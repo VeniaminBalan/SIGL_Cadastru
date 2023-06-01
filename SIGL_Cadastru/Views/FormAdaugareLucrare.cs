@@ -33,16 +33,16 @@ namespace SIGL_Cadastru.Views
             xmlNode = xmldoc.ChildNodes[1];
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add(new TreeNode(xmldoc.DocumentElement.Name));
-            CustomTreeNode tNode;
-            tNode = (CustomTreeNode)treeView1.Nodes[0];
+            TreeNode tNode;
+            tNode = treeView1.Nodes[0];
 
             AddNode(xmlNode, tNode);
 
         }
-        private void AddNode(XmlNode inXmlNode, CustomTreeNode inTreeNode) 
+        private void AddNode(XmlNode inXmlNode, TreeNode inTreeNode) 
         {
             XmlNode xNode;
-            CustomTreeNode tNode;
+            TreeNode tNode;
             XmlNodeList nodeList;
             int i = 0;
             if (inXmlNode.HasChildNodes)
@@ -83,6 +83,8 @@ namespace SIGL_Cadastru.Views
                     else
                         inTreeNode.Nodes.Add(new CustomTreeNode(TreeObjectType.Simple,xNode.Name));
 
+
+                    tNode = inTreeNode.Nodes[i];
                     AddNode(xNode, tNode);
                 }
             }
@@ -95,6 +97,11 @@ namespace SIGL_Cadastru.Views
         private void DisplayPointSelector() 
         {
             groupBoxPuncte.Visible = true;
+        }
+
+        private void HidePointSelector()
+        {
+            groupBoxPuncte.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -112,11 +119,15 @@ namespace SIGL_Cadastru.Views
         {
             string txt = e.Node.Text;
 
-            CustomTreeNode node = e.Node as CustomTreeNode;
-            if (node.TreeobjectType == TreeObjectType.Point)
+            CustomTreeNode? node = e.Node as CustomTreeNode;
+            if (node != null)
             {
-                DisplayPointSelector();
+                if (node.TreeobjectType == TreeObjectType.Point)
+                    DisplayPointSelector();
+                else
+                    HidePointSelector();
             }
+
 
             try 
             {

@@ -13,7 +13,7 @@ namespace SIGL_Cadastru.Utils
     }
     public class CustomTreeNode : TreeNode
     {
-        public TreeObjectType TreeobjectType { get; set; }
+        public TreeObjectType TreeobjectType { get; set; } = TreeObjectType.Simple;
 
         public CustomTreeNode(TreeObjectType treeobjectType, string name) : base(name)
         {
