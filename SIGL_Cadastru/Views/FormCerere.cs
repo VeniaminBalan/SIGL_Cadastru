@@ -42,14 +42,10 @@ namespace SIGL_Cadastru.Views
             return await _repository.GetAsync();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
+            FormAdaugareLucrare formAdaugareLucrare = new FormAdaugareLucrare();
+            formAdaugareLucrare.Show();
         }
     }
 }

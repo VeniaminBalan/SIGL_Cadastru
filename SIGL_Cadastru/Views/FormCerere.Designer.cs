@@ -390,7 +390,6 @@
             this.label8.Size = new System.Drawing.Size(50, 19);
             this.label8.TabIndex = 9;
             this.label8.Text = "De la:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label14
             // 
@@ -412,6 +411,7 @@
             this.button1.TabIndex = 23;
             this.button1.Text = "Adaugare Serviciu";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
             // 

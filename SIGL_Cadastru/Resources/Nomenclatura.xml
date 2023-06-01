@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Lucrari>
+	<Cadastru category="Elaborarea planului geometric">
+		<Suprafata subcategory="0,1 - 0,3 ha">
+			<Price termen="20">1800</Price>
+			<Price termen="7">5400</Price>
+		</Suprafata>
+		<Suprafata subcategory="0,3 - 1,0 ha">
+			<Price termen="20">2500</Price>
+			<Price termen="7">7500</Price>
+		</Suprafata>
+		<Suprafata subcategory="1,0 - 2,0 ha">
+			<Price termen="20">3000</Price>
+			<Price termen="7">9000</Price>
+		</Suprafata>
+		<Suprafata subcategory="2,0 - 3,0 ha">
+			<Price termen="20">4000</Price>
+			<Price termen="7">12000</Price>
+		</Suprafata>
+		<Suprafata subcategory="3,0 - 4,0 ha">
+			<Price termen="20">4000</Price>
+			<Price termen="7">12000</Price>
+		</Suprafata>
+		<Suprafata subcategory="3,0 - 4,0 ha">
+			<Price termen="20">5000</Price>
+			<Price termen="7">15000</Price>
+		</Suprafata>
+		<Suprafata subcategory="4,0 - 5,0 ha">
+			<Price termen="20">6000</Price>
+			<Price termen="7">18000</Price>
+		</Suprafata>
+	</Cadastru>
+
+	<Cadastru category="Actualizarea planului cadastral">
+		<Suprafata subcategory="0,1 - 0,3 ha">
+			<Price termen="20">1800</Price>
+			<Price termen="7">5400</Price>
+		</Suprafata>
+		<Suprafata subcategory="0,3 - 1,0 ha">
+			<Price termen="20">2500</Price>
+			<Price termen="7">7500</Price>
+		</Suprafata>
+		<Suprafata subcategory="1,0 - 2,0 ha">
+			<Price termen="20">3000</Price>
+			<Price termen="7">9000</Price>
+		</Suprafata>
+		<Suprafata subcategory="2,0 - 3,0 ha">
+			<Price termen="20">4000</Price>
+			<Price termen="7">12000</Price>
+		</Suprafata>
+		<Suprafata subcategory="3,0 - 4,0 ha">
+			<Price termen="20">4000</Price>
+			<Price termen="7">12000</Price>
+		</Suprafata>
+		<Suprafata subcategory="3,0 - 4,0 ha">
+			<Price termen="20">5000</Price>
+			<Price termen="7">15000</Price>
+		</Suprafata>
+		<Suprafata subcategory="4,0 - 5,0 ha">
+			<Price termen="20">6000</Price>
+			<Price termen="7">18000</Price>
+		</Suprafata>
+	</Cadastru>
+
+	<Cadastru category="Transpunerea in termen a hotarelor">
+		<Price puncte="true">200</Price>
+	</Cadastru>
+
+	<Cadastru category="Identificarea bunului imobil">
+		<Price termen="10">1800</Price>
+		<Price termen="5">5400</Price>
+	</Cadastru>
+
+	<Cadastru category="Lucrari cadastrale la nivel de cladiri si incaperi izolate in scopul receptiei">
+
+		<Cadastru subcategory="Cladiri primare (finalizate) serviciu separat">
+			<Suprafata subcategory="0 - 150 mp">
+				<Price termen="20">1800</Price>
+				<Price termen="7">3600</Price>
+			</Suprafata>
+			<Suprafata subcategory="150 - 250 mp">
+				<Price termen="20">2500</Price>
+				<Price termen="7">5000</Price>
+			</Suprafata>
+			<Suprafata subcategory="250 - 500 mp">
+				<Price termen="20">3800</Price>
+				<Price termen="7">7600</Price>
+			</Suprafata>
+			<Suprafata subcategory="500 - 750 mp">
+				<Price termen="20">4500</Price>
+				<Price termen="7">9000</Price>
+			</Suprafata>
+			<Suprafata subcategory="750 - 1000 mp">
+				<Price termen="20">5500</Price>
+				<Price termen="7">11000</Price>
+			</Suprafata>
+			<Suprafata subcategory="1000 - 2500 mp">
+				<Price termen="20">7500</Price>
+				<Price termen="7">15000</Price>
+			</Suprafata>
+			<Suprafata subcategory="2500 - 5000 mp">
+				<Price termen="20">14000</Price>
+				<Price termen="7">28000</Price>
+			</Suprafata>
+			<Suprafata subcategory="5000 - 7500 mp">
+				<Price termen="20">20000</Price>
+				<Price termen="7">40000</Price>
+			</Suprafata>
+			<Suprafata subcategory="7500 - 10.000 mp">
+				<Price termen="20">27000</Price>
+				<Price termen="7">54000</Price>
+			</Suprafata>
+		</Cadastru>
+
+		<Cadastru subcategory="Cladire curenta (finalizata) servicu separat">
+			<Suprafata subcategory="0 - 50 mp">
+				<Price termen="20">1800</Price>
+				<Price termen="7">3600</Price>
+			</Suprafata>
+			<Suprafata subcategory="50 - 150 mp">
+				<Price termen="20">2500</Price>
+				<Price termen="7">5000</Price>
+			</Suprafata>
+			<Suprafata subcategory="150 - 250 mp">
+				<Price termen="20">3000</Price>
+				<Price termen="7">6000</Price>
+			</Suprafata>
+			<Suprafata subcategory="250 - 500 mp">
+				<Price termen="20">4000</Price>
+				<Price termen="7">8000</Price>
+			</Suprafata>
+			<Suprafata subcategory="500 - 750 mp">
+				<Price termen="20">5000</Price>
+				<Price termen="7">1000</Price>
+			</Suprafata>
+			<Suprafata subcategory="750 - 1000 mp">
+				<Price termen="20">7000</Price>
+				<Price termen="7">14000</Price>
+			</Suprafata>
+			<Suprafata subcategory="1000 - 2500 mp">
+				<Price termen="20">9000</Price>
+				<Price termen="7">18000</Price>
+			</Suprafata>
+			<Suprafata subcategory="2500 - 5000 mp">
+				<Price termen="20">10000</Price>
+				<Price termen="7">20000</Price>
+			</Suprafata>
+			<Suprafata subcategory="5000 - 7500 mp">
+				<Price termen="20">12000</Price>
+				<Price termen="7">20000</Price>
+			</Suprafata>
+			<Suprafata subcategory="7500 - 10000 mp">
+				<Price termen="20">15000</Price>
+				<Price termen="7">30000</Price>
+			</Suprafata>
+		</Cadastru>
+
+		<Cadastru subcategory="Incapere izolata ce nu este situata la nivelul solului">
+			<Suprafata subcategory="0 - 50 mp">
+				<Price termen="20">1800</Price>
+				<Price termen="7">3600</Price>
+			</Suprafata>
+			<Suprafata subcategory="50 - 150 mp">
+				<Price termen="20">2500</Price>
+				<Price termen="7">5000</Price>
+			</Suprafata>
+			<Suprafata subcategory="150 - 250 mp">
+				<Price termen="20">3000</Price>
+				<Price termen="7">6000</Price>
+			</Suprafata>
+			<Suprafata subcategory="250 - 500 mp">
+				<Price termen="20">4000</Price>
+				<Price termen="7">8000</Price>
+			</Suprafata>
+			<Suprafata subcategory="500 - 750 mp">
+				<Price termen="20">5000</Price>
+				<Price termen="7">1000</Price>
+			</Suprafata>
+			<Suprafata subcategory="750 - 1000 mp">
+				<Price termen="20">6000</Price>
+				<Price termen="7">12000</Price>
+			</Suprafata>
+			<Suprafata subcategory="1000 - 2500 mp">
+				<Price termen="20">6500</Price>
+				<Price termen="7">13000</Price>
+			</Suprafata>
+			<Suprafata subcategory="2500 - 5000 mp">
+				<Price termen="20">7000</Price>
+				<Price termen="7">14000</Price>
+			</Suprafata>
+			<Suprafata subcategory="5000 - 7500 mp">
+				<Price termen="20">8000</Price>
+				<Price termen="7">16000</Price>
+			</Suprafata>
+			<Suprafata subcategory="7500 - 10.000 mp">
+				<Price termen="20">12000</Price>
+				<Price termen="7">24000</Price>
+			</Suprafata>
+		</Cadastru>
+
+		<Cadastru subcategory="Cladire inregistrata">
+			<Price termen="20">1800</Price>
+			<Price termen="7">3600</Price>
+		</Cadastru>
+	</Cadastru>
+
+	<Cadastru category="Formarea bunurilor imobile">
+		<Cadastru subcategory="Constructii si/sau incaperi izolate prin separare, divizare, combinare si comasare">
+			<Price termen="20">5000</Price>
+			<Price termen="7">10000</Price>
+		</Cadastru>
+
+		<Cadastru subcategory="Teren (cu sau fara constructii)">
+			<Cadastru subcategory="prin separare, divizare, combinare">
+				<Price termen="20">5000</Price>
+				<Price termen="7">10000</Price>
+			</Cadastru>
+			<Cadastru subcategory="prin comasare">
+				<Price termen="20">5000</Price>
+				<Price termen="7">10000</Price>
+			</Cadastru>
+		</Cadastru>
+	</Cadastru>
+
+	<Cadastru category="Constatarea specialistului">
+		<Price>6000</Price>
+	</Cadastru>
+
+	<Cadastru category="Lucrari de delimitare selectiva a terenurilor proprietate publica UTA">
+
+		<Suprafata subcategory="0,1 - 0,3 ha">
+			<Price termen="20">5000</Price>
+			<Price termen="7">10000</Price>
+		</Suprafata>
+
+		<Suprafata subcategory="0,3 - 0,5 ha">
+			<Price termen="20">6000</Price>
+			<Price termen="7">12000</Price>
+		</Suprafata>
+
+		<Suprafata subcategory="0,5 - 2,0 ha">
+			<Price termen="20">8000</Price>
+			<Price termen="7">16000</Price>
+		</Suprafata>
+
+		<Suprafata subcategory="2,0 - 5,0 ha">
+			<Price termen="20">10000</Price>
+			<Price termen="7">20000</Price>
+		</Suprafata>
+
+		<Suprafata subcategory="5,0 - 10,0 ha">
+			<Price termen="20">15000</Price>
+			<Price termen="7">30000</Price>
+		</Suprafata>
+
+		<Suprafata subcategory="5,0 - 10,0 ha">
+			<Price termen="20">20000</Price>
+			<Price termen="7">40000</Price>
+		</Suprafata>
+
+	</Cadastru>
+
+</Lucrari>
+

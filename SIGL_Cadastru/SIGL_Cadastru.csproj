@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SIGL_Cadastru.App\SIGL_Cadastru.App.csproj" />
     <ProjectReference Include="..\SIGL_Cadastru.Repo\SIGL_Cadastru.Repo.csproj" />
   </ItemGroup>
 
