@@ -22,6 +22,8 @@ namespace SIGL_Cadastru.Views
             this._repository = repository;
             InitializeComponent();
             dosare= new List<Dosar>();
+
+            listBox1.SelectionMode = SelectionMode.MultiExtended;
         }
 
         private async void button_Add_Click(object sender, EventArgs e)
@@ -46,6 +48,15 @@ namespace SIGL_Cadastru.Views
         {
             FormAdaugareLucrare formAdaugareLucrare = new FormAdaugareLucrare();
             formAdaugareLucrare.Show();
+            formAdaugareLucrare.SubmitButtonPressed += OnFormAdaugareSubmit;
+        }
+
+
+        private void OnFormAdaugareSubmit(object sender, AdaugareLucrareEventArgs e) 
+        {
+            ((FormAdaugareLucrare)sender).Dispose();
+            //MessageBox.Show(e.lucrare + "\n" + e.suma.ToString());
+            listBox1.Items.Add(e.lucrare);
         }
     }
 }

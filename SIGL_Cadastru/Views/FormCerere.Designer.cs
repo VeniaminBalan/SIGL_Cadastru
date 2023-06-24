@@ -67,6 +67,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.maskedTextBox10 = new System.Windows.Forms.MaskedTextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label_suma = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -451,11 +453,32 @@
             this.label17.TabIndex = 29;
             this.label17.Text = "Km";
             // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(416, 554);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(83, 25);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "Suma: ";
+            // 
+            // label_suma
+            // 
+            this.label_suma.AutoSize = true;
+            this.label_suma.Location = new System.Drawing.Point(505, 558);
+            this.label_suma.Name = "label_suma";
+            this.label_suma.Size = new System.Drawing.Size(0, 20);
+            this.label_suma.TabIndex = 31;
+            // 
             // FormCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 700);
+            this.Controls.Add(this.label_suma);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.maskedTextBox10);
             this.Controls.Add(this.label16);
@@ -526,5 +549,7 @@
         private Label label16;
         private MaskedTextBox maskedTextBox10;
         private Label label17;
+        private Label label15;
+        private Label label_suma;
     }
 }

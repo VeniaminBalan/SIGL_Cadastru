@@ -4,62 +4,62 @@
 	<Cadastru category="Elaborarea planului geometric">
 		<Suprafata subcategory="0,1 - 0,3 ha">
 			<Price termen="20">1800</Price>
-			<Price termen="7">5400</Price>
+			<Price termen="7">3600</Price>
 		</Suprafata>
 		<Suprafata subcategory="0,3 - 1,0 ha">
 			<Price termen="20">2500</Price>
-			<Price termen="7">7500</Price>
+			<Price termen="7">5000</Price>
 		</Suprafata>
 		<Suprafata subcategory="1,0 - 2,0 ha">
 			<Price termen="20">3000</Price>
-			<Price termen="7">9000</Price>
+			<Price termen="7">6000</Price>
 		</Suprafata>
 		<Suprafata subcategory="2,0 - 3,0 ha">
 			<Price termen="20">4000</Price>
-			<Price termen="7">12000</Price>
-		</Suprafata>
-		<Suprafata subcategory="3,0 - 4,0 ha">
-			<Price termen="20">4000</Price>
-			<Price termen="7">12000</Price>
+			<Price termen="7">8000</Price>
 		</Suprafata>
 		<Suprafata subcategory="3,0 - 4,0 ha">
 			<Price termen="20">5000</Price>
-			<Price termen="7">15000</Price>
+			<Price termen="7">10000</Price>
 		</Suprafata>
 		<Suprafata subcategory="4,0 - 5,0 ha">
 			<Price termen="20">6000</Price>
-			<Price termen="7">18000</Price>
+			<Price termen="7">12000</Price>
+		</Suprafata>
+		<Suprafata subcategory="5,0 - 10,0 ha">
+			<Price termen="20">8000</Price>
+			<Price termen="7">16000</Price>
 		</Suprafata>
 	</Cadastru>
 
 	<Cadastru category="Actualizarea planului cadastral">
 		<Suprafata subcategory="0,1 - 0,3 ha">
 			<Price termen="20">1800</Price>
-			<Price termen="7">5400</Price>
+			<Price termen="7">3600</Price>
 		</Suprafata>
 		<Suprafata subcategory="0,3 - 1,0 ha">
 			<Price termen="20">2500</Price>
-			<Price termen="7">7500</Price>
+			<Price termen="7">5000</Price>
 		</Suprafata>
 		<Suprafata subcategory="1,0 - 2,0 ha">
 			<Price termen="20">3000</Price>
-			<Price termen="7">9000</Price>
+			<Price termen="7">6000</Price>
 		</Suprafata>
 		<Suprafata subcategory="2,0 - 3,0 ha">
 			<Price termen="20">4000</Price>
-			<Price termen="7">12000</Price>
-		</Suprafata>
-		<Suprafata subcategory="3,0 - 4,0 ha">
-			<Price termen="20">4000</Price>
-			<Price termen="7">12000</Price>
+			<Price termen="7">8000</Price>
 		</Suprafata>
 		<Suprafata subcategory="3,0 - 4,0 ha">
 			<Price termen="20">5000</Price>
-			<Price termen="7">15000</Price>
+			<Price termen="7">10000</Price>
 		</Suprafata>
-		<Suprafata subcategory="4,0 - 5,0 ha">
+		<Suprafata subcategory="3,0 - 4,0 ha">
 			<Price termen="20">6000</Price>
-			<Price termen="7">18000</Price>
+			<Price termen="7">12000</Price>
+		</Suprafata>
+		<Suprafata subcategory="5,0 - 10,0 ha">
+			<Price termen="20">8000</Price>
+			<Price termen="7">16000</Price>
 		</Suprafata>
 	</Cadastru>
 
@@ -224,7 +224,8 @@
 	</Cadastru>
 
 	<Cadastru category="Constatarea specialistului">
-		<Price>6000</Price>
+		<Price termen="20">6000</Price>
+		<Price termen="7">12000 </Price>
 	</Cadastru>
 
 	<Cadastru category="Lucrari de delimitare selectiva a terenurilor proprietate publica UTA">
@@ -262,4 +263,3 @@
 	</Cadastru>
 
 </Lucrari>
-

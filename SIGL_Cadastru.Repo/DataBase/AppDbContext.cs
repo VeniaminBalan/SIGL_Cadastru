@@ -10,5 +10,8 @@ namespace SIGL_Cadastru.Repo.DataBase
         }
 
         public DbSet<Dosar> Dosare { get; set; }
+        public DbSet<CerereDto> Cereri { get; set; }
+        public DbSet<LucrareDto> Lucrari { get; set; }
+        public DbSet<PersoanaDto> Persoane { get; set; }
     }
 }
