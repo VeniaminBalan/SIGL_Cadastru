@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIGL_Cadastru.Repo.DataBase;
 
@@ -10,9 +11,11 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230626075815_upd5")]
+    partial class upd5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
@@ -30,29 +33,29 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.Property<int>("CostTotal")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly?>("Eliberat")
+                    b.Property<DateOnly>("Eliberat")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ExecutantId")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly?>("LaReceptie")
+                    b.Property<DateOnly>("LaReceptie")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NrCadastral")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly?>("Prelungit")
+                    b.Property<DateOnly>("Prelungit")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly?>("Respins")
+                    b.Property<DateOnly>("Respins")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ResponsabilId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("StareaCererii")
+                    b.Property<int>("StareaCererii")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("ValabilDeLa")
@@ -69,23 +72,7 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasIndex("ResponsabilId");
 
-                    b.ToTable("Cereri", t =>
-                        {
-                            t.HasCheckConstraint("CK_NrCadstral", "LENGTH(NrCadastral) <= 15");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f5bb1dbe-a8cc-4d8b-89aa-3f5a595a7546"),
-                            ClientId = new Guid("6eed1456-1b25-4195-9eda-e240a9ef09fd"),
-                            CostTotal = 9999,
-                            ExecutantId = new Guid("d8f68da7-402b-411f-b6ea-a16beaf005e3"),
-                            NrCadastral = "12121212",
-                            ResponsabilId = new Guid("d8f68da7-402b-411f-b6ea-a16beaf005e3"),
-                            ValabilDeLa = new DateOnly(2023, 6, 26),
-                            ValabilPanaLa = new DateOnly(2023, 7, 7)
-                        });
+                    b.ToTable("Cereri");
                 });
 
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Lucrare", b =>
@@ -142,28 +129,6 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Persoane");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d8f68da7-402b-411f-b6ea-a16beaf005e3"),
-                            DataNasterii = new DateOnly(1977, 7, 16),
-                            Domiciliu = "sat. Gribova",
-                            IDNP = "2000818343",
-                            Nume = "Balan",
-                            Prenume = "Octavian",
-                            Rol = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("6eed1456-1b25-4195-9eda-e240a9ef09fd"),
-                            DataNasterii = new DateOnly(1977, 7, 16),
-                            Domiciliu = "sat. Pierduta",
-                            IDNP = "2000818332",
-                            Nume = "Gutu",
-                            Prenume = "Ion",
-                            Rol = 0
-                        });
                 });
 
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Cerere", b =>

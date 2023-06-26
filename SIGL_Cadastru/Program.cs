@@ -1,10 +1,11 @@
+using AutoMapper;
+using Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Repository;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
-using SIGL_Cadastru.Repo.Models;
-using SIGL_Cadastru.Repo.Repository;
 using SIGL_Cadastru.Views;
 using System.Configuration;
 
@@ -35,7 +36,8 @@ namespace SIGL_Cadastru
 
                 .ConfigureServices((context, services) => {
                     services.AddDbContext<AppDbContext>(options => options.UseSqlite(varstring));
-                    services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+                    services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
+                    services.AddAutoMapper(typeof(Program));
 
                     //services.AddTransient<IHelloWorldService, HelloWorldServiceImpl>();
                     /*
@@ -52,15 +54,24 @@ namespace SIGL_Cadastru
 
                     services.AddTransient<FormMain>(container => 
                     {
-                        var repository = container.GetRequiredService<IRepository<Dosar>>();
-                        var formCerere = new FormMain(repository);
+                        var repository = container.GetRequiredService<IRepositoryManager>();
+                        var mapper = container.GetRequiredService<IMapper>();
+                        var formCerere = new FormMain(repository, mapper);
                         return formCerere;
                     });
                     services.AddTransient<FormCerere>(container =>
                     {
-                        var repository = container.GetRequiredService<IRepository<Dosar>>();
+                        var repository = container.GetRequiredService<IRepositoryManager>();
                         var formCerere = new FormCerere(repository);
                         return formCerere;
+                    });
+
+                    services.AddTransient<UC_Main>(container => 
+                    {
+                        var repository = container.GetRequiredService<IRepositoryManager>();
+                        var mapper = container.GetRequiredService<IMapper>();
+                        var uc_main = new UC_Main(repository, mapper);
+                        return uc_main;
                     });
                 });
         }
@@ -98,6 +109,11 @@ namespace SIGL_Cadastru
             public FormMain CreateMain()
             {
                 return _serviceProvider.GetRequiredService<FormMain>();
+            }
+
+            public UC_Main CreateUC_Main()
+            {
+                return _serviceProvider.GetRequiredService<UC_Main>();
             }
 
             /* 

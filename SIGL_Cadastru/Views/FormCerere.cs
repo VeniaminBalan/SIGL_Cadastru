@@ -1,11 +1,13 @@
-﻿using SIGL_Cadastru.Repo.Models;
-using SIGL_Cadastru.Repo.Repository;
+﻿using Contracts;
+using SIGL_Cadastru.Repo.Contracts;
+using SIGL_Cadastru.Repo.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,35 +16,33 @@ namespace SIGL_Cadastru.Views
 {
     public partial class FormCerere : Form
     {
-        private readonly IRepository<Dosar> _repository;
-        public List<Dosar> dosare;
+        private readonly IRepositoryManager _repo;
+        private List<Lucrare> Lucrari = new List<Lucrare>();
 
-        public FormCerere(IRepository<Dosar> repository)
+
+        public FormCerere(IRepositoryManager repo)
         {
-            this._repository = repository;
+            _repo = repo;
             InitializeComponent();
-            dosare= new List<Dosar>();
 
-            listBox1.SelectionMode = SelectionMode.MultiExtended;
+            listBoxLucrari.SelectionMode = SelectionMode.MultiExtended;
         }
 
         private async void button_Add_Click(object sender, EventArgs e)
         {
-
-            var dosar = new Dosar
+            try
             {
-                
-            };
 
+            }
+            catch (Exception)
+            {
 
-            var d = await _repository.AddAsync(dosar);
+                MessageBox.Show("Error!");
+                return;
+            }
 
         }
 
-        private async Task<IEnumerable<Dosar>> GetData() 
-        {
-            return await _repository.GetAsync();
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -53,10 +53,52 @@ namespace SIGL_Cadastru.Views
 
 
         private void OnFormAdaugareSubmit(object sender, AdaugareLucrareEventArgs e) 
-        {
+        {            
+            AddLucrare(new Lucrare(e));
+
             ((FormAdaugareLucrare)sender).Dispose();
-            //MessageBox.Show(e.lucrare + "\n" + e.suma.ToString());
-            listBox1.Items.Add(e.lucrare);
+        }
+
+        private void AddLucrare(Lucrare lucrare) 
+        {
+            Lucrari.Add(lucrare);
+            UpdateListBox();
+            UpdateSuma();
+        }
+
+        private void UpdateListBox() 
+        {
+            listBoxLucrari.Items.Clear();
+            foreach (var item in Lucrari)
+            {
+                listBoxLucrari.Items.Add(item.lucrare);
+            }
+        }
+
+        private void UpdateSuma()
+        {
+            int suma = 0;
+            foreach (var item in Lucrari)
+            {
+                suma += item.suma;
+            }
+
+            label_suma.Text = suma.ToString();
+        }
+
+    }
+
+    class Lucrare
+    {
+        public string lucrare;
+        public int suma;
+
+        public Lucrare() { }
+
+        public Lucrare(AdaugareLucrareEventArgs adaugareLucrare) 
+        {
+            this.lucrare = adaugareLucrare.lucrare;
+            this.suma = adaugareLucrare.suma;
         }
     }
 }

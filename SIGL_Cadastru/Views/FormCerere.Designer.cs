@@ -63,12 +63,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxLucrari = new System.Windows.Forms.ListBox();
             this.label16 = new System.Windows.Forms.Label();
             this.maskedTextBox10 = new System.Windows.Forms.MaskedTextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label_suma = new System.Windows.Forms.Label();
+            this.label_modificator = new System.Windows.Forms.Label();
+            this.maskedTextBox11 = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -415,14 +417,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listBox1
+            // listBoxLucrari
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(22, 475);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(301, 104);
-            this.listBox1.TabIndex = 24;
+            this.listBoxLucrari.FormattingEnabled = true;
+            this.listBoxLucrari.ItemHeight = 20;
+            this.listBoxLucrari.Location = new System.Drawing.Point(22, 475);
+            this.listBoxLucrari.Name = "listBoxLucrari";
+            this.listBoxLucrari.Size = new System.Drawing.Size(301, 104);
+            this.listBoxLucrari.TabIndex = 24;
             // 
             // label16
             // 
@@ -472,17 +474,37 @@
             this.label_suma.Size = new System.Drawing.Size(0, 20);
             this.label_suma.TabIndex = 31;
             // 
+            // label_modificator
+            // 
+            this.label_modificator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_modificator.AutoSize = true;
+            this.label_modificator.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label_modificator.Location = new System.Drawing.Point(680, 558);
+            this.label_modificator.Name = "label_modificator";
+            this.label_modificator.Size = new System.Drawing.Size(105, 22);
+            this.label_modificator.TabIndex = 32;
+            this.label_modificator.Text = "Modificator";
+            // 
+            // maskedTextBox11
+            // 
+            this.maskedTextBox11.Location = new System.Drawing.Point(791, 555);
+            this.maskedTextBox11.Name = "maskedTextBox11";
+            this.maskedTextBox11.Size = new System.Drawing.Size(65, 27);
+            this.maskedTextBox11.TabIndex = 33;
+            // 
             // FormCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 700);
+            this.Controls.Add(this.maskedTextBox11);
+            this.Controls.Add(this.label_modificator);
             this.Controls.Add(this.label_suma);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.maskedTextBox10);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBoxLucrari);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox3);
@@ -545,11 +567,13 @@
         private Label label9;
         private Label label14;
         private Button button1;
-        private ListBox listBox1;
+        private ListBox listBoxLucrari;
         private Label label16;
         private MaskedTextBox maskedTextBox10;
         private Label label17;
         private Label label15;
         private Label label_suma;
+        private Label label_modificator;
+        private MaskedTextBox maskedTextBox11;
     }
 }

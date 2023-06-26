@@ -31,8 +31,8 @@
             this.button_cerere_noua = new System.Windows.Forms.Button();
             this.aside_navbar = new System.Windows.Forms.Panel();
             this.panel_content = new System.Windows.Forms.Panel();
-            this.userControl11 = new SIGL_Cadastru.Views.UserControl1();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.uC_PersoanaExistenta1 = new SIGL_Cadastru.Views.UC_PersoanaExistenta();
             this.aside_navbar.SuspendLayout();
             this.panel_content.SuspendLayout();
             this.SuspendLayout();
@@ -53,36 +53,35 @@
             this.aside_navbar.Dock = System.Windows.Forms.DockStyle.Left;
             this.aside_navbar.Location = new System.Drawing.Point(0, 0);
             this.aside_navbar.Name = "aside_navbar";
-            this.aside_navbar.Size = new System.Drawing.Size(103, 540);
+            this.aside_navbar.Size = new System.Drawing.Size(103, 627);
             this.aside_navbar.TabIndex = 4;
             // 
             // panel_content
             // 
-            this.panel_content.Controls.Add(this.userControl11);
+            this.panel_content.Controls.Add(this.uC_PersoanaExistenta1);
             this.panel_content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_content.Location = new System.Drawing.Point(103, 0);
             this.panel_content.Name = "panel_content";
-            this.panel_content.Size = new System.Drawing.Size(836, 540);
+            this.panel_content.Size = new System.Drawing.Size(1087, 627);
             this.panel_content.TabIndex = 5;
             // 
-            // userControl11
+            // uC_PersoanaExistenta1
             // 
-            this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl11.Location = new System.Drawing.Point(0, 0);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.ParentForm = null;
-            this.userControl11.Size = new System.Drawing.Size(836, 540);
-            this.userControl11.TabIndex = 0;
+            this.uC_PersoanaExistenta1.Location = new System.Drawing.Point(122, 39);
+            this.uC_PersoanaExistenta1.Name = "uC_PersoanaExistenta1";
+            this.uC_PersoanaExistenta1.Size = new System.Drawing.Size(632, 452);
+            this.uC_PersoanaExistenta1.TabIndex = 0;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(939, 540);
+            this.ClientSize = new System.Drawing.Size(1190, 627);
             this.Controls.Add(this.panel_content);
             this.Controls.Add(this.aside_navbar);
             this.Name = "FormMain";
             this.Text = "FormMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.aside_navbar.ResumeLayout(false);
             this.panel_content.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -94,6 +93,6 @@
         private Panel aside_navbar;
         private Panel panel_content;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private UserControl1 userControl11;
+        private UC_PersoanaExistenta uC_PersoanaExistenta1;
     }
 }

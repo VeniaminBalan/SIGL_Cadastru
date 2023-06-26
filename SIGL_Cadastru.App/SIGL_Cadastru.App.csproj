@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SIGL_Cadastru.Repo\SIGL_Cadastru.Repo.csproj" />
+  </ItemGroup>
+
 </Project>

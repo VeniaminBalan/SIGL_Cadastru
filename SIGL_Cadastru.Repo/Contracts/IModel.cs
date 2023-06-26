@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIGL_Cadastru.Repo.Models
+namespace SIGL_Cadastru.Repo.Contracts
 {
     public interface IModel
     {

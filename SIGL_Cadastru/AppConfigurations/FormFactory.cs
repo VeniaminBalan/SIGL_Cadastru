@@ -27,5 +27,9 @@ namespace SIGL_Cadastru.AppConfigurations
             return _provider.CreateMain();
         }
 
+        public UC_Main CreateUC_Main()
+        {
+            return _provider.CreateUC_Main();
+        }
     }
 }
