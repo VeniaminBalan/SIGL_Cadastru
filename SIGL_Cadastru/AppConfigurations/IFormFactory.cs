@@ -11,8 +11,9 @@ namespace SIGL_Cadastru.AppConfigurations
     {
         public FormCerere CreateCerere();
         public FormMain CreateMain();
-
         public UC_Main CreateUC_Main();
+        public UC_PersoanaExistenta CreateUC_PersoanaExistenta();
+        public UC_PersoanaNoua CreateUC_PersoanaNoua();
 
     }
 }

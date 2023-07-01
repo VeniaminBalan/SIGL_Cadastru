@@ -62,7 +62,8 @@ namespace SIGL_Cadastru
                     services.AddTransient<FormCerere>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
-                        var formCerere = new FormCerere(repository);
+                        var mapper = container.GetRequiredService<IMapper>();
+                        var formCerere = new FormCerere(repository, mapper);
                         return formCerere;
                     });
 
@@ -72,6 +73,22 @@ namespace SIGL_Cadastru
                         var mapper = container.GetRequiredService<IMapper>();
                         var uc_main = new UC_Main(repository, mapper);
                         return uc_main;
+                    });
+
+                    services.AddTransient<UC_PersoanaExistenta>(container =>
+                    {
+                        var repository = container.GetRequiredService<IRepositoryManager>();
+                        var mapper = container.GetRequiredService<IMapper>();
+                        var uc_PE = new UC_PersoanaExistenta(repository, mapper);
+                        return uc_PE;
+                    });
+
+                    services.AddTransient<UC_PersoanaNoua>(container =>
+                    {
+                        var repository = container.GetRequiredService<IRepositoryManager>();
+                        var mapper = container.GetRequiredService<IMapper>();
+                        var uc_PNoua = new UC_PersoanaNoua(repository, mapper);
+                        return uc_PNoua;
                     });
                 });
         }
@@ -114,6 +131,16 @@ namespace SIGL_Cadastru
             public UC_Main CreateUC_Main()
             {
                 return _serviceProvider.GetRequiredService<UC_Main>();
+            }
+
+            public UC_PersoanaExistenta CreateUC_PersoanaExistenta()
+            {
+                return _serviceProvider.GetRequiredService<UC_PersoanaExistenta>();
+            }
+
+            public UC_PersoanaNoua CreateUC_PersoanaNoua()
+            {
+                return _serviceProvider.GetRequiredService<UC_PersoanaNoua>();
             }
 
             /* 

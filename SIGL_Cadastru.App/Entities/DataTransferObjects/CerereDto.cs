@@ -10,9 +10,9 @@ namespace SIGL_Cadastru.App.Entities
     public class CerereDto
     {
         public Guid Id { get; set; }
-        public PersoanaDto Client { get; set; }
-        public PersoanaDto Executant { get; set; }
-        public PersoanaDto Responsabil { get; set; }
+        public string Client { get; set; }
+        public string Executant { get; set; }
+        public string Responsabil { get; set; }
         public string NrCadastral { get; set; }
         public DateOnly ValabilDeLa { get; set; }
         public DateOnly ValabilPanaLa { get; set; }
@@ -22,5 +22,9 @@ namespace SIGL_Cadastru.App.Entities
         public DateOnly Eliberat { get; set; }
         public DateOnly Respins { get; set; }
 
+        public override string ToString()
+        {
+            return new string($"{Id} \n {Client} \n {Executant} \n {Responsabil} \n {NrCadastral}");
+        }
     }
 }

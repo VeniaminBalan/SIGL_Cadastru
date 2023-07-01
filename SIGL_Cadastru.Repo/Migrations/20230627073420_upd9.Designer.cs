@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIGL_Cadastru.Repo.DataBase;
 
@@ -10,9 +11,11 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230627073420_upd9")]
+    partial class upd9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
@@ -31,6 +34,9 @@ namespace SIGL_Cadastru.Repo.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly?>("Eliberat")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ExecutantId")
@@ -54,6 +60,9 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.Property<int?>("StareaCererii")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Telefon")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("ValabilDeLa")
                         .HasColumnType("TEXT");
@@ -83,7 +92,6 @@ namespace SIGL_Cadastru.Repo.Migrations
                             ExecutantId = new Guid("d8f68da7-402b-411f-b6ea-a16beaf005e3"),
                             NrCadastral = "36011010001",
                             ResponsabilId = new Guid("d8f68da7-402b-411f-b6ea-a16beaf005e3"),
-                            StareaCererii = 0,
                             ValabilDeLa = new DateOnly(2023, 6, 26),
                             ValabilPanaLa = new DateOnly(2023, 7, 7)
                         });
@@ -125,9 +133,6 @@ namespace SIGL_Cadastru.Repo.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("IDNP")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -142,9 +147,6 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.Property<int>("Rol")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Telefon")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -203,17 +205,12 @@ namespace SIGL_Cadastru.Repo.Migrations
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Lucrare", b =>
                 {
                     b.HasOne("SIGL_Cadastru.Repo.Models.Cerere", "Cerere")
-                        .WithMany("Lucrari")
+                        .WithMany()
                         .HasForeignKey("CerereId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cerere");
-                });
-
-            modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Cerere", b =>
-                {
-                    b.Navigation("Lucrari");
                 });
 #pragma warning restore 612, 618
         }

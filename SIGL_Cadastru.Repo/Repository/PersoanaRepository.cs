@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Repo.Models;
@@ -26,10 +27,36 @@ namespace SIGL_Cadastru.Repo.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Persoana> GetByIdAsync(Guid companyId, bool trackChanges)
+        public async Task<IEnumerable<Persoana>> GetAllClientiAync(bool trackChanges)
         {
-            throw new NotImplementedException();
+            var clienti = await FindAll(trackChanges)
+                .Where(p => p.Rol == Role.Client)
+                .ToListAsync();
+
+            return clienti;
         }
+
+        public async Task<IEnumerable<Persoana>> GetAllExecutantiAync(bool trackChanges)
+        {
+            var responsabil = await FindAll(trackChanges)
+                .Where(p => p.Rol == Role.Responsabil || p.Rol == Role.Executant)
+                .ToListAsync();
+
+            return responsabil;
+        }
+
+        public async Task<IEnumerable<Persoana>> GetAllResponsabiliAync(bool trackChanges)
+        {
+            var responsabil = await FindAll(trackChanges)
+                .Where(p => p.Rol == Role.Responsabil)
+                .ToListAsync();
+
+            return responsabil;
+        }
+
+        public async Task<Persoana> GetByIdAsync(Guid Id, bool trackChanges)=>
+            await FindByCondition(e => e.Id.Equals(Id),trackChanges)
+            .SingleOrDefaultAsync();
 
         public Task<IEnumerable<Persoana>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
         {

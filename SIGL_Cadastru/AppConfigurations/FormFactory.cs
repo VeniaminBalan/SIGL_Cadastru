@@ -31,5 +31,15 @@ namespace SIGL_Cadastru.AppConfigurations
         {
             return _provider.CreateUC_Main();
         }
+
+        public UC_PersoanaExistenta CreateUC_PersoanaExistenta()
+        {
+            return _provider.CreateUC_PersoanaExistenta();
+        }
+
+        public UC_PersoanaNoua CreateUC_PersoanaNoua()
+        {
+            return _provider.CreateUC_PersoanaNoua();
+        }
     }
 }

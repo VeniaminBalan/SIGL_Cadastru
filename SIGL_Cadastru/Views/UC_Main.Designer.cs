@@ -76,6 +76,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(1678, 530);
@@ -87,6 +88,7 @@
             this.idDataGridViewTextBoxColumn.HeaderText = "Id";
             this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
             this.idDataGridViewTextBoxColumn.Width = 125;
             // 
             // clientDataGridViewTextBoxColumn
@@ -95,6 +97,7 @@
             this.clientDataGridViewTextBoxColumn.HeaderText = "Client";
             this.clientDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.clientDataGridViewTextBoxColumn.Name = "clientDataGridViewTextBoxColumn";
+            this.clientDataGridViewTextBoxColumn.ReadOnly = true;
             this.clientDataGridViewTextBoxColumn.Width = 125;
             // 
             // executantDataGridViewTextBoxColumn
@@ -103,6 +106,7 @@
             this.executantDataGridViewTextBoxColumn.HeaderText = "Executant";
             this.executantDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.executantDataGridViewTextBoxColumn.Name = "executantDataGridViewTextBoxColumn";
+            this.executantDataGridViewTextBoxColumn.ReadOnly = true;
             this.executantDataGridViewTextBoxColumn.Width = 125;
             // 
             // responsabilDataGridViewTextBoxColumn
@@ -111,6 +115,7 @@
             this.responsabilDataGridViewTextBoxColumn.HeaderText = "Responsabil";
             this.responsabilDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.responsabilDataGridViewTextBoxColumn.Name = "responsabilDataGridViewTextBoxColumn";
+            this.responsabilDataGridViewTextBoxColumn.ReadOnly = true;
             this.responsabilDataGridViewTextBoxColumn.Width = 125;
             // 
             // nrCadastralDataGridViewTextBoxColumn
@@ -119,6 +124,7 @@
             this.nrCadastralDataGridViewTextBoxColumn.HeaderText = "NrCadastral";
             this.nrCadastralDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nrCadastralDataGridViewTextBoxColumn.Name = "nrCadastralDataGridViewTextBoxColumn";
+            this.nrCadastralDataGridViewTextBoxColumn.ReadOnly = true;
             this.nrCadastralDataGridViewTextBoxColumn.Width = 125;
             // 
             // valabilDeLaDataGridViewTextBoxColumn
@@ -127,6 +133,7 @@
             this.valabilDeLaDataGridViewTextBoxColumn.HeaderText = "ValabilDeLa";
             this.valabilDeLaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.valabilDeLaDataGridViewTextBoxColumn.Name = "valabilDeLaDataGridViewTextBoxColumn";
+            this.valabilDeLaDataGridViewTextBoxColumn.ReadOnly = true;
             this.valabilDeLaDataGridViewTextBoxColumn.Width = 125;
             // 
             // valabilPanaLaDataGridViewTextBoxColumn
@@ -135,6 +142,7 @@
             this.valabilPanaLaDataGridViewTextBoxColumn.HeaderText = "ValabilPanaLa";
             this.valabilPanaLaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.valabilPanaLaDataGridViewTextBoxColumn.Name = "valabilPanaLaDataGridViewTextBoxColumn";
+            this.valabilPanaLaDataGridViewTextBoxColumn.ReadOnly = true;
             this.valabilPanaLaDataGridViewTextBoxColumn.Width = 125;
             // 
             // prelungitDataGridViewTextBoxColumn
@@ -143,6 +151,7 @@
             this.prelungitDataGridViewTextBoxColumn.HeaderText = "Prelungit";
             this.prelungitDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.prelungitDataGridViewTextBoxColumn.Name = "prelungitDataGridViewTextBoxColumn";
+            this.prelungitDataGridViewTextBoxColumn.ReadOnly = true;
             this.prelungitDataGridViewTextBoxColumn.Width = 125;
             // 
             // stareaCereriiDataGridViewTextBoxColumn
@@ -151,6 +160,7 @@
             this.stareaCereriiDataGridViewTextBoxColumn.HeaderText = "StareaCererii";
             this.stareaCereriiDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.stareaCereriiDataGridViewTextBoxColumn.Name = "stareaCereriiDataGridViewTextBoxColumn";
+            this.stareaCereriiDataGridViewTextBoxColumn.ReadOnly = true;
             this.stareaCereriiDataGridViewTextBoxColumn.Width = 125;
             // 
             // laReceptieDataGridViewTextBoxColumn
@@ -159,6 +169,7 @@
             this.laReceptieDataGridViewTextBoxColumn.HeaderText = "LaReceptie";
             this.laReceptieDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.laReceptieDataGridViewTextBoxColumn.Name = "laReceptieDataGridViewTextBoxColumn";
+            this.laReceptieDataGridViewTextBoxColumn.ReadOnly = true;
             this.laReceptieDataGridViewTextBoxColumn.Width = 125;
             // 
             // eliberatDataGridViewTextBoxColumn
@@ -167,6 +178,7 @@
             this.eliberatDataGridViewTextBoxColumn.HeaderText = "Eliberat";
             this.eliberatDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.eliberatDataGridViewTextBoxColumn.Name = "eliberatDataGridViewTextBoxColumn";
+            this.eliberatDataGridViewTextBoxColumn.ReadOnly = true;
             this.eliberatDataGridViewTextBoxColumn.Width = 125;
             // 
             // respinsDataGridViewTextBoxColumn
@@ -175,6 +187,7 @@
             this.respinsDataGridViewTextBoxColumn.HeaderText = "Respins";
             this.respinsDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.respinsDataGridViewTextBoxColumn.Name = "respinsDataGridViewTextBoxColumn";
+            this.respinsDataGridViewTextBoxColumn.ReadOnly = true;
             this.respinsDataGridViewTextBoxColumn.Width = 125;
             // 
             // Id

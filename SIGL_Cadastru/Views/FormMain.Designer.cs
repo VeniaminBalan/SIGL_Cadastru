@@ -31,8 +31,9 @@
             this.button_cerere_noua = new System.Windows.Forms.Button();
             this.aside_navbar = new System.Windows.Forms.Panel();
             this.panel_content = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.uC_PersoanaExistenta1 = new SIGL_Cadastru.Views.UC_PersoanaExistenta();
+            this.button_update = new System.Windows.Forms.Button();
             this.aside_navbar.SuspendLayout();
             this.panel_content.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             // aside_navbar
             // 
+            this.aside_navbar.Controls.Add(this.button_update);
             this.aside_navbar.Controls.Add(this.button_cerere_noua);
             this.aside_navbar.Dock = System.Windows.Forms.DockStyle.Left;
             this.aside_navbar.Location = new System.Drawing.Point(0, 0);
@@ -58,19 +60,32 @@
             // 
             // panel_content
             // 
-            this.panel_content.Controls.Add(this.uC_PersoanaExistenta1);
+            this.panel_content.Controls.Add(this.panel1);
             this.panel_content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_content.Location = new System.Drawing.Point(103, 0);
             this.panel_content.Name = "panel_content";
             this.panel_content.Size = new System.Drawing.Size(1087, 627);
             this.panel_content.TabIndex = 5;
             // 
-            // uC_PersoanaExistenta1
+            // panel1
             // 
-            this.uC_PersoanaExistenta1.Location = new System.Drawing.Point(122, 39);
-            this.uC_PersoanaExistenta1.Name = "uC_PersoanaExistenta1";
-            this.uC_PersoanaExistenta1.Size = new System.Drawing.Size(632, 452);
-            this.uC_PersoanaExistenta1.TabIndex = 0;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1087, 57);
+            this.panel1.TabIndex = 0;
+            // 
+            // button_update
+            // 
+            this.button_update.Location = new System.Drawing.Point(0, 112);
+            this.button_update.Name = "button_update";
+            this.button_update.Size = new System.Drawing.Size(104, 40);
+            this.button_update.TabIndex = 4;
+            this.button_update.Text = "Update";
+            this.button_update.UseVisualStyleBackColor = true;
+            this.button_update.Click += new System.EventHandler(this.button_update_Click);
             // 
             // FormMain
             // 
@@ -93,6 +108,7 @@
         private Panel aside_navbar;
         private Panel panel_content;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private UC_PersoanaExistenta uC_PersoanaExistenta1;
+        private Panel panel1;
+        private Button button_update;
     }
 }

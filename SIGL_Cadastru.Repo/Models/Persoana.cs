@@ -20,6 +20,8 @@ namespace SIGL_Cadastru.Repo.Models
         public string IDNP { get; set; }
         public DateOnly DataNasterii { get; set; }
         public string Domiciliu { get; set; }
+        public string? Email { get; set; }
+        public string? Telefon { get; set; }
         public Role Rol { get; set; }
     }
 }

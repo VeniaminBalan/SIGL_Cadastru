@@ -12,25 +12,28 @@ namespace SIGL_Cadastru.Repo.Repository
         {
         }
 
-        public void CreateCerere(Cerere cerere)
+        public void CreateCerere(Cerere cerere) 
         {
-            throw new NotImplementedException();
+            Create(cerere);
+            Console.WriteLine("Cerere Repository");
         }
 
-        public void DeleteCerere(Cerere cerere)
-        {
-            throw new NotImplementedException();
-        }
+        public void DeleteCerere(Cerere cerere) => Delete(cerere);
 
         public async Task<IEnumerable<Cerere>> GetAllAync(bool trackChanges) =>
             await FindAll(trackChanges)
+            .Include(c => c.Executant)
+            .Include(c => c.Client)
+            .Include(c => c.Responsabil)
             .OrderBy(c => c.ValabilPanaLa)
             .ToListAsync();
 
-        public Task<Cerere> GetByIdAsync(Guid companyId, bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Cerere> GetByIdAsync(Guid CererId, bool trackChanges) =>
+            await FindByCondition(c => c.Id.Equals(CererId), trackChanges)
+            .Include(c => c.Executant)
+            .Include(c => c.Client)
+            .Include(c => c.Responsabil)
+            .SingleOrDefaultAsync();
 
         public Task<IEnumerable<Cerere>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
         {

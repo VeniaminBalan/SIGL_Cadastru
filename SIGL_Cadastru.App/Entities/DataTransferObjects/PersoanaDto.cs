@@ -10,5 +10,13 @@ namespace SIGL_Cadastru.App.Entities
         public string IDNP { get; set; }
         public DateOnly DataNasterii { get; set; }
         public string Domiciliu { get; set; }
+        public string? Email { get; set; }
+        public string? Telefon { get; set; }
+
+        public override string ToString()
+        {
+            return new string($"{Id} {Nume} {Prenume}({IDNP})");
+        }
     }
+
 }
