@@ -13,9 +13,9 @@ public class RepositoryManager : IRepositoryManager
 {
     private readonly AppDbContext _appDbContext;
 
-    private  ICerereRepository _cerereRepository;
-    private  ILucrareRepository _lucrareRepository;
-    private  IPersoanaRepository _perosanaRepository;
+    private Lazy<ICerereRepository> _cerereRepository;
+    private Lazy<ILucrareRepository> _lucrareRepository;
+    private Lazy<IPersoanaRepository> _perosanaRepository;
 
     public RepositoryManager(AppDbContext appDbContext)
     {

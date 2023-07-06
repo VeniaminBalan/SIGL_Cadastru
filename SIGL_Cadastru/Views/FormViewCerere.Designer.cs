@@ -41,24 +41,25 @@
             this.lucrareDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label_responsabil = new System.Windows.Forms.Label();
             this.label_executant = new System.Windows.Forms.Label();
-            this.label_stareaCererii = new System.Windows.Forms.Label();
             this.label_valabilDeLa = new System.Windows.Forms.Label();
             this.label_ValabilPanaLa = new System.Windows.Forms.Label();
             this.label_pretTotal = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_telefon = new System.Windows.Forms.Label();
+            this.label_email = new System.Windows.Forms.Label();
+            this.label_domiciliu = new System.Windows.Forms.Label();
+            this.label_idnp = new System.Windows.Forms.Label();
+            this.label_prenume = new System.Windows.Forms.Label();
+            this.label_Nume = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label_Nume = new System.Windows.Forms.Label();
-            this.label_prenume = new System.Windows.Forms.Label();
-            this.label_idnp = new System.Windows.Forms.Label();
-            this.label_domiciliu = new System.Windows.Forms.Label();
-            this.label_email = new System.Windows.Forms.Label();
-            this.label_telefon = new System.Windows.Forms.Label();
+            this.comboBox_stareaCererii = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -158,54 +159,45 @@
             this.label_responsabil.AutoSize = true;
             this.label_responsabil.Location = new System.Drawing.Point(149, 29);
             this.label_responsabil.Name = "label_responsabil";
-            this.label_responsabil.Size = new System.Drawing.Size(50, 20);
+            this.label_responsabil.Size = new System.Drawing.Size(18, 20);
             this.label_responsabil.TabIndex = 7;
-            this.label_responsabil.Text = "label7";
+            this.label_responsabil.Text = "...";
             // 
             // label_executant
             // 
             this.label_executant.AutoSize = true;
             this.label_executant.Location = new System.Drawing.Point(149, 66);
             this.label_executant.Name = "label_executant";
-            this.label_executant.Size = new System.Drawing.Size(50, 20);
+            this.label_executant.Size = new System.Drawing.Size(18, 20);
             this.label_executant.TabIndex = 8;
-            this.label_executant.Text = "label7";
-            // 
-            // label_stareaCererii
-            // 
-            this.label_stareaCererii.AutoSize = true;
-            this.label_stareaCererii.Location = new System.Drawing.Point(149, 103);
-            this.label_stareaCererii.Name = "label_stareaCererii";
-            this.label_stareaCererii.Size = new System.Drawing.Size(50, 20);
-            this.label_stareaCererii.TabIndex = 9;
-            this.label_stareaCererii.Text = "label7";
+            this.label_executant.Text = "...";
             // 
             // label_valabilDeLa
             // 
             this.label_valabilDeLa.AutoSize = true;
             this.label_valabilDeLa.Location = new System.Drawing.Point(149, 140);
             this.label_valabilDeLa.Name = "label_valabilDeLa";
-            this.label_valabilDeLa.Size = new System.Drawing.Size(50, 20);
+            this.label_valabilDeLa.Size = new System.Drawing.Size(18, 20);
             this.label_valabilDeLa.TabIndex = 10;
-            this.label_valabilDeLa.Text = "label7";
+            this.label_valabilDeLa.Text = "...";
             // 
             // label_ValabilPanaLa
             // 
             this.label_ValabilPanaLa.AutoSize = true;
             this.label_ValabilPanaLa.Location = new System.Drawing.Point(149, 177);
             this.label_ValabilPanaLa.Name = "label_ValabilPanaLa";
-            this.label_ValabilPanaLa.Size = new System.Drawing.Size(50, 20);
+            this.label_ValabilPanaLa.Size = new System.Drawing.Size(18, 20);
             this.label_ValabilPanaLa.TabIndex = 11;
-            this.label_ValabilPanaLa.Text = "label7";
+            this.label_ValabilPanaLa.Text = "...";
             // 
             // label_pretTotal
             // 
             this.label_pretTotal.AutoSize = true;
             this.label_pretTotal.Location = new System.Drawing.Point(149, 214);
             this.label_pretTotal.Name = "label_pretTotal";
-            this.label_pretTotal.Size = new System.Drawing.Size(50, 20);
+            this.label_pretTotal.Size = new System.Drawing.Size(18, 20);
             this.label_pretTotal.TabIndex = 12;
-            this.label_pretTotal.Text = "label7";
+            this.label_pretTotal.Text = "...";
             // 
             // label7
             // 
@@ -233,10 +225,82 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Location = new System.Drawing.Point(112, 310);
+            this.panel1.Location = new System.Drawing.Point(234, 310);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(786, 125);
+            this.panel1.Size = new System.Drawing.Size(664, 125);
             this.panel1.TabIndex = 14;
+            // 
+            // label_telefon
+            // 
+            this.label_telefon.AutoSize = true;
+            this.label_telefon.Location = new System.Drawing.Point(452, 73);
+            this.label_telefon.Name = "label_telefon";
+            this.label_telefon.Size = new System.Drawing.Size(18, 20);
+            this.label_telefon.TabIndex = 11;
+            this.label_telefon.Text = "...";
+            // 
+            // label_email
+            // 
+            this.label_email.AutoSize = true;
+            this.label_email.Location = new System.Drawing.Point(452, 43);
+            this.label_email.Name = "label_email";
+            this.label_email.Size = new System.Drawing.Size(18, 20);
+            this.label_email.TabIndex = 10;
+            this.label_email.Text = "...";
+            // 
+            // label_domiciliu
+            // 
+            this.label_domiciliu.AutoSize = true;
+            this.label_domiciliu.Location = new System.Drawing.Point(452, 14);
+            this.label_domiciliu.Name = "label_domiciliu";
+            this.label_domiciliu.Size = new System.Drawing.Size(18, 20);
+            this.label_domiciliu.TabIndex = 9;
+            this.label_domiciliu.Text = "...";
+            // 
+            // label_idnp
+            // 
+            this.label_idnp.AutoSize = true;
+            this.label_idnp.Location = new System.Drawing.Point(180, 73);
+            this.label_idnp.Name = "label_idnp";
+            this.label_idnp.Size = new System.Drawing.Size(18, 20);
+            this.label_idnp.TabIndex = 8;
+            this.label_idnp.Text = "...";
+            // 
+            // label_prenume
+            // 
+            this.label_prenume.AutoSize = true;
+            this.label_prenume.Location = new System.Drawing.Point(180, 43);
+            this.label_prenume.Name = "label_prenume";
+            this.label_prenume.Size = new System.Drawing.Size(18, 20);
+            this.label_prenume.TabIndex = 7;
+            this.label_prenume.Text = "...";
+            // 
+            // label_Nume
+            // 
+            this.label_Nume.AutoSize = true;
+            this.label_Nume.Location = new System.Drawing.Point(180, 14);
+            this.label_Nume.Name = "label_Nume";
+            this.label_Nume.Size = new System.Drawing.Size(18, 20);
+            this.label_Nume.TabIndex = 6;
+            this.label_Nume.Text = "...";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(360, 73);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(61, 20);
+            this.label13.TabIndex = 5;
+            this.label13.Text = "Telefon:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(360, 43);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(49, 20);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Email:";
             // 
             // label11
             // 
@@ -274,88 +338,35 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Nume:";
             // 
-            // label12
+            // comboBox_stareaCererii
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(360, 43);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(49, 20);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Email:";
+            this.comboBox_stareaCererii.FormattingEnabled = true;
+            this.comboBox_stareaCererii.Location = new System.Drawing.Point(149, 103);
+            this.comboBox_stareaCererii.Name = "comboBox_stareaCererii";
+            this.comboBox_stareaCererii.Size = new System.Drawing.Size(104, 28);
+            this.comboBox_stareaCererii.TabIndex = 15;
             // 
-            // label13
+            // button1
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(360, 73);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(61, 20);
-            this.label13.TabIndex = 5;
-            this.label13.Text = "Telefon:";
-            // 
-            // label_Nume
-            // 
-            this.label_Nume.AutoSize = true;
-            this.label_Nume.Location = new System.Drawing.Point(180, 14);
-            this.label_Nume.Name = "label_Nume";
-            this.label_Nume.Size = new System.Drawing.Size(58, 20);
-            this.label_Nume.TabIndex = 6;
-            this.label_Nume.Text = "label14";
-            // 
-            // label_prenume
-            // 
-            this.label_prenume.AutoSize = true;
-            this.label_prenume.Location = new System.Drawing.Point(180, 43);
-            this.label_prenume.Name = "label_prenume";
-            this.label_prenume.Size = new System.Drawing.Size(58, 20);
-            this.label_prenume.TabIndex = 7;
-            this.label_prenume.Text = "label14";
-            // 
-            // label_idnp
-            // 
-            this.label_idnp.AutoSize = true;
-            this.label_idnp.Location = new System.Drawing.Point(180, 73);
-            this.label_idnp.Name = "label_idnp";
-            this.label_idnp.Size = new System.Drawing.Size(58, 20);
-            this.label_idnp.TabIndex = 8;
-            this.label_idnp.Text = "label14";
-            // 
-            // label_domiciliu
-            // 
-            this.label_domiciliu.AutoSize = true;
-            this.label_domiciliu.Location = new System.Drawing.Point(452, 14);
-            this.label_domiciliu.Name = "label_domiciliu";
-            this.label_domiciliu.Size = new System.Drawing.Size(58, 20);
-            this.label_domiciliu.TabIndex = 9;
-            this.label_domiciliu.Text = "label14";
-            // 
-            // label_email
-            // 
-            this.label_email.AutoSize = true;
-            this.label_email.Location = new System.Drawing.Point(452, 43);
-            this.label_email.Name = "label_email";
-            this.label_email.Size = new System.Drawing.Size(58, 20);
-            this.label_email.TabIndex = 10;
-            this.label_email.Text = "label14";
-            // 
-            // label_telefon
-            // 
-            this.label_telefon.AutoSize = true;
-            this.label_telefon.Location = new System.Drawing.Point(452, 73);
-            this.label_telefon.Name = "label_telefon";
-            this.label_telefon.Size = new System.Drawing.Size(58, 20);
-            this.label_telefon.TabIndex = 11;
-            this.label_telefon.Text = "label14";
+            this.button1.Location = new System.Drawing.Point(56, 384);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 50);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Actualizare";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormViewCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboBox_stareaCererii);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label_pretTotal);
             this.Controls.Add(this.label_ValabilPanaLa);
             this.Controls.Add(this.label_valabilDeLa);
-            this.Controls.Add(this.label_stareaCererii);
             this.Controls.Add(this.label_executant);
             this.Controls.Add(this.label_responsabil);
             this.Controls.Add(this.dataGridView1);
@@ -366,7 +377,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormViewCerere";
-            this.Text = "FormViewCerere";
+            this.Text = "Cerere";
             this.Load += new System.EventHandler(this.FormViewCerere_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).EndInit();
@@ -391,7 +402,6 @@
         private BindingSource lucrareDtoBindingSource;
         private Label label_responsabil;
         private Label label_executant;
-        private Label label_stareaCererii;
         private Label label_valabilDeLa;
         private Label label_ValabilPanaLa;
         private Label label_pretTotal;
@@ -409,5 +419,7 @@
         private Label label_idnp;
         private Label label_prenume;
         private Label label_Nume;
+        private ComboBox comboBox_stareaCererii;
+        private Button button1;
     }
 }

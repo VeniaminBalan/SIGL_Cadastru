@@ -16,9 +16,12 @@ namespace SIGL_Cadastru.Views
 {
     public partial class FormViewCerere : Form
     {
+        public event EventHandler<EventArgs> DataChenged;
+
         private readonly IRepositoryManager _repo;
         private readonly IMapper _mapper;
         private readonly Guid _cererId;
+        private Cerere cerere;
 
         public FormViewCerere(IRepositoryManager repo, IMapper mapper, Guid cerereId)
         {
@@ -30,7 +33,7 @@ namespace SIGL_Cadastru.Views
 
         private async void FormViewCerere_Load(object sender, EventArgs e)
         {
-            var cerere = await _repo.Cerere.GetByIdAsync(_cererId, true);
+            this.cerere = await _repo.Cerere.GetByIdAsync(_cererId, true);
             SetView(cerere);
         }
 
@@ -41,24 +44,8 @@ namespace SIGL_Cadastru.Views
             label_executant.Text = cerereDto.Executant;
             label_responsabil.Text = cerereDto.Responsabil;
 
-            switch (cerereDto.StareaCererii)
-            {
-                case Status.Inlucru:
-                    label_stareaCererii.Text = "In Lucru";
-                    break;
-                case Status.LaReceptie:
-                    label_stareaCererii.Text = "La Receptie";
-                    break;
-                case Status.Eliberat:
-                    label_stareaCererii.Text = "Eliberat";
-                    break;
-                case Status.Respins:
-                    label_stareaCererii.Text = "Respins";
-                    label_stareaCererii.ForeColor = Color.Red;
-                    break;
-                default:
-                    break;
-            }
+            comboBox_stareaCererii.DataSource = Enum.GetValues(typeof(Status));
+            comboBox_stareaCererii.SelectedItem = cerere.StareaCererii;
 
             label_valabilDeLa.Text = cerereDto.ValabilDeLa.ToString();
             label_ValabilPanaLa.Text = cerereDto.ValabilPanaLa.ToString();
@@ -66,7 +53,7 @@ namespace SIGL_Cadastru.Views
 
             dataGridView1.DataSource =  _mapper.Map<List<LucrareDto>>(cerere.Lucrari);
 
-            //label_pretTotal.Text = cerereDto.
+            label_pretTotal.Text = cerere.CostTotal.ToString();
 
 
             label_Nume.Text = cerere.Client.Nume;
@@ -77,5 +64,15 @@ namespace SIGL_Cadastru.Views
             label_telefon.Text = cerere.Client.Telefon;
         }
 
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            if (cerere.StareaCererii != (Status)comboBox_stareaCererii.SelectedItem) 
+            {
+                cerere.StareaCererii = (Status)comboBox_stareaCererii.SelectedItem;
+                await _repo.SaveAsync();
+                DataChenged!.Invoke(sender, new EventArgs());
+                //this.InitializeComponent();
+            }
+        }
     }
 }

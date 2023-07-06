@@ -52,7 +52,14 @@ namespace SIGL_Cadastru.Views
 
             var id = (Guid)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
             var form_cerereView = new FormFactory().CreateFromViewCerere(id);
+            form_cerereView.DataChenged += ActualizareButtonPressed;
             form_cerereView.Show();
+        }
+
+        public async void ActualizareButtonPressed(object sender, EventArgs e) 
+        {
+            await UpdateTable();
+            //MessageBox.Show("Update");
         }
     }
 }
