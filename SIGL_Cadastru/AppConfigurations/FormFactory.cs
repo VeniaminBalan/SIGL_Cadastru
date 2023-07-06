@@ -22,6 +22,11 @@ namespace SIGL_Cadastru.AppConfigurations
             return _provider.CreateCerere();
         }
 
+        public FormViewCerere CreateFromViewCerere(Guid Id)
+        {
+            return _provider.CreateFromViewCerere(Id);
+        }
+
         public FormMain CreateMain()
         {
             return _provider.CreateMain();

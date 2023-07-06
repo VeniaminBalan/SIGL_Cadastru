@@ -39,18 +39,15 @@ namespace SIGL_Cadastru
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
                     services.AddAutoMapper(typeof(Program));
 
-                    //services.AddTransient<IHelloWorldService, HelloWorldServiceImpl>();
-                    /*
-                    services.AddTransient<Func<string, Form2>>(
-                        container =>
-                            something =>
-                            {
-                                var helloWorldService =
-                                    container.GetRequiredService<IHelloWorldService>();
-                                return new Form2(helloWorldService, something);
-                            });
 
-                    */
+                    services.AddTransient<Func<Guid, FormViewCerere>>(
+                        container =>
+                            Id =>
+                            {
+                                var repository = container.GetRequiredService<IRepositoryManager>();
+                                var mapper = container.GetRequiredService<IMapper>();
+                                return new FormViewCerere(repository, mapper, Id);
+                            });
 
                     services.AddTransient<FormMain>(container => 
                     {
@@ -143,15 +140,11 @@ namespace SIGL_Cadastru
                 return _serviceProvider.GetRequiredService<UC_PersoanaNoua>();
             }
 
-            /* 
-            public Form2 CreateForm2(string something)
+            public FormViewCerere CreateFromViewCerere(Guid Id)
             {
-                var _form2Factory = _serviceProvider.GetRequiredService<Func<string, Form2>>();
-                return _form2Factory(something);
+                var _form2Factory = _serviceProvider.GetRequiredService<Func<Guid, FormViewCerere>>();
+                return _form2Factory(Id);
             }
-            */
-
-
         }
 
     }

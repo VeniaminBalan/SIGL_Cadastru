@@ -33,6 +33,7 @@ namespace SIGL_Cadastru.Repo.Repository
             .Include(c => c.Executant)
             .Include(c => c.Client)
             .Include(c => c.Responsabil)
+            .Include(c => c.Lucrari)
             .SingleOrDefaultAsync();
 
         public Task<IEnumerable<Cerere>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)

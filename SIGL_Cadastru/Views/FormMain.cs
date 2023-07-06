@@ -39,12 +39,15 @@ namespace SIGL_Cadastru.Views
         private void button_cerere_noua_Click(object sender, EventArgs e)
         {
             var form_cerere = new FormFactory().CreateCerere();
+            form_cerere.CreateButtonPressed += Form_cerere_CreateButtonPressed;
             form_cerere.Show();
         }
 
-        private async void button_update_Click(object sender, EventArgs e)
+        private async void Form_cerere_CreateButtonPressed(object? sender, EventArgs e)
         {
             await uc_Main.UpdateTable();
+            ((Form)sender).Dispose();
         }
+
     }
 }

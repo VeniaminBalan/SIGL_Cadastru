@@ -33,7 +33,6 @@
             this.panel_content = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button_update = new System.Windows.Forms.Button();
             this.aside_navbar.SuspendLayout();
             this.panel_content.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +49,6 @@
             // 
             // aside_navbar
             // 
-            this.aside_navbar.Controls.Add(this.button_update);
             this.aside_navbar.Controls.Add(this.button_cerere_noua);
             this.aside_navbar.Dock = System.Windows.Forms.DockStyle.Left;
             this.aside_navbar.Location = new System.Drawing.Point(0, 0);
@@ -77,16 +75,6 @@
             this.panel1.Size = new System.Drawing.Size(1087, 57);
             this.panel1.TabIndex = 0;
             // 
-            // button_update
-            // 
-            this.button_update.Location = new System.Drawing.Point(0, 112);
-            this.button_update.Name = "button_update";
-            this.button_update.Size = new System.Drawing.Size(104, 40);
-            this.button_update.TabIndex = 4;
-            this.button_update.Text = "Update";
-            this.button_update.UseVisualStyleBackColor = true;
-            this.button_update.Click += new System.EventHandler(this.button_update_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -109,6 +97,5 @@
         private Panel panel_content;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Panel panel1;
-        private Button button_update;
     }
 }

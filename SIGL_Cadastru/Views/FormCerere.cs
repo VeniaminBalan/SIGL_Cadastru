@@ -12,6 +12,8 @@ namespace SIGL_Cadastru.Views
 {
     public partial class FormCerere : Form
     {
+        public event EventHandler CreateButtonPressed;
+
         private readonly IRepositoryManager _repo;
         private readonly IMapper _mapper;
         private List<Lucrare> Lucrari = new List<Lucrare>();
@@ -89,7 +91,7 @@ namespace SIGL_Cadastru.Views
                     NrCadastral = maskedTextBox_NrCadasrtral.Text,
                     ValabilDeLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value),
                     ValabilPanaLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value.AddBusinessDays(int.Parse(textBox_termen.Text))),
-                    CostTotal = suma - int.Parse(textBox_adaos.Text),
+                    CostTotal = suma + int.Parse(textBox_adaos.Text),
                     Responsabil= responsabil,
                     ResponsabilId = responsabil.Id,
                     Executant = executant,
@@ -108,6 +110,9 @@ namespace SIGL_Cadastru.Views
                 MessageBox.Show("Error!" + ex.Message);
                 return;
             }
+
+            MessageBox.Show("Cererea a fost creata!");
+            CreateButtonPressed?.Invoke(this, EventArgs.Empty);
 
         }
 
