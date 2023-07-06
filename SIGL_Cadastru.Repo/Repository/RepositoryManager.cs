@@ -20,35 +20,16 @@ public class RepositoryManager : IRepositoryManager
     public RepositoryManager(AppDbContext appDbContext)
     {
         _appDbContext = appDbContext;
+
+        _cerereRepository = new Lazy<ICerereRepository>(() => new CerereRepository(_appDbContext));
+        _lucrareRepository = new Lazy<ILucrareRepository>(() => new LucrareRepository(_appDbContext));
+        _perosanaRepository = new Lazy<IPersoanaRepository>(() => new PersoanaRepository(_appDbContext));
+
     }
 
-    public ICerereRepository Cerere {
-        get 
-        {
-            if (_cerereRepository is null)
-                _cerereRepository = new CerereRepository(_appDbContext);
-
-            return _cerereRepository;
-        }
-    }
-    public ILucrareRepository Lucrare { 
-        get
-        {
-            if (_lucrareRepository is null)
-                _lucrareRepository = new LucrareRepository(_appDbContext);
-
-            return _lucrareRepository;
-        }
-    }
-    public IPersoanaRepository Persoana {
-        get
-        {
-            if (_perosanaRepository is null)
-                _perosanaRepository = new PersoanaRepository(_appDbContext);
-
-            return _perosanaRepository;
-        }
-    }
+    public ICerereRepository Cerere => _cerereRepository.Value;
+    public ILucrareRepository Lucrare => _lucrareRepository.Value;
+    public IPersoanaRepository Persoana=> _perosanaRepository.Value;
 
     public Task SaveAsync() => _appDbContext.SaveChangesAsync();
 }

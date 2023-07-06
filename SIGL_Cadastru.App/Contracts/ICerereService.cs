@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services;
+namespace SIGL_Cadastru.App.Contracts;
 
 public interface ICerereService
 {
