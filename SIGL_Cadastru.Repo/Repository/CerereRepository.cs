@@ -28,8 +28,8 @@ namespace SIGL_Cadastru.Repo.Repository
             .OrderBy(c => c.ValabilPanaLa)
             .ToListAsync();
 
-        public async Task<Cerere> GetByIdAsync(Guid CererId, bool trackChanges) =>
-            await FindByCondition(c => c.Id.Equals(CererId), trackChanges)
+        public async Task<Cerere> GetByIdAsync(Guid CerereId, bool trackChanges) =>
+            await FindByCondition(c => c.Id.Equals(CerereId), trackChanges)
             .Include(c => c.Executant)
             .Include(c => c.Client)
             .Include(c => c.Responsabil)

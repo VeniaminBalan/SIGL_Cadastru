@@ -1,15 +1,11 @@
-﻿using SIGL_Cadastru.Repo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SIGL_Cadastru.App.Entities;
+using SIGL_Cadastru.Repo.Models;
 
 namespace SIGL_Cadastru.App.Contracts;
 
 public interface ICerereService
 {
     public Task CreateNewCerere(Cerere cerere);
-    public Task<IEnumerable<Cerere>> GetAll();
-    public Task<Cerere> GetById(Guid Id);
+    public Task<IEnumerable<CerereDto>> GetAllAsync(bool trackChanges);
+    public Task<CerereDto> GetById(Guid Id, bool trackChanges);
 }

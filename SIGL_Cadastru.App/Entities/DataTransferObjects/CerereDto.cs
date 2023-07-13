@@ -9,18 +9,22 @@ namespace SIGL_Cadastru.App.Entities
 {
     public class CerereDto
     {
-        public Guid Id { get; set; }
-        public string Client { get; set; }
-        public string Executant { get; set; }
-        public string Responsabil { get; set; }
-        public string NrCadastral { get; set; }
-        public DateOnly ValabilDeLa { get; set; }
-        public DateOnly ValabilPanaLa { get; set; }
-        public DateOnly Prelungit { get; set; }
-        public Status StareaCererii { get; set; }
-        public DateOnly LaReceptie { get; set; }
-        public DateOnly Eliberat { get; set; }
-        public DateOnly Respins { get; set; }
+        public Guid Id { get; init; }
+
+        public Guid ClientId { get; init; }
+        public string Client { get; init; }
+        public Guid ExecutantId { get; init; }
+        public string Executant { get; init; }
+        public Guid ResponsabilId { get; init; }
+        public string Responsabil { get; init; }
+        public string NrCadastral { get; init; }
+        public DateOnly ValabilDeLa { get; init; }
+        public DateOnly ValabilPanaLa { get; init; }
+        public DateOnly? Prelungit { get; init; }
+        public Status StareaCererii { get; init; }
+        public DateOnly? LaReceptie { get; init; }
+        public DateOnly? Eliberat { get; init; }
+        public DateOnly? Respins { get; init; }
 
         public override string ToString()
         {

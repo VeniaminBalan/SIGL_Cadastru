@@ -1,28 +1,24 @@
 ﻿using Contracts;
 using SIGL_Cadastru.App.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SIGL_Cadastru.App.Services
+namespace Services;
+
+public sealed class ServiceManager : IServiceManager
 {
-    internal class ServiceManager : IServiceManager
+    
+    private readonly Lazy<ICerereService> _cerereService;
+    private readonly Lazy<ILucrareService> _lucrareService;
+    private readonly Lazy<IPersoanaService> _persoanaService;
+
+    public ServiceManager(IRepositoryManager repoManager)
     {
-        private readonly IRepositoryManager _repo;
-        private readonly ILoggerManager _logger;
 
-        public ServiceManager(IRepositoryManager repo, ILoggerManager logger)
-        {
-            _repo = repo;
-            _logger = logger;
-        }
-
-        public ICerereService CerereService => throw new NotImplementedException();
-
-        public IPersoanaService PersoanaService => throw new NotImplementedException();
-
-        public ILucrareService lucrareService => throw new NotImplementedException();
+        _cerereService = new Lazy<ICerereService>(() => new CerereService(repoManager));
+        _lucrareService = new Lazy<ILucrareService>(() => new LucrareService(repoManager));
+        _persoanaService = new Lazy<IPersoanaService>(() => new PersoanaService(repoManager));
     }
+
+    public ICerereService CerereService => _cerereService.Value;
+    public IPersoanaService PersoanaService => _persoanaService.Value;
+    public ILucrareService lucrareService => _lucrareService.Value;
 }
