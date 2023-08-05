@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
+using Models;
 using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.Repo.Models;
 using System;
@@ -66,18 +67,22 @@ namespace SIGL_Cadastru.Views
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            /*
-            if (cerere.StareaCererii != (Status)comboBox_stareaCererii.SelectedItem) 
+            var status = (Status)comboBox_stareaCererii.SelectedItem;
+
+            var statusList = cerere.StatusList;
+
+ 
+
+            switch (status) 
             {
-                cerere.StareaCererii = (Status)comboBox_stareaCererii.SelectedItem;
+                case Status.Eliberat:
+                    statusList.Add(CerereStatus.NewStatusEliberat(cerere, DateOnly.FromDateTime(DateTime.Now.AddDays(10))) );
+                    break;
+            }
 
-                // --> await serviceManager.Cerere.Update(cerere); TODO
 
-                await _repo.SaveAsync();
-                
-                //this.InitializeComponent();
-            }*/
-
+            cerere.StatusList = statusList;
+            await _repo.SaveAsync();
             DataChenged!.Invoke(sender, new EventArgs());
         }
     }

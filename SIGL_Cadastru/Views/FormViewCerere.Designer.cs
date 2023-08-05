@@ -58,8 +58,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox_stareaCererii = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.comboBox_stareaCererii = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -338,14 +338,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Nume:";
             // 
-            // comboBox_stareaCererii
-            // 
-            this.comboBox_stareaCererii.FormattingEnabled = true;
-            this.comboBox_stareaCererii.Location = new System.Drawing.Point(149, 103);
-            this.comboBox_stareaCererii.Name = "comboBox_stareaCererii";
-            this.comboBox_stareaCererii.Size = new System.Drawing.Size(104, 28);
-            this.comboBox_stareaCererii.TabIndex = 15;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(56, 384);
@@ -355,6 +347,14 @@
             this.button1.Text = "Actualizare";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBox_stareaCererii
+            // 
+            this.comboBox_stareaCererii.FormattingEnabled = true;
+            this.comboBox_stareaCererii.Location = new System.Drawing.Point(149, 103);
+            this.comboBox_stareaCererii.Name = "comboBox_stareaCererii";
+            this.comboBox_stareaCererii.Size = new System.Drawing.Size(104, 28);
+            this.comboBox_stareaCererii.TabIndex = 15;
             // 
             // FormViewCerere
             // 
@@ -419,7 +419,7 @@
         private Label label_idnp;
         private Label label_prenume;
         private Label label_Nume;
-        private ComboBox comboBox_stareaCererii;
         private Button button1;
+        private ComboBox comboBox_stareaCererii;
     }
 }

@@ -34,17 +34,28 @@ internal sealed class CerereService : ICerereService
             Executant = string.Join(' ', x.Executant.Nume, x.Executant.Prenume),
 
             ClientId = x.ClientId,
-            Client = string.Join(' ', x.Executant.Nume, x.Executant.Prenume),
+            Client = string.Join(' ', x.Client.Nume, x.Client.Prenume),
 
             NrCadastral= x.NrCadastral,
             ValabilDeLa=x.ValabilDeLa,
             ValabilPanaLa=x.ValabilPanaLa,
-        });
+
+            StareaCererii = SetStatus(x.StatusList)
+
+        }).ToList();
 
     }
 
     public async Task<CerereDto> GetById(Guid Id, bool trackChanges)
     {
         throw new NotImplementedException();
+    }
+
+
+    private Status SetStatus(List<CerereStatus> stari) 
+    {
+        var state = stari.OrderBy(x => x.Created).First();
+        return state.Starea;
+            
     }
 }

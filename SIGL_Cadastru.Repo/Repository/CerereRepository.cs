@@ -25,6 +25,7 @@ namespace SIGL_Cadastru.Repo.Repository
             .Include(c => c.Executant)
             .Include(c => c.Client)
             .Include(c => c.Responsabil)
+            .Include(c => c.StatusList)
             .OrderBy(c => c.ValabilPanaLa)
             .ToListAsync();
 
@@ -34,6 +35,7 @@ namespace SIGL_Cadastru.Repo.Repository
             .Include(c => c.Client)
             .Include(c => c.Responsabil)
             .Include(c => c.Lucrari)
+            .Include(c => c.StatusList)
             .SingleOrDefaultAsync();
 
         public Task<IEnumerable<Cerere>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)

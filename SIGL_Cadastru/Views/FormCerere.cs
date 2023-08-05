@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using FluentDateTime;
-using SIGL_Cadastru.App.Entities;
+using Models;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Utils;
@@ -96,9 +96,13 @@ namespace SIGL_Cadastru.Views
                     ResponsabilId = responsabil.Id,
                     Executant = executant,
                     ExecutantId = executant.Id,
-                    Lucrari = this.Lucrari
+                    Lucrari = this.Lucrari,                
                 
                 };
+
+                newCerere.StatusList = new List<CerereStatus> {
+                        CerereStatus.NewStatusInLucru(newCerere)
+                    };
 
                 _repo.Cerere.CreateCerere(newCerere);
                 await _repo.SaveAsync();

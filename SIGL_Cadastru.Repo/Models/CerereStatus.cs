@@ -13,4 +13,29 @@ public class CerereStatus
     public Status Starea { get; set; }
     public DateOnly Created { get; set; }
     public Cerere Cerere { get; set; }
+
+    private CerereStatus() 
+    {
+        Id = Guid.NewGuid();
+    }
+
+    public static CerereStatus NewStatusInLucru(Cerere cerere) 
+    {
+        return new CerereStatus 
+        {
+            Starea = Status.Inlucru,
+            Created = DateOnly.FromDateTime(DateTime.Now),
+            Cerere= cerere
+        };
+    }
+
+    public static CerereStatus NewStatusEliberat(Cerere cerere, DateOnly date)
+    {
+        return new CerereStatus
+        {
+            Starea = Status.Eliberat,
+            Created = date,
+            Cerere = cerere
+        };
+    }
 }

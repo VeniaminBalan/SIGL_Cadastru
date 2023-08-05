@@ -35,10 +35,7 @@ namespace SIGL_Cadastru.Views
         {
             var cereri = await _service.CerereService.GetAllAsync(false);
 
-            var response = _mapper.Map<List<CerereDto>>(cereri);
-
-            dataGridView1.DataSource = response;           
-            
+            dataGridView1.DataSource = cereri;                      
         }
 
         private async void UC_Main_Load(object sender, EventArgs e)
