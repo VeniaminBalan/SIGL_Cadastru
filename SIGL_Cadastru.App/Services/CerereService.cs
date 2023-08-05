@@ -19,35 +19,10 @@ internal sealed class CerereService : ICerereService
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<CerereDto>> GetAllAsync(bool trackChanges)
+    public async Task<IEnumerable<Cerere>> GetAllAsync(bool trackChanges)
     {
-        var cereri = await _repo.Cerere.GetAllAync(trackChanges);
+        return await _repo.Cerere.GetAllAync(trackChanges);
 
-        var cereriDto = cereri.Select(c => new CerereDto 
-        {
-            Id = c.Id,
-
-            ClientId = c.ClientId,
-            Client = string.Join(" ", c.Client.Nume, c.Client.Prenume),
-
-            ResponsabilId = c.ResponsabilId,
-            Responsabil = string.Join(" ", c.Responsabil.Nume, c.Responsabil.Prenume),
-
-            ExecutantId= c.ExecutantId,
-            Executant = string.Join(" ", c.Executant.Nume, c.Executant.Prenume),
-
-            NrCadastral= c.NrCadastral,
-            ValabilDeLa = c.ValabilDeLa,
-            ValabilPanaLa= c.ValabilPanaLa,
-            Eliberat = c.Eliberat,
-            Prelungit = c.Prelungit,
-            Respins = c.Respins,
-            LaReceptie= c.LaReceptie,
-            
-            StareaCererii = SetStatus(c.ValabilDeLa, c.Respins, c.LaReceptie, c.Eliberat)
-        });
-
-        return cereriDto;
     }
 
     public async Task<CerereDto> GetById(Guid Id, bool trackChanges)
@@ -55,31 +30,35 @@ internal sealed class CerereService : ICerereService
         throw new NotImplementedException();
     }
 
+    public async Task Update(Cerere cerere)
+    {
+        cerere.StareaCererii = SetStatus(cerere);
+    }
 
-    private Status SetStatus(DateOnly ValabilDeLa, DateOnly? Respins, DateOnly? LaReceptie, DateOnly? Eliberat) 
+    private Status SetStatus(Cerere cerere) 
     {
         DateOnly DateRespins;
-        if (Respins is null)
+        if (cerere.Respins is null)
             DateRespins = new DateOnly();
-        else DateRespins = (DateOnly)Respins;
+        else DateRespins = (DateOnly)cerere.Respins;
 
         DateOnly DateLaReceptie;
-        if (Respins is null)
+        if (cerere.LaReceptie is null)
             DateLaReceptie = new DateOnly();
-        else DateLaReceptie = (DateOnly)LaReceptie;
+        else DateLaReceptie = (DateOnly)cerere.LaReceptie;
 
         DateOnly DateEliberat;
-        if (Respins is null)
+        if (cerere.Eliberat is null)
             DateEliberat = new DateOnly();
-        else DateEliberat = (DateOnly)Eliberat;
+        else DateEliberat = (DateOnly)cerere.Eliberat;
 
 
-        List<DateOnly> dates = new List<DateOnly>{ ValabilDeLa, DateRespins, DateLaReceptie, DateEliberat };
+        List<DateOnly> dates = new List<DateOnly>{ cerere.ValabilDeLa, DateRespins, DateLaReceptie, DateEliberat };
         dates.Sort();
 
         var last = dates.Last();
 
-        if (last == ValabilDeLa)
+        if (last == cerere.ValabilDeLa)
             return Status.Inlucru;
 
         if (last == DateRespins)
@@ -91,6 +70,6 @@ internal sealed class CerereService : ICerereService
         if(last == DateEliberat)
             return Status.Eliberat;
 
-        throw new Exception("somethin went wrong in SetStatus method");
+        throw new Exception("something went wrong in SetStatus method");
     }
 }

@@ -6,6 +6,8 @@ namespace SIGL_Cadastru.App.Contracts;
 public interface ICerereService
 {
     public Task CreateNewCerere(Cerere cerere);
-    public Task<IEnumerable<CerereDto>> GetAllAsync(bool trackChanges);
+    public Task<IEnumerable<Cerere>> GetAllAsync(bool trackChanges);
     public Task<CerereDto> GetById(Guid Id, bool trackChanges);
+
+    public Task Update(Cerere cerere);
 }

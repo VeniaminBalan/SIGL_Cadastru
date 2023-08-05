@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repository;
+using Services;
+using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Views;
@@ -37,6 +39,7 @@ namespace SIGL_Cadastru
                 .ConfigureServices((context, services) => {
                     services.AddDbContext<AppDbContext>(options => options.UseSqlite(varstring));
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
+                    services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
                     services.AddAutoMapper(typeof(Program));
 
 
@@ -53,6 +56,8 @@ namespace SIGL_Cadastru
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
                         var mapper = container.GetRequiredService<IMapper>();
+                        var service = container.GetRequiredService<IServiceManager>();
+                        
                         var formCerere = new FormMain(repository, mapper);
                         return formCerere;
                     });

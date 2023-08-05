@@ -21,7 +21,7 @@ namespace SIGL_Cadastru.Views
         private readonly IRepositoryManager _repo;
         private readonly IMapper _mapper;
         private readonly Guid _cererId;
-        private Cerere cerere;
+        private Cerere cerere = null;
 
         public FormViewCerere(IRepositoryManager repo, IMapper mapper, Guid cerereId)
         {
@@ -69,6 +69,9 @@ namespace SIGL_Cadastru.Views
             if (cerere.StareaCererii != (Status)comboBox_stareaCererii.SelectedItem) 
             {
                 cerere.StareaCererii = (Status)comboBox_stareaCererii.SelectedItem;
+
+                // --> await serviceManager.Cerere.Update(cerere); TODO
+
                 await _repo.SaveAsync();
                 DataChenged!.Invoke(sender, new EventArgs());
                 //this.InitializeComponent();

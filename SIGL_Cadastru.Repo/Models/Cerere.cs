@@ -45,9 +45,14 @@ namespace SIGL_Cadastru.Repo.Models
         public DateOnly ValabilPanaLa { get; set; }
         public DateOnly? Prelungit { get; set; }
         public int CostTotal { get; set; }
+
+
+        // --- transactional logic
+        // TODO remove, add List<State>
         public Status? StareaCererii { get; set; } = Status.Inlucru;
         public DateOnly? LaReceptie { get; set; }
         public DateOnly? Eliberat { get; set; }
         public DateOnly? Respins { get; set; }
+        // ---
     }
 }
