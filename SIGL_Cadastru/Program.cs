@@ -54,9 +54,12 @@ namespace SIGL_Cadastru
 
                     services.AddTransient<FormMain>(container => 
                     {
+
                         var repository = container.GetRequiredService<IRepositoryManager>();
                         var mapper = container.GetRequiredService<IMapper>();
                         var service = container.GetRequiredService<IServiceManager>();
+
+                        if (service is null) throw new NullReferenceException();
                         
                         var formCerere = new FormMain(repository, mapper);
                         return formCerere;
@@ -71,9 +74,10 @@ namespace SIGL_Cadastru
 
                     services.AddTransient<UC_Main>(container => 
                     {
-                        var repository = container.GetRequiredService<IRepositoryManager>();
                         var mapper = container.GetRequiredService<IMapper>();
-                        var uc_main = new UC_Main(repository, mapper);
+                        var service = container.GetRequiredService<IServiceManager>();
+
+                        var uc_main = new UC_Main(service, mapper);
                         return uc_main;
                     });
 

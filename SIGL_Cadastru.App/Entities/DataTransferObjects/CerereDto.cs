@@ -1,4 +1,4 @@
-﻿using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Repo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

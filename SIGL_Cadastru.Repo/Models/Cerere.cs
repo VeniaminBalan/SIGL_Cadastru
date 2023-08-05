@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -39,20 +40,14 @@ namespace SIGL_Cadastru.Repo.Models
         [ForeignKey("ResponsabilId")]
         public Guid ResponsabilId { get; set; }
         public Persoana Responsabil { get; set; }
-        public List<Lucrare> Lucrari { get; set; }
-        public string NrCadastral { get; set; }
+
         public DateOnly ValabilDeLa { get; set; }
         public DateOnly ValabilPanaLa { get; set; }
-        public DateOnly? Prelungit { get; set; }
+
+        public List<Lucrare> Lucrari { get; set; }
+        public string NrCadastral { get; set; }
         public int CostTotal { get; set; }
-
-
-        // --- transactional logic
-        // TODO remove, add List<State>
-        public Status? StareaCererii { get; set; } = Status.Inlucru;
-        public DateOnly? LaReceptie { get; set; }
-        public DateOnly? Eliberat { get; set; }
-        public DateOnly? Respins { get; set; }
-        // ---
+        public List<CerereStatus> StatusList { get; set; }
     }
+
 }

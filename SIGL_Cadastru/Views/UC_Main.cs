@@ -1,5 +1,6 @@
 using AutoMapper;
 using Contracts;
+using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.AppConfigurations;
 using System;
@@ -17,12 +18,12 @@ namespace SIGL_Cadastru.Views
     public partial class UC_Main : UserControl
     {
 
-        private readonly IRepositoryManager _repo;
+        private readonly IServiceManager _service;
         private readonly IMapper _mapper;
 
-        public UC_Main(IRepositoryManager repo, IMapper mapper)
+        public UC_Main(IServiceManager service, IMapper mapper)
         {
-            _repo = repo;
+            _service = service;
             _mapper = mapper;
 
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace SIGL_Cadastru.Views
 
         public async Task UpdateTable() 
         {
-            var cereri = await _repo.Cerere.GetAllAync(false);
+            var cereri = await _service.CerereService.GetAllAsync(false);
 
             var response = _mapper.Map<List<CerereDto>>(cereri);
 

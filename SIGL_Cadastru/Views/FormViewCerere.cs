@@ -45,7 +45,7 @@ namespace SIGL_Cadastru.Views
             label_responsabil.Text = cerereDto.Responsabil;
 
             comboBox_stareaCererii.DataSource = Enum.GetValues(typeof(Status));
-            comboBox_stareaCererii.SelectedItem = cerere.StareaCererii;
+            comboBox_stareaCererii.SelectedItem = cerereDto.StareaCererii;
 
             label_valabilDeLa.Text = cerereDto.ValabilDeLa.ToString();
             label_ValabilPanaLa.Text = cerereDto.ValabilPanaLa.ToString();
@@ -66,6 +66,7 @@ namespace SIGL_Cadastru.Views
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            /*
             if (cerere.StareaCererii != (Status)comboBox_stareaCererii.SelectedItem) 
             {
                 cerere.StareaCererii = (Status)comboBox_stareaCererii.SelectedItem;
@@ -73,9 +74,11 @@ namespace SIGL_Cadastru.Views
                 // --> await serviceManager.Cerere.Update(cerere); TODO
 
                 await _repo.SaveAsync();
-                DataChenged!.Invoke(sender, new EventArgs());
+                
                 //this.InitializeComponent();
-            }
+            }*/
+
+            DataChenged!.Invoke(sender, new EventArgs());
         }
     }
 }
