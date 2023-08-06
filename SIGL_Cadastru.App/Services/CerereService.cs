@@ -40,7 +40,11 @@ internal sealed class CerereService : ICerereService
             ValabilDeLa=x.ValabilDeLa,
             ValabilPanaLa=x.ValabilPanaLa,
 
-            StareaCererii = SetStatus(x.StatusList)
+            StareaCererii = SetStatus(x.StatusList),
+            LaReceptie = GetDate(x.StatusList, Status.LaReceptie),
+            Eliberat = GetDate(x.StatusList, Status.Eliberat),
+            Respins = GetDate(x.StatusList, Status.Respins)
+
 
         }).ToList();
 
@@ -54,8 +58,18 @@ internal sealed class CerereService : ICerereService
 
     private Status SetStatus(List<CerereStatus> stari) 
     {
-        var state = stari.OrderBy(x => x.Created).First();
-        return state.Starea;
-            
+        var state = stari.OrderByDescending(x => x.Created).First();
+        return state.Starea;           
     }
+
+    private DateOnly? GetDate(List<CerereStatus> stari, Status status) 
+    {
+        var state = stari.OrderByDescending(x => x.Created).FirstOrDefault(d => d.Starea == status);
+
+        if (state is null) 
+            return null;
+
+        return state.Created;
+    }
+
 }
