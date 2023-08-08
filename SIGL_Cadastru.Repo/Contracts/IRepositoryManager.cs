@@ -7,5 +7,6 @@ public interface IRepositoryManager
     public ILucrareRepository Lucrare { get;}
     public IPersoanaRepository Persoana { get; }
 
+    public ICerereStatusRepository CerereStatus { get; }
     Task SaveAsync();
 }

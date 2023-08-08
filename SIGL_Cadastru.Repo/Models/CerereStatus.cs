@@ -1,6 +1,7 @@
 ﻿using SIGL_Cadastru.Repo.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ public class CerereStatus
     public Guid Id { get; set; }
     public Status Starea { get; set; }
     public DateOnly Created { get; set; }
+    [ForeignKey("CerereId")]
+    public Guid CerereId { get; set; }
     public Cerere Cerere { get; set; }
 
     private CerereStatus() 

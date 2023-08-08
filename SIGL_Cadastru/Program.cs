@@ -47,9 +47,9 @@ namespace SIGL_Cadastru
                         container =>
                             Id =>
                             {
-                                var repository = container.GetRequiredService<IRepositoryManager>();
+                                var service = container.GetRequiredService<IServiceManager>();
                                 var mapper = container.GetRequiredService<IMapper>();
-                                return new FormViewCerere(repository, mapper, Id);
+                                return new FormViewCerere(service, mapper, Id);
                             });
 
                     services.AddTransient<FormMain>(container => 

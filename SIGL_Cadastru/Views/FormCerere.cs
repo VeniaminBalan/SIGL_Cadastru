@@ -16,7 +16,7 @@ namespace SIGL_Cadastru.Views
 
         private readonly IRepositoryManager _repo;
         private readonly IMapper _mapper;
-        private List<Lucrare> Lucrari = new List<Lucrare>();
+        private List<Lucrare> Lucrari = new();
         private UC_PersoanaExistenta persoanaExistenta;
         private UC_PersoanaNoua persoanaNoua;
         private int suma;

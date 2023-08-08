@@ -38,9 +38,12 @@ namespace SIGL_Cadastru.Repo.Repository
             .Include(c => c.StatusList)
             .SingleOrDefaultAsync();
 
+
         public Task<IEnumerable<Cerere>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateCerere(Cerere cerere) => Update(cerere);
     }
 }

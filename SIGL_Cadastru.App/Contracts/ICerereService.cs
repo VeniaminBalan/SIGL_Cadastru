@@ -8,5 +8,5 @@ public interface ICerereService
 {
     public Task CreateNewCerere(Cerere cerere);
     public Task<IEnumerable<CerereDto>> GetAllAsync(bool trackChanges);
-    public Task<CerereDto> GetById(Guid Id, bool trackChanges);
+    public Task<CerereDto?> GetByIdAsync(Guid Id, bool trackChanges);
 }

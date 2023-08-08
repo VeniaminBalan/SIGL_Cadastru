@@ -9,4 +9,5 @@ public interface ICerereRepository
     Task<IEnumerable<Cerere>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
     void CreateCerere(Cerere cerere);
     void DeleteCerere(Cerere cerere);
+    void UpdateCerere(Cerere cerere);
 }
