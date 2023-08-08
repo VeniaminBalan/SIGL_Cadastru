@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace SIGL_Cadastru.App.Contracts
     {
         ICerereService CerereService { get; }
         IPersoanaService PersoanaService { get; }
-        ILucrareService lucrareService { get; }
+        ILucrareService LucrareService { get; }
+        ICerereStatusService CerereStatus { get; }
+        IRepositoryManager RepositoryManager { get; }
+        Task SaveAsync();
     }
 }

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repository;
+using Services;
+using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Views;
@@ -37,6 +39,7 @@ namespace SIGL_Cadastru
                 .ConfigureServices((context, services) => {
                     services.AddDbContext<AppDbContext>(options => options.UseSqlite(varstring));
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
+                    services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
                     services.AddAutoMapper(typeof(Program));
 
 
@@ -44,15 +47,20 @@ namespace SIGL_Cadastru
                         container =>
                             Id =>
                             {
-                                var repository = container.GetRequiredService<IRepositoryManager>();
+                                var service = container.GetRequiredService<IServiceManager>();
                                 var mapper = container.GetRequiredService<IMapper>();
-                                return new FormViewCerere(repository, mapper, Id);
+                                return new FormViewCerere(service, mapper, Id);
                             });
 
                     services.AddTransient<FormMain>(container => 
                     {
+
                         var repository = container.GetRequiredService<IRepositoryManager>();
                         var mapper = container.GetRequiredService<IMapper>();
+                        var service = container.GetRequiredService<IServiceManager>();
+
+                        if (service is null) throw new NullReferenceException();
+                        
                         var formCerere = new FormMain(repository, mapper);
                         return formCerere;
                     });
@@ -66,9 +74,10 @@ namespace SIGL_Cadastru
 
                     services.AddTransient<UC_Main>(container => 
                     {
-                        var repository = container.GetRequiredService<IRepositoryManager>();
                         var mapper = container.GetRequiredService<IMapper>();
-                        var uc_main = new UC_Main(repository, mapper);
+                        var service = container.GetRequiredService<IServiceManager>();
+
+                        var uc_main = new UC_Main(service, mapper);
                         return uc_main;
                     });
 

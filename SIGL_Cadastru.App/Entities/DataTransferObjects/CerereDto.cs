@@ -1,4 +1,4 @@
-﻿using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Repo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace SIGL_Cadastru.App.Entities
         public DateOnly? LaReceptie { get; init; }
         public DateOnly? Eliberat { get; init; }
         public DateOnly? Respins { get; init; }
-
+        public int CostTotal { get; init; }
         public override string ToString()
         {
             return new string($"{Id} \n {Client} \n {Executant} \n {Responsabil} \n {NrCadastral}");

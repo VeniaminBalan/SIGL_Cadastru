@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using SIGL_Cadastru.Repo.Contracts;
 using SIGL_Cadastru.Repo.DataBase;
@@ -20,27 +21,15 @@ namespace SIGL_Cadastru.Repo.Repository
 
         public void CreateLucrare(Lucrare lucrare)
         {
-            throw new NotImplementedException();
+            Create(lucrare);
         }
 
         public void DeleteLucrare(Lucrare lucrare)
         {
-            throw new NotImplementedException();
+            Delete(lucrare);
         }
 
-        public Task<IEnumerable<Lucrare>> GetAllAync(bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Lucrare> GetByIdAsync(Guid companyId, bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Lucrare>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<Lucrare>> GetAllByIdAsync(Guid cerereId, bool trackChanges) =>
+           await FindByCondition(l => l.CerereId == cerereId, trackChanges).ToListAsync();
     }
 }

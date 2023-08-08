@@ -1,8 +1,11 @@
 ﻿using Contracts;
+using Mappers;
 using SIGL_Cadastru.App.Contracts;
+using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.Repo.Models;
 
 namespace Services;
+
 
 internal sealed class PersoanaService : IPersoanaService
 {
@@ -14,18 +17,52 @@ internal sealed class PersoanaService : IPersoanaService
         _repo = repo;
     }
 
-    public Task CreateNewPersoana(Cerere cerere)
+    public void CreatePersoana(Persoana perosana)
     {
-        throw new NotImplementedException();
+        _repo.Persoana.CreatePersoana(perosana);
     }
 
-    public Task<IEnumerable<Cerere>> GetAll()
+    public void DeletePersoana(Persoana perosana)
     {
-        throw new NotImplementedException();
+        _repo.Persoana.DeletePersoana(perosana);
     }
 
-    public Task<Cerere> GetById(Guid Id)
+    public async Task<IEnumerable<PersoanaDto>> GetAllAync(bool trackChanges)
     {
-        throw new NotImplementedException();
+        var data = await _repo.Persoana.GetAllAync(trackChanges);
+
+        return data.Select(x => PersoanaMapper.Map(x));
+    }
+
+    public async Task<IEnumerable<PersoanaDto>> GetAllClientiAync(bool trackChanges)
+    {
+        var data = await _repo.Persoana.GetAllClientiAync(trackChanges);
+        return data.Select(x => PersoanaMapper.Map(x));
+    }
+
+    public async Task<IEnumerable<PersoanaDto>> GetAllExecutantiAync(bool trackChanges)
+    {
+        var data = await _repo.Persoana.GetAllExecutantiAync(trackChanges);
+        return data.Select(x => PersoanaMapper.Map(x));
+    }
+
+    public async Task<IEnumerable<PersoanaDto>> GetAllResponsabiliAync(bool trackChanges)
+    {
+        var data = await _repo.Persoana.GetAllResponsabiliAync(trackChanges);
+        return data.Select(x => PersoanaMapper.Map(x));
+    }
+
+    public async Task<PersoanaDto> GetByIdAsync(Guid Id, bool trackChanges)
+    {
+        var data = await _repo.Persoana.GetByIdAsync(Id, trackChanges);
+
+        return PersoanaMapper.Map(data);
+    }
+
+    public async Task<IEnumerable<PersoanaDto>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
+    {
+        var data = await _repo.Persoana.getByIdsAsync(ids, trackChanges);
+
+        return data.Select(x => PersoanaMapper.Map(x));
     }
 }

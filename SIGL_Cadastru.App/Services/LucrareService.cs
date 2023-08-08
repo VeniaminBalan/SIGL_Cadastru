@@ -1,7 +1,8 @@
 ﻿using Contracts;
+using Mappers;
 using SIGL_Cadastru.App.Contracts;
+using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.Repo.Models;
-
 
 namespace Services;
 
@@ -14,18 +15,19 @@ internal sealed class LucrareService : ILucrareService
         _repo = repo;
     }
 
-    public Task CreateNewLucrare(Cerere cerere)
+    public void CreateLucrare(Lucrare lucrare)
     {
-        throw new NotImplementedException();
+        _repo.Lucrare.CreateLucrare(lucrare);
     }
 
-    public Task<IEnumerable<Cerere>> GetAll()
+    public void DeleteLucrare(Lucrare lucrare)
     {
-        throw new NotImplementedException();
+        _repo.Lucrare.DeleteLucrare(lucrare);
     }
 
-    public Task<Cerere> GetById(Guid Id)
+    public async Task<IList<LucrareDto>> GetAllByIdAsync(Guid cerereId, bool trackChanges)
     {
-        throw new NotImplementedException();
+        var data = await _repo.Lucrare.GetAllByIdAsync(cerereId, trackChanges);
+        return data.Select(x => LucrareMapper.Map(x)).ToList();
     }
 }

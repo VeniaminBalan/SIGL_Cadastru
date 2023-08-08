@@ -14,7 +14,6 @@ namespace SIGL_Cadastru.Repo.Models
         [ForeignKey(nameof(Cerere))]
         public Guid CerereId { get; set; }
         public Cerere Cerere { get; set; }
-
         public string TipLucrare { get; set; }
         public int Pret { get; set; }
     }

@@ -29,13 +29,6 @@ namespace SIGL_Cadastru.Views
             return uc_main;
         }
 
-        /*
-        public IRepository<Dosar> GetRepository() 
-        {
-            return _repository;
-        }
-        */
-
         private void button_cerere_noua_Click(object sender, EventArgs e)
         {
             var form_cerere = new FormFactory().CreateCerere();

@@ -58,11 +58,18 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox_stareaCererii = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.dataGridViewStatus = new System.Windows.Forms.DataGridView();
+            this.label_StareCererii = new System.Windows.Forms.Label();
+            this.button_adaugareStare = new System.Windows.Forms.Button();
+            this.cerereStatusDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stareaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cerereStatusDtoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -338,14 +345,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Nume:";
             // 
-            // comboBox_stareaCererii
-            // 
-            this.comboBox_stareaCererii.FormattingEnabled = true;
-            this.comboBox_stareaCererii.Location = new System.Drawing.Point(149, 103);
-            this.comboBox_stareaCererii.Name = "comboBox_stareaCererii";
-            this.comboBox_stareaCererii.Size = new System.Drawing.Size(104, 28);
-            this.comboBox_stareaCererii.TabIndex = 15;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(56, 384);
@@ -356,13 +355,68 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // dataGridViewStatus
+            // 
+            this.dataGridViewStatus.AutoGenerateColumns = false;
+            this.dataGridViewStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.createdDataGridViewTextBoxColumn,
+            this.stareaDataGridViewTextBoxColumn});
+            this.dataGridViewStatus.DataSource = this.cerereStatusDtoBindingSource;
+            this.dataGridViewStatus.Location = new System.Drawing.Point(913, 12);
+            this.dataGridViewStatus.Name = "dataGridViewStatus";
+            this.dataGridViewStatus.RowHeadersWidth = 51;
+            this.dataGridViewStatus.RowTemplate.Height = 29;
+            this.dataGridViewStatus.Size = new System.Drawing.Size(279, 362);
+            this.dataGridViewStatus.TabIndex = 17;
+            // 
+            // label_StareCererii
+            // 
+            this.label_StareCererii.AutoSize = true;
+            this.label_StareCererii.Location = new System.Drawing.Point(149, 103);
+            this.label_StareCererii.Name = "label_StareCererii";
+            this.label_StareCererii.Size = new System.Drawing.Size(18, 20);
+            this.label_StareCererii.TabIndex = 18;
+            this.label_StareCererii.Text = "...";
+            // 
+            // button_adaugareStare
+            // 
+            this.button_adaugareStare.Location = new System.Drawing.Point(996, 389);
+            this.button_adaugareStare.Name = "button_adaugareStare";
+            this.button_adaugareStare.Size = new System.Drawing.Size(113, 49);
+            this.button_adaugareStare.TabIndex = 19;
+            this.button_adaugareStare.Text = "Adaugare";
+            this.button_adaugareStare.UseVisualStyleBackColor = true;
+            // 
+            // cerereStatusDtoBindingSource
+            // 
+            this.cerereStatusDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.DataTransferObjects.CerereStatusDto);
+            // 
+            // createdDataGridViewTextBoxColumn
+            // 
+            this.createdDataGridViewTextBoxColumn.DataPropertyName = "Created";
+            this.createdDataGridViewTextBoxColumn.HeaderText = "Data";
+            this.createdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
+            this.createdDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // stareaDataGridViewTextBoxColumn
+            // 
+            this.stareaDataGridViewTextBoxColumn.DataPropertyName = "Starea";
+            this.stareaDataGridViewTextBoxColumn.HeaderText = "Starea";
+            this.stareaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.stareaDataGridViewTextBoxColumn.Name = "stareaDataGridViewTextBoxColumn";
+            this.stareaDataGridViewTextBoxColumn.Width = 125;
+            // 
             // FormViewCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(910, 450);
+            this.ClientSize = new System.Drawing.Size(1204, 450);
+            this.Controls.Add(this.button_adaugareStare);
+            this.Controls.Add(this.label_StareCererii);
+            this.Controls.Add(this.dataGridViewStatus);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox_stareaCererii);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label_pretTotal);
             this.Controls.Add(this.label_ValabilPanaLa);
@@ -383,6 +437,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cerereStatusDtoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,7 +475,12 @@
         private Label label_idnp;
         private Label label_prenume;
         private Label label_Nume;
-        private ComboBox comboBox_stareaCererii;
         private Button button1;
+        private DataGridView dataGridViewStatus;
+        private Label label_StareCererii;
+        private Button button_adaugareStare;
+        private DataGridViewTextBoxColumn createdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn stareaDataGridViewTextBoxColumn;
+        private BindingSource cerereStatusDtoBindingSource;
     }
 }
