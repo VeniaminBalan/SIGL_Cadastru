@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SIGL_Cadastru.Repo.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace SIGL_Cadastru.Repo.Models
         Executant,
         Responsabil
     }
-    public class Persoana
+    public class Persoana : IModel
     {
         public Guid Id { get; set; }
         public string Nume { get; set; }

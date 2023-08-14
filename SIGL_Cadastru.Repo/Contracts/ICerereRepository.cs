@@ -10,4 +10,5 @@ public interface ICerereRepository
     void CreateCerere(Cerere cerere);
     void DeleteCerere(Cerere cerere);
     void UpdateCerere(Cerere cerere);
+    Task<Cerere?> UpdateCerereAsync(Guid Id, Cerere cerere);
 }

@@ -1,4 +1,5 @@
 ﻿using Models;
+using SIGL_Cadastru.Repo.Contracts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,7 @@ namespace SIGL_Cadastru.Repo.Models
         Eliberat,
         Respins
     }
-    public class Cerere
+    public class Cerere : IModel
     {
         [Column("CerereId")]
         public Guid Id { get; set; }

@@ -2,10 +2,12 @@
 using Models;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;
+using SIGL_Cadastru.App.Exceptions;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.Repo.Models;
 
 namespace Services;
+
 
 internal sealed class CerereService : ICerereService
 {
@@ -16,26 +18,36 @@ internal sealed class CerereService : ICerereService
         _repo = repo;
     }
 
-    public async Task CreateNewCerere(Cerere cerere)
+    public void CreateNewCerere(Cerere cerere)
     {
         _repo.Cerere.CreateCerere(cerere);
     }
 
-    public async Task<IEnumerable<CerereDto>> GetAllAsync(bool trackChanges)
+    public async Task<IEnumerable<Cerere>> GetAllAsync(bool trackChanges)
     {
         var data = await _repo.Cerere.GetAllAync(trackChanges);
 
-        return data.Select(x => CerereMapper.Map(x)).ToList();
+        return data;
 
     }
 
-    public async Task<CerereDto?> GetByIdAsync(Guid Id, bool trackChanges)
+    public async Task<Cerere?> GetByIdAsync(Guid Id, bool trackChanges)
     {
         var data = await _repo.Cerere.GetByIdAsync(Id, trackChanges);
 
-        if (data is null) return null;
+        if (data is null) 
+            throw new CerereNotFoundException();
 
-        return CerereMapper.Map(data);
+        return data;
     }
 
+    public void UpdateCerere(Cerere cerere)
+    {
+        _repo.Cerere.UpdateCerere(cerere);
+    }
+
+    public Task<Cerere> UpdateCerereAsync(Guid Id, Cerere cerere)
+    {
+        return _repo.Cerere.UpdateCerereAsync(Id, cerere);
+    }
 }

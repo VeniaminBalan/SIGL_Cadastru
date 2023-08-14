@@ -12,5 +12,4 @@ public class DbNode // TODO
     public Guid ParentId { get; set; }
     public string Category { get; set; }
     public string Name { get; set; }
-
 }

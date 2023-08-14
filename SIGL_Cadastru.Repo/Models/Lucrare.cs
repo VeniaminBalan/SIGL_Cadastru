@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using SIGL_Cadastru.Repo.Contracts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIGL_Cadastru.Repo.Models
 {
-    public class Lucrare
+    public class Lucrare : IModel
     {
         public Guid Id {get;set; }
 

@@ -27,7 +27,7 @@ internal sealed class LucrareService : ILucrareService
 
     public async Task<IList<LucrareDto>> GetAllByIdAsync(Guid cerereId, bool trackChanges)
     {
-        var data = await _repo.Lucrare.GetAllByIdAsync(cerereId, trackChanges);
+        var data = await _repo.Lucrare.GetAllByCerereIdAsync(cerereId, trackChanges);
         return data.Select(x => LucrareMapper.Map(x)).ToList();
     }
 }

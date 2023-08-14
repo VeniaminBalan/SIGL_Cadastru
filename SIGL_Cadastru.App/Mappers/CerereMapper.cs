@@ -39,7 +39,9 @@ namespace SIGL_Cadastru.App.Mappers
 
         private static Status SetStatus(List<CerereStatus> stari)
         {
-            var state = stari.OrderByDescending(x => x.Created).First();
+            var state = stari.OrderByDescending(x => x.Created).FirstOrDefault();
+
+            if(state is null) return Status.Inlucru;
             return state.Starea;
         }
 

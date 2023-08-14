@@ -40,6 +40,7 @@ namespace SIGL_Cadastru.Views
         {
             await uc_Main.UpdateTable();
             ((Form)sender).Dispose();
+            _repo.DetachAll();
         }
 
     }

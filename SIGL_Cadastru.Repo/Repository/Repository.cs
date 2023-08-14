@@ -2,10 +2,11 @@
 using SIGL_Cadastru.Repo.DataBase;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Repository;
 
-public class Repository<T> : IRepository<T> where T : class
+public class Repository<T> : IRepository<T> where T : class, IModel
 {
     private readonly AppDbContext _appDbContext;
     public Repository(AppDbContext appDbContext)
@@ -28,9 +29,34 @@ public class Repository<T> : IRepository<T> where T : class
                 .Where(expression);
 
     public void Create(T entity) => _appDbContext.Set<T>().Add(entity);
-
     public void Update(T entity) => _appDbContext.Set<T>().Update(entity);
 
-    public void Delete(T entity) => _appDbContext.Set<T>().Remove(entity);
+    public async Task<T?> UpdateAsync(Guid id, object newEntity)
+    {
+        var entity = await GetAsync(id);
+        if (entity is null) return null;
 
+        CheckUpdateObject(entity, newEntity);
+        await Save();
+
+        return _appDbContext.Set<T>().First(e => e.Id == id);
+    }
+
+    public void Delete(T entity) => _appDbContext.Set<T>().Remove(entity);
+    public void Detach(T entity) => _appDbContext.Entry(entity).State = EntityState.Detached;
+
+    private Task<int> Save() => _appDbContext.SaveChangesAsync();
+    private async Task<T?> GetAsync(Guid id)
+    {
+        return await _appDbContext.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
+    }
+    private static void CheckUpdateObject(T originalObj, object updateObj)
+    {
+        foreach (var property in updateObj.GetType().GetProperties())
+        {
+            var propValue = property.GetValue(updateObj, null);
+            var originalProp = originalObj.GetType().GetProperty(property.Name);
+            if (propValue is not null && originalProp is not null) originalProp.SetValue(originalObj, propValue);
+        }
+    }
 }
