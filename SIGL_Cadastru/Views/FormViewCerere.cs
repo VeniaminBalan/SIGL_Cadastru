@@ -96,7 +96,6 @@ namespace SIGL_Cadastru.Views
             var items = statusItems.Where(x => x.State == EntityState.Added || x.State == EntityState.Original)
                 .Select(x => CerereStatusMapper.Map(x.CerereStatus)).ToList();
 
-            //dataGridViewStatus.DataSource = cerere!.StatusList.Select(CerereStatusMapper.Map).ToList();
             dataGridViewStatus.DataSource = items;
         }
         private void UpdateLucrariList() 
@@ -147,8 +146,9 @@ namespace SIGL_Cadastru.Views
         {
             var form = (FormAddState)sender;
 
-            var cerereStatus = new CerereStatus 
+            var cerereStatus = new CerereStatus
             {
+                Id = new Guid(),
                 Created = form.Date,
                 Starea = form.Status,
                 Cerere = cerere!
