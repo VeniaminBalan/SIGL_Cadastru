@@ -219,6 +219,11 @@ namespace SIGL_Cadastru.Views
                 e.Handled = true;
             }
         }
+
+        private void FormCerere_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _repo.DetachAll();
+        }
     }
 
 }

@@ -30,6 +30,8 @@ namespace SIGL_Cadastru.Views
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cerereDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.executantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,14 +42,12 @@ namespace SIGL_Cadastru.Views
             this.prelungitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stareaCereriiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.laReceptieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eliberatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.respinsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eliberatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Responsabil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValabilDeLa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cerereDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -57,6 +57,8 @@ namespace SIGL_Cadastru.Views
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -70,8 +72,8 @@ namespace SIGL_Cadastru.Views
             this.prelungitDataGridViewTextBoxColumn,
             this.stareaCereriiDataGridViewTextBoxColumn,
             this.laReceptieDataGridViewTextBoxColumn,
-            this.eliberatDataGridViewTextBoxColumn,
             this.respinsDataGridViewTextBoxColumn,
+            this.eliberatDataGridViewTextBoxColumn,
             this.Id,
             this.Client,
             this.Responsabil,
@@ -86,6 +88,24 @@ namespace SIGL_Cadastru.Views
             this.dataGridView1.Size = new System.Drawing.Size(1507, 528);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // cerereDtoBindingSource
+            // 
+            this.cerereDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Size = new System.Drawing.Size(1678, 530);
+            this.splitContainer1.SplitterDistance = 165;
+            this.splitContainer1.TabIndex = 1;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -177,15 +197,6 @@ namespace SIGL_Cadastru.Views
             this.laReceptieDataGridViewTextBoxColumn.ReadOnly = true;
             this.laReceptieDataGridViewTextBoxColumn.Width = 125;
             // 
-            // eliberatDataGridViewTextBoxColumn
-            // 
-            this.eliberatDataGridViewTextBoxColumn.DataPropertyName = "Eliberat";
-            this.eliberatDataGridViewTextBoxColumn.HeaderText = "Eliberat";
-            this.eliberatDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.eliberatDataGridViewTextBoxColumn.Name = "eliberatDataGridViewTextBoxColumn";
-            this.eliberatDataGridViewTextBoxColumn.ReadOnly = true;
-            this.eliberatDataGridViewTextBoxColumn.Width = 125;
-            // 
             // respinsDataGridViewTextBoxColumn
             // 
             this.respinsDataGridViewTextBoxColumn.DataPropertyName = "Respins";
@@ -194,6 +205,15 @@ namespace SIGL_Cadastru.Views
             this.respinsDataGridViewTextBoxColumn.Name = "respinsDataGridViewTextBoxColumn";
             this.respinsDataGridViewTextBoxColumn.ReadOnly = true;
             this.respinsDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // eliberatDataGridViewTextBoxColumn
+            // 
+            this.eliberatDataGridViewTextBoxColumn.DataPropertyName = "Eliberat";
+            this.eliberatDataGridViewTextBoxColumn.HeaderText = "Eliberat";
+            this.eliberatDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.eliberatDataGridViewTextBoxColumn.Name = "eliberatDataGridViewTextBoxColumn";
+            this.eliberatDataGridViewTextBoxColumn.ReadOnly = true;
+            this.eliberatDataGridViewTextBoxColumn.Width = 125;
             // 
             // Id
             // 
@@ -235,24 +255,6 @@ namespace SIGL_Cadastru.Views
             this.ValabilDeLa.Visible = false;
             this.ValabilDeLa.Width = 125;
             // 
-            // cerereDtoBindingSource
-            // 
-            this.cerereDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(1678, 530);
-            this.splitContainer1.SplitterDistance = 165;
-            this.splitContainer1.TabIndex = 1;
-            // 
             // UC_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -273,6 +275,9 @@ namespace SIGL_Cadastru.Views
         #endregion
 
         private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn costTotalDataGridViewTextBoxColumn;
+        private BindingSource cerereDtoBindingSource;
+        private SplitContainer splitContainer1;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn clientDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn executantDataGridViewTextBoxColumn;
@@ -281,16 +286,13 @@ namespace SIGL_Cadastru.Views
         private DataGridViewTextBoxColumn valabilDeLaDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valabilPanaLaDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn prelungitDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn costTotalDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn stareaCereriiDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn laReceptieDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn eliberatDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn respinsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn eliberatDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Client;
         private DataGridViewTextBoxColumn Responsabil;
         private DataGridViewTextBoxColumn ValabilDeLa;
-        private BindingSource cerereDtoBindingSource;
-        private SplitContainer splitContainer1;
     }
 }

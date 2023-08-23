@@ -30,6 +30,7 @@ namespace SIGL_Cadastru.Views
 
             if (item is not null)
                 label_selectedPerson.Text = item.Text;
+            else label_selectedPerson.Text = "";
         }
 
         public UC_PersoanaExistenta(IRepositoryManager repo, IMapper mapper)
@@ -69,7 +70,7 @@ namespace SIGL_Cadastru.Views
 
         private async Task UpdateListBox() 
         {
-            await GetQuariablePeopleAsync();
+            await GetQuariablePeopleAsync(new PeopleQueryParams(search, null));
             listBox_persoane.DataSource = clienti!.Select(r => new ComboItem
             {
                 ID = r.Id,
@@ -82,16 +83,17 @@ namespace SIGL_Cadastru.Views
 
         private async Task GetQuariablePeopleAsync(PeopleQueryParams peopleQuery) 
         {
-            clienti = await _repo.Persoana.GetAllAync(peopleQuery, false) as List<Persoana>;
+            clienti = await _repo.Persoana.GetAllAync(peopleQuery, true) as List<Persoana>;
         }
         private void listBox_persoane_Click(object sender, EventArgs e)
         {
             SetSelectedItem(listBox_persoane.SelectedItem as ComboItem);
         }
 
-        private void textBox_search_TextChanged(object sender, EventArgs e)
+        private async void textBox_search_TextChanged(object sender, EventArgs e)
         {
             search = textBox_search.Text;
+            await UpdateListBox();
         }
     }
 }

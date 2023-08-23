@@ -180,5 +180,11 @@ namespace SIGL_Cadastru.Views
             }
             UpdateViewStatusList();
         }
+
+        private void FormViewCerere_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _service.DetachAll();
+        }
     }
+
 }

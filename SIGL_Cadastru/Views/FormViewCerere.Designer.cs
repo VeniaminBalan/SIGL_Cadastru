@@ -130,14 +130,19 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tipLucrareDataGridViewTextBoxColumn,
             this.pretDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.lucrareDtoBindingSource;
+            this.dataGridView1.Enabled = false;
             this.dataGridView1.Location = new System.Drawing.Point(344, 12);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(554, 279);
@@ -149,6 +154,7 @@
             this.tipLucrareDataGridViewTextBoxColumn.HeaderText = "TipLucrare";
             this.tipLucrareDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.tipLucrareDataGridViewTextBoxColumn.Name = "tipLucrareDataGridViewTextBoxColumn";
+            this.tipLucrareDataGridViewTextBoxColumn.ReadOnly = true;
             this.tipLucrareDataGridViewTextBoxColumn.Width = 450;
             // 
             // pretDataGridViewTextBoxColumn
@@ -157,6 +163,7 @@
             this.pretDataGridViewTextBoxColumn.HeaderText = "Pret";
             this.pretDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.pretDataGridViewTextBoxColumn.Name = "pretDataGridViewTextBoxColumn";
+            this.pretDataGridViewTextBoxColumn.ReadOnly = true;
             this.pretDataGridViewTextBoxColumn.Width = 50;
             // 
             // lucrareDtoBindingSource
@@ -368,12 +375,13 @@
             this.dataGridViewStatus.DataSource = this.cerereStatusDtoBindingSource;
             this.dataGridViewStatus.Location = new System.Drawing.Point(913, 12);
             this.dataGridViewStatus.Name = "dataGridViewStatus";
+            this.dataGridViewStatus.ReadOnly = true;
             this.dataGridViewStatus.RowHeadersWidth = 51;
             this.dataGridViewStatus.RowTemplate.Height = 29;
+            this.dataGridViewStatus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewStatus.Size = new System.Drawing.Size(279, 362);
             this.dataGridViewStatus.TabIndex = 17;
             this.dataGridViewStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStatus_CellContentClick);
-            this.dataGridViewStatus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             // 
             // createdDataGridViewTextBoxColumn
             // 
@@ -381,6 +389,7 @@
             this.createdDataGridViewTextBoxColumn.HeaderText = "Data";
             this.createdDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
+            this.createdDataGridViewTextBoxColumn.ReadOnly = true;
             this.createdDataGridViewTextBoxColumn.Width = 125;
             // 
             // stareaDataGridViewTextBoxColumn
@@ -389,6 +398,7 @@
             this.stareaDataGridViewTextBoxColumn.HeaderText = "Starea";
             this.stareaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.stareaDataGridViewTextBoxColumn.Name = "stareaDataGridViewTextBoxColumn";
+            this.stareaDataGridViewTextBoxColumn.ReadOnly = true;
             this.stareaDataGridViewTextBoxColumn.Width = 125;
             // 
             // cerereStatusDtoBindingSource
@@ -460,6 +470,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormViewCerere";
             this.Text = "Cerere";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormViewCerere_FormClosed);
             this.Load += new System.EventHandler(this.FormViewCerere_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).EndInit();

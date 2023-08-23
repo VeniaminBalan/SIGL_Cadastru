@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Models;
+using Query;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.App.Exceptions;
@@ -23,9 +24,9 @@ internal sealed class CerereService : ICerereService
         _repo.Cerere.CreateCerere(cerere);
     }
 
-    public async Task<IEnumerable<Cerere>> GetAllAsync(bool trackChanges)
+    public async Task<IEnumerable<Cerere>> GetAllAsync(CerereQueryParams queryParams, bool trackChanges)
     {
-        var data = await _repo.Cerere.GetAllAync(trackChanges);
+        var data = await _repo.Cerere.GetAllAync(queryParams,trackChanges);
 
         return data;
 

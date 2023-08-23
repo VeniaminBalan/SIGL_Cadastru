@@ -43,6 +43,7 @@
             this.label_modificator = new System.Windows.Forms.Label();
             this.textBox_adaos = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dateTimePicker_dataSolicitarii = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_termen = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.panelUC = new System.Windows.Forms.Panel();
             this.buttonPNoua = new System.Windows.Forms.Button();
             this.buttonPExistenta = new System.Windows.Forms.Button();
-            this.dateTimePicker_dataSolicitarii = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -215,6 +215,13 @@
             this.panel1.Size = new System.Drawing.Size(339, 320);
             this.panel1.TabIndex = 34;
             // 
+            // dateTimePicker_dataSolicitarii
+            // 
+            this.dateTimePicker_dataSolicitarii.Location = new System.Drawing.Point(128, 115);
+            this.dateTimePicker_dataSolicitarii.Name = "dateTimePicker_dataSolicitarii";
+            this.dateTimePicker_dataSolicitarii.Size = new System.Drawing.Size(208, 27);
+            this.dateTimePicker_dataSolicitarii.TabIndex = 9;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -311,13 +318,6 @@
             this.buttonPExistenta.UseVisualStyleBackColor = true;
             this.buttonPExistenta.Click += new System.EventHandler(this.buttonPExistenta_Click);
             // 
-            // dateTimePicker_dataSolicitarii
-            // 
-            this.dateTimePicker_dataSolicitarii.Location = new System.Drawing.Point(128, 115);
-            this.dateTimePicker_dataSolicitarii.Name = "dateTimePicker_dataSolicitarii";
-            this.dateTimePicker_dataSolicitarii.Size = new System.Drawing.Size(208, 27);
-            this.dateTimePicker_dataSolicitarii.TabIndex = 9;
-            // 
             // FormCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -343,6 +343,7 @@
             this.Controls.Add(this.button_Add);
             this.Name = "FormCerere";
             this.Text = "FormCerere";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormCerere_FormClosed);
             this.Load += new System.EventHandler(this.FormCerere_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

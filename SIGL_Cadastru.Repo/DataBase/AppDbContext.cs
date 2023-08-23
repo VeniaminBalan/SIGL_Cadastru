@@ -25,6 +25,7 @@ namespace SIGL_Cadastru.Repo.DataBase
         public DbSet<Lucrare> Lucrari { get; set; }
         public DbSet<Persoana> Persoane { get; set; }
         public DbSet<CerereStatus> Stari { get; set; }
+        public IQueryable<Cerere> Cerere { get; internal set; }
     }
 
 

@@ -1,18 +1,10 @@
 using AutoMapper;
-using Contracts;
+using Query;
 using SIGL_Cadastru.App.Contracts;
-using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.AppConfigurations;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace SIGL_Cadastru.Views
 {
@@ -34,7 +26,7 @@ namespace SIGL_Cadastru.Views
 
         public async Task UpdateTable() 
         {
-            var data = await _service.CerereService.GetAllAsync(false);
+            var data = await _service.CerereService.GetAllAsync(new CerereQueryParams(),false);
 
             var cereri = data.Select(CerereMapper.Map);
 
