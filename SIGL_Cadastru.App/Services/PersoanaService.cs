@@ -3,6 +3,7 @@ using Mappers;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Repo.Query;
 
 namespace Services;
 
@@ -27,9 +28,9 @@ internal sealed class PersoanaService : IPersoanaService
         _repo.Persoana.DeletePersoana(perosana);
     }
 
-    public async Task<IEnumerable<PersoanaDto>> GetAllAync(bool trackChanges)
+    public async Task<IEnumerable<PersoanaDto>> GetAllAync(PeopleQueryParams queryParams,bool trackChanges)
     {
-        var data = await _repo.Persoana.GetAllAync(trackChanges);
+        var data = await _repo.Persoana.GetAllAync(queryParams,trackChanges);
 
         return data.Select(x => PersoanaMapper.Map(x));
     }

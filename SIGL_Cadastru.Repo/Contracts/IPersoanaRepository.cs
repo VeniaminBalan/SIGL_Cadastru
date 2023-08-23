@@ -1,12 +1,13 @@
 ﻿
 
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Repo.Query;
 
 namespace Contracts;
 
 public interface IPersoanaRepository
 {
-    Task<IEnumerable<Persoana>> GetAllAync(bool trackChanges);
+    Task<IEnumerable<Persoana>> GetAllAync(PeopleQueryParams queryParams,bool trackChanges);
     Task<Persoana> GetByIdAsync(Guid Id, bool trackChanges);
     Task<IEnumerable<Persoana>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
     void CreatePersoana(Persoana perosana);

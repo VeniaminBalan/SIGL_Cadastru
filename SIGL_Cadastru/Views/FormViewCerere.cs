@@ -1,22 +1,13 @@
 ﻿using AutoMapper;
-using Contracts;
 using Mappers;
 using Models;
 using SIGL_Cadastru.App.Contracts;
-using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.App.Entities.DataTransferObjects;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace SIGL_Cadastru.Views
 {
@@ -28,11 +19,9 @@ namespace SIGL_Cadastru.Views
         private readonly IMapper _mapper;
         private readonly Guid _cererId;
 
-        private Guid SelectedItem;
         private Cerere? cerere;
 
         private List<StatusItem> statusItems = new();
-        private List<CerereStatusDto> cerereStatusLsit = new();
 
         public FormViewCerere(IServiceManager service, IMapper mapper, Guid cerereId)
         {
@@ -81,7 +70,7 @@ namespace SIGL_Cadastru.Views
         }
         private void UpdateCerereData() 
         {
-            var cerereDto = CerereMapper.Map(cerere);
+            var cerereDto = CerereMapper.Map(cerere!);
             label_executant.Text = cerereDto.Executant;
             label_responsabil.Text = cerereDto.Responsabil;
 
