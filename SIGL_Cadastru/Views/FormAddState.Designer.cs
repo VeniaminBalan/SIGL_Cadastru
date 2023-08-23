@@ -1,6 +1,6 @@
 ﻿namespace SIGL_Cadastru.Views
 {
-    partial class FormAdaugareStatus
+    partial class FormAddState
     {
         /// <summary>
         /// Required designer variable.
@@ -29,66 +29,67 @@
         private void InitializeComponent()
         {
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.Data = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(81, 37);
+            this.dateTimePicker1.Location = new System.Drawing.Point(84, 37);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
             this.dateTimePicker1.TabIndex = 0;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(81, 102);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(151, 28);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // Data
-            // 
-            this.Data.AutoSize = true;
-            this.Data.Location = new System.Drawing.Point(12, 42);
-            this.Data.Name = "Data";
-            this.Data.Size = new System.Drawing.Size(41, 20);
-            this.Data.TabIndex = 2;
-            this.Data.Text = "Data";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 102);
+            this.label1.Location = new System.Drawing.Point(20, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Stare";
+            this.label1.Size = new System.Drawing.Size(44, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Data:";
             // 
-            // button
+            // label2
             // 
-            this.button.Location = new System.Drawing.Point(301, 131);
-            this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(122, 46);
-            this.button.TabIndex = 4;
-            this.button.Text = "Adaugare";
-            this.button.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 87);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Status:";
             // 
-            // FormAdaugareStatus
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(84, 83);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(151, 28);
+            this.comboBox1.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(303, 131);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(118, 41);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Adaugare";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // FormAddState
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 189);
-            this.Controls.Add(this.button);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.Data);
+            this.ClientSize = new System.Drawing.Size(433, 184);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
-            this.Name = "FormAdaugareStatus";
-            this.Text = "FormAdaugareStatus";
+            this.Name = "FormAddState";
+            this.Text = "FormAddState";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,9 +98,9 @@
         #endregion
 
         private DateTimePicker dateTimePicker1;
-        private ComboBox comboBox1;
-        private Label Data;
         private Label label1;
-        private Button button;
+        private Label label2;
+        private ComboBox comboBox1;
+        private Button button1;
     }
 }

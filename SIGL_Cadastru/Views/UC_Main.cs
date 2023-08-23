@@ -2,6 +2,7 @@ using AutoMapper;
 using Contracts;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;
+using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.AppConfigurations;
 using System;
 using System.Collections.Generic;
@@ -33,9 +34,11 @@ namespace SIGL_Cadastru.Views
 
         public async Task UpdateTable() 
         {
-            var cereri = await _service.CerereService.GetAllAsync(false);
+            var data = await _service.CerereService.GetAllAsync(false);
 
-            dataGridView1.DataSource = cereri;                      
+            var cereri = data.Select(CerereMapper.Map);
+
+            dataGridView1.DataSource = cereri.ToList();
         }
 
         private async void UC_Main_Load(object sender, EventArgs e)
@@ -57,7 +60,6 @@ namespace SIGL_Cadastru.Views
         public async void ActualizareButtonPressed(object sender, EventArgs e) 
         {
             await UpdateTable();
-            //MessageBox.Show("Update");
         }
     }
 }

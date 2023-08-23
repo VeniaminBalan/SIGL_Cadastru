@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Repo.Repository;
 using System;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository;
+
 
 public class RepositoryManager : IRepositoryManager
 {
@@ -33,5 +35,6 @@ public class RepositoryManager : IRepositoryManager
     public ILucrareRepository Lucrare => _lucrareRepository.Value;
     public IPersoanaRepository Persoana=> _perosanaRepository.Value;
     public ICerereStatusRepository CerereStatus=> _cerereStatusRepository.Value;
+    public void DetachAll() => _appDbContext.ChangeTracker.Clear();
     public Task SaveAsync() => _appDbContext.SaveChangesAsync();
 }

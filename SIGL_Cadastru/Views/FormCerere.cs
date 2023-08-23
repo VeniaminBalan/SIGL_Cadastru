@@ -100,10 +100,6 @@ namespace SIGL_Cadastru.Views
                 
                 };
 
-                newCerere.StatusList = new List<CerereStatus> {
-                        CerereStatus.NewStatusInLucru(newCerere)
-                    };
-
                 _repo.Cerere.CreateCerere(newCerere);
                 await _repo.SaveAsync();
 

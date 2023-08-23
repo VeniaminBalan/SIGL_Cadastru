@@ -60,11 +60,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridViewStatus = new System.Windows.Forms.DataGridView();
-            this.label_StareCererii = new System.Windows.Forms.Label();
-            this.button_adaugareStare = new System.Windows.Forms.Button();
-            this.cerereStatusDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stareaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cerereStatusDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label_StareCererii = new System.Windows.Forms.Label();
+            this.button_adaugareStare = new System.Windows.Forms.Button();
+            this.button_reset = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -138,7 +140,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(554, 222);
+            this.dataGridView1.Size = new System.Drawing.Size(554, 279);
             this.dataGridView1.TabIndex = 6;
             // 
             // tipLucrareDataGridViewTextBoxColumn
@@ -358,6 +360,7 @@
             // dataGridViewStatus
             // 
             this.dataGridViewStatus.AutoGenerateColumns = false;
+            this.dataGridViewStatus.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dataGridViewStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.createdDataGridViewTextBoxColumn,
@@ -369,6 +372,28 @@
             this.dataGridViewStatus.RowTemplate.Height = 29;
             this.dataGridViewStatus.Size = new System.Drawing.Size(279, 362);
             this.dataGridViewStatus.TabIndex = 17;
+            this.dataGridViewStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStatus_CellContentClick);
+            this.dataGridViewStatus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // createdDataGridViewTextBoxColumn
+            // 
+            this.createdDataGridViewTextBoxColumn.DataPropertyName = "Created";
+            this.createdDataGridViewTextBoxColumn.HeaderText = "Data";
+            this.createdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
+            this.createdDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // stareaDataGridViewTextBoxColumn
+            // 
+            this.stareaDataGridViewTextBoxColumn.DataPropertyName = "Starea";
+            this.stareaDataGridViewTextBoxColumn.HeaderText = "Starea";
+            this.stareaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.stareaDataGridViewTextBoxColumn.Name = "stareaDataGridViewTextBoxColumn";
+            this.stareaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // cerereStatusDtoBindingSource
+            // 
+            this.cerereStatusDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.DataTransferObjects.CerereStatusDto);
             // 
             // label_StareCererii
             // 
@@ -387,32 +412,35 @@
             this.button_adaugareStare.TabIndex = 19;
             this.button_adaugareStare.Text = "Adaugare";
             this.button_adaugareStare.UseVisualStyleBackColor = true;
+            this.button_adaugareStare.Click += new System.EventHandler(this.button_adaugareStare_Click);
             // 
-            // cerereStatusDtoBindingSource
+            // button_reset
             // 
-            this.cerereStatusDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.DataTransferObjects.CerereStatusDto);
+            this.button_reset.Location = new System.Drawing.Point(1129, 384);
+            this.button_reset.Name = "button_reset";
+            this.button_reset.Size = new System.Drawing.Size(63, 29);
+            this.button_reset.TabIndex = 20;
+            this.button_reset.Text = "Reset";
+            this.button_reset.UseVisualStyleBackColor = true;
+            this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
             // 
-            // createdDataGridViewTextBoxColumn
+            // button2
             // 
-            this.createdDataGridViewTextBoxColumn.DataPropertyName = "Created";
-            this.createdDataGridViewTextBoxColumn.HeaderText = "Data";
-            this.createdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
-            this.createdDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // stareaDataGridViewTextBoxColumn
-            // 
-            this.stareaDataGridViewTextBoxColumn.DataPropertyName = "Starea";
-            this.stareaDataGridViewTextBoxColumn.HeaderText = "Starea";
-            this.stareaDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.stareaDataGridViewTextBoxColumn.Name = "stareaDataGridViewTextBoxColumn";
-            this.stareaDataGridViewTextBoxColumn.Width = 125;
+            this.button2.Location = new System.Drawing.Point(913, 384);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(63, 29);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Delete";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // FormViewCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1204, 450);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button_reset);
             this.Controls.Add(this.button_adaugareStare);
             this.Controls.Add(this.label_StareCererii);
             this.Controls.Add(this.dataGridViewStatus);
@@ -482,5 +510,7 @@
         private DataGridViewTextBoxColumn createdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn stareaDataGridViewTextBoxColumn;
         private BindingSource cerereStatusDtoBindingSource;
+        private Button button_reset;
+        private Button button2;
     }
 }

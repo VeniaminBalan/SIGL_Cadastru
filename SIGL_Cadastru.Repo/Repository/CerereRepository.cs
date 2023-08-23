@@ -6,10 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SIGL_Cadastru.Repo.Repository
 {
+
+
     public class CerereRepository : Repository<Cerere>, ICerereRepository
     {
+        private readonly AppDbContext _appDbContext;
         public CerereRepository(AppDbContext appDbContext) : base(appDbContext)
         {
+            _appDbContext = appDbContext;
         }
 
         public void CreateCerere(Cerere cerere) 
@@ -29,7 +33,7 @@ namespace SIGL_Cadastru.Repo.Repository
             .OrderBy(c => c.ValabilPanaLa)
             .ToListAsync();
 
-        public async Task<Cerere> GetByIdAsync(Guid CerereId, bool trackChanges) =>
+        public async Task<Cerere?> GetByIdAsync(Guid CerereId, bool trackChanges) =>
             await FindByCondition(c => c.Id.Equals(CerereId), trackChanges)
             .Include(c => c.Executant)
             .Include(c => c.Client)
@@ -45,5 +49,7 @@ namespace SIGL_Cadastru.Repo.Repository
         }
 
         public void UpdateCerere(Cerere cerere) => Update(cerere);
+        public Task<Cerere?> UpdateCerereAsync(Guid Id, Cerere cerere) => UpdateAsync(Id, cerere);
+
     }
 }

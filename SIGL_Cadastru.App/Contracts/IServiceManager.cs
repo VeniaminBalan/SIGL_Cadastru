@@ -15,5 +15,6 @@ namespace SIGL_Cadastru.App.Contracts
         ICerereStatusService CerereStatus { get; }
         IRepositoryManager RepositoryManager { get; }
         Task SaveAsync();
+        void DetachAll();
     }
 }

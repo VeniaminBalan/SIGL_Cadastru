@@ -29,7 +29,7 @@ namespace SIGL_Cadastru.Repo.Repository
             Delete(lucrare);
         }
 
-        public async Task<IEnumerable<Lucrare>> GetAllByIdAsync(Guid cerereId, bool trackChanges) =>
+        public async Task<IEnumerable<Lucrare>> GetAllByCerereIdAsync(Guid cerereId, bool trackChanges) =>
            await FindByCondition(l => l.CerereId == cerereId, trackChanges).ToListAsync();
     }
 }

@@ -43,7 +43,7 @@ namespace SIGL_Cadastru
                     services.AddAutoMapper(typeof(Program));
 
 
-                    services.AddTransient<Func<Guid, FormViewCerere>>(
+                    services.AddScoped<Func<Guid, FormViewCerere>>(
                         container =>
                             Id =>
                             {
@@ -72,7 +72,7 @@ namespace SIGL_Cadastru
                         return formCerere;
                     });
 
-                    services.AddTransient<UC_Main>(container => 
+                    services.AddScoped<UC_Main>(container => 
                     {
                         var mapper = container.GetRequiredService<IMapper>();
                         var service = container.GetRequiredService<IServiceManager>();

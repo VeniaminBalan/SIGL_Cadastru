@@ -13,14 +13,14 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<ICerereStatusService> _cerereStatusService;
     private readonly IRepositoryManager _repositoryManager;
 
-    public ServiceManager(IRepositoryManager repoManager, IRepositoryManager repositoryManager)
+    public ServiceManager(IRepositoryManager repoManager)
     {
 
         _cerereService = new Lazy<ICerereService>(() => new CerereService(repoManager));
         _cerereStatusService = new Lazy<ICerereStatusService>(() => new CerereStatusService(repoManager));
         _lucrareService = new Lazy<ILucrareService>(() => new LucrareService(repoManager));
         _persoanaService = new Lazy<IPersoanaService>(() => new PersoanaService(repoManager));
-        _repositoryManager = repositoryManager;
+        _repositoryManager = repoManager;
     }
 
     public ICerereService CerereService => _cerereService.Value;
@@ -30,5 +30,7 @@ public sealed class ServiceManager : IServiceManager
     public IRepositoryManager RepositoryManager => _repositoryManager;
 
     public async Task SaveAsync() => await _repositoryManager.SaveAsync();
+
+    public void DetachAll() => _repositoryManager.DetachAll();
 
 }
