@@ -10,6 +10,6 @@ public interface ICerereService
     public void CreateNewCerere(Cerere cerere);
     public void UpdateCerere(Cerere cerere);
     public Task<Cerere> UpdateCerereAsync(Guid Id,Cerere cerere);
-    public Task<IEnumerable<Cerere>> GetAllAsync(CerereQueryParams queryParams, bool trackChanges);
+    public Task<IEnumerable<CerereDto>> GetAllAsync(CerereQueryParams queryParams, bool trackChanges);
     public Task<Cerere?> GetByIdAsync(Guid Id, bool trackChanges);
 }

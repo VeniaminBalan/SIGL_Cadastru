@@ -100,6 +100,7 @@ namespace SIGL_Cadastru.Views
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            _service.DetachAll();
             _service.CerereService.UpdateCerere(cerere!);
 
             foreach (var item in statusItems) 

@@ -7,31 +7,27 @@ using System.Threading.Tasks;
 
 namespace Query;
 
+public enum FilterMode 
+{   
+    
+}
+
 public class CerereQueryParams
 {
-    public string Search { get; private set; } = string.Empty;
-    public string NrCadastral { get; private set; } = string.Empty;
-    public string Comment { get; private set; } = string.Empty;
+    public SearchQuery? Search { get; set; } = null;
+    public TimeSpanFilter? TimeFilter { get; set; } = null;
+    public StateFilter? StateFilter { get; set; } = null;
 
-    public DateOnly? StartTime { get; private set; } = null;
-    public DateOnly? EndTime { get; private set; } = null;
-
-    public CerereQueryParams() { }
-    public CerereQueryParams(string search)
+    public CerereQueryParams()
+    {
+    }
+    public CerereQueryParams(SearchQuery? search, TimeSpanFilter? timeFilter)
     {
         Search = search;
+        TimeFilter = timeFilter;
     }
-    public CerereQueryParams(string search, string nrCadastral) : this(search)
+    public CerereQueryParams(SearchQuery? search, TimeSpanFilter? timeFilter, StateFilter stateFilter) : this(search, timeFilter)
     {
-        NrCadastral = nrCadastral;
-    }
-    public CerereQueryParams(string search, string nrCadastral, string comment) : this(search, nrCadastral)
-    {
-        Comment = comment;
-    }
-    public CerereQueryParams(string search, string nrCadastral, string comment, DateOnly? startTime, DateOnly? endTime) : this(search, nrCadastral, comment)
-    {
-        StartTime = startTime;
-        EndTime = endTime;
+        StateFilter = stateFilter;
     }
 }

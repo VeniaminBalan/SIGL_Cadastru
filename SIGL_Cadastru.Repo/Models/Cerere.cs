@@ -10,7 +10,8 @@ namespace SIGL_Cadastru.Repo.Models
         Inlucru,
         LaReceptie,
         Eliberat,
-        Respins
+        Respins,
+        Prelungit
     }
     public class Cerere : IModel
     {

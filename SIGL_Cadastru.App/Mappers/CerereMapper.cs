@@ -33,15 +33,19 @@ namespace SIGL_Cadastru.App.Mappers
                 StareaCererii = SetStatus(cerere.StatusList),
                 LaReceptie = GetDate(cerere.StatusList, Status.LaReceptie),
                 Eliberat = GetDate(cerere.StatusList, Status.Eliberat),
-                Respins = GetDate(cerere.StatusList, Status.Respins)
+                Respins = GetDate(cerere.StatusList, Status.Respins),
+                Prelungit = GetDate(cerere.StatusList, Status.Prelungit)
             };
         }
 
-        private static Status SetStatus(List<CerereStatus> stari)
+        public static Status SetStatus(List<CerereStatus> stari)
         {
-            var state = stari.OrderByDescending(x => x.Created).FirstOrDefault();
+            var state = stari
+                .Where(s => s.Starea != Status.Prelungit)
+                .OrderByDescending(x => x.Created).FirstOrDefault();
 
             if(state is null) return Status.Inlucru;
+
             return state.Starea;
         }
 

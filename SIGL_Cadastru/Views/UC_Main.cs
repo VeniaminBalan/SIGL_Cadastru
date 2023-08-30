@@ -3,7 +3,10 @@ using Query;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.AppConfigurations;
+using SIGL_Cadastru.Repo.Models;
 using System.Data;
+
+
 
 
 namespace SIGL_Cadastru.Views
@@ -13,6 +16,8 @@ namespace SIGL_Cadastru.Views
 
         private readonly IServiceManager _service;
         private readonly IMapper _mapper;
+
+        private CerereQueryParams cerereQuery = new();
 
         public UC_Main(IServiceManager service, IMapper mapper)
         {
@@ -26,11 +31,20 @@ namespace SIGL_Cadastru.Views
 
         public async Task UpdateTable() 
         {
-            var data = await _service.CerereService.GetAllAsync(new CerereQueryParams(),false);
 
-            var cereri = data.Select(CerereMapper.Map);
+            try
+            {
+                var cereri = await _service.CerereService.GetAllAsync(cerereQuery, false);           
+                dataGridView1.DataSource = cereri.ToList();
+                
 
-            dataGridView1.DataSource = cereri.ToList();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private async void UC_Main_Load(object sender, EventArgs e)
@@ -51,6 +65,41 @@ namespace SIGL_Cadastru.Views
 
         public async void ActualizareButtonPressed(object sender, EventArgs e) 
         {
+            await UpdateTable();
+        }
+
+        private async void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            var text = textBox1.Text;
+            var column = comboBox1.Text;
+
+            var search = SearchQuery.Create(text, column);
+
+            this.cerereQuery.Search = search;
+
+            await UpdateTable();
+
+        }
+
+        private async void checkBox_Eliberat_CheckedChanged(object sender, EventArgs e)
+        {
+            var statefilter = new StateFilter();
+
+            if (checkBox_inLucru.Checked)
+                statefilter.states.Add(Repo.Models.Status.Inlucru);
+
+            if (checkBox_Eliberat.Checked)
+                statefilter.states.Add(Repo.Models.Status.Eliberat);
+
+            if (checkBox_Respins.Checked)
+                statefilter.states.Add(Repo.Models.Status.Respins);
+
+            if (checkBox_laReceptie.Checked)
+                statefilter.states.Add(Repo.Models.Status.LaReceptie);
+
+
+            this.cerereQuery.StateFilter = statefilter;
+
             await UpdateTable();
         }
     }

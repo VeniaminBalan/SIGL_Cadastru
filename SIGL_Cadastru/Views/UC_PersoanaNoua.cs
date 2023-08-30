@@ -2,15 +2,7 @@
 using Contracts;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace SIGL_Cadastru.Views
 {
@@ -18,7 +10,17 @@ namespace SIGL_Cadastru.Views
     {
         private readonly IRepositoryManager _repo;
         private readonly IMapper _mapper;
+        private readonly Role _rol;
 
+
+        public UC_PersoanaNoua(IRepositoryManager repo, IMapper mapper, Role rol)
+        {
+            _repo = repo;
+            _mapper = mapper;
+            _rol = rol;
+
+            InitializeComponent();
+        }
         public UC_PersoanaNoua(IRepositoryManager repo, IMapper mapper)
         {
             _repo = repo;
@@ -44,7 +46,8 @@ namespace SIGL_Cadastru.Views
                 Email = email,
                 Telefon= telefon,
                 Domiciliu= domicilul,
-                DataNasterii= dataNasterii
+                DataNasterii= dataNasterii,
+                Rol = _rol
             };
         }
         public void SetView()

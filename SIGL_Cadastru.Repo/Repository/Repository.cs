@@ -8,7 +8,7 @@ namespace Repository;
 
 public class Repository<T> : IRepository<T> where T : class, IModel
 {
-    private readonly AppDbContext _appDbContext;
+    protected readonly AppDbContext _appDbContext;
     public Repository(AppDbContext appDbContext)
     {
         _appDbContext = appDbContext;

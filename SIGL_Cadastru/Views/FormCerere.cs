@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
 using FluentDateTime;
-using Models;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Utils;
