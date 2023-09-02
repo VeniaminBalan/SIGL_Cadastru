@@ -36,11 +36,11 @@
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxNume = new System.Windows.Forms.TextBox();
-            this.textBoxPrenume = new System.Windows.Forms.TextBox();
-            this.textBoxTelefon = new System.Windows.Forms.TextBox();
-            this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.textBoxAdresa = new System.Windows.Forms.TextBox();
             this.textBoxIDNP = new System.Windows.Forms.TextBox();
+            this.textBoxTelefon = new System.Windows.Forms.TextBox();
+            this.textBoxAdresa = new System.Windows.Forms.TextBox();
+            this.textBoxEmail = new System.Windows.Forms.TextBox();
+            this.textBoxPrenume = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -114,12 +114,12 @@
             this.textBoxNume.Size = new System.Drawing.Size(125, 27);
             this.textBoxNume.TabIndex = 1;
             // 
-            // textBoxPrenume
+            // textBoxIDNP
             // 
-            this.textBoxPrenume.Location = new System.Drawing.Point(301, 16);
-            this.textBoxPrenume.Name = "textBoxPrenume";
-            this.textBoxPrenume.Size = new System.Drawing.Size(125, 27);
-            this.textBoxPrenume.TabIndex = 3;
+            this.textBoxIDNP.Location = new System.Drawing.Point(301, 16);
+            this.textBoxIDNP.Name = "textBoxIDNP";
+            this.textBoxIDNP.Size = new System.Drawing.Size(125, 27);
+            this.textBoxIDNP.TabIndex = 3;
             // 
             // textBoxTelefon
             // 
@@ -128,26 +128,26 @@
             this.textBoxTelefon.Size = new System.Drawing.Size(125, 27);
             this.textBoxTelefon.TabIndex = 4;
             // 
-            // textBoxEmail
-            // 
-            this.textBoxEmail.Location = new System.Drawing.Point(96, 157);
-            this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(330, 27);
-            this.textBoxEmail.TabIndex = 6;
-            // 
             // textBoxAdresa
             // 
-            this.textBoxAdresa.Location = new System.Drawing.Point(96, 204);
+            this.textBoxAdresa.Location = new System.Drawing.Point(96, 157);
             this.textBoxAdresa.Name = "textBoxAdresa";
             this.textBoxAdresa.Size = new System.Drawing.Size(330, 27);
-            this.textBoxAdresa.TabIndex = 7;
+            this.textBoxAdresa.TabIndex = 6;
             // 
-            // textBoxIDNP
+            // textBoxEmail
             // 
-            this.textBoxIDNP.Location = new System.Drawing.Point(96, 63);
-            this.textBoxIDNP.Name = "textBoxIDNP";
-            this.textBoxIDNP.Size = new System.Drawing.Size(125, 27);
-            this.textBoxIDNP.TabIndex = 2;
+            this.textBoxEmail.Location = new System.Drawing.Point(96, 204);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(330, 27);
+            this.textBoxEmail.TabIndex = 7;
+            // 
+            // textBoxPrenume
+            // 
+            this.textBoxPrenume.Location = new System.Drawing.Point(96, 63);
+            this.textBoxPrenume.Name = "textBoxPrenume";
+            this.textBoxPrenume.Size = new System.Drawing.Size(125, 27);
+            this.textBoxPrenume.TabIndex = 2;
             // 
             // label7
             // 
@@ -163,12 +163,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.textBoxIDNP);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBoxAdresa);
-            this.Controls.Add(this.textBoxEmail);
-            this.Controls.Add(this.textBoxTelefon);
             this.Controls.Add(this.textBoxPrenume);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBoxEmail);
+            this.Controls.Add(this.textBoxAdresa);
+            this.Controls.Add(this.textBoxTelefon);
+            this.Controls.Add(this.textBoxIDNP);
             this.Controls.Add(this.textBoxNume);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dateTimePicker);
@@ -194,11 +194,11 @@
         private DateTimePicker dateTimePicker;
         private Label label6;
         private TextBox textBoxNume;
-        private TextBox textBoxPrenume;
-        private TextBox textBoxTelefon;
-        private TextBox textBoxEmail;
-        private TextBox textBoxAdresa;
         private TextBox textBoxIDNP;
+        private TextBox textBoxTelefon;
+        private TextBox textBoxAdresa;
+        private TextBox textBoxEmail;
+        private TextBox textBoxPrenume;
         private Label label7;
     }
 }

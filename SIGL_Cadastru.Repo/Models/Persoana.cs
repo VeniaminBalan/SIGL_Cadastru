@@ -28,6 +28,7 @@ namespace SIGL_Cadastru.Repo.Models
         public string? Telefon { get; set; }
         public Role Rol { get; set; }
 
+        internal Persoana() { }
         internal Persoana(Guid id, string nume, string prenume, string iDNP, DateOnly dataNasterii, string domiciliu, string? email, string? telefon, Role rol)
         {
             Id = id;
@@ -53,6 +54,18 @@ namespace SIGL_Cadastru.Repo.Models
             Role rol,
             IPersoanaRepository repo)
         {
+            if (string.IsNullOrWhiteSpace(nume))
+                throw new Exception("nume is null");
+
+            if (string.IsNullOrWhiteSpace(prenume))
+                throw new Exception("prenume is null");
+
+            if (string.IsNullOrWhiteSpace(domiciliu))
+                throw new Exception("domiciliu is null");
+                   
+
+            if (string.IsNullOrWhiteSpace(iDNP))
+                throw new Exception("IDNP is null");
 
             if (!await repo.isIdnpUniqe(iDNP))
                 throw new IDNPUsedException("this IDNP is already used");

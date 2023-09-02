@@ -31,24 +31,32 @@ namespace SIGL_Cadastru.Views
         public async Task<Result<Persoana>> GetPersoana() 
         {
             var nume = textBoxNume.Text;
-            var prenume = textBoxPrenume.Text;
+            var prenume = textBoxPrenume.Text; 
             var idnp = textBoxIDNP.Text;
             var email = textBoxEmail.Text;
             var telefon = textBoxTelefon.Text;
-            var domicilul = textBoxAdresa.Text;
+            var domicilul = textBoxAdresa.Text; 
             DateOnly dataNasterii = DateOnly.FromDateTime(dateTimePicker.Value.Date);
 
             try
             {
-                var p =  await Persoana.Create(new Guid(), nume, prenume, idnp, dataNasterii, domicilul, email, telefon, _rol,
-                _repo.Persoana);
+                var p =  await Persoana.Create(
+                    new Guid(), 
+                    nume,
+                    prenume,
+                    idnp, 
+                    dataNasterii,
+                    domicilul, 
+                    email, 
+                    telefon,
+                    _rol,
+                    _repo.Persoana);
 
                 return new Result<Persoana>(ResultState.NewObject, p);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                MessageBox.Show(e.Message);
                 throw;
             }
 

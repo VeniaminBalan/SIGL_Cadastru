@@ -54,7 +54,7 @@
             this.buttonPNoua = new System.Windows.Forms.Button();
             this.buttonPExistenta = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_comment = new System.Windows.Forms.TextBox();
             this.comboBox_transport = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -314,13 +314,13 @@
             this.label8.TabIndex = 38;
             this.label8.Text = "Comentariu:";
             // 
-            // textBox1
+            // textBox_comment
             // 
-            this.textBox1.Location = new System.Drawing.Point(22, 437);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(339, 104);
-            this.textBox1.TabIndex = 39;
+            this.textBox_comment.Location = new System.Drawing.Point(22, 437);
+            this.textBox_comment.Multiline = true;
+            this.textBox_comment.Name = "textBox_comment";
+            this.textBox_comment.Size = new System.Drawing.Size(339, 104);
+            this.textBox_comment.TabIndex = 39;
             // 
             // comboBox_transport
             // 
@@ -337,7 +337,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 703);
             this.Controls.Add(this.comboBox_transport);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_comment);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.buttonPExistenta);
             this.Controls.Add(this.buttonPNoua);
@@ -398,7 +398,7 @@
         private Label label7;
         private DateTimePicker dateTimePicker_dataSolicitarii;
         private Label label8;
-        private TextBox textBox1;
+        private TextBox textBox_comment;
         private ComboBox comboBox_transport;
     }
 }

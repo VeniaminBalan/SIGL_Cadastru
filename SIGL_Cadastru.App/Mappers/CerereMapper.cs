@@ -13,6 +13,13 @@ namespace SIGL_Cadastru.App.Mappers
     {
         public static CerereDto Map(Cerere cerere) 
         {
+            int costTotal = cerere.Adaos;
+
+            foreach (var l in cerere.Lucrari) 
+            {
+                costTotal += l.Pret;
+            }
+
             return new CerereDto
             {
                 Id = cerere.Id,
@@ -28,7 +35,7 @@ namespace SIGL_Cadastru.App.Mappers
                 NrCadastral = cerere.NrCadastral,
                 ValabilDeLa = cerere.ValabilDeLa,
                 ValabilPanaLa = cerere.ValabilPanaLa,
-                CostTotal= cerere.CostTotal,
+                CostTotal = costTotal,
 
                 StareaCererii = SetStatus(cerere.StatusList),
                 LaReceptie = GetDate(cerere.StatusList, Status.LaReceptie),
