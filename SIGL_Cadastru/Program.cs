@@ -67,8 +67,7 @@ namespace SIGL_Cadastru
                     services.AddTransient<FormCerere>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
-                        var mapper = container.GetRequiredService<IMapper>();
-                        var formCerere = new FormCerere(repository, mapper);
+                        var formCerere = new FormCerere(repository);
                         return formCerere;
                     });
 

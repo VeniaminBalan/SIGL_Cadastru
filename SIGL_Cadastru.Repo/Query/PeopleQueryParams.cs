@@ -9,6 +9,10 @@ namespace SIGL_Cadastru.Repo.Query
 
         public PeopleQueryParams() { }
 
+        public PeopleQueryParams(Role rol)
+        {
+            Rol = rol;
+        }
         public PeopleQueryParams(string search, Role? rol)
         {
             Search = search;

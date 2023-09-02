@@ -4,5 +4,5 @@
 	<Option type="in localitate">100</Option>
 	<Option type="in raion">200</Option>
 	<Option type="50 - 100 km">400</Option>
-	<Option type="100+ km">400</Option>
+	<Option type="100+ km">800</Option>
 </Transport>

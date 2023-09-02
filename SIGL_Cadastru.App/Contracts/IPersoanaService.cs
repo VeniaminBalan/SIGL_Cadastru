@@ -13,12 +13,7 @@ namespace SIGL_Cadastru.App.Contracts
     {
         Task<IEnumerable<PersoanaDto>> GetAllAync(PeopleQueryParams queryParams,bool trackChanges);
         Task<PersoanaDto> GetByIdAsync(Guid Id, bool trackChanges);
-        Task<IEnumerable<PersoanaDto>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
         void CreatePersoana(Persoana perosana);
         void DeletePersoana(Persoana perosana);
-
-        Task<IEnumerable<PersoanaDto>> GetAllExecutantiAync(bool trackChanges);
-        Task<IEnumerable<PersoanaDto>> GetAllResponsabiliAync(bool trackChanges);
-        Task<IEnumerable<PersoanaDto>> GetAllClientiAync(bool trackChanges);
     }
 }

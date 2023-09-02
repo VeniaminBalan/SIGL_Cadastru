@@ -13,7 +13,7 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
     {
         public void Configure(EntityTypeBuilder<Cerere> builder)
         {
-
+          
             builder.HasData
                 (
                     new Cerere

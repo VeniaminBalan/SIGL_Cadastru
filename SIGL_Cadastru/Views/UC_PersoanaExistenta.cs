@@ -38,11 +38,13 @@ namespace SIGL_Cadastru.Views
             this.Visible= false;
         }
 
-        public Persoana GetPersoana()
+        public Task<Result<Persoana>> GetPersoana()
         {
             if (selectedItem is null)
                 throw new PersonNotFoundException("persoana nu este selectata");
-            return clienti.First(c => c.Id == selectedItem.ID);
+            var p = clienti.First(c => c.Id == selectedItem.ID);
+
+            return Task.FromResult(new Result<Persoana>(ResultState.ExistingObject, p));
         }
 
         public void SetView()

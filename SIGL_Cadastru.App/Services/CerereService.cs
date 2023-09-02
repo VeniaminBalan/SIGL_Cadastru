@@ -24,6 +24,17 @@ internal sealed class CerereService : ICerereService
         _repo.Cerere.CreateCerere(cerere);
     }
 
+    public async Task DeleteCerere(Guid id)
+    {
+        var cerere = await _repo.Cerere.GetByIdAsync(id, true);
+
+        if(cerere is null)
+            throw new CerereNotFoundException("Cererea nu a fost gasita");
+
+        _repo.Cerere.DeleteCerere(cerere);
+        await _repo.SaveAsync();
+    }
+
     public async Task<IEnumerable<CerereDto>> GetAllAsync(CerereQueryParams queryParams, bool trackChanges)
     {
         var data = await _repo.Cerere.GetAllAync(trackChanges);

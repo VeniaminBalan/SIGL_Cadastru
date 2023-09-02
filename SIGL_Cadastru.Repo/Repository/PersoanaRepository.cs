@@ -16,23 +16,14 @@ namespace SIGL_Cadastru.Repo.Repository
             _context = appDbContext;
         }
 
-        public void CreatePersoana(Persoana perosana)
-        {
-            throw new NotImplementedException();
-        }
+        public void CreatePersoana(Persoana perosana) => Create(perosana);
 
-        public void DeletePersoana(Persoana perosana)
-        {
-            throw new NotImplementedException();
-        }
+        public void DeletePersoana(Persoana perosana) => Delete(perosana);
 
         public async Task<IEnumerable<Persoana>> GetAllAync(PeopleQueryParams queryParams, bool trackChanges)
         {
 
-            IQueryable<Persoana>  peopleQuary = _context.Persoane;
-
-            if (!trackChanges)
-                peopleQuary = peopleQuary.AsNoTracking();
+            IQueryable<Persoana>  peopleQuary = FindAll(trackChanges);
 
             if (!string.IsNullOrEmpty(queryParams.Search)) 
             {
@@ -51,40 +42,19 @@ namespace SIGL_Cadastru.Repo.Repository
 
         }
 
-        public async Task<IEnumerable<Persoana>> GetAllClientiAync(bool trackChanges)
-        {
-            var clienti = await FindAll(trackChanges)
-                .Where(p => p.Rol == Role.Client)
-                .ToListAsync();
-
-            return clienti;
-        }
-
-        public async Task<IEnumerable<Persoana>> GetAllExecutantiAync(bool trackChanges)
-        {
-            var responsabil = await FindAll(trackChanges)
-                .Where(p => p.Rol == Role.Responsabil || p.Rol == Role.Executant)
-                .ToListAsync();
-
-            return responsabil;
-        }
-
-        public async Task<IEnumerable<Persoana>> GetAllResponsabiliAync(bool trackChanges)
-        {
-            var responsabil = await FindAll(trackChanges)
-                .Where(p => p.Rol == Role.Responsabil)
-                .ToListAsync();
-
-            return responsabil;
-        }
-
-        public async Task<Persoana> GetByIdAsync(Guid Id, bool trackChanges)=>
+        public async Task<Persoana?> GetByIdAsync(Guid Id, bool trackChanges)=>
             await FindByCondition(e => e.Id.Equals(Id),trackChanges)
             .SingleOrDefaultAsync();
 
-        public Task<IEnumerable<Persoana>> getByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
+
+        public async Task<bool> isIdnpUniqe(string idnp)
         {
-            throw new NotImplementedException();
+            var p = await FindByCondition(p => p.IDNP == idnp, false).FirstOrDefaultAsync();
+
+            if (p is null)
+                return true;
+
+            return false;
         }
     }
 }

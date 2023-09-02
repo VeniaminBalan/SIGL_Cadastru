@@ -3,6 +3,7 @@ using Contracts;
 using FluentDateTime;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Repo.Query;
 using SIGL_Cadastru.Utils;
 using System.Data;
 
@@ -14,7 +15,6 @@ namespace SIGL_Cadastru.Views
         public event EventHandler CreateButtonPressed;
 
         private readonly IRepositoryManager _repo;
-        private readonly IMapper _mapper;
         private List<Lucrare> Lucrari = new();
         private UC_PersoanaExistenta persoanaExistenta;
         private UC_PersoanaNoua persoanaNoua;
@@ -22,18 +22,49 @@ namespace SIGL_Cadastru.Views
 
         private IUCPersoana selected_uc_persoana;
 
-        public FormCerere(IRepositoryManager repo, IMapper mapper)
+        public FormCerere(IRepositoryManager repo)
         {
             _repo = repo;
-            _mapper = mapper;
             InitializeComponent();
             SetUC();
         }
 
         private async void FormCerere_Load(object sender, EventArgs e)
         {
-            comboBox_Executant.DataSource = await GetPersoane(Role.Executant);
-            comboBox_Responsabil.DataSource = await GetPersoane(Role.Responsabil);
+            var responsabili = await GetPersoane(Role.Responsabil);
+            comboBox_Responsabil.DataSource = responsabili;
+
+            var executanti = await GetPersoane(Role.Executant);
+            foreach (var ex in responsabili) 
+            {
+                executanti.Add(ex);
+            }
+
+            comboBox_Executant.DataSource = executanti;
+        }
+
+        private async Task<List<ComboItem>> GetPersoane(Role rol)
+        {
+            var pers = new List<Persoana>();
+
+            switch (rol)
+            {
+                case Role.Executant:
+                    pers = await _repo.Persoana.GetAllAync(new PeopleQueryParams(Role.Executant), false) as List<Persoana>;
+                    break;
+                case Role.Responsabil:
+                    pers = await _repo.Persoana.GetAllAync(new PeopleQueryParams(Role.Responsabil), false) as List<Persoana>;
+                    break;
+                default:
+                    break;
+            }
+
+            return pers.Select(r => new ComboItem
+            {
+                ID = r.Id,
+                Text = string.Join(' ', r.Nume, r.Prenume)
+            }).ToList();
+
         }
 
         void SetSelectedUC(IUCPersoana uc) 
@@ -51,34 +82,22 @@ namespace SIGL_Cadastru.Views
         {
             try
             {
-
-
                 var executantItem = (ComboItem)comboBox_Executant.SelectedItem;
                 var responsabilItem = (ComboItem)comboBox_Responsabil.SelectedItem;
 
                 var responsabil = await _repo.Persoana.GetByIdAsync(responsabilItem.ID, true);
                 var executant = await _repo.Persoana.GetByIdAsync(executantItem.ID, true);
-                var get_client = GetSelectedUC().GetPersoana();
                 Persoana client;
 
-                if (get_client.Id == Guid.Empty)
+                try
                 {
-                    client = new()
-                    {
-                        Id = Guid.NewGuid(),
-                        Nume = get_client.Nume,
-                        Prenume = get_client.Prenume,
-                        IDNP = get_client.IDNP,
-                        Domiciliu = get_client.Domiciliu,
-                        DataNasterii = get_client.DataNasterii,
-                        Email = get_client.Email,
-                        Telefon = get_client.Telefon,
-                        Rol = Role.Client
-                    };
+                    var result = await GetSelectedUC().GetPersoana();
+                    client = result.Value;
+
                 }
-                else 
+                catch (Exception)
                 {
-                    client = get_client;
+                    return;
                 }
 
 
@@ -163,31 +182,6 @@ namespace SIGL_Cadastru.Views
             this.suma = suma;
             label_suma.Text = suma.ToString();
         }
-
-        private async Task<IEnumerable<ComboItem>> GetPersoane(Role rol) 
-        {
-            var pers = new List<Persoana>();
-
-            switch (rol)
-            {
-                case Role.Executant:
-                    pers = await _repo.Persoana.GetAllExecutantiAync(false) as List<Persoana>;
-                    break;
-                case Role.Responsabil:
-                    pers = await _repo.Persoana.GetAllResponsabiliAync(false) as List<Persoana>;
-                    break;
-                default:
-                    pers = Array.Empty<Persoana>().ToList();
-                    break;
-            }
-
-            return pers.Select(r => new ComboItem
-            {
-                ID = r.Id,
-                Text = string.Join(' ', r.Nume, r.Prenume)
-            }).ToList();
-
-        }
         private void buttonPNoua_Click(object sender, EventArgs e)
         {
             SetSelectedUC(persoanaNoua);
@@ -218,7 +212,6 @@ namespace SIGL_Cadastru.Views
                 e.Handled = true;
             }
         }
-
         private void FormCerere_FormClosed(object sender, FormClosedEventArgs e)
         {
             _repo.DetachAll();

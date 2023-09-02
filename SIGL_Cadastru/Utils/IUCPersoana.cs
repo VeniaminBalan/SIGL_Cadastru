@@ -9,7 +9,7 @@ namespace SIGL_Cadastru.Utils
 {
     public interface IUCPersoana
     {
-        public Persoana GetPersoana();
+        public Task<Result<Persoana>> GetPersoana();
         public void SetView();
         public void CloseView();
     }

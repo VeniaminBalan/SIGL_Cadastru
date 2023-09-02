@@ -48,7 +48,7 @@
             // 
             this.listBox_persoane.FormattingEnabled = true;
             this.listBox_persoane.ItemHeight = 20;
-            this.listBox_persoane.Location = new System.Drawing.Point(15, 48);
+            this.listBox_persoane.Location = new System.Drawing.Point(3, 45);
             this.listBox_persoane.Name = "listBox_persoane";
             this.listBox_persoane.Size = new System.Drawing.Size(445, 164);
             this.listBox_persoane.TabIndex = 2;
@@ -58,7 +58,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(15, 14);
+            this.label2.Location = new System.Drawing.Point(3, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 28);
             this.label2.TabIndex = 3;
@@ -66,7 +66,7 @@
             // 
             // textBox_search
             // 
-            this.textBox_search.Location = new System.Drawing.Point(104, 15);
+            this.textBox_search.Location = new System.Drawing.Point(91, 12);
             this.textBox_search.Name = "textBox_search";
             this.textBox_search.Size = new System.Drawing.Size(356, 27);
             this.textBox_search.TabIndex = 4;
@@ -80,7 +80,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(15, 233);
+            this.label1.Location = new System.Drawing.Point(3, 218);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 23);
             this.label1.TabIndex = 5;
@@ -89,7 +89,7 @@
             // label_selectedPerson
             // 
             this.label_selectedPerson.AutoSize = true;
-            this.label_selectedPerson.Location = new System.Drawing.Point(178, 235);
+            this.label_selectedPerson.Location = new System.Drawing.Point(166, 221);
             this.label_selectedPerson.Name = "label_selectedPerson";
             this.label_selectedPerson.Size = new System.Drawing.Size(0, 20);
             this.label_selectedPerson.TabIndex = 6;
@@ -106,7 +106,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBox_persoane);
             this.Name = "UC_PersoanaExistenta";
-            this.Size = new System.Drawing.Size(498, 283);
+            this.Size = new System.Drawing.Size(450, 250);
             this.Load += new System.EventHandler(this.UC_PersoanaExistenta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.persoanaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.persoanaDtoBindingSource)).EndInit();

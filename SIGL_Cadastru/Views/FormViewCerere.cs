@@ -91,7 +91,6 @@ namespace SIGL_Cadastru.Views
         {
             dataGridView1.DataSource = cerere!.Lucrari.Select(LucrareMapper.Map).ToList();
         }
-
         private void ResetViewStatusList() 
         {
             statusItems = cerere!.StatusList.Select(c => new StatusItem(c, EntityState.Original)).ToList();
@@ -185,6 +184,22 @@ namespace SIGL_Cadastru.Views
         private void FormViewCerere_FormClosed(object sender, FormClosedEventArgs e)
         {
             _service.DetachAll();
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Doriti sa stergeti Cererea ? \n (Aceasta actiune nu este reversibila)", "Stergere", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                await _service.CerereService.DeleteCerere(_cererId);
+                DataChenged!.Invoke(sender, new EventArgs());
+                this.Dispose();
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                
+            }
         }
     }
 

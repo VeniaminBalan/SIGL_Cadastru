@@ -28,7 +28,7 @@ namespace SIGL_Cadastru.Views
             InitializeComponent();
         }
 
-        public Persoana GetPersoana() 
+        public async Task<Result<Persoana>> GetPersoana() 
         {
             var nume = textBoxNume.Text;
             var prenume = textBoxPrenume.Text;
@@ -38,17 +38,21 @@ namespace SIGL_Cadastru.Views
             var domicilul = textBoxAdresa.Text;
             DateOnly dataNasterii = DateOnly.FromDateTime(dateTimePicker.Value.Date);
 
-            return new Persoana
+            try
             {
-                Nume= nume,
-                Prenume= prenume,
-                IDNP= idnp,
-                Email = email,
-                Telefon= telefon,
-                Domiciliu= domicilul,
-                DataNasterii= dataNasterii,
-                Rol = _rol
-            };
+                var p =  await Persoana.Create(new Guid(), nume, prenume, idnp, dataNasterii, domicilul, email, telefon, _rol,
+                _repo.Persoana);
+
+                return new Result<Persoana>(ResultState.NewObject, p);
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                throw;
+            }
+
+            
         }
         public void SetView()
         {

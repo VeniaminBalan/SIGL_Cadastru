@@ -30,15 +30,6 @@ namespace SIGL_Cadastru.Views
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cerereDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.checkBox_Eliberat = new System.Windows.Forms.CheckBox();
-            this.checkBox_Respins = new System.Windows.Forms.CheckBox();
-            this.checkBox_laReceptie = new System.Windows.Forms.CheckBox();
-            this.checkBox_inLucru = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.executantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +46,15 @@ namespace SIGL_Cadastru.Views
             this.Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Responsabil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValabilDeLa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cerereDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkBox_Eliberat = new System.Windows.Forms.CheckBox();
+            this.checkBox_Respins = new System.Windows.Forms.CheckBox();
+            this.checkBox_laReceptie = new System.Windows.Forms.CheckBox();
+            this.checkBox_inLucru = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -93,119 +93,10 @@ namespace SIGL_Cadastru.Views
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1507, 528);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // cerereDtoBindingSource
-            // 
-            this.cerereDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Eliberat);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Respins);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_laReceptie);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_inLucru);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(1678, 530);
-            this.splitContainer1.SplitterDistance = 165;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // checkBox_Eliberat
-            // 
-            this.checkBox_Eliberat.AutoSize = true;
-            this.checkBox_Eliberat.Checked = true;
-            this.checkBox_Eliberat.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Eliberat.Location = new System.Drawing.Point(13, 204);
-            this.checkBox_Eliberat.Name = "checkBox_Eliberat";
-            this.checkBox_Eliberat.Size = new System.Drawing.Size(82, 24);
-            this.checkBox_Eliberat.TabIndex = 6;
-            this.checkBox_Eliberat.Text = "Eliberat";
-            this.checkBox_Eliberat.UseVisualStyleBackColor = true;
-            this.checkBox_Eliberat.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // checkBox_Respins
-            // 
-            this.checkBox_Respins.AutoSize = true;
-            this.checkBox_Respins.Checked = true;
-            this.checkBox_Respins.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Respins.Location = new System.Drawing.Point(13, 174);
-            this.checkBox_Respins.Name = "checkBox_Respins";
-            this.checkBox_Respins.Size = new System.Drawing.Size(81, 24);
-            this.checkBox_Respins.TabIndex = 5;
-            this.checkBox_Respins.Text = "Respins";
-            this.checkBox_Respins.UseVisualStyleBackColor = true;
-            this.checkBox_Respins.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // checkBox_laReceptie
-            // 
-            this.checkBox_laReceptie.AutoSize = true;
-            this.checkBox_laReceptie.Checked = true;
-            this.checkBox_laReceptie.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_laReceptie.Location = new System.Drawing.Point(13, 145);
-            this.checkBox_laReceptie.Name = "checkBox_laReceptie";
-            this.checkBox_laReceptie.Size = new System.Drawing.Size(108, 24);
-            this.checkBox_laReceptie.TabIndex = 4;
-            this.checkBox_laReceptie.Text = "La Receptie";
-            this.checkBox_laReceptie.UseVisualStyleBackColor = true;
-            this.checkBox_laReceptie.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // checkBox_inLucru
-            // 
-            this.checkBox_inLucru.AutoSize = true;
-            this.checkBox_inLucru.Checked = true;
-            this.checkBox_inLucru.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_inLucru.Location = new System.Drawing.Point(13, 115);
-            this.checkBox_inLucru.Name = "checkBox_inLucru";
-            this.checkBox_inLucru.Size = new System.Drawing.Size(82, 24);
-            this.checkBox_inLucru.TabIndex = 3;
-            this.checkBox_inLucru.Text = "In Lucru";
-            this.checkBox_inLucru.UseVisualStyleBackColor = true;
-            this.checkBox_inLucru.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(3, 77);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 27);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Client",
-            "Responsabil",
-            "Executant",
-            "Nr Cadastral"});
-            this.comboBox1.Location = new System.Drawing.Point(3, 43);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 28);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Cautare:";
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -355,6 +246,116 @@ namespace SIGL_Cadastru.Views
             this.ValabilDeLa.ReadOnly = true;
             this.ValabilDeLa.Visible = false;
             this.ValabilDeLa.Width = 125;
+            // 
+            // cerereDtoBindingSource
+            // 
+            this.cerereDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Eliberat);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Respins);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_laReceptie);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_inLucru);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Size = new System.Drawing.Size(1678, 530);
+            this.splitContainer1.SplitterDistance = 165;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // checkBox_Eliberat
+            // 
+            this.checkBox_Eliberat.AutoSize = true;
+            this.checkBox_Eliberat.Checked = true;
+            this.checkBox_Eliberat.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Eliberat.Location = new System.Drawing.Point(13, 204);
+            this.checkBox_Eliberat.Name = "checkBox_Eliberat";
+            this.checkBox_Eliberat.Size = new System.Drawing.Size(82, 24);
+            this.checkBox_Eliberat.TabIndex = 6;
+            this.checkBox_Eliberat.Text = "Eliberat";
+            this.checkBox_Eliberat.UseVisualStyleBackColor = true;
+            this.checkBox_Eliberat.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // checkBox_Respins
+            // 
+            this.checkBox_Respins.AutoSize = true;
+            this.checkBox_Respins.Checked = true;
+            this.checkBox_Respins.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Respins.Location = new System.Drawing.Point(13, 174);
+            this.checkBox_Respins.Name = "checkBox_Respins";
+            this.checkBox_Respins.Size = new System.Drawing.Size(81, 24);
+            this.checkBox_Respins.TabIndex = 5;
+            this.checkBox_Respins.Text = "Respins";
+            this.checkBox_Respins.UseVisualStyleBackColor = true;
+            this.checkBox_Respins.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // checkBox_laReceptie
+            // 
+            this.checkBox_laReceptie.AutoSize = true;
+            this.checkBox_laReceptie.Checked = true;
+            this.checkBox_laReceptie.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_laReceptie.Location = new System.Drawing.Point(13, 145);
+            this.checkBox_laReceptie.Name = "checkBox_laReceptie";
+            this.checkBox_laReceptie.Size = new System.Drawing.Size(108, 24);
+            this.checkBox_laReceptie.TabIndex = 4;
+            this.checkBox_laReceptie.Text = "La Receptie";
+            this.checkBox_laReceptie.UseVisualStyleBackColor = true;
+            this.checkBox_laReceptie.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // checkBox_inLucru
+            // 
+            this.checkBox_inLucru.AutoSize = true;
+            this.checkBox_inLucru.Checked = true;
+            this.checkBox_inLucru.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_inLucru.Location = new System.Drawing.Point(13, 115);
+            this.checkBox_inLucru.Name = "checkBox_inLucru";
+            this.checkBox_inLucru.Size = new System.Drawing.Size(82, 24);
+            this.checkBox_inLucru.TabIndex = 3;
+            this.checkBox_inLucru.Text = "In Lucru";
+            this.checkBox_inLucru.UseVisualStyleBackColor = true;
+            this.checkBox_inLucru.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 77);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(160, 27);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Client",
+            "Responsabil",
+            "Executant",
+            "Nr Cadastral"});
+            this.comboBox1.Location = new System.Drawing.Point(3, 43);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(160, 28);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Cautare:";
             // 
             // UC_Main
             // 

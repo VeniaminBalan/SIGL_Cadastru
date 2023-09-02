@@ -1,9 +1,12 @@
 using AutoMapper;
 using Query;
 using SIGL_Cadastru.App.Contracts;
+using SIGL_Cadastru.App.Entities;
+using SIGL_Cadastru.App.Entities.DataTransferObjects;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Utils;
 using System.Data;
 
 
@@ -53,14 +56,23 @@ namespace SIGL_Cadastru.Views
         }
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int row = e.RowIndex;
-            if (row < 0) return;
 
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                CerereDto? cerere = row.DataBoundItem as CerereDto;
 
-            var id = (Guid)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
-            var form_cerereView = new FormFactory().CreateFromViewCerere(id);
-            form_cerereView.DataChenged += ActualizareButtonPressed;
-            form_cerereView.Show();
+                if (cerere is not null)
+                {
+
+                    var id = cerere.Id;
+                    var form_cerereView = new FormFactory().CreateFromViewCerere(id);
+                    form_cerereView.DataChenged += ActualizareButtonPressed;
+                    form_cerereView.Show();
+
+                    return;
+                }
+            }
+
         }
 
         public async void ActualizareButtonPressed(object sender, EventArgs e) 
@@ -102,5 +114,6 @@ namespace SIGL_Cadastru.Views
 
             await UpdateTable();
         }
+
     }
 }
