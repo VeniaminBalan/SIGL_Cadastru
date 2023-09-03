@@ -44,6 +44,8 @@ namespace SIGL_Cadastru.Views
                 this.Dispose();          
             }
 
+            textBox_Comment.Text = cerere!.Comment;
+
             ResetViewStatusList();
 
             UpdateClientData();
@@ -59,7 +61,7 @@ namespace SIGL_Cadastru.Views
 
         private void UpdateClientData() 
         {
-            var client = PersoanaMapper.Map(cerere.Client);
+            var client = PersoanaMapper.Map(cerere!.Client);
 
             label_Nume.Text = client.Nume;
             label_prenume.Text = client.Prenume;
@@ -101,12 +103,13 @@ namespace SIGL_Cadastru.Views
         {
             _service.DetachAll();
             _service.CerereService.UpdateCerere(cerere!);
+            cerere!.SetComment(textBox_Comment.Text);
 
             foreach (var item in statusItems) 
             {
                 if (item.State == EntityState.Added)
                 {
-                    cerere!.StatusList.Add(item.CerereStatus);
+                    cerere!.AddStatus(item.CerereStatus);
                 }
                 else if (item.State == EntityState.Removed) 
                 {

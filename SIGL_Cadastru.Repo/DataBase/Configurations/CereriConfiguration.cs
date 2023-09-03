@@ -13,7 +13,20 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
     {
         public void Configure(EntityTypeBuilder<Cerere> builder)
         {
-          
+            builder.HasKey(e => e.Id);
+
+            builder.Property(c => c.NrCadastral).HasMaxLength(15);
+            builder.Property(c => c.Comment).HasMaxLength(255);
+
+
+            builder.HasMany(c => c.Lucrari)
+                .WithOne(l => l.Cerere)
+                .HasForeignKey(l => l.CerereId);
+
+            builder.HasMany(c => c.StatusList)
+                .WithOne(l => l.Cerere)
+                .HasForeignKey(s => s.CerereId);
+
         }
     }
 }

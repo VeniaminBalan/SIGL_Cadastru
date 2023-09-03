@@ -1,7 +1,7 @@
 ﻿using Exceptions;
 using Query;
 using SIGL_Cadastru.App.Entities;
-using SIGL_Cadastru.Repo.Models;
+
 
 namespace Extensions;
 
@@ -21,7 +21,7 @@ public static class SearchQueryExtension
         switch (column)
         {
             case "nr cadastral":
-                return list.Where(c => c.NrCadastral.Contains(query.Search));
+                return list.Where(c => c.NrCadastral.Contains(search));
 
             case "client":
                 return list.Where(c => c.Client.ToLower().Contains(search));
@@ -32,8 +32,11 @@ public static class SearchQueryExtension
             case "executant":
                 return list.Where(c => c.Executant.ToLower().Contains(search));
 
+            case "comentariu":
+                return list.Where(c => c.Comment.ToLower().Contains(search));
+
             default:
-                throw new SearchColumnInvalidException($"{column} column does not exist");
+                throw new SearchColumnInvalidException($" {column} column does not exist");
         }
     }
 }

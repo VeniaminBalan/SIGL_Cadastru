@@ -16,7 +16,7 @@ namespace SIGL_Cadastru.Views
         public event EventHandler CreateButtonPressed;
 
         private readonly IRepositoryManager _repo;
-        private List<Lucrare> Lucrari = new();
+        private HashSet<Lucrare> Lucrari = new();
         private UC_PersoanaExistenta persoanaExistenta;
         private UC_PersoanaNoua persoanaNoua;
         private int suma;
@@ -86,41 +86,46 @@ namespace SIGL_Cadastru.Views
             var adaos = int.Parse(textBox_adaos.Text);
             var comment = textBox_comment.Text;
 
+
+
+            //------------------------------------
+
+
+            var executantItem = (ComboItem)comboBox_Executant.SelectedItem;
+            var responsabilItem = (ComboItem)comboBox_Responsabil.SelectedItem;
+
+            var valabilDeLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value);
+            var valabilPanaLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value.AddBusinessDays(int.Parse(textBox_termen.Text)));
+
+            var responsabil = await _repo.Persoana.GetByIdAsync(responsabilItem.ID, true);
+            var executant = await _repo.Persoana.GetByIdAsync(executantItem.ID, true);
+            Persoana client;
+
+            var result = await GetSelectedUC().GetPersoana();
+            client = result.Value;
+
+
+            Cerere newCerere = Cerere.Create(
+                id,
+                client,
+                executant,
+                responsabil,
+                valabilDeLa,
+                valabilPanaLa,
+                this.Lucrari,
+                nrCadastral,
+                adaos,
+                comment,
+                new());
+
+
+            _repo.Cerere.CreateCerere(newCerere);
+            await _repo.SaveAsync();
+
+
+            //-------------------------------------
             try
             {
-                var executantItem = (ComboItem)comboBox_Executant.SelectedItem;
-                var responsabilItem = (ComboItem)comboBox_Responsabil.SelectedItem;
-
-                var valabilDeLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value);
-                var valabilPanaLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value.AddBusinessDays(int.Parse(textBox_termen.Text)));
-
-                var responsabil = await _repo.Persoana.GetByIdAsync(responsabilItem.ID, true);
-                var executant = await _repo.Persoana.GetByIdAsync(executantItem.ID, true);
-                Persoana client;
-
-                var result = await GetSelectedUC().GetPersoana();
-                client = result.Value;
-
-
-                Cerere newCerere = Cerere.Create(
-                    id,
-                    client.Id,
-                    client,
-                    executant.Id,
-                    executant,
-                    responsabil.Id,
-                    responsabil,
-                    valabilDeLa,
-                    valabilPanaLa,
-                    this.Lucrari,
-                    nrCadastral,
-                    adaos,
-                    comment,
-                    new List<CerereStatus>());
-
-
-                _repo.Cerere.CreateCerere(newCerere);
-                await _repo.SaveAsync();
 
             }
             catch (Exception ex)
@@ -151,6 +156,7 @@ namespace SIGL_Cadastru.Views
                 Id = new Guid(),
                 Pret = e.suma,
                 TipLucrare = e.lucrare
+                
             });
 
             ((FormAdaugareLucrare)sender).Dispose();

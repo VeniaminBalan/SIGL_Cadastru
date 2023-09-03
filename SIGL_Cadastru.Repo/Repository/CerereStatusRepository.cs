@@ -24,7 +24,7 @@ public class CerereStatusRepository : Repository<CerereStatus>, ICerereStatusRep
     public void DeleteCerere(CerereStatus cerere) => Delete(cerere);
 
     public async Task<List<CerereStatus>> GetByIdAsync(Guid cerereId, bool trackChanges) =>
-            await FindByCondition(c => c.CerereId == cerereId, trackChanges)
+            await FindByCondition(c => c.Cerere.Id == cerereId, trackChanges)
         .OrderBy(c => c.Created)
         .ToListAsync();
 }

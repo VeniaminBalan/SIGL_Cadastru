@@ -15,50 +15,45 @@ namespace SIGL_Cadastru.Repo.Models
     }
     public class Cerere : IModel
     {
-        [Column("CerereId")]
-        public Guid Id { get; set; }
+        public Guid Id { get;private set; }
+        public Persoana Client { get; private set; }
+        public Persoana Executant { get; private set; }
+        public Persoana Responsabil { get; private set; }
 
-        [ForeignKey("ClientId")]
-        public Guid ClientId { get; set; }
-        public Persoana Client { get; set; }
 
-        [ForeignKey("ExecutantId")]
-        public Guid ExecutantId { get; set; }
-        public Persoana Executant { get; set; }
+        public DateOnly ValabilDeLa { get; private set; }
+        public DateOnly ValabilPanaLa { get; private set; }
 
-        [ForeignKey("ResponsabilId")]
-        public Guid ResponsabilId { get; set; }
-        public Persoana Responsabil { get; set; }
+        public string NrCadastral { get; private set; }
+        public int Adaos { get; private set; }
+        public string Comment { get; private set; }
 
-        public DateOnly ValabilDeLa { get; set; }
-        public DateOnly ValabilPanaLa { get; set; }
-        public List<Lucrare> Lucrari { get; set; } = new();
-        public string NrCadastral { get; set; }
-        public int Adaos { get; set; }
-        public string Comment { get; set; }
-        public List<CerereStatus> StatusList { get; set; } = new();
+
+        private readonly List<Lucrare> _lucrari = new();
+        private readonly List<CerereStatus> _stateList = new();
+
+        public IReadOnlyList<Lucrare> Lucrari => _lucrari;
+        public IReadOnlyList<CerereStatus> StatusList => _stateList;
 
 
         private Cerere() { }
-        internal Cerere(Guid id, Guid clientId, Persoana client, Guid executantId, Persoana executant, Guid responsabilId, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, List<Lucrare> lucrari, string nrCadastral, int adaos, string comment, List<CerereStatus> statusList)
+
+        public Cerere(Guid id, Persoana client, Persoana executant, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, HashSet<Lucrare> lucrari, HashSet<CerereStatus> stateList)
         {
             Id = id;
-            ClientId = clientId;
             Client = client;
-            ExecutantId = executantId;
             Executant = executant;
-            ResponsabilId = responsabilId;
             Responsabil = responsabil;
             ValabilDeLa = valabilDeLa;
             ValabilPanaLa = valabilPanaLa;
-            Lucrari = lucrari;
             NrCadastral = nrCadastral;
             Adaos = adaos;
             Comment = comment;
-            StatusList = statusList;
+            _lucrari = lucrari.ToList();
+            _stateList = stateList.ToList();
         }
 
-        public static Cerere Create(Guid id, Guid clientId, Persoana client, Guid executantId, Persoana executant, Guid responsabilId, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, List<Lucrare> lucrari, string nrCadastral, int adaos, string comment, List<CerereStatus> statusList) 
+        public static Cerere Create(Guid id, Persoana client, Persoana executant, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, HashSet<Lucrare> lucrari, string nrCadastral, int adaos, string comment, HashSet<CerereStatus> statusList) 
         {
             int costTotal = adaos;
 
@@ -70,11 +65,23 @@ namespace SIGL_Cadastru.Repo.Models
             if (costTotal < 0)
                 throw new Exception("Costul total nu poate fi mai mic de 0");
 
+            return new Cerere(id, client, executant, responsabil, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, lucrari, statusList);
 
-            return new Cerere(id, clientId, client, executantId, executant, responsabilId, responsabil, valabilDeLa, valabilPanaLa, lucrari, nrCadastral, adaos, comment, statusList);
         }
 
+        public void AddStatus(CerereStatus cerereStatus) 
+        {
+            _stateList.Add(cerereStatus);
+        }
+        public void AddLucrare(Lucrare lucrare) 
+        {
+            _lucrari.Add(lucrare);
+        }
 
+        public void SetComment(string _comment) 
+        {
+            this.Comment = _comment;
+        }
     }
 
 }

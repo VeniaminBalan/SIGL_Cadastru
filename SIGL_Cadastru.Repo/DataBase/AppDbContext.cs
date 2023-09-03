@@ -13,19 +13,19 @@ namespace SIGL_Cadastru.Repo.DataBase
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder
-                 .Entity<Cerere>()
-                 .ToTable(b => b.HasCheckConstraint("CK_NrCadstral", "LENGTH(NrCadastral) <= 15"));
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
-            modelBuilder.ApplyConfiguration(new PersoanaConfiguration());
-            modelBuilder.ApplyConfiguration(new CereriConfiguration());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+        {
+            optionsBuilder.UseSqlite();
         }
 
         public DbSet<Cerere> Cereri { get; set; }
         public DbSet<Lucrare> Lucrari { get; set; }
         public DbSet<Persoana> Persoane { get; set; }
         public DbSet<CerereStatus> Stari { get; set; }
-        public IQueryable<Cerere> Cerere { get; internal set; }
     }
 
 

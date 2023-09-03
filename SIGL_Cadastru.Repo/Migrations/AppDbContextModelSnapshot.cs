@@ -43,8 +43,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("CerereId");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Adaos")
                         .HasColumnType("INTEGER");
@@ -54,6 +53,7 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.Property<string>("Comment")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ExecutantId")
@@ -61,6 +61,7 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.Property<string>("NrCadastral")
                         .IsRequired()
+                        .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ResponsabilId")
@@ -80,10 +81,7 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasIndex("ResponsabilId");
 
-                    b.ToTable("Cereri", t =>
-                        {
-                            t.HasCheckConstraint("CK_NrCadstral", "LENGTH(NrCadastral) <= 15");
-                        });
+                    b.ToTable("Cereri");
                 });
 
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Lucrare", b =>
@@ -123,6 +121,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("IDNP")
@@ -131,10 +130,12 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.Property<string>("Nume")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Prenume")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Rol")
@@ -145,19 +146,13 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persoane");
+                    b.HasIndex("Email")
+                        .IsUnique();
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d8f68da7-402b-411f-b6ea-a16beaf005e3"),
-                            DataNasterii = new DateOnly(1977, 7, 16),
-                            Domiciliu = "sat. Gribova",
-                            IDNP = "2000818343",
-                            Nume = "Balan",
-                            Prenume = "Octavian",
-                            Rol = 2
-                        });
+                    b.HasIndex("IDNP")
+                        .IsUnique();
+
+                    b.ToTable("Persoane");
                 });
 
             modelBuilder.Entity("Models.CerereStatus", b =>

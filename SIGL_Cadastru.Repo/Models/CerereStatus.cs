@@ -13,25 +13,9 @@ namespace Models;
 public class CerereStatus : IModel
 {
     public Guid Id { get; set; }
+    public Cerere Cerere { get; set; }
+    public Guid CerereId { get; private set; }
     public Status Starea { get; set; }
     public DateOnly Created { get; set; }
-    [ForeignKey("CerereId")]
-    public Guid CerereId { get; set; }
-    public Cerere Cerere { get; set; }
-
-    public CerereStatus() 
-    {
-        Id = Guid.NewGuid();
-    }
-
-    public static CerereStatus NewStatusInLucru(Cerere cerere) 
-    {
-        return new CerereStatus 
-        {
-            Starea = Status.Inlucru,
-            Created = DateOnly.FromDateTime(DateTime.Now),
-            Cerere= cerere
-        };
-    }
 
 }

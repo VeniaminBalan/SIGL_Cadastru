@@ -18,28 +18,19 @@ namespace SIGL_Cadastru.Repo.Models
     }
     public class Persoana : IModel
     {
-        public Guid Id { get; set; }
-        public string Nume { get; set; }
-        public string Prenume { get; set; }
-        public string IDNP { get; set; }
-        public DateOnly DataNasterii { get; set; }
-        public string Domiciliu { get; set; }
-        public string? Email { get; set; }
-        public string? Telefon { get; set; }
-        public Role Rol { get; set; }
+        public Guid Id { get; private set; }
+        public string Nume { get; private set; }
+        public string Prenume { get; private set; }
+        public string IDNP { get; private set; }
+        public DateOnly DataNasterii { get; private set; }
+        public string Domiciliu { get; private set; }
+        public string? Email { get; private set; }
+        public string? Telefon { get; private set; }
+        public Role Rol { get; private set; }
 
-        internal Persoana() { }
-        internal Persoana(Guid id, string nume, string prenume, string iDNP, DateOnly dataNasterii, string domiciliu, string? email, string? telefon, Role rol)
+        private Persoana() 
         {
-            Id = id;
-            Nume = nume;
-            Prenume = prenume;
-            IDNP = iDNP;
-            DataNasterii = dataNasterii;
-            Domiciliu = domiciliu;
-            Email = email;
-            Telefon = telefon;
-            Rol = rol;
+
         }
 
         public static async Task<Persoana> Create(
@@ -76,8 +67,18 @@ namespace SIGL_Cadastru.Repo.Models
                     throw new InvalidEmailException($"this Email: {email} is invalid");
             }
 
-
-            return new Persoana(id, nume, prenume, iDNP, dataNasterii, domiciliu, email, telefon, rol);
+            return new Persoana 
+            {
+                Id = id,
+                Nume= nume,
+                Prenume= prenume,
+                IDNP = iDNP,
+                DataNasterii= dataNasterii,
+                Domiciliu= domiciliu,
+                Email = email,
+                Telefon= telefon,
+                Rol= rol
+            };
         }
 
         public static bool IsEmailValid(string email)

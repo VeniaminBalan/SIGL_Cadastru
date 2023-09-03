@@ -10,6 +10,7 @@ using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Views;
 using System.Configuration;
+using System.Reflection;
 
 namespace SIGL_Cadastru
 {
@@ -37,7 +38,9 @@ namespace SIGL_Cadastru
             return Host.CreateDefaultBuilder()
 
                 .ConfigureServices((context, services) => {
-                    services.AddDbContext<AppDbContext>(options => options.UseSqlite(varstring));
+                    services.AddDbContext<AppDbContext>(options => options.UseSqlite(varstring, b => 
+                    b.MigrationsAssembly( typeof(AppDbContext).Assembly.ToString() )));
+
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
                     services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
                     services.AddAutoMapper(typeof(Program));

@@ -9,20 +9,14 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
     {
         public void Configure(EntityTypeBuilder<Persoana> builder)
         {
-            builder.HasData
-                (
-                    new Persoana(
-                        new Guid("d8f68da7-402b-411f-b6ea-a16beaf005e3"),
-                        "Balan",
-                        "Octavian",
-                        "2000818343",
-                        new DateOnly(1977, 7, 16),
-                        "sat. Gribova",
-                        null,
-                        null,
-                        Role.Responsabil
-                        )
-                ) ;
+            builder.HasKey(e => e.Id);
+
+            builder.Property(p => p.Nume).HasMaxLength(50);
+            builder.Property(p => p.Prenume).HasMaxLength(50);
+
+            builder.Property(p => p.Email).HasMaxLength(255);
+            builder.HasIndex(p => p.Email).IsUnique();
+            builder.HasIndex(p => p.IDNP).IsUnique();
         }
     }
 }

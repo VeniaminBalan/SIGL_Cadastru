@@ -23,25 +23,23 @@ namespace SIGL_Cadastru.App.Mappers
             return new CerereDto
             {
                 Id = cerere.Id,
-                ResponsabilId = cerere.ResponsabilId,
                 Responsabil = string.Join(' ', cerere.Responsabil.Nume, cerere.Responsabil.Prenume),
 
-                ExecutantId = cerere.ExecutantId,
                 Executant = string.Join(' ', cerere.Executant.Nume, cerere.Executant.Prenume),
 
-                ClientId = cerere.ClientId,
                 Client = string.Join(' ', cerere.Client.Nume, cerere.Client.Prenume),
 
                 NrCadastral = cerere.NrCadastral,
                 ValabilDeLa = cerere.ValabilDeLa,
                 ValabilPanaLa = cerere.ValabilPanaLa,
+                Comment= cerere.Comment,
                 CostTotal = costTotal,
 
-                StareaCererii = SetStatus(cerere.StatusList),
-                LaReceptie = GetDate(cerere.StatusList, Status.LaReceptie),
-                Eliberat = GetDate(cerere.StatusList, Status.Eliberat),
-                Respins = GetDate(cerere.StatusList, Status.Respins),
-                Prelungit = GetDate(cerere.StatusList, Status.Prelungit)
+                StareaCererii = SetStatus(cerere.StatusList.ToList()),
+                LaReceptie = GetDate(cerere.StatusList.ToList(), Status.LaReceptie),
+                Eliberat = GetDate(cerere.StatusList.ToList(), Status.Eliberat),
+                Respins = GetDate(cerere.StatusList.ToList(), Status.Respins),
+                Prelungit = GetDate(cerere.StatusList.ToList(), Status.Prelungit)
             };
         }
 

@@ -8,6 +8,6 @@ namespace SIGL_Cadastru.Repo.Contracts
 {
     public interface IModel
     {
-        Guid Id { get; set; }
+        Guid Id { get; }
     }
 }

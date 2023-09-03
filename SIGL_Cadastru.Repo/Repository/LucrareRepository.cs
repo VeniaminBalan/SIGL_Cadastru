@@ -30,6 +30,6 @@ namespace SIGL_Cadastru.Repo.Repository
         }
 
         public async Task<IEnumerable<Lucrare>> GetAllByCerereIdAsync(Guid cerereId, bool trackChanges) =>
-           await FindByCondition(l => l.CerereId == cerereId, trackChanges).ToListAsync();
+           await FindByCondition(l => l.Cerere.Id == cerereId, trackChanges).ToListAsync();
     }
 }
