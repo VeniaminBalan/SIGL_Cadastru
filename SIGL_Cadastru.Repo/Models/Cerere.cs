@@ -16,11 +16,15 @@ namespace SIGL_Cadastru.Repo.Models
     public class Cerere : IModel
     {
         public Guid Id { get;private set; }
+
+        public Guid ClientId { get; private set; }
         public Persoana Client { get; private set; }
+
+        public Guid ExecutantId { get; private set; }
         public Persoana Executant { get; private set; }
+
+        public Guid ResponsabilId { get; private set; }
         public Persoana Responsabil { get; private set; }
-
-
         public DateOnly ValabilDeLa { get; private set; }
         public DateOnly ValabilPanaLa { get; private set; }
 
@@ -35,25 +39,28 @@ namespace SIGL_Cadastru.Repo.Models
         public IReadOnlyList<Lucrare> Lucrari => _lucrari;
         public IReadOnlyList<CerereStatus> StatusList => _stateList;
 
-
-        private Cerere() { }
-
-        public Cerere(Guid id, Persoana client, Persoana executant, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, HashSet<Lucrare> lucrari, HashSet<CerereStatus> stateList)
+        public Cerere(Guid id, Guid clientId, Persoana client, Guid executantId, Persoana executant, Guid responsabilId, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<Lucrare> lucrari, List<CerereStatus> stateList)
         {
             Id = id;
+            ClientId = clientId;
             Client = client;
+            ExecutantId = executantId;
             Executant = executant;
+            ResponsabilId = responsabilId;
             Responsabil = responsabil;
             ValabilDeLa = valabilDeLa;
             ValabilPanaLa = valabilPanaLa;
             NrCadastral = nrCadastral;
             Adaos = adaos;
             Comment = comment;
-            _lucrari = lucrari.ToList();
-            _stateList = stateList.ToList();
+            _lucrari = lucrari;
+            _stateList = stateList;
         }
 
-        public static Cerere Create(Guid id, Persoana client, Persoana executant, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, HashSet<Lucrare> lucrari, string nrCadastral, int adaos, string comment, HashSet<CerereStatus> statusList) 
+        private Cerere() { }
+
+
+        public static Cerere Create(Guid id, Guid clientId, Persoana client, Guid executantId, Persoana executant, Guid responsabilId, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<Lucrare> lucrari, List<CerereStatus> stateList) 
         {
             int costTotal = adaos;
 
@@ -65,7 +72,7 @@ namespace SIGL_Cadastru.Repo.Models
             if (costTotal < 0)
                 throw new Exception("Costul total nu poate fi mai mic de 0");
 
-            return new Cerere(id, client, executant, responsabil, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, lucrari, statusList);
+            return new Cerere(id,clientId, client,executantId, executant,responsabilId, responsabil, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, lucrari, stateList);
 
         }
 

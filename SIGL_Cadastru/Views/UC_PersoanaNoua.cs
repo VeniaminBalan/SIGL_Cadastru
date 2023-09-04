@@ -41,7 +41,7 @@ namespace SIGL_Cadastru.Views
             try
             {
                 var p =  await Persoana.Create(
-                    new Guid(), 
+                    Guid.NewGuid(), 
                     nume,
                     prenume,
                     idnp, 

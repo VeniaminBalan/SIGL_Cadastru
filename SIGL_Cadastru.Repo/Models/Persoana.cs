@@ -33,6 +33,19 @@ namespace SIGL_Cadastru.Repo.Models
 
         }
 
+        internal Persoana(Guid id, string nume, string prenume, string iDNP, DateOnly dataNasterii, string domiciliu, string? email, string? telefon, Role rol)
+        {
+            Id = id;
+            Nume = nume;
+            Prenume = prenume;
+            IDNP = iDNP;
+            DataNasterii = dataNasterii;
+            Domiciliu = domiciliu;
+            Email = email;
+            Telefon = telefon;
+            Rol = rol;
+        }
+
         public static async Task<Persoana> Create(
             Guid id,
             string nume,

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIGL_Cadastru.Repo.DataBase;
 
@@ -10,9 +11,11 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230904054531_upd2")]
+    partial class upd2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
@@ -146,12 +149,18 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("IDNP")
+                        .IsUnique();
+
                     b.ToTable("Persoane");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2ade478b-809e-4969-b72e-36c6702c38ce"),
+                            Id = new Guid("89f12875-5cff-4d84-8dd3-fa9b1371a92f"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -163,14 +172,14 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e7d78657-228d-4d09-b409-e5c5f1742cf1"),
+                            Id = new Guid("599ad2aa-5529-45c2-b0fb-74e5824f0878"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",
                             IDNP = "2002500081628",
                             Nume = "Balan",
                             Prenume = "Veniamin",
-                            Rol = 0,
+                            Rol = 2,
                             Telefon = "079900846"
                         });
                 });

@@ -15,8 +15,33 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
             builder.Property(p => p.Prenume).HasMaxLength(50);
 
             builder.Property(p => p.Email).HasMaxLength(255);
-            builder.HasIndex(p => p.Email).IsUnique();
-            builder.HasIndex(p => p.IDNP).IsUnique();
+
+
+            builder.HasData(
+
+                    new Persoana(
+                            Guid.NewGuid(),
+                            "Balan",
+                            "Octavian",
+                            "124353452341",
+                            DateOnly.Parse("1977-07-16"),
+                            "sat. Gribova",
+                            "geoproiectgrup@mail.ru",
+                            "079900218",
+                            Role.Responsabil ),
+
+                    new Persoana(
+                            Guid.NewGuid(),
+                            "Balan",
+                            "Veniamin",
+                            "2002500081628",
+                            DateOnly.Parse("2002-08-13"),
+                            "or. Drochia",
+                            "",
+                            "079900846",
+                            Role.Client)                       
+
+                );
         }
     }
 }
