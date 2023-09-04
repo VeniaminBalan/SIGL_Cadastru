@@ -40,6 +40,11 @@ namespace SIGL_Cadastru.Views
         {
             
             AdaugareButtonClicked?.Invoke(this, EventArgs.Empty);
-        } 
+        }
+
+        private void button_Anulare_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

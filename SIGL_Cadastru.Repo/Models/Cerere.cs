@@ -78,6 +78,9 @@ namespace SIGL_Cadastru.Repo.Models
 
         public void AddStatus(CerereStatus cerereStatus) 
         {
+            if (cerereStatus.Created < this.ValabilDeLa)
+                throw new Exception($"data starii ({cerereStatus.Created}) nu poate fi mai devreme de data de cand e valabila cererea");
+
             _stateList.Add(cerereStatus);
         }
         public void AddLucrare(Lucrare lucrare) 

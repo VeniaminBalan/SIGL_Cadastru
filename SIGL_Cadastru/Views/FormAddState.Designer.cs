@@ -33,6 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button_Anulare = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -70,7 +71,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(303, 131);
+            this.button1.Location = new System.Drawing.Point(20, 131);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 41);
             this.button1.TabIndex = 4;
@@ -78,11 +79,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button_Anulare
+            // 
+            this.button_Anulare.Location = new System.Drawing.Point(303, 131);
+            this.button_Anulare.Name = "button_Anulare";
+            this.button_Anulare.Size = new System.Drawing.Size(118, 41);
+            this.button_Anulare.TabIndex = 5;
+            this.button_Anulare.Text = "Anulare";
+            this.button_Anulare.UseVisualStyleBackColor = true;
+            this.button_Anulare.Click += new System.EventHandler(this.button_Anulare_Click);
+            // 
             // FormAddState
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(433, 184);
+            this.Controls.Add(this.button_Anulare);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
@@ -102,5 +114,6 @@
         private Label label2;
         private ComboBox comboBox1;
         private Button button1;
+        private Button button_Anulare;
     }
 }

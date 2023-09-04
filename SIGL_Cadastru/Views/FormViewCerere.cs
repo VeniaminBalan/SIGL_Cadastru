@@ -21,7 +21,7 @@ namespace SIGL_Cadastru.Views
 
         private Cerere? cerere;
 
-        private List<StatusItem> statusItems = new();
+        private HashSet<StatusItem> statusItems = new();
 
         public FormViewCerere(IServiceManager service, IMapper mapper, Guid cerereId)
         {
@@ -95,7 +95,7 @@ namespace SIGL_Cadastru.Views
         }
         private void ResetViewStatusList() 
         {
-            statusItems = cerere!.StatusList.Select(c => new StatusItem(c, EntityState.Original)).ToList();
+            statusItems = cerere!.StatusList.Select(c => new StatusItem(c, EntityState.Original)).ToHashSet();
             UpdateViewStatusList();
         }
 
@@ -109,7 +109,17 @@ namespace SIGL_Cadastru.Views
             {
                 if (item.State == EntityState.Added)
                 {
-                    cerere!.AddStatus(item.CerereStatus);
+                    try
+                    {
+                        cerere!.AddStatus(item.CerereStatus);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                        continue;
+                    }
+                    
                 }
                 else if (item.State == EntityState.Removed) 
                 {
@@ -138,6 +148,12 @@ namespace SIGL_Cadastru.Views
         {
             var form = (FormAddState)sender;
 
+            if (form.Date < cerere!.ValabilDeLa)
+            {
+                MessageBox.Show($" 1111 data starii ({form.Date}) nu poate fi mai devreme de data de cand e valabila cererea");
+                return;
+            }
+
             var cerereStatus = new CerereStatus
             {
                 Id = new Guid(),
@@ -145,6 +161,7 @@ namespace SIGL_Cadastru.Views
                 Starea = form.Status,
                 Cerere = cerere!
             };
+
 
             statusItems.Add(new StatusItem(cerereStatus, EntityState.Added));
 
