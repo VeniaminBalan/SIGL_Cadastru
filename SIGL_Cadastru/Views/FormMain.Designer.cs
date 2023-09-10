@@ -30,9 +30,9 @@
         {    
             this.button_cerere_noua = new System.Windows.Forms.Button();
             this.panel_content = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel_content.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -56,15 +56,6 @@
             this.panel_content.Size = new System.Drawing.Size(1190, 627);
             this.panel_content.TabIndex = 5;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(118, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 50);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Setari";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.button1);
@@ -74,6 +65,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1190, 73);
             this.panel1.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(118, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 50);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Setari";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 

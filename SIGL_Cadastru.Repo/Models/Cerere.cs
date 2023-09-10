@@ -1,5 +1,8 @@
-﻿using Models;
+﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
+using Models;
 using SIGL_Cadastru.Repo.Contracts;
+using SQLitePCL;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIGL_Cadastru.Repo.Models
@@ -16,7 +19,6 @@ namespace SIGL_Cadastru.Repo.Models
     public class Cerere : IModel
     {
         public Guid Id { get;private set; }
-
         public Guid ClientId { get; private set; }
         public Persoana Client { get; private set; }
 
@@ -25,6 +27,8 @@ namespace SIGL_Cadastru.Repo.Models
 
         public Guid ResponsabilId { get; private set; }
         public Persoana Responsabil { get; private set; }
+
+        public string Nr { get; private set; }
         public DateOnly ValabilDeLa { get; private set; }
         public DateOnly ValabilPanaLa { get; private set; }
 
@@ -39,14 +43,14 @@ namespace SIGL_Cadastru.Repo.Models
         public IReadOnlyList<Lucrare> Lucrari => _lucrari;
         public IReadOnlyList<CerereStatus> StatusList => _stateList;
 
-        public Cerere(Guid id, Guid clientId, Persoana client, Guid executantId, Persoana executant, Guid responsabilId, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<Lucrare> lucrari, List<CerereStatus> stateList)
+        private Cerere(Guid id, Persoana client, Persoana executant, Persoana responsabil,string nr ,DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<Lucrare> lucrari, List<CerereStatus> stateList)
         {
             Id = id;
-            ClientId = clientId;
+            ClientId = client.Id;
             Client = client;
-            ExecutantId = executantId;
+            ExecutantId = executant.Id;
             Executant = executant;
-            ResponsabilId = responsabilId;
+            ResponsabilId = responsabil.Id;
             Responsabil = responsabil;
             ValabilDeLa = valabilDeLa;
             ValabilPanaLa = valabilPanaLa;
@@ -55,13 +59,29 @@ namespace SIGL_Cadastru.Repo.Models
             Comment = comment;
             _lucrari = lucrari;
             _stateList = stateList;
+            Nr = nr;
         }
 
         private Cerere() { }
 
 
-        public static Cerere Create(Guid id, Guid clientId, Persoana client, Guid executantId, Persoana executant, Guid responsabilId, Persoana responsabil, DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<Lucrare> lucrari, List<CerereStatus> stateList) 
+        public async static Task<Cerere> Create(
+            Guid id, 
+            Persoana client, 
+            Persoana executant, 
+            Persoana responsabil, 
+            DateOnly valabilDeLa, 
+            DateOnly valabilPanaLa, 
+            string nrCadastral, 
+            int adaos, 
+            string comment, 
+            List<Lucrare> lucrari, 
+            List<CerereStatus> stateList,
+            ICerereRepository _repo) 
         {
+            if (string.IsNullOrEmpty(nrCadastral))
+                throw new Exception("Nr cadastral gresit");
+
             int costTotal = adaos;
 
             foreach (var item in lucrari)
@@ -72,7 +92,16 @@ namespace SIGL_Cadastru.Repo.Models
             if (costTotal < 0)
                 throw new Exception("Costul total nu poate fi mai mic de 0");
 
-            return new Cerere(id,clientId, client,executantId, executant,responsabilId, responsabil, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, lucrari, stateList);
+            string count = await _repo.GetLastNr();
+
+            if (string.IsNullOrWhiteSpace(count))
+                count = "00/0000";
+
+            int resultNr = int.Parse(count.Split("/")[1]) + 1;
+
+            string nr = $"{DateTime.Now.Year%100}/{string.Format("{0:0000}", resultNr)}";
+
+            return new Cerere(id, client,executant,responsabil,nr, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, lucrari, stateList);
 
         }
 
@@ -81,7 +110,14 @@ namespace SIGL_Cadastru.Repo.Models
             if (cerereStatus.Created < this.ValabilDeLa)
                 throw new Exception($"data starii ({cerereStatus.Created}) nu poate fi mai devreme de data de cand e valabila cererea");
 
+            if (cerereStatus.Starea == Status.Eliberat && this.StatusList.Any(c => c.Starea == Status.Eliberat))
+                throw new Exception($"Cererea poate fi eliberata doar o singura data");
+
+            if (cerereStatus.Starea == Status.Prelungit && cerereStatus.Created < ValabilPanaLa)
+                throw new Exception($"Starea \"Prelungit\" poate fi setata dupa data {ValabilPanaLa}");
+
             _stateList.Add(cerereStatus);
+
         }
         public void AddLucrare(Lucrare lucrare) 
         {

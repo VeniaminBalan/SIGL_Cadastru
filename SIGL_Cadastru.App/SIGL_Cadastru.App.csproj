@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FreeSpire.PDF" Version="8.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SIGL_Cadastru.Repo\SIGL_Cadastru.Repo.csproj" />
   </ItemGroup>
 

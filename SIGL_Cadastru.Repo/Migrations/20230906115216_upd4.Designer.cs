@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIGL_Cadastru.Repo.DataBase;
 
@@ -10,9 +11,11 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906115216_upd4")]
+    partial class upd4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
@@ -83,8 +86,7 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasIndex("ExecutantId");
 
-                    b.HasIndex("Nr")
-                        .IsUnique();
+                    b.HasIndex("Nr");
 
                     b.HasIndex("ResponsabilId");
 
@@ -158,7 +160,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("232e0d89-365b-4467-b568-4e5b6af49c54"),
+                            Id = new Guid("fcc03fac-4c18-4a15-a146-54651b2a6bca"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -170,7 +172,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33157c3b-30d1-4e41-9a37-55686ff5e015"),
+                            Id = new Guid("d961f6ca-5ed0-4e40-b34e-059649fcc818"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",

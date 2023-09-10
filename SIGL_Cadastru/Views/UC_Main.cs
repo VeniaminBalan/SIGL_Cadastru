@@ -34,7 +34,7 @@ namespace SIGL_Cadastru.Views
 
         public async Task UpdateTable() 
         {
-
+            
             try
             {
                 var cereri = await _service.CerereService.GetAllAsync(cerereQuery, false);           
@@ -112,6 +112,71 @@ namespace SIGL_Cadastru.Views
 
             this.cerereQuery.StateFilter = statefilter;
 
+            await UpdateTable();
+        }
+
+        private async void maskedTextBox_inceput_TextChanged(object sender, EventArgs e)
+        {
+            maskedTextBox_inceput.ForeColor = Color.Black;
+
+            if (!maskedTextBox_inceput.MaskCompleted) 
+            {
+                if (this.cerereQuery.TimeFilter is null)
+                    return;
+
+                this.cerereQuery.TimeFilter = null;
+                await UpdateTable();
+                return;
+            }
+
+
+            var date = new DateOnly();
+
+            try
+            {
+                date = DateOnly.Parse(maskedTextBox_inceput.Text);
+            }
+            catch (Exception)
+            {
+                maskedTextBox_inceput.ForeColor= Color.Red;
+                return;
+                
+            }
+
+            cerereQuery.TimeFilter = TimeSpanFilter.Create(TimeFilterMode.StartDate, date);
+            await UpdateTable();
+
+        }
+
+        private async void maskedTextBox_panaLa_TextChanged(object sender, EventArgs e)
+        {
+            maskedTextBox_panaLa.ForeColor = Color.Black;
+
+            if (!maskedTextBox_panaLa.MaskCompleted)
+            {
+                if (this.cerereQuery.TimeFilter is null)
+                    return;
+
+                this.cerereQuery.TimeFilter = null;
+                await UpdateTable();
+                return;
+            }
+
+
+            var date = new DateOnly();
+
+            try
+            {
+                date = DateOnly.Parse(maskedTextBox_panaLa.Text);
+            }
+            catch (Exception)
+            {
+                maskedTextBox_panaLa.ForeColor = Color.Red;
+                return;
+                
+            }
+
+            cerereQuery.TimeFilter = TimeSpanFilter.Create(TimeFilterMode.EndDate, date);
             await UpdateTable();
         }
 

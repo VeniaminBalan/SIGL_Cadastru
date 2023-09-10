@@ -32,8 +32,9 @@ namespace SIGL_Cadastru.App.Mappers
                 NrCadastral = cerere.NrCadastral,
                 ValabilDeLa = cerere.ValabilDeLa,
                 ValabilPanaLa = cerere.ValabilPanaLa,
-                Comment= cerere.Comment,
+                Comment = cerere.Comment,
                 CostTotal = costTotal,
+                Nr = cerere.Nr,
 
                 StareaCererii = SetStatus(cerere.StatusList.ToList()),
                 LaReceptie = GetDate(cerere.StatusList.ToList(), Status.LaReceptie),

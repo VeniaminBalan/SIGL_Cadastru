@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Repository;
 using Services;
 using SIGL_Cadastru.App.Contracts;
+using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Views;
@@ -30,9 +31,14 @@ namespace SIGL_Cadastru
 
         static IHostBuilder CreateHostBuilder()
         {
+            string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources\Nomenclatura.xml");
+            string sPdf = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources");
+            string sPdfFilePath = Path.GetFullPath(sPdf);
+
+
             var connectionString = ConfigurationManager.ConnectionStrings["SQlite"].ConnectionString;
             var varstring = @"Data Source=E:\PC\Projects\consult-trading\SIGL_Cadastru\DB\SIGLDB.db";
-
 
 
             return Host.CreateDefaultBuilder()
@@ -43,6 +49,9 @@ namespace SIGL_Cadastru
 
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
                     services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
+                    //services.AddScoped(typeof(IPdfGeneratorService), typeof(PdfGeneratorService));
+                    //services.Configure<PdfGeneratorService>(p => p.Path = sPdfFilePath);
+
                     services.AddAutoMapper(typeof(Program));
 
 
@@ -51,8 +60,9 @@ namespace SIGL_Cadastru
                             Id =>
                             {
                                 var service = container.GetRequiredService<IServiceManager>();
-                                var mapper = container.GetRequiredService<IMapper>();
-                                return new FormViewCerere(service, mapper, Id);
+                                //var pdfService = container.GetRequiredService<IPdfGeneratorService>();
+                                var pdfService = new PdfGeneratorService(sPdfFilePath);
+                                return new FormViewCerere(service, pdfService, Id);
                             });
 
                     services.AddTransient<FormMain>(container => 
@@ -61,8 +71,6 @@ namespace SIGL_Cadastru
                         var repository = container.GetRequiredService<IRepositoryManager>();
                         var mapper = container.GetRequiredService<IMapper>();
                         var service = container.GetRequiredService<IServiceManager>();
-
-                        if (service is null) throw new NullReferenceException();
                         
                         var formCerere = new FormMain(repository, mapper);
                         return formCerere;
@@ -70,7 +78,9 @@ namespace SIGL_Cadastru
                     services.AddTransient<FormCerere>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
-                        var formCerere = new FormCerere(repository);
+                        var pdfService = new PdfGeneratorService(sPdfFilePath);
+
+                        var formCerere = new FormCerere(repository, pdfService);
                         return formCerere;
                     });
 

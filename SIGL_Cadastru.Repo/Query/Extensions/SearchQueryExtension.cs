@@ -1,13 +1,13 @@
 ﻿using Exceptions;
 using Query;
-using SIGL_Cadastru.App.Entities;
+using SIGL_Cadastru.Repo.Models;
+using Microsoft.EntityFrameworkCore.Query;
 
-
-namespace Extensions;
+namespace SIGL_Cadastru.Repo.Query.Extensions;
 
 public static class SearchQueryExtension
 {
-    public static IEnumerable<CerereDto> SearchBy(this IEnumerable<CerereDto> list, SearchQuery query)
+    public static IQueryable<Cerere> SearchBy(this IQueryable<Cerere> list, SearchQuery query)
     {
         if (string.IsNullOrWhiteSpace(query.Search))
             return list;
@@ -20,17 +20,20 @@ public static class SearchQueryExtension
 
         switch (column)
         {
+            case "nr":
+                return list.Where(c => c.Nr.ToLower().Contains(search));
+
             case "nr cadastral":
                 return list.Where(c => c.NrCadastral.Contains(search));
 
             case "client":
-                return list.Where(c => c.Client.ToLower().Contains(search));
+                return list.Where(c => (c.Client.Nume+" "+c.Client.Prenume).ToLower().Contains(search));
 
             case "responsabil":
-                return list.Where(c => c.Responsabil.ToLower().Contains(search));
+                return list.Where(c => (c.Responsabil.Nume+""+c.Responsabil.Prenume).ToLower().Contains(search));
 
             case "executant":
-                return list.Where(c => c.Executant.ToLower().Contains(search));
+                return list.Where(c => (c.Executant.Nume+" "+c.Executant.Prenume).ToLower().Contains(search));
 
             case "comentariu":
                 return list.Where(c => c.Comment.ToLower().Contains(search));

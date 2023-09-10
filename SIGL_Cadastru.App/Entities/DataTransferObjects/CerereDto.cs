@@ -10,7 +10,6 @@ namespace SIGL_Cadastru.App.Entities
     public class CerereDto
     {
         public Guid Id { get; init; }
-
         public Guid ClientId { get; init; }
         public string Client { get; init; }
         public Guid ExecutantId { get; init; }
@@ -27,6 +26,8 @@ namespace SIGL_Cadastru.App.Entities
         public DateOnly? Respins { get; init; }
         public int CostTotal { get; init; }
         public string Comment { get; init; }
+        public string Nr { get; init; }
+
         public override string ToString()
         {
             return new string($"{Id} \n {Client} \n {Executant} \n {Responsabil} \n {NrCadastral}");

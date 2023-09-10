@@ -3,7 +3,6 @@ using Exceptions;
 using Query;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.Repo.Models;
-using Extensions;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.App.Entities;
 
@@ -37,22 +36,21 @@ internal sealed class CerereService : ICerereService
 
     public async Task<IEnumerable<CerereDto>> GetAllAsync(CerereQueryParams queryParams, bool trackChanges)
     {
-        var data = await _repo.Cerere.GetAllAync(trackChanges);
+        var data = await _repo.Cerere.GetAllAync(queryParams, trackChanges);
 
-        if (queryParams.TimeFilter is not null)
-            data = data.FilterBy(queryParams.TimeFilter).ToList();
-
-        var ret = data.Select(CerereMapper.Map);
-
-        if(queryParams.StateFilter is not null)
-            ret = ret.FilterByState(queryParams.StateFilter);
-
-        if (queryParams.Search is not null)
-            ret = ret.SearchBy(queryParams.Search).ToList();
+        //if (queryParams.TimeFilter is not null)
+        //    data = data.FilterBy(queryParams.TimeFilter).ToList();
 
 
+        //if(queryParams.StateFilter is not null)
+        //    ret = ret.FilterByState(queryParams.StateFilter);
 
-        return ret;
+        //if (queryParams.Search is not null)
+        //    ret = ret.SearchBy(queryParams.Search).ToList();
+
+
+
+        return data.Select(CerereMapper.Map);
 
     }
 
@@ -72,8 +70,4 @@ internal sealed class CerereService : ICerereService
         _repo.Cerere.UpdateCerere(cerere);
     }
 
-    public Task<Cerere> UpdateCerereAsync(Guid Id, Cerere cerere)
-    {
-        return _repo.Cerere.UpdateCerereAsync(Id, cerere);
-    }
 }

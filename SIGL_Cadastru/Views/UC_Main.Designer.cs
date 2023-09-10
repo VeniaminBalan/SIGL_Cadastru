@@ -30,7 +30,7 @@ namespace SIGL_Cadastru.Views
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.executantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.responsabilDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,8 +46,13 @@ namespace SIGL_Cadastru.Views
             this.Client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Responsabil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValabilDeLa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cerereDtoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.cerereDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.maskedTextBox_panaLa = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maskedTextBox_inceput = new System.Windows.Forms.MaskedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.checkBox_Eliberat = new System.Windows.Forms.CheckBox();
             this.checkBox_Respins = new System.Windows.Forms.CheckBox();
             this.checkBox_laReceptie = new System.Windows.Forms.CheckBox();
@@ -56,6 +61,7 @@ namespace SIGL_Cadastru.Views
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -70,7 +76,7 @@ namespace SIGL_Cadastru.Views
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
+            this.Nr,
             this.clientDataGridViewTextBoxColumn,
             this.executantDataGridViewTextBoxColumn,
             this.responsabilDataGridViewTextBoxColumn,
@@ -86,7 +92,7 @@ namespace SIGL_Cadastru.Views
             this.Client,
             this.Responsabil,
             this.ValabilDeLa});
-            this.dataGridView1.DataSource = this.cerereDtoBindingSource;
+            this.dataGridView1.DataSource = this.cerereDtoBindingSource1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -98,14 +104,14 @@ namespace SIGL_Cadastru.Views
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // idDataGridViewTextBoxColumn
+            // Nr
             // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 125;
+            this.Nr.DataPropertyName = "Nr";
+            this.Nr.HeaderText = "Nr";
+            this.Nr.MinimumWidth = 6;
+            this.Nr.Name = "Nr";
+            this.Nr.ReadOnly = true;
+            this.Nr.Width = 125;
             // 
             // clientDataGridViewTextBoxColumn
             // 
@@ -247,6 +253,10 @@ namespace SIGL_Cadastru.Views
             this.ValabilDeLa.Visible = false;
             this.ValabilDeLa.Width = 125;
             // 
+            // cerereDtoBindingSource1
+            // 
+            this.cerereDtoBindingSource1.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
+            // 
             // cerereDtoBindingSource
             // 
             this.cerereDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
@@ -255,11 +265,17 @@ namespace SIGL_Cadastru.Views
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.maskedTextBox_panaLa);
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.maskedTextBox_inceput);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.checkBox_Eliberat);
             this.splitContainer1.Panel1.Controls.Add(this.checkBox_Respins);
             this.splitContainer1.Panel1.Controls.Add(this.checkBox_laReceptie);
@@ -274,6 +290,44 @@ namespace SIGL_Cadastru.Views
             this.splitContainer1.Size = new System.Drawing.Size(1678, 530);
             this.splitContainer1.SplitterDistance = 165;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // maskedTextBox_panaLa
+            // 
+            this.maskedTextBox_panaLa.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.maskedTextBox_panaLa.Location = new System.Drawing.Point(13, 332);
+            this.maskedTextBox_panaLa.Mask = "00-00-0000";
+            this.maskedTextBox_panaLa.Name = "maskedTextBox_panaLa";
+            this.maskedTextBox_panaLa.Size = new System.Drawing.Size(96, 30);
+            this.maskedTextBox_panaLa.TabIndex = 10;
+            this.maskedTextBox_panaLa.TextChanged += new System.EventHandler(this.maskedTextBox_panaLa_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 309);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Pana la:";
+            // 
+            // maskedTextBox_inceput
+            // 
+            this.maskedTextBox_inceput.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.maskedTextBox_inceput.Location = new System.Drawing.Point(13, 270);
+            this.maskedTextBox_inceput.Mask = "00-00-0000";
+            this.maskedTextBox_inceput.Name = "maskedTextBox_inceput";
+            this.maskedTextBox_inceput.Size = new System.Drawing.Size(96, 30);
+            this.maskedTextBox_inceput.TabIndex = 8;
+            this.maskedTextBox_inceput.TextChanged += new System.EventHandler(this.maskedTextBox_inceput_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 247);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(141, 20);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Valabil incepand cu:";
             // 
             // checkBox_Eliberat
             // 
@@ -339,6 +393,7 @@ namespace SIGL_Cadastru.Views
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
+            "Nr",
             "Client",
             "Responsabil",
             "Executant",
@@ -367,6 +422,7 @@ namespace SIGL_Cadastru.Views
             this.Size = new System.Drawing.Size(1678, 530);
             this.Load += new System.EventHandler(this.UC_Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -390,7 +446,8 @@ namespace SIGL_Cadastru.Views
         private CheckBox checkBox_Respins;
         private CheckBox checkBox_laReceptie;
         private CheckBox checkBox_inLucru;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private BindingSource cerereDtoBindingSource1;
+        private DataGridViewTextBoxColumn Nr;
         private DataGridViewTextBoxColumn clientDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn executantDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn responsabilDataGridViewTextBoxColumn;
@@ -406,5 +463,9 @@ namespace SIGL_Cadastru.Views
         private DataGridViewTextBoxColumn Client;
         private DataGridViewTextBoxColumn Responsabil;
         private DataGridViewTextBoxColumn ValabilDeLa;
+        private Label label2;
+        private MaskedTextBox maskedTextBox_panaLa;
+        private Label label3;
+        private MaskedTextBox maskedTextBox_inceput;
     }
 }

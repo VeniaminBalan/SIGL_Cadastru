@@ -1,11 +1,5 @@
-﻿
-using SIGL_Cadastru.Repo.Contracts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SIGL_Cadastru.Repo.Contracts;
+
 
 namespace SIGL_Cadastru.Repo.Models
 {

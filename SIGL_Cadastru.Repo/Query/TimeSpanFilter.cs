@@ -11,29 +11,51 @@ public enum TimeFilterMode
 
 public class TimeSpanFilter
 {
-    public DateOnly StartTime { get; private set; }
-    public DateOnly EndTime { get; private set; }
+    public DateOnly? StartTime { get; private set; }
+    public DateOnly? EndTime { get; private set; }
 
     public TimeFilterMode FilterMode { get; private set; }
-    private TimeSpanFilter(DateOnly startTime, DateOnly endTime)
+    private TimeSpanFilter()
     {
-        StartTime = startTime;
-        EndTime = endTime;
+
     }
 
-    private TimeSpanFilter(DateOnly startTime, DateOnly endTime, TimeFilterMode mode)
+    public static TimeSpanFilter? Create(TimeFilterMode mode, DateOnly date)
     {
-        StartTime = startTime;
-        EndTime = endTime;
-        FilterMode = mode;
+        switch (mode)
+        {
+            case TimeFilterMode.StartDate:
+                return new TimeSpanFilter 
+                {
+                    StartTime = date,
+                    EndTime = null,
+                    FilterMode= mode
+                };
+            case TimeFilterMode.EndDate:
+                return new TimeSpanFilter
+                {
+                    StartTime = null,
+                    EndTime = date,
+                    FilterMode = mode
+                };
+            default:
+                throw new Exception("mode time span filter invalid");
+        }
+
     }
 
-    public static TimeSpanFilter? Create(DateOnly startTime, DateOnly endTime, TimeFilterMode mode = TimeFilterMode.Mixt) 
+    public static TimeSpanFilter? Create(TimeFilterMode mode, DateOnly startDate, DateOnly endDate)
     {
-        if (startTime > endTime)
-            return null;// throw exception ex: TimeSpanNotValid
+        if (startDate > endDate)
+            return null;
 
 
-        return new TimeSpanFilter(startTime, endTime);
+        return new TimeSpanFilter 
+        {
+            StartTime = startDate,
+            EndTime= endDate,
+            FilterMode= mode
+        };
+
     }
 }

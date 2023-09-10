@@ -56,17 +56,18 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_comment = new System.Windows.Forms.TextBox();
             this.comboBox_transport = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_Vizualizare
             // 
             this.button_Vizualizare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_Vizualizare.Location = new System.Drawing.Point(440, 642);
+            this.button_Vizualizare.Location = new System.Drawing.Point(349, 643);
             this.button_Vizualizare.Name = "button_Vizualizare";
             this.button_Vizualizare.Size = new System.Drawing.Size(109, 39);
             this.button_Vizualizare.TabIndex = 2;
-            this.button_Vizualizare.Text = "Vizualizare";
+            this.button_Vizualizare.Text = "Creare";
             this.button_Vizualizare.UseVisualStyleBackColor = true;
             this.button_Vizualizare.Click += new System.EventHandler(this.button_Add_Click);
             // 
@@ -289,7 +290,7 @@
             this.buttonPNoua.Name = "buttonPNoua";
             this.buttonPNoua.Size = new System.Drawing.Size(162, 41);
             this.buttonPNoua.TabIndex = 36;
-            this.buttonPNoua.Text = "Persoana Noua";
+            this.buttonPNoua.Text = "Client Nou";
             this.buttonPNoua.UseVisualStyleBackColor = true;
             this.buttonPNoua.Click += new System.EventHandler(this.buttonPNoua_Click);
             // 
@@ -299,7 +300,7 @@
             this.buttonPExistenta.Name = "buttonPExistenta";
             this.buttonPExistenta.Size = new System.Drawing.Size(162, 41);
             this.buttonPExistenta.TabIndex = 37;
-            this.buttonPExistenta.Text = "Persoana Existenta";
+            this.buttonPExistenta.Text = "Client Existent";
             this.buttonPExistenta.UseVisualStyleBackColor = true;
             this.buttonPExistenta.Click += new System.EventHandler(this.buttonPExistenta_Click);
             // 
@@ -330,12 +331,24 @@
             this.comboBox_transport.Size = new System.Drawing.Size(151, 28);
             this.comboBox_transport.TabIndex = 40;
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(483, 642);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(109, 39);
+            this.button2.TabIndex = 41;
+            this.button2.Text = "Vizualizare";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button_vizualizare_Click);
+            // 
             // FormCerere
             // 
             this.AcceptButton = this.button_Vizualizare;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 703);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox_transport);
             this.Controls.Add(this.textBox_comment);
             this.Controls.Add(this.label8);
@@ -400,5 +413,6 @@
         private Label label8;
         private TextBox textBox_comment;
         private ComboBox comboBox_transport;
+        private Button button2;
     }
 }

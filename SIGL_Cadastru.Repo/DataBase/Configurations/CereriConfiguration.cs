@@ -18,6 +18,8 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
             builder.Property(c => c.NrCadastral).HasMaxLength(15);
             builder.Property(c => c.Comment).HasMaxLength(255);
 
+            builder.HasIndex(c => c.Nr)
+                .IsUnique();
 
             builder.HasMany(c => c.Lucrari)
                 .WithOne(l => l.Cerere)

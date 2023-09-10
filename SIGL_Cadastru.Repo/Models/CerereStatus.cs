@@ -18,4 +18,12 @@ public class CerereStatus : IModel
     public Status Starea { get; set; }
     public DateOnly Created { get; set; }
 
+    public static CerereStatus CreateDefault() 
+    {
+        return new CerereStatus
+        {
+            Starea = Status.Inlucru
+        };
+    }
+
 }

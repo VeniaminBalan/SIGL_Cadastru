@@ -69,6 +69,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox_Comment = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label_Nr = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -79,7 +82,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 29);
+            this.label1.Location = new System.Drawing.Point(28, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 20);
             this.label1.TabIndex = 0;
@@ -88,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 66);
+            this.label2.Location = new System.Drawing.Point(28, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 20);
             this.label2.TabIndex = 1;
@@ -97,7 +100,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 103);
+            this.label3.Location = new System.Drawing.Point(28, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 20);
             this.label3.TabIndex = 2;
@@ -106,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 140);
+            this.label4.Location = new System.Drawing.Point(28, 163);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 20);
             this.label4.TabIndex = 3;
@@ -115,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 177);
+            this.label5.Location = new System.Drawing.Point(28, 200);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 20);
             this.label5.TabIndex = 4;
@@ -124,7 +127,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(28, 214);
+            this.label6.Location = new System.Drawing.Point(28, 237);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 20);
             this.label6.TabIndex = 5;
@@ -175,7 +178,7 @@
             // label_responsabil
             // 
             this.label_responsabil.AutoSize = true;
-            this.label_responsabil.Location = new System.Drawing.Point(149, 29);
+            this.label_responsabil.Location = new System.Drawing.Point(149, 52);
             this.label_responsabil.Name = "label_responsabil";
             this.label_responsabil.Size = new System.Drawing.Size(18, 20);
             this.label_responsabil.TabIndex = 7;
@@ -184,7 +187,7 @@
             // label_executant
             // 
             this.label_executant.AutoSize = true;
-            this.label_executant.Location = new System.Drawing.Point(149, 66);
+            this.label_executant.Location = new System.Drawing.Point(149, 89);
             this.label_executant.Name = "label_executant";
             this.label_executant.Size = new System.Drawing.Size(18, 20);
             this.label_executant.TabIndex = 8;
@@ -193,7 +196,7 @@
             // label_valabilDeLa
             // 
             this.label_valabilDeLa.AutoSize = true;
-            this.label_valabilDeLa.Location = new System.Drawing.Point(149, 140);
+            this.label_valabilDeLa.Location = new System.Drawing.Point(149, 163);
             this.label_valabilDeLa.Name = "label_valabilDeLa";
             this.label_valabilDeLa.Size = new System.Drawing.Size(18, 20);
             this.label_valabilDeLa.TabIndex = 10;
@@ -202,7 +205,7 @@
             // label_ValabilPanaLa
             // 
             this.label_ValabilPanaLa.AutoSize = true;
-            this.label_ValabilPanaLa.Location = new System.Drawing.Point(149, 177);
+            this.label_ValabilPanaLa.Location = new System.Drawing.Point(149, 200);
             this.label_ValabilPanaLa.Name = "label_ValabilPanaLa";
             this.label_ValabilPanaLa.Size = new System.Drawing.Size(18, 20);
             this.label_ValabilPanaLa.TabIndex = 11;
@@ -211,7 +214,7 @@
             // label_pretTotal
             // 
             this.label_pretTotal.AutoSize = true;
-            this.label_pretTotal.Location = new System.Drawing.Point(149, 214);
+            this.label_pretTotal.Location = new System.Drawing.Point(149, 237);
             this.label_pretTotal.Name = "label_pretTotal";
             this.label_pretTotal.Size = new System.Drawing.Size(18, 20);
             this.label_pretTotal.TabIndex = 12;
@@ -410,7 +413,7 @@
             // label_StareCererii
             // 
             this.label_StareCererii.AutoSize = true;
-            this.label_StareCererii.Location = new System.Drawing.Point(149, 103);
+            this.label_StareCererii.Location = new System.Drawing.Point(149, 126);
             this.label_StareCererii.Name = "label_StareCererii";
             this.label_StareCererii.Size = new System.Drawing.Size(18, 20);
             this.label_StareCererii.TabIndex = 18;
@@ -465,11 +468,44 @@
             this.textBox_Comment.Size = new System.Drawing.Size(287, 95);
             this.textBox_Comment.TabIndex = 23;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(149, 384);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(51, 34);
+            this.button4.TabIndex = 24;
+            this.button4.Text = "Pdf";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label_Nr
+            // 
+            this.label_Nr.AutoSize = true;
+            this.label_Nr.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label_Nr.Location = new System.Drawing.Point(157, 12);
+            this.label_Nr.Name = "label_Nr";
+            this.label_Nr.Size = new System.Drawing.Size(22, 23);
+            this.label_Nr.TabIndex = 26;
+            this.label_Nr.Text = "...";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(118, 12);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(34, 23);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "Nr:";
+            // 
             // FormViewCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1204, 450);
+            this.Controls.Add(this.label_Nr);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.textBox_Comment);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -548,5 +584,8 @@
         private Button button2;
         private Button button3;
         private TextBox textBox_Comment;
+        private Button button4;
+        private Label label_Nr;
+        private Label label15;
     }
 }

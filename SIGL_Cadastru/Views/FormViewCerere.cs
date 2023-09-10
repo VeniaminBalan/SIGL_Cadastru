@@ -7,6 +7,8 @@ using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Utils;
 using System.Data;
+using System.Diagnostics;
+using System.Security.Policy;
 
 
 namespace SIGL_Cadastru.Views
@@ -16,18 +18,18 @@ namespace SIGL_Cadastru.Views
         public event EventHandler<EventArgs> DataChenged;
 
         private readonly IServiceManager _service;
-        private readonly IMapper _mapper;
+        private readonly IPdfGeneratorService _pdfService;
         private readonly Guid _cererId;
 
         private Cerere? cerere;
 
         private HashSet<StatusItem> statusItems = new();
 
-        public FormViewCerere(IServiceManager service, IMapper mapper, Guid cerereId)
+        public FormViewCerere(IServiceManager service, IPdfGeneratorService pdfService, Guid cererId)
         {
             _service = service;
-            _mapper = mapper;
-            _cererId = cerereId;
+            _pdfService = pdfService;
+            _cererId = cererId;
 
             InitializeComponent();
         }
@@ -75,6 +77,8 @@ namespace SIGL_Cadastru.Views
             var cerereDto = CerereMapper.Map(cerere!);
             label_executant.Text = cerereDto.Executant;
             label_responsabil.Text = cerereDto.Responsabil;
+
+            label_Nr.Text = cerereDto.Nr;
 
             label_valabilDeLa.Text = cerereDto.ValabilDeLa.ToString();
             label_ValabilPanaLa.Text = cerereDto.ValabilPanaLa.ToString();
@@ -154,6 +158,18 @@ namespace SIGL_Cadastru.Views
                 return;
             }
 
+            if (form.Status == Status.Eliberat && this.statusItems.Any(s => s.CerereStatus.Starea == Status.Eliberat)) 
+            {
+                MessageBox.Show(" Cererea poate fi eliberata doar o singura data");
+                return;
+            }
+
+            if (form.Status == Status.Prelungit && form.Date < cerere!.ValabilPanaLa) 
+            {
+                MessageBox.Show($"Starea \"Prelungit\" poate fi setata dupa data {cerere!.ValabilPanaLa}");
+                return;
+            }
+
             var cerereStatus = new CerereStatus
             {
                 Id = new Guid(),
@@ -219,6 +235,23 @@ namespace SIGL_Cadastru.Views
             else if (dialogResult == DialogResult.No)
             {
                 
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var path = _pdfService.GeneratePdf(cerere!);
+
+                //System.Diagnostics.Process.Start(path);
+
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {path}"));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
         }
     }
