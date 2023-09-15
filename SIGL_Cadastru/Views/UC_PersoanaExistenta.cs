@@ -33,9 +33,14 @@ namespace SIGL_Cadastru.Views
             InitializeComponent();
         }
 
-        public void CloseView()
+        public void HideUC()
         {
             this.Visible= false;
+        }
+        public void ShowUC()
+        {
+            this.Visible = true;
+            this.BringToFront();
         }
 
         public Task<Result<Persoana>> GetPersoana()
@@ -47,11 +52,6 @@ namespace SIGL_Cadastru.Views
             return Task.FromResult(new Result<Persoana>(ResultState.ExistingObject, p));
         }
 
-        public void SetView()
-        {
-            this.Visible= true;
-            this.BringToFront();
-        }
 
         private async void UC_PersoanaExistenta_Load(object sender, EventArgs e)
         {

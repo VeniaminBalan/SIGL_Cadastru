@@ -36,6 +36,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tipLucrareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pretDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lucrareDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label_responsabil = new System.Windows.Forms.Label();
             this.label_executant = new System.Windows.Forms.Label();
@@ -72,8 +74,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.documentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_uc_doc = new System.Windows.Forms.Panel();
-            this.tipLucrareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pretDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -155,6 +155,24 @@
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(600, 206);
             this.dataGridView1.TabIndex = 6;
+            // 
+            // tipLucrareDataGridViewTextBoxColumn
+            // 
+            this.tipLucrareDataGridViewTextBoxColumn.DataPropertyName = "TipLucrare";
+            this.tipLucrareDataGridViewTextBoxColumn.HeaderText = "TipLucrare";
+            this.tipLucrareDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tipLucrareDataGridViewTextBoxColumn.Name = "tipLucrareDataGridViewTextBoxColumn";
+            this.tipLucrareDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tipLucrareDataGridViewTextBoxColumn.Width = 495;
+            // 
+            // pretDataGridViewTextBoxColumn
+            // 
+            this.pretDataGridViewTextBoxColumn.DataPropertyName = "Pret";
+            this.pretDataGridViewTextBoxColumn.HeaderText = "Pret";
+            this.pretDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.pretDataGridViewTextBoxColumn.Name = "pretDataGridViewTextBoxColumn";
+            this.pretDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pretDataGridViewTextBoxColumn.Width = 50;
             // 
             // lucrareDtoBindingSource
             // 
@@ -494,24 +512,6 @@
             this.panel_uc_doc.Size = new System.Drawing.Size(600, 150);
             this.panel_uc_doc.TabIndex = 27;
             // 
-            // tipLucrareDataGridViewTextBoxColumn
-            // 
-            this.tipLucrareDataGridViewTextBoxColumn.DataPropertyName = "TipLucrare";
-            this.tipLucrareDataGridViewTextBoxColumn.HeaderText = "TipLucrare";
-            this.tipLucrareDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tipLucrareDataGridViewTextBoxColumn.Name = "tipLucrareDataGridViewTextBoxColumn";
-            this.tipLucrareDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tipLucrareDataGridViewTextBoxColumn.Width = 495;
-            // 
-            // pretDataGridViewTextBoxColumn
-            // 
-            this.pretDataGridViewTextBoxColumn.DataPropertyName = "Pret";
-            this.pretDataGridViewTextBoxColumn.HeaderText = "Pret";
-            this.pretDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.pretDataGridViewTextBoxColumn.Name = "pretDataGridViewTextBoxColumn";
-            this.pretDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pretDataGridViewTextBoxColumn.Width = 50;
-            // 
             // FormViewCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -543,6 +543,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormViewCerere";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cerere";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormViewCerere_FormClosed);
             this.Load += new System.EventHandler(this.FormViewCerere_Load);

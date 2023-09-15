@@ -1,9 +1,9 @@
-﻿using SIGL_Cadastru.Utils;
+﻿using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,26 +11,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace SIGL_Cadastru.Views
+namespace SIGL_Cadastru.Views.Adaugare_Lucrare
 {
-    public partial class FormAdaugareLucrare : Form
+    public partial class UC_Tree : UserControl, ILucrareaAddView
     {
-        public event EventHandler<AdaugareLucrareEventArgs> SubmitButtonPressed;
-
-
         private int? pret;
         private int puncte = 1;
         private int suma = 0;
         private string path;
 
-        public FormAdaugareLucrare()
+        public UC_Tree()
         {
             InitializeComponent();
             InitTreeView();
-            panel_lucrare.Enabled = false;
-            panel_lucrare.Visible = false;
         }
+        public Lucrare GetLucrare()
+        {
+            var text = labelNodeSelected.Text;
+            var pret = GetSuma();
 
+            if (pret == 0)
+                throw new Exception("Selectati termenul");
+
+            return Lucrare.Create(text, pret);
+        }
         private void InitTreeView()
         {
             XmlDocument xmldoc = new XmlDocument();
@@ -69,7 +73,8 @@ namespace SIGL_Cadastru.Views
                         string attribute = xNode.Attributes[0].Value.ToString();
                         inTreeNode.Nodes.Add(new CustomTreeNode(TreeObjectType.Regular, attribute));
 
-                    } else if (xNode.Name == "Price")
+                    }
+                    else if (xNode.Name == "Price")
                     {
                         try
                         {
@@ -105,51 +110,18 @@ namespace SIGL_Cadastru.Views
                 inTreeNode.Text = inXmlNode.InnerText.ToString();
             }
         }
-        private void DisplayPointSelector()
-        {
-            groupBoxPuncte.Visible = true;
-        }
-        private void HidePointSelector()
-        {
-            groupBoxPuncte.Visible = false;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            if (GetSuma() == 0)
-            {
-                MessageBox.Show("Selectati lucraraea");
-            }
-            else 
-            {
-                var text = labelNodeSelected.Text + "\n" + "Suma: " + GetSuma();
-                DialogResult dialogResult = MessageBox.Show(text, "Adaugare Lucrare", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    SubmitButtonPressed?.Invoke(this, new AdaugareLucrareEventArgs
-                    {
-                        lucrare = labelNodeSelected.Text,
-                        suma = GetSuma()
-                    });
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    
-                }
-            }
-        }
-
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+
             labelNodeSelected.Text = "";
             string txt = e.Node.FullPath;
             var index = txt.IndexOf(@"\");
-            if (index != -1) 
+            if (index != -1)
             {
                 index++;
                 SetPath(txt.Substring(index, txt.Length - index));
-            }else
+            }
+            else
                 SetPath("");
 
             CustomTreeNode? node = e.Node as CustomTreeNode;
@@ -176,8 +148,16 @@ namespace SIGL_Cadastru.Views
 
         }
 
+        private void DisplayPointSelector()
+        {
+            groupBoxPuncte.Visible = true;
+        }
+        private void HidePointSelector()
+        {
+            groupBoxPuncte.Visible = false;
+        }
 
-        private void SetPriceValue(CustomTreeNode node) 
+        private void SetPriceValue(CustomTreeNode node)
         {
             var child = node.FirstNode;
             try
@@ -192,70 +172,30 @@ namespace SIGL_Cadastru.Views
             }
         }
 
-        private void SetPret(int ?_pret) 
+        private void SetPret(int? _pret)
         {
             pret = _pret;
             SetSuma();
         }
 
-        private void SetSuma() 
+        private void SetSuma()
         {
             if (pret == null)
             {
                 this.suma = 0;
                 label_suma.Text = "";
             }
-            else 
+            else
             {
                 this.suma = (int)pret * puncte;
                 label_suma.Text = suma.ToString();
             }
-                
+
         }
 
-        private int GetSuma() 
+        private int GetSuma()
         {
             return this.suma;
-        }
-
-
-        public int? GetPret() 
-        {
-            return pret;
-        }
-
-        private AdaugareLucrareEventArgs GetEventArgs() 
-        {
-            if(GetPret() != null) 
-            {
-
-            }
-            return null;
-        }
-
-        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-
-
-        }
-
-        private void maskedTextBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void onPuncteChanhed()
-        {
-
-        }
-
-        private void maskedTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-
         }
 
         private void maskedTextBox1_KeyUp(object sender, KeyEventArgs e)
@@ -274,43 +214,36 @@ namespace SIGL_Cadastru.Views
             SetSuma();
 
         }
+        private void maskedTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
 
-        private void SetPath(string path) 
+        }
+
+        private void SetPath(string path)
         {
             this.path = path;
             DisplayPath();
         }
-
-        private string GetPath() 
+        private string GetPath()
         {
             return this.path;
         }
-
-        private void DisplayPath(string option ="") 
+        private void DisplayPath(string option = "")
         {
             labelNodeSelected.Text = path + option;
         }
-
-        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        public void HideUC()
         {
-            if (checkBox1.Checked == true)
-            {
-                panel_lucrare.Enabled = true;
-                panel_lucrare.Visible = true;
-            }
-            else 
-            {
-                panel_lucrare.Enabled = false;
-                panel_lucrare.Visible = false;
-            }
-
-
+            this.Visible = false;
         }
-    }
-
-    public class AdaugareLucrareEventArgs : EventArgs
-    {
-        public int suma;
-        public string lucrare;
+        public void ShowUC()
+        {
+            this.Visible = true;
+            this.BringToFront();
+        }
     }
 }

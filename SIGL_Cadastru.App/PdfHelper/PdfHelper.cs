@@ -47,6 +47,9 @@ namespace SIGL_Cadastru.App.PdfHelper
         }
         private static void DrawTable(this PdfPageBase page, List<Document> list) 
         {
+            if (list.Count() == 0)
+                return;
+
             PdfBrush brush = PdfBrushes.Black;
             PointF location = new PointF(50, 200);
 
@@ -75,7 +78,7 @@ namespace SIGL_Cadastru.App.PdfHelper
                 column.StringFormat = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
             }
 
-            table.Columns[0].Width = 5;
+            table.Columns[0].Width = 10;
             table.Columns[1].Width = 50;
             table.Columns[2].Width = 15;
             table.Columns[3].Width = 10;

@@ -82,6 +82,7 @@
             this.ClientSize = new System.Drawing.Size(1190, 627);
             this.Controls.Add(this.panel_content);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel_content.ResumeLayout(false);

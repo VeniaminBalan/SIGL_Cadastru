@@ -62,13 +62,13 @@ namespace SIGL_Cadastru.Views
 
             
         }
-        public void SetView()
+        public void ShowUC()
         {
             this.Visible = true;
             this.BringToFront();
         }
 
-        public void CloseView()
+        public void HideUC()
         {
             this.Visible = false;
         }

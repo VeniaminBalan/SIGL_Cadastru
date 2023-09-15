@@ -22,8 +22,10 @@ namespace SIGL_Cadastru.Views
         private readonly IPdfGeneratorService _pdfService;
 
         private HashSet<Lucrare> Lucrari = new();
+
         private UC_PersoanaExistenta persoanaExistenta;
         private UC_PersoanaNoua persoanaNoua;
+
         private UC_DocumentsView UC_documente;
         private int suma;
 
@@ -79,7 +81,7 @@ namespace SIGL_Cadastru.Views
         void SetSelectedUC(IUCPersoana uc) 
         {
             this.selected_uc_persoana= uc;
-            uc.SetView();
+            uc.ShowUC();
         }
         IUCPersoana GetSelectedUC() 
         {
@@ -95,13 +97,8 @@ namespace SIGL_Cadastru.Views
 
 
         private void OnFormAdaugareSubmit(object sender, AdaugareLucrareEventArgs e) 
-        {            
-            AddLucrare(new Lucrare 
-            {
-                Pret = e.suma,
-                TipLucrare = e.lucrare
-                
-            });
+        {
+            AddLucrare(e.Lucrare);
 
             ((FormAdaugareLucrare)sender).Dispose();
         }
@@ -249,6 +246,36 @@ namespace SIGL_Cadastru.Views
                 return;
             }
 
+
+        }
+
+        private void listBoxLucrari_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void listBoxLucrari_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Delete)
+                return;
+
+
+            var index = listBoxLucrari.SelectedIndex;
+
+            try
+            {
+                var item = Lucrari.ToList()[index];
+                Lucrari.Remove(item);
+
+                UpdateListBox();
+                UpdateSuma();
+                UpdateSuma();
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
 
         }
     }
