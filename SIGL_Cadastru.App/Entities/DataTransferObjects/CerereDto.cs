@@ -20,7 +20,7 @@ namespace SIGL_Cadastru.App.Entities
         public DateOnly ValabilDeLa { get; init; }
         public DateOnly ValabilPanaLa { get; init; }
         public DateOnly? Prelungit { get; init; }
-        public Status StareaCererii { get; init; }
+        public Status? StareaCererii { get; init; }
         public DateOnly? LaReceptie { get; init; }
         public DateOnly? Eliberat { get; init; }
         public DateOnly? Respins { get; init; }

@@ -10,6 +10,7 @@ using SIGL_Cadastru.Repo.Query;
 using SIGL_Cadastru.Utils;
 using System.Data;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SIGL_Cadastru.Views
 {
@@ -23,6 +24,7 @@ namespace SIGL_Cadastru.Views
         private HashSet<Lucrare> Lucrari = new();
         private UC_PersoanaExistenta persoanaExistenta;
         private UC_PersoanaNoua persoanaNoua;
+        private UC_DocumentsView UC_documente;
         private int suma;
 
         private IUCPersoana selected_uc_persoana;
@@ -96,7 +98,6 @@ namespace SIGL_Cadastru.Views
         {            
             AddLucrare(new Lucrare 
             {
-                Id = new Guid(),
                 Pret = e.suma,
                 TipLucrare = e.lucrare
                 
@@ -142,6 +143,9 @@ namespace SIGL_Cadastru.Views
         }
         private void SetUC() 
         {
+            this.UC_documente = new UC_DocumentsView(new List<Document>());
+            this.panel_UC_Documente.Controls.Add(UC_documente);
+
             var factory = new FormFactory();
 
             var uc_PNoua = factory.CreateUC_PersoanaNoua();
@@ -192,7 +196,6 @@ namespace SIGL_Cadastru.Views
             var result = await GetSelectedUC().GetPersoana();
             Persoana client = result.Value;
 
-
             return await Cerere.Create(
                 id,
                 client,
@@ -203,11 +206,12 @@ namespace SIGL_Cadastru.Views
                 nrCadastral,
                 adaos,
                 comment,
-                this.Lucrari.ToList(),
+                new Portofoliu(UC_documente.GetDocumente() , this.Lucrari.ToList()),
                 new(),
                 _repo.Cerere);
 
         }
+
         private async void button_Add_Click(object sender, EventArgs e)
         {
             try

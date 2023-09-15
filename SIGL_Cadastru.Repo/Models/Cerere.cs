@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using SIGL_Cadastru.Repo.Contracts;
 using SQLitePCL;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIGL_Cadastru.Repo.Models
@@ -35,15 +36,15 @@ namespace SIGL_Cadastru.Repo.Models
         public string NrCadastral { get; private set; }
         public int Adaos { get; private set; }
         public string Comment { get; private set; }
+        public Status Starea { get; private set; }
+        public Portofoliu Portofoliu { get; private set; }
 
 
-        private readonly List<Lucrare> _lucrari = new();
         private readonly List<CerereStatus> _stateList = new();
-
-        public IReadOnlyList<Lucrare> Lucrari => _lucrari;
         public IReadOnlyList<CerereStatus> StatusList => _stateList;
 
-        private Cerere(Guid id, Persoana client, Persoana executant, Persoana responsabil,string nr ,DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<Lucrare> lucrari, List<CerereStatus> stateList)
+
+        private Cerere(Guid id, Persoana client, Persoana executant, Persoana responsabil,string nr ,DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<CerereStatus> stateList, Portofoliu portofoliu)
         {
             Id = id;
             ClientId = client.Id;
@@ -57,9 +58,10 @@ namespace SIGL_Cadastru.Repo.Models
             NrCadastral = nrCadastral;
             Adaos = adaos;
             Comment = comment;
-            _lucrari = lucrari;
+            Portofoliu = portofoliu;
             _stateList = stateList;
             Nr = nr;
+            Starea = Status.Inlucru;
         }
 
         private Cerere() { }
@@ -75,16 +77,25 @@ namespace SIGL_Cadastru.Repo.Models
             string nrCadastral, 
             int adaos, 
             string comment, 
-            List<Lucrare> lucrari, 
+            Portofoliu portofoliu, 
             List<CerereStatus> stateList,
             ICerereRepository _repo) 
         {
+            if (stateList.Count() == 0)
+                stateList.Add(new CerereStatus
+                {
+                    Id = Guid.NewGuid(),
+                    Created = DateOnly.FromDateTime(DateTime.Now),
+                    CerereId = id,
+                    Starea = Status.Inlucru
+                }) ;
+
             if (string.IsNullOrEmpty(nrCadastral))
                 throw new Exception("Nr cadastral gresit");
 
             int costTotal = adaos;
 
-            foreach (var item in lucrari)
+            foreach (var item in portofoliu.Lucrari)
             {
                 costTotal += item.Pret;
             }
@@ -97,15 +108,16 @@ namespace SIGL_Cadastru.Repo.Models
             if (string.IsNullOrWhiteSpace(count))
                 count = "00/0000";
 
-            int resultNr = int.Parse(count.Split("/")[1]) + 1;
+            int resultNr = int.Parse(count.Split("/")[1]) + 1; // +performace with spans 
 
             string nr = $"{DateTime.Now.Year%100}/{string.Format("{0:0000}", resultNr)}";
 
-            return new Cerere(id, client,executant,responsabil,nr, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, lucrari, stateList);
+            return new Cerere(id, client,executant,responsabil,nr, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, stateList, portofoliu);
+
 
         }
 
-        public void AddStatus(CerereStatus cerereStatus) 
+        public void AddStatus(CerereStatus cerereStatus)
         {
             if (cerereStatus.Created < this.ValabilDeLa)
                 throw new Exception($"data starii ({cerereStatus.Created}) nu poate fi mai devreme de data de cand e valabila cererea");
@@ -117,16 +129,28 @@ namespace SIGL_Cadastru.Repo.Models
                 throw new Exception($"Starea \"Prelungit\" poate fi setata dupa data {ValabilPanaLa}");
 
             _stateList.Add(cerereStatus);
+            Starea = SetStatus(_stateList);
 
-        }
-        public void AddLucrare(Lucrare lucrare) 
-        {
-            _lucrari.Add(lucrare);
         }
 
         public void SetComment(string _comment) 
         {
             this.Comment = _comment;
+        }
+
+        private static Status SetStatus(List<CerereStatus> stari)
+        {
+            if (stari.Any(c => c.Starea == Status.Eliberat))
+                return Status.Eliberat;
+
+            var state = stari
+                .Where(s => s.Starea != Status.Prelungit)
+                .OrderByDescending(x => x.Created).FirstOrDefault();
+
+            if (state is null)
+                return Status.Inlucru;
+
+            return state.Starea;
         }
     }
 

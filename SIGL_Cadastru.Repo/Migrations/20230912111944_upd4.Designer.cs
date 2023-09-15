@@ -11,14 +11,14 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230904054531_upd2")]
-    partial class upd2
+    [Migration("20230912111944_upd4")]
+    partial class upd4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
 
             modelBuilder.Entity("Models.CerereStatus", b =>
                 {
@@ -62,13 +62,23 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.Property<Guid>("ExecutantId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Nr")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("NrCadastral")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Portofoliu")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ResponsabilId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Starea")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("ValabilDeLa")
                         .HasColumnType("TEXT");
@@ -81,6 +91,9 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasIndex("ClientId");
 
                     b.HasIndex("ExecutantId");
+
+                    b.HasIndex("Nr")
+                        .IsUnique();
 
                     b.HasIndex("ResponsabilId");
 
@@ -149,18 +162,12 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("IDNP")
-                        .IsUnique();
-
                     b.ToTable("Persoane");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("89f12875-5cff-4d84-8dd3-fa9b1371a92f"),
+                            Id = new Guid("5676c1a1-baf5-4fd7-b159-2456ef9f3efd"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -172,14 +179,14 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("599ad2aa-5529-45c2-b0fb-74e5824f0878"),
+                            Id = new Guid("5fdb4ade-5692-4d43-8000-ad30cdc72fb8"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",
                             IDNP = "2002500081628",
                             Nume = "Balan",
                             Prenume = "Veniamin",
-                            Rol = 2,
+                            Rol = 0,
                             Telefon = "079900846"
                         });
                 });

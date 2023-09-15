@@ -34,14 +34,16 @@ namespace SIGL_Cadastru.Repo.Repository
                 .Include(c => c.StatusList)
                 .AsQueryable();
 
-            if(queryParams.Search is not null)
+            if (queryParams.Search is not null)
                 query = query.SearchBy(queryParams.Search);
 
             if (queryParams.StateFilter is not null)
                 query = query.FilterByState(queryParams.StateFilter);
-            
 
-            return await query.ToListAsync();
+
+            return await query
+                .OrderBy(c => c.ValabilPanaLa)
+                .ToListAsync();
         }
 
 
@@ -50,7 +52,6 @@ namespace SIGL_Cadastru.Repo.Repository
             .Include(c => c.Executant)
             .Include(c => c.Client)
             .Include(c => c.Responsabil)
-            .Include(c => c.Lucrari)
             .Include(c => c.StatusList)
             .SingleOrDefaultAsync();
 

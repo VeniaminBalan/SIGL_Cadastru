@@ -13,7 +13,10 @@ namespace SIGL_Cadastru.Repo.DataBase
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
 
         }
 
@@ -23,7 +26,6 @@ namespace SIGL_Cadastru.Repo.DataBase
         }
 
         public DbSet<Cerere> Cereri { get; set; }
-        public DbSet<Lucrare> Lucrari { get; set; }
         public DbSet<Persoana> Persoane { get; set; }
         public DbSet<CerereStatus> Stari { get; set; }
     }

@@ -36,8 +36,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tipLucrareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pretDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lucrareDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label_responsabil = new System.Windows.Forms.Label();
             this.label_executant = new System.Windows.Forms.Label();
@@ -72,11 +70,16 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label_Nr = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.documentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel_uc_doc = new System.Windows.Forms.Panel();
+            this.tipLucrareDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pretDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lucrareDtoBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereStatusDtoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -145,31 +148,13 @@
             this.pretDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.lucrareDtoBindingSource;
             this.dataGridView1.Enabled = false;
-            this.dataGridView1.Location = new System.Drawing.Point(344, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(307, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(554, 279);
+            this.dataGridView1.Size = new System.Drawing.Size(600, 206);
             this.dataGridView1.TabIndex = 6;
-            // 
-            // tipLucrareDataGridViewTextBoxColumn
-            // 
-            this.tipLucrareDataGridViewTextBoxColumn.DataPropertyName = "TipLucrare";
-            this.tipLucrareDataGridViewTextBoxColumn.HeaderText = "TipLucrare";
-            this.tipLucrareDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tipLucrareDataGridViewTextBoxColumn.Name = "tipLucrareDataGridViewTextBoxColumn";
-            this.tipLucrareDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tipLucrareDataGridViewTextBoxColumn.Width = 450;
-            // 
-            // pretDataGridViewTextBoxColumn
-            // 
-            this.pretDataGridViewTextBoxColumn.DataPropertyName = "Pret";
-            this.pretDataGridViewTextBoxColumn.HeaderText = "Pret";
-            this.pretDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.pretDataGridViewTextBoxColumn.Name = "pretDataGridViewTextBoxColumn";
-            this.pretDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pretDataGridViewTextBoxColumn.Width = 50;
             // 
             // lucrareDtoBindingSource
             // 
@@ -246,7 +231,7 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Location = new System.Drawing.Point(344, 310);
+            this.panel1.Location = new System.Drawing.Point(344, 413);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(554, 125);
             this.panel1.TabIndex = 14;
@@ -361,7 +346,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(27, 384);
+            this.button1.Location = new System.Drawing.Point(11, 495);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 50);
             this.button1.TabIndex = 16;
@@ -452,7 +437,7 @@
             // button3
             // 
             this.button3.ForeColor = System.Drawing.Color.Red;
-            this.button3.Location = new System.Drawing.Point(221, 384);
+            this.button3.Location = new System.Drawing.Point(205, 495);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 50);
             this.button3.TabIndex = 22;
@@ -462,15 +447,15 @@
             // 
             // textBox_Comment
             // 
-            this.textBox_Comment.Location = new System.Drawing.Point(28, 270);
+            this.textBox_Comment.Location = new System.Drawing.Point(12, 292);
             this.textBox_Comment.Multiline = true;
             this.textBox_Comment.Name = "textBox_Comment";
-            this.textBox_Comment.Size = new System.Drawing.Size(287, 95);
+            this.textBox_Comment.Size = new System.Drawing.Size(287, 184);
             this.textBox_Comment.TabIndex = 23;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(149, 384);
+            this.button4.Location = new System.Drawing.Point(133, 495);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(51, 34);
             this.button4.TabIndex = 24;
@@ -498,11 +483,41 @@
             this.label15.TabIndex = 25;
             this.label15.Text = "Nr:";
             // 
+            // documentBindingSource
+            // 
+            this.documentBindingSource.DataSource = typeof(SIGL_Cadastru.Repo.Models.Document);
+            // 
+            // panel_uc_doc
+            // 
+            this.panel_uc_doc.Location = new System.Drawing.Point(307, 224);
+            this.panel_uc_doc.Name = "panel_uc_doc";
+            this.panel_uc_doc.Size = new System.Drawing.Size(600, 150);
+            this.panel_uc_doc.TabIndex = 27;
+            // 
+            // tipLucrareDataGridViewTextBoxColumn
+            // 
+            this.tipLucrareDataGridViewTextBoxColumn.DataPropertyName = "TipLucrare";
+            this.tipLucrareDataGridViewTextBoxColumn.HeaderText = "TipLucrare";
+            this.tipLucrareDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tipLucrareDataGridViewTextBoxColumn.Name = "tipLucrareDataGridViewTextBoxColumn";
+            this.tipLucrareDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tipLucrareDataGridViewTextBoxColumn.Width = 495;
+            // 
+            // pretDataGridViewTextBoxColumn
+            // 
+            this.pretDataGridViewTextBoxColumn.DataPropertyName = "Pret";
+            this.pretDataGridViewTextBoxColumn.HeaderText = "Pret";
+            this.pretDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.pretDataGridViewTextBoxColumn.Name = "pretDataGridViewTextBoxColumn";
+            this.pretDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pretDataGridViewTextBoxColumn.Width = 50;
+            // 
             // FormViewCerere
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1204, 450);
+            this.ClientSize = new System.Drawing.Size(1204, 550);
+            this.Controls.Add(this.panel_uc_doc);
             this.Controls.Add(this.label_Nr);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.button4);
@@ -537,6 +552,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereStatusDtoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -551,8 +567,6 @@
         private Label label5;
         private Label label6;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn tipLucrareDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn pretDataGridViewTextBoxColumn;
         private BindingSource lucrareDtoBindingSource;
         private Label label_responsabil;
         private Label label_executant;
@@ -587,5 +601,9 @@
         private Button button4;
         private Label label_Nr;
         private Label label15;
+        private BindingSource documentBindingSource;
+        private DataGridViewTextBoxColumn tipLucrareDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn pretDataGridViewTextBoxColumn;
+        private Panel panel_uc_doc;
     }
 }

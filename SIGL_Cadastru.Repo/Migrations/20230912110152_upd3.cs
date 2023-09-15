@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     /// <inheritdoc />
-    public partial class upd4 : Migration
+    public partial class upd3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,15 +16,15 @@ namespace SIGL_Cadastru.Repo.Migrations
             migrationBuilder.DeleteData(
                 table: "Persoane",
                 keyColumn: "Id",
-                keyValue: new Guid("2ade478b-809e-4969-b72e-36c6702c38ce"));
+                keyValue: new Guid("20061c56-246d-420a-b4bd-ded337e0268e"));
 
             migrationBuilder.DeleteData(
                 table: "Persoane",
                 keyColumn: "Id",
-                keyValue: new Guid("e7d78657-228d-4d09-b409-e5c5f1742cf1"));
+                keyValue: new Guid("6271a87e-1fce-49cc-90c2-602c429d9504"));
 
             migrationBuilder.AddColumn<string>(
-                name: "Nr",
+                name: "Portofoliu",
                 table: "Cereri",
                 type: "TEXT",
                 nullable: false,
@@ -35,35 +35,26 @@ namespace SIGL_Cadastru.Repo.Migrations
                 columns: new[] { "Id", "DataNasterii", "Domiciliu", "Email", "IDNP", "Nume", "Prenume", "Rol", "Telefon" },
                 values: new object[,]
                 {
-                    { new Guid("d961f6ca-5ed0-4e40-b34e-059649fcc818"), new DateOnly(2002, 8, 13), "or. Drochia", "", "2002500081628", "Balan", "Veniamin", 0, "079900846" },
-                    { new Guid("fcc03fac-4c18-4a15-a146-54651b2a6bca"), new DateOnly(1977, 7, 16), "sat. Gribova", "geoproiectgrup@mail.ru", "124353452341", "Balan", "Octavian", 2, "079900218" }
+                    { new Guid("0a7d429f-8651-4964-8f5a-1b4342869e45"), new DateOnly(1977, 7, 16), "sat. Gribova", "geoproiectgrup@mail.ru", "124353452341", "Balan", "Octavian", 2, "079900218" },
+                    { new Guid("eba3d242-c5bd-4402-ac00-cc2320c54ab0"), new DateOnly(2002, 8, 13), "or. Drochia", "", "2002500081628", "Balan", "Veniamin", 0, "079900846" }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Cereri_Nr",
-                table: "Cereri",
-                column: "Nr");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_Cereri_Nr",
-                table: "Cereri");
+            migrationBuilder.DeleteData(
+                table: "Persoane",
+                keyColumn: "Id",
+                keyValue: new Guid("0a7d429f-8651-4964-8f5a-1b4342869e45"));
 
             migrationBuilder.DeleteData(
                 table: "Persoane",
                 keyColumn: "Id",
-                keyValue: new Guid("d961f6ca-5ed0-4e40-b34e-059649fcc818"));
-
-            migrationBuilder.DeleteData(
-                table: "Persoane",
-                keyColumn: "Id",
-                keyValue: new Guid("fcc03fac-4c18-4a15-a146-54651b2a6bca"));
+                keyValue: new Guid("eba3d242-c5bd-4402-ac00-cc2320c54ab0"));
 
             migrationBuilder.DropColumn(
-                name: "Nr",
+                name: "Portofoliu",
                 table: "Cereri");
 
             migrationBuilder.InsertData(
@@ -71,8 +62,8 @@ namespace SIGL_Cadastru.Repo.Migrations
                 columns: new[] { "Id", "DataNasterii", "Domiciliu", "Email", "IDNP", "Nume", "Prenume", "Rol", "Telefon" },
                 values: new object[,]
                 {
-                    { new Guid("2ade478b-809e-4969-b72e-36c6702c38ce"), new DateOnly(1977, 7, 16), "sat. Gribova", "geoproiectgrup@mail.ru", "124353452341", "Balan", "Octavian", 2, "079900218" },
-                    { new Guid("e7d78657-228d-4d09-b409-e5c5f1742cf1"), new DateOnly(2002, 8, 13), "or. Drochia", "", "2002500081628", "Balan", "Veniamin", 0, "079900846" }
+                    { new Guid("20061c56-246d-420a-b4bd-ded337e0268e"), new DateOnly(2002, 8, 13), "or. Drochia", "", "2002500081628", "Balan", "Veniamin", 0, "079900846" },
+                    { new Guid("6271a87e-1fce-49cc-90c2-602c429d9504"), new DateOnly(1977, 7, 16), "sat. Gribova", "geoproiectgrup@mail.ru", "124353452341", "Balan", "Octavian", 2, "079900218" }
                 });
         }
     }

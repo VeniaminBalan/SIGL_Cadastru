@@ -27,7 +27,8 @@ namespace SIGL_Cadastru.Views
         {
             InitializeComponent();
             InitTreeView();
-
+            panel_lucrare.Enabled = false;
+            panel_lucrare.Visible = false;
         }
 
         private void InitTreeView()
@@ -288,6 +289,22 @@ namespace SIGL_Cadastru.Views
         private void DisplayPath(string option ="") 
         {
             labelNodeSelected.Text = path + option;
+        }
+
+        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                panel_lucrare.Enabled = true;
+                panel_lucrare.Visible = true;
+            }
+            else 
+            {
+                panel_lucrare.Enabled = false;
+                panel_lucrare.Visible = false;
+            }
+
+
         }
     }
 

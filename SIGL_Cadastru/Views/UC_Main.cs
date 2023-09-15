@@ -180,5 +180,26 @@ namespace SIGL_Cadastru.Views
             await UpdateTable();
         }
 
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "stareaCererii") 
+            {
+                if (e.Value is not null) 
+                {
+                    string stringValue = e.Value.ToString();
+                    stringValue = stringValue.ToLower();
+                    if ((stringValue.IndexOf("respins") > -1))
+                    {
+                        e.CellStyle.ForeColor = Color.Red;
+                    } 
+                    else if ((stringValue.IndexOf("eliberat") > -1)) 
+                    {
+                        e.CellStyle.ForeColor = Color.Green;
+                    }
+                }
+            }
+        }
+
     }
 }

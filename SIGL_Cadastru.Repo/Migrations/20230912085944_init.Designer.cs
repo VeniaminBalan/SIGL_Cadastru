@@ -11,8 +11,8 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230906115216_upd4")]
-    partial class upd4
+    [Migration("20230912085944_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,8 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasIndex("ExecutantId");
 
-                    b.HasIndex("Nr");
+                    b.HasIndex("Nr")
+                        .IsUnique();
 
                     b.HasIndex("ResponsabilId");
 
@@ -160,7 +161,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fcc03fac-4c18-4a15-a146-54651b2a6bca"),
+                            Id = new Guid("c5879fa5-ec06-4ba9-8da2-393ea522f4cd"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -172,7 +173,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d961f6ca-5ed0-4e40-b34e-059649fcc818"),
+                            Id = new Guid("80bf23ed-90e7-4673-bc04-6235fc857481"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",

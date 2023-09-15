@@ -15,7 +15,7 @@ namespace SIGL_Cadastru.Repo.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
 
             modelBuilder.Entity("Models.CerereStatus", b =>
                 {
@@ -68,8 +68,15 @@ namespace SIGL_Cadastru.Repo.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Portofoliu")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ResponsabilId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Starea")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("ValabilDeLa")
                         .HasColumnType("TEXT");
@@ -89,29 +96,6 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasIndex("ResponsabilId");
 
                     b.ToTable("Cereri");
-                });
-
-            modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Lucrare", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("CerereId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Pret")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("TipLucrare")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CerereId");
-
-                    b.ToTable("Lucrari");
                 });
 
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Persoana", b =>
@@ -158,7 +142,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("232e0d89-365b-4467-b568-4e5b6af49c54"),
+                            Id = new Guid("58536fb2-9944-4a56-b499-77e5dd308d10"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -170,7 +154,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33157c3b-30d1-4e41-9a37-55686ff5e015"),
+                            Id = new Guid("d8ca11fb-812c-4de8-9e99-cc87355f18f3"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",
@@ -220,21 +204,8 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.Navigation("Responsabil");
                 });
 
-            modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Lucrare", b =>
-                {
-                    b.HasOne("SIGL_Cadastru.Repo.Models.Cerere", "Cerere")
-                        .WithMany("Lucrari")
-                        .HasForeignKey("CerereId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cerere");
-                });
-
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Cerere", b =>
                 {
-                    b.Navigation("Lucrari");
-
                     b.Navigation("StatusList");
                 });
 #pragma warning restore 612, 618

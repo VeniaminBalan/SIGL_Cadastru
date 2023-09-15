@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button_Vizualizare = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,7 +58,11 @@
             this.textBox_comment = new System.Windows.Forms.TextBox();
             this.comboBox_transport = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.documentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel_UC_Documente = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Vizualizare
@@ -342,12 +347,35 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button_vizualizare_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(369, 412);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(104, 22);
+            this.label9.TabIndex = 42;
+            this.label9.Text = "Documente:";
+            // 
+            // documentBindingSource
+            // 
+            this.documentBindingSource.DataSource = typeof(SIGL_Cadastru.Repo.Models.Document);
+            // 
+            // panel_UC_Documente
+            // 
+            this.panel_UC_Documente.Location = new System.Drawing.Point(369, 437);
+            this.panel_UC_Documente.Name = "panel_UC_Documente";
+            this.panel_UC_Documente.Size = new System.Drawing.Size(600, 150);
+            this.panel_UC_Documente.TabIndex = 43;
+            // 
             // FormCerere
             // 
             this.AcceptButton = this.button_Vizualizare;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 703);
+            this.Controls.Add(this.panel_UC_Documente);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox_transport);
             this.Controls.Add(this.textBox_comment);
@@ -379,6 +407,7 @@
             this.Load += new System.EventHandler(this.FormCerere_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,5 +443,8 @@
         private TextBox textBox_comment;
         private ComboBox comboBox_transport;
         private Button button2;
+        private Label label9;
+        private BindingSource documentBindingSource;
+        private Panel panel_UC_Documente;
     }
 }

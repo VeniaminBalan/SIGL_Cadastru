@@ -2,7 +2,6 @@
 using SIGL_Cadastru.Repo.DataBase;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Repository;
 

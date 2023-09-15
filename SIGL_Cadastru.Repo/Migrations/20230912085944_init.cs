@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace SIGL_Cadastru.Repo.Migrations
 {
     /// <inheritdoc />
@@ -38,6 +40,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     ClientId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ExecutantId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ResponsabilId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Nr = table.Column<string>(type: "TEXT", nullable: false),
                     ValabilDeLa = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     ValabilPanaLa = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     NrCadastral = table.Column<string>(type: "TEXT", maxLength: 15, nullable: false),
@@ -107,6 +110,15 @@ namespace SIGL_Cadastru.Repo.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Persoane",
+                columns: new[] { "Id", "DataNasterii", "Domiciliu", "Email", "IDNP", "Nume", "Prenume", "Rol", "Telefon" },
+                values: new object[,]
+                {
+                    { new Guid("80bf23ed-90e7-4673-bc04-6235fc857481"), new DateOnly(2002, 8, 13), "or. Drochia", "", "2002500081628", "Balan", "Veniamin", 0, "079900846" },
+                    { new Guid("c5879fa5-ec06-4ba9-8da2-393ea522f4cd"), new DateOnly(1977, 7, 16), "sat. Gribova", "geoproiectgrup@mail.ru", "124353452341", "Balan", "Octavian", 2, "079900218" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cereri_ClientId",
                 table: "Cereri",
@@ -118,6 +130,12 @@ namespace SIGL_Cadastru.Repo.Migrations
                 column: "ExecutantId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cereri_Nr",
+                table: "Cereri",
+                column: "Nr",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cereri_ResponsabilId",
                 table: "Cereri",
                 column: "ResponsabilId");
@@ -126,18 +144,6 @@ namespace SIGL_Cadastru.Repo.Migrations
                 name: "IX_Lucrari_CerereId",
                 table: "Lucrari",
                 column: "CerereId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Persoane_Email",
-                table: "Persoane",
-                column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Persoane_IDNP",
-                table: "Persoane",
-                column: "IDNP",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stari_CerereId",

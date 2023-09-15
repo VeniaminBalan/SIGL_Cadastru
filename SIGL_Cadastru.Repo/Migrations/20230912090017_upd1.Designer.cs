@@ -11,8 +11,8 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230904052014_upd1t")]
-    partial class upd1t
+    [Migration("20230912090017_upd1")]
+    partial class upd1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,6 +62,10 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.Property<Guid>("ExecutantId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Nr")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("NrCadastral")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -69,6 +73,9 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.Property<Guid>("ResponsabilId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Starea")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("ValabilDeLa")
                         .HasColumnType("TEXT");
@@ -81,6 +88,9 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasIndex("ClientId");
 
                     b.HasIndex("ExecutantId");
+
+                    b.HasIndex("Nr")
+                        .IsUnique();
 
                     b.HasIndex("ResponsabilId");
 
@@ -149,13 +159,33 @@ namespace SIGL_Cadastru.Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("IDNP")
-                        .IsUnique();
-
                     b.ToTable("Persoane");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6271a87e-1fce-49cc-90c2-602c429d9504"),
+                            DataNasterii = new DateOnly(1977, 7, 16),
+                            Domiciliu = "sat. Gribova",
+                            Email = "geoproiectgrup@mail.ru",
+                            IDNP = "124353452341",
+                            Nume = "Balan",
+                            Prenume = "Octavian",
+                            Rol = 2,
+                            Telefon = "079900218"
+                        },
+                        new
+                        {
+                            Id = new Guid("20061c56-246d-420a-b4bd-ded337e0268e"),
+                            DataNasterii = new DateOnly(2002, 8, 13),
+                            Domiciliu = "or. Drochia",
+                            Email = "",
+                            IDNP = "2002500081628",
+                            Nume = "Balan",
+                            Prenume = "Veniamin",
+                            Rol = 0,
+                            Telefon = "079900846"
+                        });
                 });
 
             modelBuilder.Entity("Models.CerereStatus", b =>

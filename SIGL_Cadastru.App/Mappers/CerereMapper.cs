@@ -15,7 +15,7 @@ namespace SIGL_Cadastru.App.Mappers
         {
             int costTotal = cerere.Adaos;
 
-            foreach (var l in cerere.Lucrari) 
+            foreach (var l in cerere.Portofoliu.Lucrari) 
             {
                 costTotal += l.Pret;
             }
@@ -24,9 +24,7 @@ namespace SIGL_Cadastru.App.Mappers
             {
                 Id = cerere.Id,
                 Responsabil = string.Join(' ', cerere.Responsabil.Nume, cerere.Responsabil.Prenume),
-
                 Executant = string.Join(' ', cerere.Executant.Nume, cerere.Executant.Prenume),
-
                 Client = string.Join(' ', cerere.Client.Nume, cerere.Client.Prenume),
 
                 NrCadastral = cerere.NrCadastral,
@@ -34,25 +32,14 @@ namespace SIGL_Cadastru.App.Mappers
                 ValabilPanaLa = cerere.ValabilPanaLa,
                 Comment = cerere.Comment,
                 CostTotal = costTotal,
-                Nr = cerere.Nr,
+                Nr = cerere.Nr,               
 
-                StareaCererii = SetStatus(cerere.StatusList.ToList()),
+                StareaCererii = cerere.Starea,
                 LaReceptie = GetDate(cerere.StatusList.ToList(), Status.LaReceptie),
                 Eliberat = GetDate(cerere.StatusList.ToList(), Status.Eliberat),
                 Respins = GetDate(cerere.StatusList.ToList(), Status.Respins),
                 Prelungit = GetDate(cerere.StatusList.ToList(), Status.Prelungit)
             };
-        }
-
-        public static Status SetStatus(List<CerereStatus> stari)
-        {
-            var state = stari
-                .Where(s => s.Starea != Status.Prelungit)
-                .OrderByDescending(x => x.Created).FirstOrDefault();
-
-            if(state is null) return Status.Inlucru;
-
-            return state.Starea;
         }
 
         private static DateOnly? GetDate(List<CerereStatus> stari, Status status)

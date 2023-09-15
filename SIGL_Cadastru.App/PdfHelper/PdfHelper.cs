@@ -5,6 +5,7 @@ using Spire.Pdf.Exporting.XPS.Schema;
 using Spire.Pdf.Graphics;
 using Spire.Pdf.Tables;
 using System.Drawing;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace SIGL_Cadastru.App.PdfHelper
@@ -16,9 +17,8 @@ namespace SIGL_Cadastru.App.PdfHelper
         public static PdfDocument Create(Cerere cerere) 
         {
             var doc = new PdfDocument();
-            //doc.ViewerPreferences.PageMode = PdfPageMode.
 
-            PdfPageBase page = doc.Pages.Add(PdfPageSize.A5, new PdfMargins(0), 0, PdfPageOrientation.Landscape);
+            PdfPageBase page = doc.Pages.Add(PdfPageSize.A5, new PdfMargins(20,20,20,20), 0, PdfPageOrientation.Landscape);
 
 
             string message = "Cerere";
@@ -31,7 +31,8 @@ namespace SIGL_Cadastru.App.PdfHelper
             page.DrawClientData(cerere.Client);
             page.DrawResponsabilData(cerere.Responsabil);
             page.DrawCerereData(cerere);
-            page.DrawLucrariData(cerere.Lucrari.ToList());
+            page.DrawLucrariData(cerere.Portofoliu.Lucrari.ToList());
+            page.DrawTable(cerere.Portofoliu.Documente.ToList());
 
 
             return doc;
@@ -41,49 +42,66 @@ namespace SIGL_Cadastru.App.PdfHelper
         {
             PdfFont font = new PdfFont(fontFamily, 10f, PdfFontStyle.Regular);
             PdfBrush brush = PdfBrushes.Black;
-            PointF location = new PointF(5, 5);
+            PointF location = new PointF(0, 0);
             page.Canvas.DrawString("Nr. Cadastral: " + NrCadastral, font, brush, location);
         }
-        private static void DrawTable(this PdfPageBase page, List<Lucrare> list) 
+        private static void DrawTable(this PdfPageBase page, List<Document> list) 
         {
-
-            PdfFont font = new PdfFont(PdfFontFamily.Helvetica, 10f);
             PdfBrush brush = PdfBrushes.Black;
-            PointF location = new PointF(10, 50);
-
-            String[][] dataSource = new String[list.Count+1][];
-
-            string header = "Nr Lucrare";
-
-            dataSource[0] = header.Split(' ');
+            PointF location = new PointF(50, 200);
 
 
-            for (int i = 1; i < list.Count+1; i++)
+            string[][] dataSource = new string[list.Count()+1][];
+
+
+            dataSource[0] = "NR/O;Denumirea documentului;Nr;Data;Mentiuni;Exemplare".Split(";");
+            for (int i = 0; i < list.Count(); i++)
             {
-                string content = i.ToString() + " " + list[i].TipLucrare;
-
-                dataSource[i] = content.Split(' ');
+                dataSource[i+1] = $"{i+1};{list[i].Denumirea};{list[i].Nr};{list[i].Data};{list[i].Mentiuni};{list[i].Exemplare}".Split(";");
             }
 
             PdfTable table = new PdfTable();
-            table.Style.CellPadding = 1f;
+            //table.Style
             table.Style.BorderPen = new PdfPen(brush, 0.75f);
-            table.Style.HeaderStyle.StringFormat = new PdfStringFormat(PdfTextAlignment.Left, PdfVerticalAlignment.Middle);
+            table.Style.HeaderStyle.StringFormat = new PdfStringFormat(PdfTextAlignment.Center);
             table.Style.HeaderSource = PdfHeaderSource.Rows;
             table.Style.HeaderRowCount = 1;
             table.Style.ShowHeader = true;
             table.Style.HeaderStyle.BackgroundBrush = PdfBrushes.Gray;
-
-            table.Columns[0].Width = 10;
-            table.Columns[1].Width = 100;
+            table.DataSource = dataSource;
 
             foreach (PdfColumn column in table.Columns)
-            {              
+            {
                 column.StringFormat = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
             }
+
+            table.Columns[0].Width = 5;
+            table.Columns[1].Width = 50;
+            table.Columns[2].Width = 15;
+            table.Columns[3].Width = 10;
+            table.Columns[4].Width = 25;
+            table.Columns[5].Width = 10;
+
+            table.BeginRowLayout += Table_BeginRowLayout;
+
             table.Draw(page, location);
 
         }
+
+        private static void Table_BeginRowLayout(object sender, BeginRowLayoutEventArgs args)
+        {
+            args.MinimalHeight = 10f;
+
+            PdfFont font = new PdfFont(fontFamily, 10f, PdfFontStyle.Regular);
+
+            args.CellStyle.Font = font;
+        }
+
+        private static void DrawDataGrid(this PdfPageBase page, string NrCadastral) 
+        {
+
+        }
+
         private static void DrawClientData(this PdfPageBase page, Persoana client) 
         {
             PointF location = new PointF((page.Size.ToPointF().X / 2) + 100, 30);
@@ -171,7 +189,6 @@ namespace SIGL_Cadastru.App.PdfHelper
                 page.Canvas.DrawString(eliberat.Created.ToString(), font, brush, location);
 
         }
-
         private static void DrawLucrariData(this PdfPageBase page, List<Lucrare> list)
         {
             PointF location = new PointF((page.Size.ToPointF().X / 2) - 260, 160);
@@ -192,5 +209,6 @@ namespace SIGL_Cadastru.App.PdfHelper
             }
 
         }
+
     }
 }

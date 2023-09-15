@@ -14,7 +14,6 @@ public static class LucrareMapper
     {
         return new LucrareDto 
         {
-            Id= lucrare.Id,
             Pret = lucrare.Pret,
             TipLucrare = lucrare.TipLucrare
         };

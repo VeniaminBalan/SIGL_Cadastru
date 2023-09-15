@@ -20,6 +20,7 @@ namespace SIGL_Cadastru.Views
         private readonly IServiceManager _service;
         private readonly IPdfGeneratorService _pdfService;
         private readonly Guid _cererId;
+        private UC_DocumentsView uc_documents;
 
         private Cerere? cerere;
 
@@ -55,11 +56,18 @@ namespace SIGL_Cadastru.Views
 
             UpdateViewStatusList();
             UpdateLucrariList();
+            UpdateDocumenteList();
         }
         private async Task GetCerere() 
         {
             cerere = await _service.CerereService.GetByIdAsync(_cererId, false);
-        } 
+        }
+
+        private void UpdateDocumenteList() 
+        {
+            uc_documents = new UC_DocumentsView(cerere!.Portofoliu.Documente.ToList());
+            panel_uc_doc.Controls.Add(uc_documents);
+        }
 
         private void UpdateClientData() 
         {
@@ -95,7 +103,8 @@ namespace SIGL_Cadastru.Views
         }
         private void UpdateLucrariList() 
         {
-            dataGridView1.DataSource = cerere!.Lucrari.Select(LucrareMapper.Map).ToList();
+            var data = cerere!.Portofoliu.Lucrari.ToList();
+            dataGridView1.DataSource = data;
         }
         private void ResetViewStatusList() 
         {
@@ -108,6 +117,7 @@ namespace SIGL_Cadastru.Views
             _service.DetachAll();
             _service.CerereService.UpdateCerere(cerere!);
             cerere!.SetComment(textBox_Comment.Text);
+            cerere!.Portofoliu.AddDocumentsSource(uc_documents.GetDocumente());
 
             foreach (var item in statusItems) 
             {
@@ -209,7 +219,7 @@ namespace SIGL_Cadastru.Views
                 }
                 else
                 {
-                    MessageBox.Show("Object not selected Werror");
+                    MessageBox.Show("Object not selected error");
                 }
 
 

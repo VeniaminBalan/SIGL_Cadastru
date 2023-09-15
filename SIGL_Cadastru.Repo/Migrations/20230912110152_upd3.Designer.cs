@@ -11,14 +11,14 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230906123058_upd5")]
-    partial class upd5
+    [Migration("20230912110152_upd3")]
+    partial class upd3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
 
             modelBuilder.Entity("Models.CerereStatus", b =>
                 {
@@ -71,8 +71,15 @@ namespace SIGL_Cadastru.Repo.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Portofoliu")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ResponsabilId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Starea")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("ValabilDeLa")
                         .HasColumnType("TEXT");
@@ -161,7 +168,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("232e0d89-365b-4467-b568-4e5b6af49c54"),
+                            Id = new Guid("0a7d429f-8651-4964-8f5a-1b4342869e45"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -173,7 +180,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33157c3b-30d1-4e41-9a37-55686ff5e015"),
+                            Id = new Guid("eba3d242-c5bd-4402-ac00-cc2320c54ab0"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",

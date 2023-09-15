@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Options;
+using SIGL_Cadastru.Repo.DataBase.CustomConverters;
 using SIGL_Cadastru.Repo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Newtonsoft.Json;
+
 
 namespace SIGL_Cadastru.Repo.DataBase.Configurations
 {
@@ -21,14 +21,15 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
             builder.HasIndex(c => c.Nr)
                 .IsUnique();
 
-            builder.HasMany(c => c.Lucrari)
-                .WithOne(l => l.Cerere)
-                .HasForeignKey(l => l.CerereId);
-
             builder.HasMany(c => c.StatusList)
                 .WithOne(l => l.Cerere)
                 .HasForeignKey(s => s.CerereId);
 
+            var converter = new CustomPortofoliuConverter();
+
+            builder.Property(c => c.Portofoliu)
+                .HasConversion(p => JsonConvert.SerializeObject(p, converter),
+                value => JsonConvert.DeserializeObject<Portofoliu>(value, converter));
         }
     }
 }

@@ -11,14 +11,14 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230904055549_upd3")]
-    partial class upd3
+    [Migration("20230912113648_upd5")]
+    partial class upd5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
 
             modelBuilder.Entity("Models.CerereStatus", b =>
                 {
@@ -62,13 +62,24 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.Property<Guid>("ExecutantId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Nr")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("NrCadastral")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Portofoliu")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ResponsabilId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Starea")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("ValabilDeLa")
                         .HasColumnType("TEXT");
@@ -81,6 +92,9 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasIndex("ClientId");
 
                     b.HasIndex("ExecutantId");
+
+                    b.HasIndex("Nr")
+                        .IsUnique();
 
                     b.HasIndex("ResponsabilId");
 
@@ -154,7 +168,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2ade478b-809e-4969-b72e-36c6702c38ce"),
+                            Id = new Guid("abddcbe9-351a-4952-9c60-4aeea1218985"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -166,7 +180,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e7d78657-228d-4d09-b409-e5c5f1742cf1"),
+                            Id = new Guid("e2adc00a-5aed-4fc7-b865-5eef17075962"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",
@@ -219,7 +233,7 @@ namespace SIGL_Cadastru.Repo.Migrations
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Lucrare", b =>
                 {
                     b.HasOne("SIGL_Cadastru.Repo.Models.Cerere", "Cerere")
-                        .WithMany("Lucrari")
+                        .WithMany()
                         .HasForeignKey("CerereId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -229,8 +243,6 @@ namespace SIGL_Cadastru.Repo.Migrations
 
             modelBuilder.Entity("SIGL_Cadastru.Repo.Models.Cerere", b =>
                 {
-                    b.Navigation("Lucrari");
-
                     b.Navigation("StatusList");
                 });
 #pragma warning restore 612, 618
