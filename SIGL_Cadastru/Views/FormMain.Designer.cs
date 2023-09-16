@@ -31,7 +31,7 @@
             this.button_cerere_noua = new System.Windows.Forms.Button();
             this.panel_content = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_setari = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel_content.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -58,7 +58,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.button_setari);
             this.panel1.Controls.Add(this.button_cerere_noua);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -66,14 +66,15 @@
             this.panel1.Size = new System.Drawing.Size(1190, 73);
             this.panel1.TabIndex = 5;
             // 
-            // button1
+            // button_setari
             // 
-            this.button1.Location = new System.Drawing.Point(118, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 50);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Setari";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_setari.Location = new System.Drawing.Point(118, 12);
+            this.button_setari.Name = "button_setari";
+            this.button_setari.Size = new System.Drawing.Size(100, 50);
+            this.button_setari.TabIndex = 4;
+            this.button_setari.Text = "Setari";
+            this.button_setari.UseVisualStyleBackColor = true;
+            this.button_setari.Click += new System.EventHandler(this.button_setari_Click);
             // 
             // FormMain
             // 
@@ -95,7 +96,7 @@
         private Button button_cerere_noua;
         private Panel panel_content;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private Button button1;
+        private Button button_setari;
         private Panel panel1;
     }
 }

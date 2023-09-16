@@ -7,21 +7,30 @@ namespace SIGL_Cadastru.Views
 {
     public partial class FormMain : Form
     {
-        private readonly IRepositoryManager _repo;
-        private readonly IMapper _mapper;
+        private readonly FormFactory _factory = new();
         private readonly UC_Main uc_Main;
 
-        public FormMain(IRepositoryManager repo, IMapper mapper)
+        private static FormMain _form;
+
+        private FormMain()
         {
-            _repo = repo;
-            _mapper = mapper;
             InitializeComponent();
             uc_Main = Add_UC_Main();
         }
 
+        public static FormMain Create() 
+        {
+            if (_form is null || _form.IsDisposed) 
+            {
+                _form = new FormMain();
+            }
+
+            return _form;
+        }
+
         public UC_Main Add_UC_Main() 
         {
-            var uc_main = new FormFactory().CreateUC_Main();
+            var uc_main = _factory.CreateUC_Main();
             panel_content.Controls.Add(uc_main);
             uc_main.Dock = DockStyle.Fill;
             uc_main.BringToFront();
@@ -31,7 +40,7 @@ namespace SIGL_Cadastru.Views
 
         private void button_cerere_noua_Click(object sender, EventArgs e)
         {
-            var form_cerere = new FormFactory().CreateCerere();
+            var form_cerere = _factory.CreateCerere();
             form_cerere.CreateButtonPressed += Form_cerere_CreateButtonPressed;
             form_cerere.Show();
         }
@@ -42,5 +51,10 @@ namespace SIGL_Cadastru.Views
             ((Form)sender).Dispose();
         }
 
+        private void button_setari_Click(object sender, EventArgs e)
+        {
+            var form = _factory.CreateFormSetari();
+            form.ShowDialog();
+        }
     }
 }

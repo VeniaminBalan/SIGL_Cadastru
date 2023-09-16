@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SIGL_Cadastru.Views;
+using SIGL_Cadastru.Views.Setari;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,10 @@ namespace SIGL_Cadastru.AppConfigurations
         public UC_PersoanaNoua CreateUC_PersoanaNoua()
         {
             return _provider.CreateUC_PersoanaNoua();
+        }
+        public FormSetari CreateFormSetari() 
+        {
+            return _provider.CreateFormSetari();
         }
     }
 }

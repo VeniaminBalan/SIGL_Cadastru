@@ -95,7 +95,6 @@ namespace SIGL_Cadastru.Views
             formAdaugareLucrare.SubmitButtonPressed += OnFormAdaugareSubmit;
         }
 
-
         private void OnFormAdaugareSubmit(object sender, AdaugareLucrareEventArgs e) 
         {
             AddLucrare(e.Lucrare);
@@ -167,7 +166,6 @@ namespace SIGL_Cadastru.Views
         {
             _repo.DetachAll();
         }
-
         private async Task<Cerere> CreateCerere() 
         {
             if (!maskedTextBox_NrCadasrtral.MaskCompleted) 
@@ -208,7 +206,6 @@ namespace SIGL_Cadastru.Views
                 _repo.Cerere);
 
         }
-
         private async void button_Add_Click(object sender, EventArgs e)
         {
             try
@@ -248,12 +245,6 @@ namespace SIGL_Cadastru.Views
 
 
         }
-
-        private void listBoxLucrari_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
         private void listBoxLucrari_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Delete)

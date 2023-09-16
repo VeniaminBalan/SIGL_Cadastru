@@ -139,7 +139,6 @@
             this.listBoxLucrari.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxLucrari.Size = new System.Drawing.Size(339, 104);
             this.listBoxLucrari.TabIndex = 24;
-            this.listBoxLucrari.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listBoxLucrari_KeyPress);
             this.listBoxLucrari.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBoxLucrari_KeyUp);
             // 
             // label16

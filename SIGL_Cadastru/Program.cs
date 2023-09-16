@@ -10,6 +10,7 @@ using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Views;
+using SIGL_Cadastru.Views.Setari;
 using System.Configuration;
 using System.Reflection;
 
@@ -49,6 +50,7 @@ namespace SIGL_Cadastru
 
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
                     services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
+
                     //services.AddScoped(typeof(IPdfGeneratorService), typeof(PdfGeneratorService));
                     //services.Configure<PdfGeneratorService>(p => p.Path = sPdfFilePath);
 
@@ -65,16 +67,8 @@ namespace SIGL_Cadastru
                                 return new FormViewCerere(service, pdfService, Id);
                             });
 
-                    services.AddTransient<FormMain>(container => 
-                    {
+                    services.AddTransient<FormMain>(container => FormMain.Create());
 
-                        var repository = container.GetRequiredService<IRepositoryManager>();
-                        var mapper = container.GetRequiredService<IMapper>();
-                        var service = container.GetRequiredService<IServiceManager>();
-                        
-                        var formCerere = new FormMain(repository, mapper);
-                        return formCerere;
-                    });
                     services.AddTransient<FormCerere>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
@@ -83,7 +77,12 @@ namespace SIGL_Cadastru
                         var formCerere = new FormCerere(repository, pdfService);
                         return formCerere;
                     });
+                    services.AddTransient<FormSetari>(container =>
+                    {
+                        var service = container.GetRequiredService<IServiceManager>();
 
+                        return FormSetari.Create(service); ;
+                    });
                     services.AddScoped<UC_Main>(container => 
                     {
                         var mapper = container.GetRequiredService<IMapper>();
@@ -92,7 +91,6 @@ namespace SIGL_Cadastru
                         var uc_main = new UC_Main(service, mapper);
                         return uc_main;
                     });
-
                     services.AddTransient<UC_PersoanaExistenta>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
@@ -100,7 +98,6 @@ namespace SIGL_Cadastru
                         var uc_PE = new UC_PersoanaExistenta(repository, mapper);
                         return uc_PE;
                     });
-
                     services.AddTransient<UC_PersoanaNoua>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
@@ -165,6 +162,11 @@ namespace SIGL_Cadastru
             {
                 var _form2Factory = _serviceProvider.GetRequiredService<Func<Guid, FormViewCerere>>();
                 return _form2Factory(Id);
+            }
+
+            public FormSetari CreateFormSetari()
+            {
+                return _serviceProvider.GetRequiredService<FormSetari>();
             }
         }
 

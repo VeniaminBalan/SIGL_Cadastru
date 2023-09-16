@@ -1,4 +1,5 @@
 ﻿using SIGL_Cadastru.Views;
+using SIGL_Cadastru.Views.Setari;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace SIGL_Cadastru.AppConfigurations
         public UC_Main CreateUC_Main();
         public UC_PersoanaExistenta CreateUC_PersoanaExistenta();
         public UC_PersoanaNoua CreateUC_PersoanaNoua();
-
+        FormSetari CreateFormSetari();
     }
 }
