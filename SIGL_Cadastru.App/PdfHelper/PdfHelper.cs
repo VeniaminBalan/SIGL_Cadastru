@@ -90,7 +90,6 @@ namespace SIGL_Cadastru.App.PdfHelper
             table.Draw(page, location);
 
         }
-
         private static void Table_BeginRowLayout(object sender, BeginRowLayoutEventArgs args)
         {
             args.MinimalHeight = 10f;
@@ -99,15 +98,14 @@ namespace SIGL_Cadastru.App.PdfHelper
 
             args.CellStyle.Font = font;
         }
-
         private static void DrawDataGrid(this PdfPageBase page, string NrCadastral) 
         {
 
         }
-
         private static void DrawClientData(this PdfPageBase page, Persoana client) 
         {
-            PointF location = new PointF((page.Size.ToPointF().X / 2) + 100, 30);
+            PointF location = new PointF((page.Size.ToPointF().X / 2) - 50, 30);
+            PointF lineLocation = new PointF(location.X, location.Y);
             PdfFont font = new PdfFont(fontFamily, 12f, PdfFontStyle.Bold);
             PdfBrush brush = PdfBrushes.Black;
 
