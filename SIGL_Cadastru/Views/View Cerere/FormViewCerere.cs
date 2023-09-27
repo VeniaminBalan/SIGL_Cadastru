@@ -5,6 +5,7 @@ using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities.DataTransferObjects;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
 using System.Data;
 using System.Diagnostics;
@@ -19,6 +20,7 @@ namespace SIGL_Cadastru.Views
 
         private readonly IServiceManager _service;
         private readonly IPdfGeneratorService _pdfService;
+        private readonly EventService _eventService;
         private readonly Guid _cererId;
         private UC_DocumentsView uc_documents;
 
@@ -26,10 +28,11 @@ namespace SIGL_Cadastru.Views
 
         private HashSet<StatusItem> statusItems = new();
 
-        public FormViewCerere(IServiceManager service, IPdfGeneratorService pdfService, Guid cererId)
+        public FormViewCerere(IServiceManager service, IPdfGeneratorService pdfService, EventService eventService, Guid cererId)
         {
             _service = service;
             _pdfService = pdfService;
+            _eventService = eventService;
             _cererId = cererId;
 
             InitializeComponent();
@@ -147,8 +150,7 @@ namespace SIGL_Cadastru.Views
             await _service.SaveAsync();
             _service.DetachAll();
 
-            DataChenged!.Invoke(sender, new EventArgs());
-
+            _eventService.OnCereriUpdateRequire(EventArgs.Empty);
         }
 
         private void button_adaugareStare_Click(object sender, EventArgs e)
@@ -227,18 +229,13 @@ namespace SIGL_Cadastru.Views
             UpdateViewStatusList();
         }
 
-        private void FormViewCerere_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            _service.DetachAll();
-        }
-
         private async void button3_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Doriti sa stergeti Cererea ? \n (Aceasta actiune nu este reversibila)", "Stergere", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 await _service.CerereService.DeleteCerere(_cererId);
-                DataChenged!.Invoke(sender, new EventArgs());
+                _eventService.OnCereriUpdateRequire(e);
                 this.Dispose();
 
             }
@@ -263,6 +260,11 @@ namespace SIGL_Cadastru.Views
 
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void FormViewCerere_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _service.DetachAll();
         }
     }
 

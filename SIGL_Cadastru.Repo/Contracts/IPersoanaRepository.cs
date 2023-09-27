@@ -7,6 +7,7 @@ namespace Contracts;
 public interface IPersoanaRepository
 {
     Task<IEnumerable<Persoana>> GetAllAync(PeopleQueryParams queryParams,bool trackChanges);
+    Task<bool> HasDependencies(Guid Id);
     Task<Persoana> GetByIdAsync(Guid Id, bool trackChanges);
     void CreatePersoana(Persoana perosana);
     void DeletePersoana(Persoana perosana);

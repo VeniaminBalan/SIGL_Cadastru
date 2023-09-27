@@ -6,10 +6,10 @@ namespace Contracts;
 
 public interface IRepositoryManager
 {
-    public ICerereRepository Cerere { get; }
-    public IPersoanaRepository Persoana { get; }
-
-    public ICerereStatusRepository CerereStatus { get; }
+    DbContext context { get; }
+    ICerereRepository Cerere { get; }
+    IPersoanaRepository Persoana { get; }
+    ICerereStatusRepository CerereStatus { get; }
     Task SaveAsync();
-    public void DetachAll();
+    void DetachAll();
 }

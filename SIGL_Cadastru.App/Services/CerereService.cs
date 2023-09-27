@@ -38,18 +38,6 @@ internal sealed class CerereService : ICerereService
     {
         var data = await _repo.Cerere.GetAllAync(queryParams, trackChanges);
 
-        //if (queryParams.TimeFilter is not null)
-        //    data = data.FilterBy(queryParams.TimeFilter).ToList();
-
-
-        //if(queryParams.StateFilter is not null)
-        //    ret = ret.FilterByState(queryParams.StateFilter);
-
-        //if (queryParams.Search is not null)
-        //    ret = ret.SearchBy(queryParams.Search).ToList();
-
-
-
         return data.Select(CerereMapper.Map);
 
     }

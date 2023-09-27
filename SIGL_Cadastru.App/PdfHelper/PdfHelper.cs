@@ -1,18 +1,17 @@
-﻿using SIGL_Cadastru.App.Entities;
-using SIGL_Cadastru.Repo.Models;
+﻿using SIGL_Cadastru.Repo.Models;
 using Spire.Pdf;
-using Spire.Pdf.Exporting.XPS.Schema;
 using Spire.Pdf.Graphics;
 using Spire.Pdf.Tables;
 using System.Drawing;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace SIGL_Cadastru.App.PdfHelper
 {
     internal static class PdfHelper
     {
-        private static PdfFontFamily fontFamily = PdfFontFamily.TimesRoman;
+        static PdfFontFamily fontFamily = PdfFontFamily.TimesRoman;
+        static PdfTrueTypeFont fontRegular = new PdfTrueTypeFont(new Font("Times New Roman", 11, FontStyle.Regular), 10f, true);
+        static PdfTrueTypeFont FontBold = new PdfTrueTypeFont(new Font("Times New Roman", 11, FontStyle.Bold), 10f, true);
 
         public static PdfDocument Create(Cerere cerere) 
         {
@@ -41,10 +40,9 @@ namespace SIGL_Cadastru.App.PdfHelper
 
         private static void DrawNrCadastral(this PdfPageBase page, string NrCadastral)
         {
-            PdfFont font = new PdfFont(fontFamily, 10f, PdfFontStyle.Regular);
             PdfBrush brush = PdfBrushes.Black;
             PointF location = new PointF(0, 0);
-            page.Canvas.DrawString("Nr. Cadastral: " + NrCadastral, font, brush, location);
+            page.Canvas.DrawString("Nr. Cadastral: " + NrCadastral, fontRegular, brush, location);
         }
         private static void DrawTable(this PdfPageBase page, List<Document> list) 
         {
@@ -94,10 +92,7 @@ namespace SIGL_Cadastru.App.PdfHelper
         private static void Table_BeginRowLayout(object sender, BeginRowLayoutEventArgs args)
         {
             args.MinimalHeight = 10f;
-
-            PdfFont font = new PdfFont(fontFamily, 10f, PdfFontStyle.Regular);
-
-            args.CellStyle.Font = font;
+            args.CellStyle.Font = fontRegular;
         }
         private static void DrawDataGrid(this PdfPageBase page, string NrCadastral) 
         {
@@ -112,7 +107,7 @@ namespace SIGL_Cadastru.App.PdfHelper
             PdfFont fontBoldSecundar = new PdfFont(fontFamily, 10f, PdfFontStyle.Bold);
             PdfBrush brush = PdfBrushes.Black;
             PdfPen pen = new PdfPen(brush);
-            string clientString = $"{client.Nume} {client.Prenume} \n {client.DataNasterii}, {client.IDNP}";
+            string clientString = $"{client.Nume} {client.Prenume} \n{client.DataNasterii}, {client.IDNP}";
 
             int offset = 40;
 
@@ -131,10 +126,6 @@ namespace SIGL_Cadastru.App.PdfHelper
             location.Y += 15;
             page.Canvas.DrawString("Adresa:", fontRegular, brush, location);
             page.Canvas.DrawString(client.Domiciliu, fontBoldSecundar, brush, location.X + offset, location.Y);
-
-
-
-
         }
         private static void DrawResponsabilData(this PdfPageBase page, Persoana responsabil) 
         {
@@ -215,13 +206,16 @@ namespace SIGL_Cadastru.App.PdfHelper
 
         private static void DrawFooter(this PdfPageBase page) 
         {
-            PdfFont font = new PdfFont(fontFamily, 10f, PdfFontStyle.Regular);
+            PdfTrueTypeFont trueTypeFont = new PdfTrueTypeFont(new Font("Times New Roman", 11, FontStyle.Bold), 10f, true);
             PdfBrush brush = PdfBrushes.Black;
-            PointF location = new PointF(10, 300);
+            PdfPen pen = new PdfPen(brush);
+            PointF location = new PointF(10, 280);
 
-            PdfTrueTypeFont trueTypeFont = new PdfTrueTypeFont(new Font("Arial", 10f, FontStyle.Regular));
+            page.Canvas.DrawString("Data și semnătura solicitantului:", trueTypeFont, brush, location);
+            int offset = 140;
+            page.Canvas.DrawLine(pen, location.X + offset , location.Y+11, location.X + 600, location.Y+11);
 
-            page.Canvas.DrawString("Data și semnătura solicitantului: ", trueTypeFont, brush, location);
+            page.Canvas.DrawRectangle(pen, new Rectangle(new Point(0, 300), new Size((int)page.ActualSize.Width-40, 50)));
 
         }
 

@@ -24,6 +24,8 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
             builder.HasMany(c => c.StatusList)
                 .WithOne(l => l.Cerere)
                 .HasForeignKey(s => s.CerereId);
+            
+
 
             var converter = new CustomPortofoliuConverter();
 

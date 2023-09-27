@@ -33,6 +33,55 @@ namespace SIGL_Cadastru.Repo.Models
 
         }
 
+        public void SetNume(string nume) 
+        {
+            if (string.IsNullOrWhiteSpace(nume))
+                throw new Exception("Numele nu poate fi gol");
+
+            Nume = nume;
+        }
+        public void SetPrenume(string prenume)
+        {
+            if (string.IsNullOrWhiteSpace(prenume))
+                throw new Exception("Prenumele nu poate fi gol");
+
+            Prenume = prenume;
+        }
+        public async Task SetIDNP(IPersoanaRepository repo ,string iDNP)
+        {
+            if (!await repo.isIdnpUniqe(iDNP))
+                throw new IDNPUsedException("this IDNP is already used");
+
+            if (string.IsNullOrWhiteSpace(iDNP))
+                throw new Exception("IDNP-ul nu poate fi gol");
+
+            IDNP = iDNP;
+        }
+        public void SetDomiciliu(string domiciliu) 
+        {
+            if (string.IsNullOrEmpty(domiciliu))
+                throw new Exception("Domiciliu nu poate fi gol");
+
+            Domiciliu = domiciliu;
+        }
+        public void SetDataNasterii(DateOnly date) 
+        {
+            DataNasterii= date;
+        }
+        public void SetEmail(string email) 
+        {
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                if (!IsEmailValid(email))
+                    throw new InvalidEmailException($"this Email: {email} is invalid");
+            }
+
+            Email = email;
+        }
+        public void SetTelefon(string telefon) 
+        {
+            Telefon = telefon;
+        }
         internal Persoana(Guid id, string nume, string prenume, string iDNP, DateOnly dataNasterii, string domiciliu, string? email, string? telefon, Role rol)
         {
             Id = id;

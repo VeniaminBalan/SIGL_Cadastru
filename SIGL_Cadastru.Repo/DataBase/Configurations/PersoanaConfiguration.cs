@@ -16,7 +16,6 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
 
             builder.Property(p => p.Email).HasMaxLength(255);
 
-
             builder.HasData(
 
                     new Persoana(

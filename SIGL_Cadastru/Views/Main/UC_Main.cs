@@ -6,6 +6,7 @@ using SIGL_Cadastru.App.Entities.DataTransferObjects;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
 using System.Data;
 
@@ -18,19 +19,24 @@ namespace SIGL_Cadastru.Views
     {
 
         private readonly IServiceManager _service;
-        private readonly IMapper _mapper;
+        private readonly EventService _eventService;
 
         private CerereQueryParams cerereQuery = new();
 
-        public UC_Main(IServiceManager service, IMapper mapper)
+        public UC_Main(IServiceManager service, EventService eventService)
         {
             _service = service;
-            _mapper = mapper;
+            _eventService = eventService;
+
+            _eventService.CereriUpdateRequire += _eventService_CereriUpdateRequire;
 
             InitializeComponent();
         }
 
-
+        private async void _eventService_CereriUpdateRequire(object? sender, EventArgs e)
+        {
+            await UpdateTable();
+        }
 
         public async Task UpdateTable() 
         {
@@ -66,18 +72,12 @@ namespace SIGL_Cadastru.Views
 
                     var id = cerere.Id;
                     var form_cerereView = new FormFactory().CreateFromViewCerere(id);
-                    form_cerereView.DataChenged += ActualizareButtonPressed;
                     form_cerereView.Show();
 
                     return;
                 }
             }
 
-        }
-
-        public async void ActualizareButtonPressed(object sender, EventArgs e) 
-        {
-            await UpdateTable();
         }
 
         private async void textBox1_TextChanged(object sender, EventArgs e)

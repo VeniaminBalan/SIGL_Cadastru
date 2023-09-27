@@ -9,6 +9,8 @@ using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
+using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Views;
 using SIGL_Cadastru.Views.Setari;
 using System.Configuration;
@@ -50,6 +52,7 @@ namespace SIGL_Cadastru
 
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
                     services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
+                    services.AddSingleton<EventService>();
 
                     //services.AddScoped(typeof(IPdfGeneratorService), typeof(PdfGeneratorService));
                     //services.Configure<PdfGeneratorService>(p => p.Path = sPdfFilePath);
@@ -57,14 +60,13 @@ namespace SIGL_Cadastru
                     services.AddAutoMapper(typeof(Program));
 
 
-                    services.AddScoped<Func<Guid, FormViewCerere>>(
-                        container =>
+                    services.AddScoped<Func<Guid, FormViewCerere>>(container =>
                             Id =>
                             {
                                 var service = container.GetRequiredService<IServiceManager>();
-                                //var pdfService = container.GetRequiredService<IPdfGeneratorService>();
+                                var eventService = container.GetRequiredService<EventService>();
                                 var pdfService = new PdfGeneratorService(sPdfFilePath);
-                                return new FormViewCerere(service, pdfService, Id);
+                                return new FormViewCerere(service, pdfService, eventService, Id);
                             });
 
                     services.AddTransient<FormMain>(container => FormMain.Create());
@@ -73,38 +75,53 @@ namespace SIGL_Cadastru
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
                         var pdfService = new PdfGeneratorService(sPdfFilePath);
+                        var eventService = container.GetRequiredService<EventService>();
 
-                        var formCerere = new FormCerere(repository, pdfService);
+                        var formCerere = new FormCerere(repository, pdfService, eventService);
                         return formCerere;
                     });
                     services.AddTransient<FormSetari>(container =>
                     {
                         var service = container.GetRequiredService<IServiceManager>();
+                        var eventService = container.GetRequiredService<EventService>();
 
-                        return FormSetari.Create(service); ;
+                        return FormSetari.Create(service, eventService); ;
                     });
                     services.AddScoped<UC_Main>(container => 
                     {
                         var mapper = container.GetRequiredService<IMapper>();
                         var service = container.GetRequiredService<IServiceManager>();
+                        var eventService = container.GetRequiredService<EventService>();
 
-                        var uc_main = new UC_Main(service, mapper);
+                        var uc_main = new UC_Main(service, eventService);
                         return uc_main;
                     });
                     services.AddTransient<UC_PersoanaExistenta>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
                         var mapper = container.GetRequiredService<IMapper>();
-                        var uc_PE = new UC_PersoanaExistenta(repository, mapper);
+                        var eventService = container.GetRequiredService<EventService>();
+                        var uc_PE = new UC_PersoanaExistenta(repository, eventService);
                         return uc_PE;
                     });
-                    services.AddTransient<UC_PersoanaNoua>(container =>
-                    {
-                        var repository = container.GetRequiredService<IRepositoryManager>();
-                        var mapper = container.GetRequiredService<IMapper>();
-                        var uc_PNoua = new UC_PersoanaNoua(repository, mapper);
-                        return uc_PNoua;
-                    });
+                    services.AddTransient<Func<Role, UC_PersoanaNoua>>(container =>
+                        role =>
+                        {
+                            var repository = container.GetRequiredService<IRepositoryManager>();
+                            var eventService = container.GetRequiredService<EventService>();
+                            var uc_PNoua = new UC_PersoanaNoua(repository, eventService,role);
+                            return uc_PNoua;
+                        });
+                    services.AddTransient<Func<Persoana, UC_EditPersoana>>(container => 
+                        persoana => 
+                        {
+                            var service = container.GetRequiredService<IServiceManager>();
+                            var eventService = container.GetRequiredService<EventService>();
+                            var formSetari = container.GetRequiredService<FormSetari>();
+                            var uc_pEdit = new UC_EditPersoana(service, eventService, formSetari, persoana);
+
+                            return uc_pEdit;
+                        });
                 });
         }
 
@@ -153,9 +170,16 @@ namespace SIGL_Cadastru
                 return _serviceProvider.GetRequiredService<UC_PersoanaExistenta>();
             }
 
-            public UC_PersoanaNoua CreateUC_PersoanaNoua()
+            public UC_EditPersoana CreateUC_PersoanaEdit(Persoana persoana)
             {
-                return _serviceProvider.GetRequiredService<UC_PersoanaNoua>();
+                var _form2Factory = _serviceProvider.GetRequiredService<Func<Persoana, UC_EditPersoana>>();
+                return _form2Factory(persoana);
+            }
+
+            public UC_PersoanaNoua CreateUC_PersoanaNoua(Role role)
+            {
+                var _form2Factory = _serviceProvider.GetRequiredService<Func<Role, UC_PersoanaNoua>>();
+                return _form2Factory(role);
             }
 
             public FormViewCerere CreateFromViewCerere(Guid Id)

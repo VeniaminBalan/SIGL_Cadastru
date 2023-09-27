@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
+using SIGL_Cadastru.Repo.Models;
 
 namespace SIGL_Cadastru.Repo.DataBase.Configurations
 {
@@ -13,6 +14,7 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
             builder.HasOne(l => l.Cerere)
                 .WithMany(c => c.StatusList)
                 .HasForeignKey(l => l.CerereId);
+
         }
     }
 }

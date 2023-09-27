@@ -7,6 +7,7 @@ using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Repo.Query;
+using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
 using System.Data;
 using System.Diagnostics;
@@ -16,10 +17,9 @@ namespace SIGL_Cadastru.Views
 {
     public partial class FormCerere : Form
     {
-        public event EventHandler CreateButtonPressed;
-
         private readonly IRepositoryManager _repo;
         private readonly IPdfGeneratorService _pdfService;
+        private readonly EventService _eventService;
 
         private HashSet<Lucrare> Lucrari = new();
 
@@ -31,11 +31,12 @@ namespace SIGL_Cadastru.Views
 
         private IUCPersoana selected_uc_persoana;
 
-        public FormCerere(IRepositoryManager repo, IPdfGeneratorService pdfService)
+        public FormCerere(IRepositoryManager repo, IPdfGeneratorService pdfService, EventService eventService)
         {
             _repo = repo;
             _pdfService = pdfService;
-
+            _eventService = eventService;
+           
             InitializeComponent();
             SetUC();
         }
@@ -144,7 +145,7 @@ namespace SIGL_Cadastru.Views
 
             var factory = new FormFactory();
 
-            var uc_PNoua = factory.CreateUC_PersoanaNoua();
+            var uc_PNoua = factory.CreateUC_PersoanaNoua(Role.Client);
             this.persoanaNoua = uc_PNoua;
             panelUC.Controls.Add(uc_PNoua);
 
@@ -161,10 +162,6 @@ namespace SIGL_Cadastru.Views
             {
                 e.Handled = true;
             }
-        }
-        private void FormCerere_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            _repo.DetachAll();
         }
         private async Task<Cerere> CreateCerere() 
         {
@@ -223,8 +220,9 @@ namespace SIGL_Cadastru.Views
             }
 
             MessageBox.Show("Cererea a fost creata!");
-            CreateButtonPressed?.Invoke(this, EventArgs.Empty);
 
+            _eventService.OnCereriUpdateRequire(EventArgs.Empty);
+            this.Dispose();
         }
         private async void Button_vizualizare_Click(object sender, EventArgs e)
         {
@@ -268,6 +266,16 @@ namespace SIGL_Cadastru.Views
                 return;
             }
 
+        }
+
+        private void FormCerere_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            foreach (Control control in panelUC.Controls)
+            {
+
+                control.Dispose();
+            }
+            _repo.DetachAll();
         }
     }
 

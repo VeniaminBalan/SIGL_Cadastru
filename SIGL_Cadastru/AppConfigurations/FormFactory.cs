@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Views;
 using SIGL_Cadastru.Views.Setari;
 using System;
@@ -43,13 +44,18 @@ namespace SIGL_Cadastru.AppConfigurations
             return _provider.CreateUC_PersoanaExistenta();
         }
 
-        public UC_PersoanaNoua CreateUC_PersoanaNoua()
+        public UC_PersoanaNoua CreateUC_PersoanaNoua(Role role)
         {
-            return _provider.CreateUC_PersoanaNoua();
+            return _provider.CreateUC_PersoanaNoua(role);
         }
         public FormSetari CreateFormSetari() 
         {
             return _provider.CreateFormSetari();
+        }
+
+        public UC_EditPersoana CreateUC_PersoanaEdit(Persoana perosana)
+        {
+            return _provider.CreateUC_PersoanaEdit(perosana);
         }
     }
 }

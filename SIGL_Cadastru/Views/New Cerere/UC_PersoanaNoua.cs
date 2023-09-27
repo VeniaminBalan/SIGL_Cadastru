@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
 
 
@@ -9,22 +10,14 @@ namespace SIGL_Cadastru.Views
     public partial class UC_PersoanaNoua : UserControl, IUCPersoana
     {
         private readonly IRepositoryManager _repo;
-        private readonly IMapper _mapper;
+        private readonly EventService _eventService;
         private readonly Role _rol;
 
-
-        public UC_PersoanaNoua(IRepositoryManager repo, IMapper mapper, Role rol)
+        public UC_PersoanaNoua(IRepositoryManager repo, EventService eventService, Role role)
         {
             _repo = repo;
-            _mapper = mapper;
-            _rol = rol;
-
-            InitializeComponent();
-        }
-        public UC_PersoanaNoua(IRepositoryManager repo, IMapper mapper)
-        {
-            _repo = repo;
-            _mapper = mapper;
+            _eventService = eventService;
+            _rol = role;
             InitializeComponent();
         }
 

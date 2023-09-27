@@ -56,5 +56,14 @@ namespace SIGL_Cadastru.Repo.Repository
 
             return false;
         }
+
+        public async Task<bool> HasDependencies(Guid Id) 
+        {
+            var p = await _appDbContext.Set<Cerere>()
+                .Where(c => c.ClientId == Id)
+                .AnyAsync();
+
+            return p;
+        }
     }
 }
