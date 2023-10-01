@@ -1,4 +1,6 @@
 ﻿using Contracts;
+using SIGL_Cadastru.AppConfigurations;
+using SIGL_Cadastru.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,8 @@ namespace SIGL_Cadastru.App.Contracts
 {
     public interface IServiceManager
     {
+        EventService EventService { get; }
+        IFormFactory FormFactory { get; }
         ICerereService CerereService { get; }
         IPersoanaService PersoanaService { get; }
         ICerereStatusService CerereStatus { get; }

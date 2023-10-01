@@ -1,14 +1,7 @@
 ﻿using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using SIGL_Cadastru.Views.Setari.Persoane;
+
 
 namespace SIGL_Cadastru.Views.Setari
 {
@@ -17,6 +10,9 @@ namespace SIGL_Cadastru.Views.Setari
         private readonly IServiceManager _service;
         private readonly EventService _eventService;
         private static FormSetari? _form;
+
+        private UC_PersoaneSetari uc_persoaneSetari = null;
+        private UC_PagePersoanaNoua uc_persoanaNoua = null;
 
         public bool UpdateRequire = false;
 
@@ -40,7 +36,23 @@ namespace SIGL_Cadastru.Views.Setari
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            splitContainer1.Panel2.Controls.Add(UC_PersoaneSetari.Create(_service, _eventService, this));
+            if (uc_persoaneSetari is null) 
+            {
+                uc_persoaneSetari = UC_PersoaneSetari.Create(_service, _eventService, this);
+                splitContainer1.Panel2.Controls.Add(uc_persoaneSetari);
+            }
+
+            uc_persoaneSetari.ShowUC();
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (uc_persoanaNoua is null) 
+            {
+                uc_persoanaNoua;
+                splitContainer1.Panel2.Controls.Add(uc_persoanaNoua);
+            }
+            uc_persoaneSetari.ShowUC();
         }
 
         private void FormSetari_FormClosed(object sender, FormClosedEventArgs e)
@@ -56,5 +68,6 @@ namespace SIGL_Cadastru.Views.Setari
 
             this.Dispose();
         }
+
     }
 }

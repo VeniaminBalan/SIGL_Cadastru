@@ -2,6 +2,7 @@
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Views;
 using SIGL_Cadastru.Views.Setari;
+using SIGL_Cadastru.Views.Setari.Persoane;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,11 @@ namespace SIGL_Cadastru.AppConfigurations
         public UC_EditPersoana CreateUC_PersoanaEdit(Persoana perosana)
         {
             return _provider.CreateUC_PersoanaEdit(perosana);
+        }
+
+        public UC_PagePersoanaNoua CreatePersoanaNouaPage()
+        {
+            return _provider.CreatePersoanaNouaPage();
         }
     }
 }

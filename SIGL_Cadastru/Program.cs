@@ -13,6 +13,7 @@ using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Views;
 using SIGL_Cadastru.Views.Setari;
+using SIGL_Cadastru.Views.Setari.Persoane;
 using System.Configuration;
 using System.Reflection;
 
@@ -122,6 +123,13 @@ namespace SIGL_Cadastru
 
                             return uc_pEdit;
                         });
+                    services.AddTransient<UC_PagePersoanaNoua>(container => 
+                    {
+                        var eventService = container.GetRequiredService<EventService>();
+                        var service = container.GetRequiredService<IServiceManager>();
+                        return new UC_PagePersoanaNoua(service, eventService);
+
+                    });
                 });
         }
 
@@ -191,6 +199,11 @@ namespace SIGL_Cadastru
             public FormSetari CreateFormSetari()
             {
                 return _serviceProvider.GetRequiredService<FormSetari>();
+            }
+
+            public UC_PagePersoanaNoua CreatePersoanaNouaPage()
+            {
+                return _serviceProvider.GetRequiredService<UC_PagePersoanaNoua>();
             }
         }
 
