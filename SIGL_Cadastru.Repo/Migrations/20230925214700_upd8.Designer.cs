@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIGL_Cadastru.Repo.DataBase;
 
@@ -10,9 +11,11 @@ using SIGL_Cadastru.Repo.DataBase;
 namespace SIGL_Cadastru.Repo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230925214700_upd8")]
+    partial class upd8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
@@ -142,7 +145,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("20ba7528-9e72-46fe-946a-99efba3d4a49"),
+                            Id = new Guid("012be37b-464c-4eec-8fb3-53f13e5f5db3"),
                             DataNasterii = new DateOnly(1977, 7, 16),
                             Domiciliu = "sat. Gribova",
                             Email = "geoproiectgrup@mail.ru",
@@ -154,7 +157,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3453d494-75e5-46b1-96ff-2a3790f2d7a5"),
+                            Id = new Guid("ceee0a5d-d828-4f45-99d3-37a3922a2e48"),
                             DataNasterii = new DateOnly(2002, 8, 13),
                             Domiciliu = "or. Drochia",
                             Email = "",
@@ -182,7 +185,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                     b.HasOne("SIGL_Cadastru.Repo.Models.Persoana", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("SIGL_Cadastru.Repo.Models.Persoana", "Executant")

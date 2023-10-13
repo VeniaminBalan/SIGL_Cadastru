@@ -108,6 +108,7 @@
             this.Name = "UC_PersoanaExistenta";
             this.Size = new System.Drawing.Size(450, 250);
             this.Load += new System.EventHandler(this.UC_PersoanaExistenta_Load);
+            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.UC_PersoanaExistenta_ControlRemoved);
             ((System.ComponentModel.ISupportInitialize)(this.persoanaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.persoanaDtoBindingSource)).EndInit();
             this.ResumeLayout(false);

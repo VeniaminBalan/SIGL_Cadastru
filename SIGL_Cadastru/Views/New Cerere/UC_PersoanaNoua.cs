@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Contracts;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
+using System.Data;
 
 
 namespace SIGL_Cadastru.Views
@@ -9,26 +11,16 @@ namespace SIGL_Cadastru.Views
     public partial class UC_PersoanaNoua : UserControl, IUCPersoana
     {
         private readonly IRepositoryManager _repo;
-        private readonly IMapper _mapper;
-        private readonly Role _rol;
+        private readonly EventService _eventService;
 
-
-        public UC_PersoanaNoua(IRepositoryManager repo, IMapper mapper, Role rol)
+        public UC_PersoanaNoua(IRepositoryManager repo, EventService eventService)
         {
             _repo = repo;
-            _mapper = mapper;
-            _rol = rol;
-
-            InitializeComponent();
-        }
-        public UC_PersoanaNoua(IRepositoryManager repo, IMapper mapper)
-        {
-            _repo = repo;
-            _mapper = mapper;
+            _eventService = eventService;
             InitializeComponent();
         }
 
-        public async Task<Result<Persoana>> GetPersoana() 
+        public async Task<Result<Persoana>> GetPersoana(Role rol) 
         {
             var nume = textBoxNume.Text;
             var prenume = textBoxPrenume.Text; 
@@ -49,7 +41,7 @@ namespace SIGL_Cadastru.Views
                     domicilul, 
                     email, 
                     telefon,
-                    _rol,
+                    rol,
                     _repo.Persoana);
 
                 return new Result<Persoana>(ResultState.NewObject, p);
@@ -71,6 +63,16 @@ namespace SIGL_Cadastru.Views
         public void HideUC()
         {
             this.Visible = false;
+        }
+
+        public void ClearData() 
+        {
+            textBoxNume.Text = "";
+            textBoxPrenume.Text = "";
+            textBoxIDNP.Text = "";
+            textBoxEmail.Text = "";
+            textBoxTelefon.Text = "";
+            textBoxAdresa.Text = "";
         }
     }
 }

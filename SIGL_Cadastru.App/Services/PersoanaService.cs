@@ -5,10 +5,10 @@ using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Repo.Query;
 
-namespace Services;
 
+namespace SIGL_Cadastru.App.Services;
 
-internal sealed class PersoanaService : IPersoanaService
+public sealed class PersoanaService : IPersoanaService
 {
 
     private readonly IRepositoryManager _repo;

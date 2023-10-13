@@ -249,9 +249,9 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Location = new System.Drawing.Point(344, 413);
+            this.panel1.Location = new System.Drawing.Point(307, 413);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(554, 125);
+            this.panel1.Size = new System.Drawing.Size(885, 125);
             this.panel1.TabIndex = 14;
             // 
             // label_telefon
@@ -387,7 +387,7 @@
             this.dataGridViewStatus.RowHeadersWidth = 51;
             this.dataGridViewStatus.RowTemplate.Height = 29;
             this.dataGridViewStatus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewStatus.Size = new System.Drawing.Size(279, 362);
+            this.dataGridViewStatus.Size = new System.Drawing.Size(279, 315);
             this.dataGridViewStatus.TabIndex = 17;
             this.dataGridViewStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStatus_CellContentClick);
             // 
@@ -424,7 +424,7 @@
             // 
             // button_adaugareStare
             // 
-            this.button_adaugareStare.Location = new System.Drawing.Point(996, 389);
+            this.button_adaugareStare.Location = new System.Drawing.Point(996, 333);
             this.button_adaugareStare.Name = "button_adaugareStare";
             this.button_adaugareStare.Size = new System.Drawing.Size(113, 49);
             this.button_adaugareStare.TabIndex = 19;
@@ -434,7 +434,7 @@
             // 
             // button_reset
             // 
-            this.button_reset.Location = new System.Drawing.Point(1129, 384);
+            this.button_reset.Location = new System.Drawing.Point(1129, 333);
             this.button_reset.Name = "button_reset";
             this.button_reset.Size = new System.Drawing.Size(63, 29);
             this.button_reset.TabIndex = 20;
@@ -444,7 +444,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(913, 384);
+            this.button2.Location = new System.Drawing.Point(913, 333);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(63, 29);
             this.button2.TabIndex = 21;

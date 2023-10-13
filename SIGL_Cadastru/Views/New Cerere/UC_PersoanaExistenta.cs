@@ -3,6 +3,7 @@ using Contracts;
 using Exceptions;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Repo.Query;
+using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
 using System.Data;
 
@@ -12,7 +13,7 @@ namespace SIGL_Cadastru.Views
     public partial class UC_PersoanaExistenta : UserControl, IUCPersoana
     {
         private readonly IRepositoryManager _repo;
-        private readonly IMapper _mapper;
+        private readonly EventService _eventService;
         private List<Persoana> clienti = new();
         private ComboItem? selectedItem;
         private string search = string.Empty;
@@ -26,11 +27,17 @@ namespace SIGL_Cadastru.Views
             else label_selectedPerson.Text = "";
         }
 
-        public UC_PersoanaExistenta(IRepositoryManager repo, IMapper mapper)
+        public UC_PersoanaExistenta(IRepositoryManager repo, EventService eventService)
         {
             _repo = repo;
-            _mapper = mapper;
+            _eventService = eventService;
+            eventService.PersoaneUpdateRequire += EventService_PersoaneUpdateRequire;
             InitializeComponent();
+        }
+
+        private async void EventService_PersoaneUpdateRequire(object? sender, EventArgs e)
+        {
+            UC_PersoanaExistenta_Load(this, EventArgs.Empty);
         }
 
         public void HideUC()
@@ -43,7 +50,7 @@ namespace SIGL_Cadastru.Views
             this.BringToFront();
         }
 
-        public Task<Result<Persoana>> GetPersoana()
+        public Task<Result<Persoana>> GetPersoana(Role rol = Role.Client)
         {
             if (selectedItem is null)
                 throw new PersonNotFoundException("persoana nu este selectata");
@@ -54,13 +61,10 @@ namespace SIGL_Cadastru.Views
 
 
         private async void UC_PersoanaExistenta_Load(object sender, EventArgs e)
-        {
-            listBox_persoane.Items.Clear();          
-
+        {       
             await GetQuariablePeopleAsync(new PeopleQueryParams());
             SetSelectedItem(listBox_persoane.SelectedItem as ComboItem);
             await UpdateListBox();
-
         }
 
         private async Task UpdateListBox() 
@@ -89,6 +93,12 @@ namespace SIGL_Cadastru.Views
         {
             search = textBox_search.Text;
             await UpdateListBox();
+        }
+
+        private void UC_PersoanaExistenta_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            _eventService.PersoaneUpdateRequire -= EventService_PersoaneUpdateRequire;
+            this.Dispose();
         }
     }
 }

@@ -6,10 +6,10 @@ using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.App.Entities;
 
-namespace Services;
 
+namespace SIGL_Cadastru.App.Services;
 
-internal sealed class CerereService : ICerereService
+public sealed class CerereService : ICerereService
 {
     private readonly IRepositoryManager _repo;
 
@@ -37,18 +37,6 @@ internal sealed class CerereService : ICerereService
     public async Task<IEnumerable<CerereDto>> GetAllAsync(CerereQueryParams queryParams, bool trackChanges)
     {
         var data = await _repo.Cerere.GetAllAync(queryParams, trackChanges);
-
-        //if (queryParams.TimeFilter is not null)
-        //    data = data.FilterBy(queryParams.TimeFilter).ToList();
-
-
-        //if(queryParams.StateFilter is not null)
-        //    ret = ret.FilterByState(queryParams.StateFilter);
-
-        //if (queryParams.Search is not null)
-        //    ret = ret.SearchBy(queryParams.Search).ToList();
-
-
 
         return data.Select(CerereMapper.Map);
 
