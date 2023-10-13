@@ -18,7 +18,7 @@ namespace SIGL_Cadastru.AppConfigurations
         FormSetari CreateFormSetari();
         UC_Main CreateUC_Main();
         UC_PersoanaExistenta CreateUC_PersoanaExistenta();
-        UC_PersoanaNoua CreateUC_PersoanaNoua(Role role);
+        UC_PersoanaNoua CreateUC_PersoanaNoua();
         UC_EditPersoana CreateUC_PersoanaEdit(Persoana perosana);
         UC_PagePersoanaNoua CreatePersoanaNouaPage();
     }

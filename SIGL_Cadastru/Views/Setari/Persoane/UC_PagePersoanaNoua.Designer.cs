@@ -30,6 +30,7 @@
         {
             this.panel_persoanaNoua = new System.Windows.Forms.Panel();
             this.button_save = new System.Windows.Forms.Button();
+            this.comboBox_rols = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // panel_persoanaNoua
@@ -47,11 +48,25 @@
             this.button_save.TabIndex = 1;
             this.button_save.Text = "Salvează";
             this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // comboBox_rols
+            // 
+            this.comboBox_rols.FormattingEnabled = true;
+            this.comboBox_rols.Items.AddRange(new object[] {
+            "Client",
+            "Executant",
+            "Responsabil"});
+            this.comboBox_rols.Location = new System.Drawing.Point(21, 328);
+            this.comboBox_rols.Name = "comboBox_rols";
+            this.comboBox_rols.Size = new System.Drawing.Size(151, 28);
+            this.comboBox_rols.TabIndex = 2;
             // 
             // UC_PagePersoanaNoua
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.comboBox_rols);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.panel_persoanaNoua);
             this.Name = "UC_PagePersoanaNoua";
@@ -64,5 +79,6 @@
 
         private Panel panel_persoanaNoua;
         private Button button_save;
+        private ComboBox comboBox_rols;
     }
 }

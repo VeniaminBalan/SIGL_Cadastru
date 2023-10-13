@@ -145,7 +145,7 @@ namespace SIGL_Cadastru.Views
 
             var factory = new FormFactory();
 
-            var uc_PNoua = factory.CreateUC_PersoanaNoua(Role.Client);
+            var uc_PNoua = factory.CreateUC_PersoanaNoua();
             this.persoanaNoua = uc_PNoua;
             panelUC.Controls.Add(uc_PNoua);
 

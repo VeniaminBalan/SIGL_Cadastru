@@ -52,11 +52,12 @@ namespace SIGL_Cadastru.Views.Setari
 
         public void HideUC()
         {
-            throw new NotImplementedException();
+            this.Visible = false;
         }
         public void ShowUC()
         {
-            throw new NotImplementedException();
+            this.Visible = true;
+            this.BringToFront();
         }
 
         private async void button_edit_Click(object sender, EventArgs e)

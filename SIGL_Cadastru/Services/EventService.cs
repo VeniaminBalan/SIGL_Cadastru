@@ -1,8 +1,11 @@
 ﻿namespace SIGL_Cadastru.Services;
 
 
-//global event raising
-public class EventService // singleton
+/// <summary>
+/// global event raising
+/// singleton service
+/// </summary>
+public class EventService 
 {
     public event EventHandler CereriUpdateRequire;
     public  virtual void OnCereriUpdateRequire(EventArgs e)

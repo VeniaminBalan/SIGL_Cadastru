@@ -4,18 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repository;
-using Services;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Service;
 using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Views;
 using SIGL_Cadastru.Views.Setari;
 using SIGL_Cadastru.Views.Setari.Persoane;
 using System.Configuration;
-using System.Reflection;
 
 namespace SIGL_Cadastru
 {
@@ -105,14 +104,13 @@ namespace SIGL_Cadastru
                         var uc_PE = new UC_PersoanaExistenta(repository, eventService);
                         return uc_PE;
                     });
-                    services.AddTransient<Func<Role, UC_PersoanaNoua>>(container =>
-                        role =>
-                        {
-                            var repository = container.GetRequiredService<IRepositoryManager>();
-                            var eventService = container.GetRequiredService<EventService>();
-                            var uc_PNoua = new UC_PersoanaNoua(repository, eventService,role);
-                            return uc_PNoua;
-                        });
+                    services.AddTransient<UC_PersoanaNoua>(container =>
+                    {
+                        var repository = container.GetRequiredService<IRepositoryManager>();
+                        var eventService = container.GetRequiredService<EventService>();
+                        var uc_PNoua = new UC_PersoanaNoua(repository, eventService);
+                        return uc_PNoua;
+                    });
                     services.AddTransient<Func<Persoana, UC_EditPersoana>>(container => 
                         persoana => 
                         {
@@ -184,10 +182,10 @@ namespace SIGL_Cadastru
                 return _form2Factory(persoana);
             }
 
-            public UC_PersoanaNoua CreateUC_PersoanaNoua(Role role)
+            public UC_PersoanaNoua CreateUC_PersoanaNoua()
             {
-                var _form2Factory = _serviceProvider.GetRequiredService<Func<Role, UC_PersoanaNoua>>();
-                return _form2Factory(role);
+                var _form2Factory = _serviceProvider.GetRequiredService<UC_PersoanaNoua>();
+                return _form2Factory;
             }
 
             public FormViewCerere CreateFromViewCerere(Guid Id)

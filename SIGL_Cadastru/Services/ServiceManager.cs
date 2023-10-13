@@ -1,9 +1,10 @@
 ﻿using Contracts;
 using SIGL_Cadastru.App.Contracts;
+using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Services;
 
-namespace SIGL_Cadastru.ServiceManager;
+namespace SIGL_Cadastru.Service;
 
 public sealed class ServiceManager : IServiceManager
 {
@@ -26,13 +27,8 @@ public sealed class ServiceManager : IServiceManager
     public IPersoanaService PersoanaService => _persoanaService.Value;
     public ICerereStatusService CerereStatus => _cerereStatusService.Value;
     public IRepositoryManager RepositoryManager => _repositoryManager;
-
-    public EventService EventService => new EventService();
-
     public IFormFactory FormFactory => new FormFactory();
-
     public async Task SaveAsync() => await _repositoryManager.SaveAsync();
-
     public void DetachAll() => _repositoryManager.DetachAll();
 
 }

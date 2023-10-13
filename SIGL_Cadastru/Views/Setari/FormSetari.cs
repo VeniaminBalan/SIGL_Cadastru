@@ -49,10 +49,10 @@ namespace SIGL_Cadastru.Views.Setari
         {
             if (uc_persoanaNoua is null) 
             {
-                uc_persoanaNoua;
+                uc_persoanaNoua = _service.FormFactory.CreatePersoanaNouaPage();
                 splitContainer1.Panel2.Controls.Add(uc_persoanaNoua);
             }
-            uc_persoaneSetari.ShowUC();
+            uc_persoanaNoua.ShowUC();
         }
 
         private void FormSetari_FormClosed(object sender, FormClosedEventArgs e)

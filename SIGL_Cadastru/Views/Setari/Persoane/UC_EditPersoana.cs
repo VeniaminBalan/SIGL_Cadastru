@@ -2,19 +2,11 @@
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using SIGL_Cadastru.Utils;
 
 namespace SIGL_Cadastru.Views.Setari
 {
-    public partial class UC_EditPersoana : UserControl
+    public partial class UC_EditPersoana : UserControl, IUserControl
     {
         private readonly IServiceManager _service;
         private readonly EventService _eventService;
@@ -40,6 +32,16 @@ namespace SIGL_Cadastru.Views.Setari
             textBoxAdresa.Text = persoana.Domiciliu;
             textBoxTelefon.Text = persoana.Telefon;
             dateTimePicker.Value = persoana.DataNasterii.ToDateTime(TimeOnly.MinValue);
+        }
+
+        public void HideUC()
+        {
+            this.Visible = false;
+        }
+        public void ShowUC()
+        {
+            this.Visible = true;
+            this.BringToFront();
         }
 
         private async void button_save_Click(object sender, EventArgs e)
@@ -92,7 +94,7 @@ namespace SIGL_Cadastru.Views.Setari
 
             var state = _service.RepositoryManager.context.Entry(_persoana).State;
 
-            if (state == EntityState.Modified) 
+            if (state == Microsoft.EntityFrameworkCore.EntityState.Modified) 
             {
                 await _service.SaveAsync();
                 MessageBox.Show("Modificarile au fost salvate");

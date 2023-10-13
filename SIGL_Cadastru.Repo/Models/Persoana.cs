@@ -132,13 +132,13 @@ namespace SIGL_Cadastru.Repo.Models
             return new Persoana 
             {
                 Id = id,
-                Nume= nume,
-                Prenume= prenume,
-                IDNP = iDNP,
+                Nume= nume.Trim(),
+                Prenume= prenume.Trim(),
+                IDNP = iDNP.Trim(),
                 DataNasterii= dataNasterii,
-                Domiciliu= domiciliu,
-                Email = email,
-                Telefon= telefon,
+                Domiciliu= domiciliu.Trim(),
+                Email = email.Trim(),
+                Telefon= telefon.Trim(),
                 Rol= rol
             };
         }
@@ -150,6 +150,10 @@ namespace SIGL_Cadastru.Repo.Models
             return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
         }
 
+        public override string? ToString()
+        {
+            return $"Nume: {Nume}, Prenume: {Prenume}, IDNP: {IDNP}";
+        }
     }
 
 }

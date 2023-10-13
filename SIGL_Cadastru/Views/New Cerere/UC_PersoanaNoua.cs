@@ -3,6 +3,7 @@ using Contracts;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
+using System.Data;
 
 
 namespace SIGL_Cadastru.Views
@@ -11,17 +12,15 @@ namespace SIGL_Cadastru.Views
     {
         private readonly IRepositoryManager _repo;
         private readonly EventService _eventService;
-        private readonly Role _rol;
 
-        public UC_PersoanaNoua(IRepositoryManager repo, EventService eventService, Role role)
+        public UC_PersoanaNoua(IRepositoryManager repo, EventService eventService)
         {
             _repo = repo;
             _eventService = eventService;
-            _rol = role;
             InitializeComponent();
         }
 
-        public async Task<Result<Persoana>> GetPersoana() 
+        public async Task<Result<Persoana>> GetPersoana(Role rol) 
         {
             var nume = textBoxNume.Text;
             var prenume = textBoxPrenume.Text; 
@@ -42,7 +41,7 @@ namespace SIGL_Cadastru.Views
                     domicilul, 
                     email, 
                     telefon,
-                    _rol,
+                    rol,
                     _repo.Persoana);
 
                 return new Result<Persoana>(ResultState.NewObject, p);
@@ -64,6 +63,16 @@ namespace SIGL_Cadastru.Views
         public void HideUC()
         {
             this.Visible = false;
+        }
+
+        public void ClearData() 
+        {
+            textBoxNume.Text = "";
+            textBoxPrenume.Text = "";
+            textBoxIDNP.Text = "";
+            textBoxEmail.Text = "";
+            textBoxTelefon.Text = "";
+            textBoxAdresa.Text = "";
         }
     }
 }

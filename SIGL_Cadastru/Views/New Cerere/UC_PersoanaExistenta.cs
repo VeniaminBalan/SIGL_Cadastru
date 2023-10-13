@@ -50,7 +50,7 @@ namespace SIGL_Cadastru.Views
             this.BringToFront();
         }
 
-        public Task<Result<Persoana>> GetPersoana()
+        public Task<Result<Persoana>> GetPersoana(Role rol = Role.Client)
         {
             if (selectedItem is null)
                 throw new PersonNotFoundException("persoana nu este selectata");

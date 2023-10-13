@@ -6,10 +6,10 @@ using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.App.Entities;
 
-namespace Services;
 
+namespace SIGL_Cadastru.App.Services;
 
-internal sealed class CerereService : ICerereService
+public sealed class CerereService : ICerereService
 {
     private readonly IRepositoryManager _repo;
 

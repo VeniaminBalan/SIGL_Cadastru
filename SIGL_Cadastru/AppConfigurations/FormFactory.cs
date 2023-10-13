@@ -45,9 +45,9 @@ namespace SIGL_Cadastru.AppConfigurations
             return _provider.CreateUC_PersoanaExistenta();
         }
 
-        public UC_PersoanaNoua CreateUC_PersoanaNoua(Role role)
+        public UC_PersoanaNoua CreateUC_PersoanaNoua()
         {
-            return _provider.CreateUC_PersoanaNoua(role);
+            return _provider.CreateUC_PersoanaNoua();
         }
         public FormSetari CreateFormSetari() 
         {

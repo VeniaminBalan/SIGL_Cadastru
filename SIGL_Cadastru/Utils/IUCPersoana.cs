@@ -9,6 +9,6 @@ namespace SIGL_Cadastru.Utils
 {
     public interface IUCPersoana : IUserControl
     {
-        public Task<Result<Persoana>> GetPersoana();
+        public Task<Result<Persoana>> GetPersoana(Role rol = Role.Client);
     }
 }
