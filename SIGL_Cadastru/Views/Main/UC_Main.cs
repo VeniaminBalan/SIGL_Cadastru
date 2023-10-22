@@ -17,7 +17,6 @@ namespace SIGL_Cadastru.Views
 {
     public partial class UC_Main : UserControl
     {
-
         private readonly IServiceManager _service;
         private readonly EventService _eventService;
 
@@ -80,6 +79,7 @@ namespace SIGL_Cadastru.Views
 
         }
 
+        // Query -->
         private async void textBox1_TextChanged(object sender, EventArgs e)
         {
             var text = textBox1.Text;
@@ -92,7 +92,6 @@ namespace SIGL_Cadastru.Views
             await UpdateTable();
 
         }
-
         private async void checkBox_Eliberat_CheckedChanged(object sender, EventArgs e)
         {
             var statefilter = new StateFilter();
@@ -114,7 +113,6 @@ namespace SIGL_Cadastru.Views
 
             await UpdateTable();
         }
-
         private async void maskedTextBox_inceput_TextChanged(object sender, EventArgs e)
         {
             maskedTextBox_inceput.ForeColor = Color.Black;
@@ -147,7 +145,6 @@ namespace SIGL_Cadastru.Views
             await UpdateTable();
 
         }
-
         private async void maskedTextBox_panaLa_TextChanged(object sender, EventArgs e)
         {
             maskedTextBox_panaLa.ForeColor = Color.Black;
@@ -179,6 +176,8 @@ namespace SIGL_Cadastru.Views
             cerereQuery.TimeFilter = TimeSpanFilter.Create(TimeFilterMode.EndDate, date);
             await UpdateTable();
         }
+        // <--
+
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -187,19 +186,62 @@ namespace SIGL_Cadastru.Views
             {
                 if (e.Value is not null) 
                 {
-                    string stringValue = e.Value.ToString();
-                    stringValue = stringValue.ToLower();
-                    if ((stringValue.IndexOf("respins") > -1))
+                    string stringValue = e.Value.ToString().ToLower();
+                    if ((stringValue.IndexOf(Status.Respins.ToString().ToLower()) > -1))
                     {
                         e.CellStyle.ForeColor = Color.Red;
-                    } 
-                    else if ((stringValue.IndexOf("eliberat") > -1)) 
+                    }
+                    else if ((stringValue.IndexOf(Status.Eliberat.ToString().ToLower()) > -1))
                     {
                         e.CellStyle.ForeColor = Color.Green;
                     }
+                    else if ((stringValue.IndexOf(Status.LaReceptie.ToString().ToLower()) > -1)) 
+                    {
+                        e.CellStyle.ForeColor = Color.DarkBlue;
+                        e.Value = "La Receptie";
+                    }
+                    else if ((stringValue.IndexOf(Status.Inlucru.ToString().ToLower()) > -1)) 
+                    {
+                        e.Value = "In Lucru";
+                    }
+                }
+            }
+
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "valabilPanaLa") 
+            {
+
+                var cerereDto = dataGridView1.Rows[e.RowIndex].DataBoundItem as CerereDto;
+
+                if (cerereDto!.StareaCererii == Status.Eliberat)
+                    return;
+
+                int valabil;
+                if (cerereDto.Prelungit is not null)
+                    valabil = cerereDto.Prelungit.Value.DayNumber;
+                else
+                    valabil = cerereDto.ValabilPanaLa.DayNumber;
+
+                var days = valabil - DateOnly.FromDateTime(DateTime.Now).DayNumber;
+
+                if (days <= 5)
+                {
+                    e.CellStyle!.ForeColor = Color.Red;
+                }
+                else if (days <= 10)
+                {
+                    e.CellStyle!.ForeColor = Color.DarkOrange;
                 }
             }
         }
 
+        private async void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //var cell = dataGridView1.Columns[e.ColumnIndex].HeaderCell.Value.ToString().Replace(" ", "");
+
+
+            //cerereQuery.SortParams = new Repo.Query.SortQueryParams { SortingColumn = cell, SortingDirection = 0 };
+
+            //await UpdateTable();
+        }
     }
 }

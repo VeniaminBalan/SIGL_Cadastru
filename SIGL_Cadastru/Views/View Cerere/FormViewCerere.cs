@@ -10,6 +10,7 @@ using SIGL_Cadastru.Utils;
 using System.Data;
 using System.Diagnostics;
 using System.Security.Policy;
+using System.Windows.Forms;
 
 
 namespace SIGL_Cadastru.Views
@@ -92,10 +93,33 @@ namespace SIGL_Cadastru.Views
             label_Nr.Text = cerereDto.Nr;
 
             label_valabilDeLa.Text = cerereDto.ValabilDeLa.ToString();
-            label_ValabilPanaLa.Text = cerereDto.ValabilPanaLa.ToString();
+            label_ValabilPanaLa.Text = $"{cerereDto.ValabilPanaLa}";
+
+
             label_pretTotal.Text = cerereDto.CostTotal.ToString();
             label_StareCererii.Text = cerereDto.StareaCererii.ToString();
             label_pretTotal.Text = cerereDto.CostTotal.ToString();
+
+
+            if (cerereDto.StareaCererii == Status.Eliberat)
+                return;
+
+            int valabil;
+            if (cerereDto.Prelungit is not null)
+                valabil = cerereDto.Prelungit.Value.DayNumber;
+            else
+                valabil = cerereDto.ValabilPanaLa.DayNumber;
+
+                var days = valabil - DateOnly.FromDateTime(DateTime.Now).DayNumber;
+
+            if (days <= 5)
+            {
+                label_ValabilPanaLa.ForeColor = Color.Red;
+            }
+            else if (days <= 10)
+            {
+                label_ValabilPanaLa.ForeColor = Color.DarkOrange;
+            }
         }
         private void UpdateViewStatusList() 
         {
@@ -148,9 +172,13 @@ namespace SIGL_Cadastru.Views
 
 
             await _service.SaveAsync();
-            _service.DetachAll();
 
             _eventService.OnCereriUpdateRequire(EventArgs.Empty);
+
+            await GetCerere();
+            _service.DetachAll();
+
+            UpdateCerereData();
         }
 
         private void button_adaugareStare_Click(object sender, EventArgs e)

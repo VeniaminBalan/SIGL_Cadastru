@@ -43,6 +43,7 @@ namespace SIGL_Cadastru.Repo.Repository
 
             return await query
                 .OrderBy(c => c.ValabilPanaLa)
+                //.Sort(queryParams.SortParams)
                 .ToListAsync();
         }
 

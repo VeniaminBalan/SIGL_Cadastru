@@ -1,4 +1,5 @@
-﻿using SIGL_Cadastru.Repo.Models;
+﻿using SIGL_Cadastru.App.Entities;
+using SIGL_Cadastru.Repo.Models;
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
 using Spire.Pdf.Tables;
@@ -10,29 +11,30 @@ namespace SIGL_Cadastru.App.PdfHelper
     internal static class PdfHelper
     {
         static PdfFontFamily fontFamily = PdfFontFamily.TimesRoman;
-        static PdfTrueTypeFont fontRegular = new PdfTrueTypeFont(new Font("Times New Roman", 11, FontStyle.Regular), 10f, true);
-        static PdfTrueTypeFont FontBold = new PdfTrueTypeFont(new Font("Times New Roman", 11, FontStyle.Bold), 10f, true);
+        static PdfTrueTypeFont fontRegular = new PdfTrueTypeFont(new Font("Times New Roman", 10, FontStyle.Regular), 9f, true);
+        static PdfTrueTypeFont FontBold = new PdfTrueTypeFont(new Font("Times New Roman", 10, FontStyle.Bold), 9f, true);
 
         public static PdfDocument Create(Cerere cerere) 
         {
+            var cerereDto = Mappers.CerereMapper.Map(cerere);
             var doc = new PdfDocument();
 
             PdfPageBase page = doc.Pages.Add(PdfPageSize.A5, new PdfMargins(20,20,20,20), 0, PdfPageOrientation.Landscape);
 
 
-            string message = "Cerere";
-            PdfFont font = new PdfFont(fontFamily, 15f, PdfFontStyle.Bold);
+            PdfFont font = new PdfFont(fontFamily, 14f, PdfFontStyle.Bold);
             PdfBrush brush = PdfBrushes.Black;
-            PointF location = new PointF((page.Size.ToPointF().X / 2) - 50, 10);
-            page.Canvas.DrawString(message, font, brush, location);
+            PointF location = new PointF((page.Size.ToPointF().X / 2) - 80, 2);
+            page.Canvas.DrawString($"Cerere Nr:{cerere.Nr}", font, brush, location);
 
             page.DrawNrCadastral(cerere.NrCadastral);
             page.DrawClientData(cerere.Client);
             page.DrawResponsabilData(cerere.Responsabil);
             page.DrawCerereData(cerere);
-            page.DrawLucrariData(cerere.Portofoliu.Lucrari.ToList());
+            page.DrawLucrariData(cerere.Portofoliu.Lucrari.ToList(), cerereDto.CostTotal);
             page.DrawTable(cerere.Portofoliu.Documente.ToList());
             page.DrawFooter();
+            page.DrawExecutentData(cerere.Executant);
 
 
             return doc;
@@ -50,7 +52,7 @@ namespace SIGL_Cadastru.App.PdfHelper
                 return;
 
             PdfBrush brush = PdfBrushes.Black;
-            PointF location = new PointF(50, 200);
+            PointF location = new PointF(50, 220);
 
 
             string[][] dataSource = new string[list.Count()+1][];
@@ -102,9 +104,9 @@ namespace SIGL_Cadastru.App.PdfHelper
         {
             PointF location = new PointF((page.Size.ToPointF().X / 2) - 50, 30);
             PointF lineLocation = new PointF(location.X, location.Y);
-            PdfFont fontRegular = new PdfFont(fontFamily, 11f, PdfFontStyle.Regular);
-            PdfFont fontBold = new PdfFont(fontFamily, 12f, PdfFontStyle.Bold);
-            PdfFont fontBoldSecundar = new PdfFont(fontFamily, 10f, PdfFontStyle.Bold);
+            PdfFont fontRegular = new PdfFont(fontFamily, 9f, PdfFontStyle.Regular);
+            PdfFont fontBold = new PdfFont(fontFamily, 10f, PdfFontStyle.Bold);
+            PdfFont fontBoldSecundar = new PdfFont(fontFamily, 8f, PdfFontStyle.Bold);
             PdfBrush brush = PdfBrushes.Black;
             PdfPen pen = new PdfPen(brush);
             string clientString = $"{client.Nume} {client.Prenume} \n{client.DataNasterii}, {client.IDNP}";
@@ -113,67 +115,113 @@ namespace SIGL_Cadastru.App.PdfHelper
 
             page.Canvas.DrawString("De la:", fontRegular, brush, location);
             page.Canvas.DrawString(clientString, fontBold, brush, location.X+offset, location.Y);
-            location.Y += 15;
-            page.Canvas.DrawLine(pen, location.X+offset, lineLocation.Y+30, location.X+250, lineLocation.Y+30);
+            location.Y += 10;
 
-            location.Y += 20;
+            var endLocation = location.X + 270;
+            page.Canvas.DrawLine(pen, location.X+offset, lineLocation.Y+25, endLocation, lineLocation.Y+25);
+
+            location.Y += 15;
             page.Canvas.DrawString("Telefon:", fontRegular, brush, location);
             page.Canvas.DrawString(client.Telefon, fontBoldSecundar, brush, location.X + offset, location.Y);
 
             page.Canvas.DrawString("Email:", fontRegular, brush, location.X + 120, location.Y);
             page.Canvas.DrawString(client.Email, fontBoldSecundar, brush, location.X + 152, location.Y);
 
-            location.Y += 15;
+            location.Y += 10;
             page.Canvas.DrawString("Adresa:", fontRegular, brush, location);
             page.Canvas.DrawString(client.Domiciliu, fontBoldSecundar, brush, location.X + offset, location.Y);
+
+
+            //Reprezentant
+            location = new PointF(location.X, location.Y+20);
+            page.Canvas.DrawString("Reprezentant:", fontRegular, brush, location);
+            page.Canvas.DrawLine(pen, location.X + 55, location.Y+10, endLocation, location.Y+10);
+
+            location.Y += 15;
+            page.Canvas.DrawString("Telefon:", fontRegular, brush, location);
+            page.Canvas.DrawString("Email:", fontRegular, brush, location.X + 120, location.Y);
+
+
+            fontRegular = new PdfFont(fontFamily, 7f, PdfFontStyle.Regular);
+            location.Y += 13;
+            page.Canvas.DrawString("Temeiul:", fontRegular, brush, location);
+            location.Y += 10;
+            page.Canvas.DrawString("Mentiuni:", fontRegular, brush, location);
+
         }
         private static void DrawResponsabilData(this PdfPageBase page, Persoana responsabil) 
         {
             PointF location = new PointF((page.Size.ToPointF().X / 2) - 270, 30);
-            PdfFont font = new PdfFont(fontFamily, 12f, PdfFontStyle.Bold);
+            PdfFont font = new PdfFont(fontFamily, 9f, PdfFontStyle.Bold);
             PdfBrush brush = PdfBrushes.Black;
+            PdfPen pen = new PdfPen(brush);
+
+            page.Canvas.DrawRectangle(pen, new Rectangle(new Point(20,25), new Size(180, 40)));
 
             page.Canvas.DrawString("Responsabil:", font, brush, location);
-            location.Y += 15;
+            location.Y += 10;
             page.Canvas.DrawString("Telefon:", font, brush, location);
-            location.Y += 15;
+            location.Y += 10;
             page.Canvas.DrawString("Email:", font, brush, location);
 
-            location.Y -= 30;
+            location.Y -= 20;
             location.X += 70;
 
             string responsabilString = responsabil.Nume + " " + responsabil.Prenume;
-            font = new PdfFont(fontFamily, 12f, PdfFontStyle.Regular);
+            font = new PdfFont(fontFamily, 9f, PdfFontStyle.Regular);
 
             page.Canvas.DrawString(responsabilString, font, brush, location);
-            location.Y += 15;
+            location.Y += 10;
             page.Canvas.DrawString(responsabil.Telefon, font, brush, location);
-            location.Y += 15;
+            location.Y += 10;
             page.Canvas.DrawString(responsabil.Email, font, brush, location);
+        }
+        private static void DrawExecutentData(this PdfPageBase page, Persoana executant)
+        {
+            PdfTrueTypeFont trueTypeFont = new PdfTrueTypeFont(new Font("Times New Roman", 10, FontStyle.Bold), 9f, true);
+            PdfBrush brush = PdfBrushes.Black;
+            PdfPen pen = new PdfPen(brush);
+            PdfFont font = new PdfFont(fontFamily, 9f, PdfFontStyle.Bold);
+            PointF location = new PointF(270, 150);
+
+            page.Canvas.DrawRectangle(pen, new Rectangle(new Point(250, 145), new Size(270, 40)));
+
+            page.Canvas.DrawString("Executant:", font, brush, location);
+            location.Y += 10;
+            page.Canvas.DrawString("Telefon:", font, brush, location);
+            location.Y += 10;
+            page.Canvas.DrawString("Email:", font, brush, location);
+
+            location.Y -= 20;
+            location.X += 70;
+
+            string responsabilString = executant.Nume + " " + executant.Prenume;
+            font = new PdfFont(fontFamily, 9f, PdfFontStyle.Regular);
+
+            page.Canvas.DrawString(responsabilString, font, brush, location);
+            location.Y += 10;
+            page.Canvas.DrawString(executant.Telefon, font, brush, location);
+            location.Y += 10;
+            page.Canvas.DrawString(executant.Email, font, brush, location);
         }
         private static void DrawCerereData(this PdfPageBase page, Cerere cerere) 
         {
             PointF location = new PointF((page.Size.ToPointF().X / 2) - 270, 85);
-            PdfFont font = new PdfFont(fontFamily, 14f, PdfFontStyle.Bold);
+            PdfFont font = new PdfFont(fontFamily, 10f, PdfFontStyle.Bold);
             PdfBrush brush = PdfBrushes.Black;
 
 
-            page.Canvas.DrawString($"Nr:{cerere.Nr}", font, brush, location);
-            location.Y += 25;
-
-            font = new PdfFont(fontFamily, 10f, PdfFontStyle.Bold);
-
             page.Canvas.DrawString("Data primirii cererii:", font, brush, location);
-            location.Y += 15;
+            location.Y += 10;
             page.Canvas.DrawString("Data eliberarii:", font, brush, location);
 
-            location.Y -= 15;
+            location.Y -= 10;
             location.X += 120;
 
             font = new PdfFont(fontFamily, 10f, PdfFontStyle.Regular);
 
             page.Canvas.DrawString(cerere.ValabilDeLa.ToString(), font, brush, location);
-            location.Y += 15;
+            location.Y += 10;
 
             var eliberat = cerere.StatusList
                 .OrderBy(s => s.Created)
@@ -183,9 +231,9 @@ namespace SIGL_Cadastru.App.PdfHelper
                 page.Canvas.DrawString(eliberat.Created.ToString(), font, brush, location);
 
         }
-        private static void DrawLucrariData(this PdfPageBase page, List<Lucrare> list)
+        private static void DrawLucrariData(this PdfPageBase page, List<Lucrare> list, int suma)
         {
-            PointF location = new PointF((page.Size.ToPointF().X / 2) - 260, 160);
+            PointF location = new PointF((page.Size.ToPointF().X / 2) - 280, 130);
             PdfFont font = new PdfFont(fontFamily, 10f, PdfFontStyle.Bold);
             PdfBrush brush = PdfBrushes.Black;
 
@@ -201,21 +249,52 @@ namespace SIGL_Cadastru.App.PdfHelper
                 location.Y += 10;
 
             }
+            font = new PdfFont(fontFamily, 10f, PdfFontStyle.Bold);
+            page.Canvas.DrawString($"Suma: {suma} MDL", font, brush, location.X-15, location.Y+5);
 
         }
-
         private static void DrawFooter(this PdfPageBase page) 
         {
-            PdfTrueTypeFont trueTypeFont = new PdfTrueTypeFont(new Font("Times New Roman", 11, FontStyle.Bold), 10f, true);
+            PdfTrueTypeFont trueTypeFont = new PdfTrueTypeFont(new Font("Times New Roman", 10, FontStyle.Bold), 9f, true);
             PdfBrush brush = PdfBrushes.Black;
             PdfPen pen = new PdfPen(brush);
-            PointF location = new PointF(10, 280);
+            PointF location = new PointF(10, 315);
 
             page.Canvas.DrawString("Data și semnătura solicitantului:", trueTypeFont, brush, location);
-            int offset = 140;
-            page.Canvas.DrawLine(pen, location.X + offset , location.Y+11, location.X + 600, location.Y+11);
+ 
+            page.Canvas.DrawLine(pen, location.X + 125 , location.Y+11, location.X + 600, location.Y+11);
 
-            page.Canvas.DrawRectangle(pen, new Rectangle(new Point(0, 300), new Size((int)page.ActualSize.Width-40, 50)));
+            //page.Canvas.DrawRectangle(pen, new Rectangle(new Point(0, 317), new Size((int)page.ActualSize.Width-40, 40)));
+
+            //PointF point = new PointF(location.X - 3, location.Y + 20);
+
+            ////page.Canvas.DrawString("ÎN REZULTATUL EXAMINARII S-A DECIS", trueTypeFont, brush, point);         
+            ////page.Canvas.DrawLine(pen, point.X + 180, point.Y + 11, point.X + 540, point.Y + 11);
+
+            ////Data
+            //point = new PointF(location.X - 3, location.Y + 40);
+            //page.Canvas.DrawString("Data: ", trueTypeFont, brush, point);
+            //page.Canvas.DrawLine(pen, point.X + 25, point.Y + 11, point.X + 125, point.Y + 11); // 100
+
+            ////Registratorul
+            //point = new PointF(location.X + 170, location.Y + 40);
+            //page.Canvas.DrawString("Registratorul: ", trueTypeFont, brush, point);
+            //page.Canvas.DrawLine(pen, point.X + 61, point.Y + 11, point.X + 161, point.Y + 11);
+            ////Semnatura
+            //point = new PointF(location.X + 370, location.Y + 40);
+            //page.Canvas.DrawString("Semnatura: ", trueTypeFont, brush, point);
+            //page.Canvas.DrawLine(pen, point.X + 51, point.Y + 11, point.X + 151, point.Y + 11);
+
+
+            //Data eliberarii
+            PointF point = new PointF(location.X, location.Y + 50);
+            page.Canvas.DrawString("Data eliberării", trueTypeFont, brush, point);
+            page.Canvas.DrawLine(pen, point.X + 65, point.Y + 11, point.X + 205, point.Y + 11);
+
+            //Semnatura solicitantului
+            point = new PointF(location.X + 290, location.Y + 50);
+            page.Canvas.DrawString("Semnătura solicitantului", trueTypeFont, brush, point);
+            page.Canvas.DrawLine(pen, point.X + 108, point.Y + 11, point.X + 248, point.Y + 11);
 
         }
 

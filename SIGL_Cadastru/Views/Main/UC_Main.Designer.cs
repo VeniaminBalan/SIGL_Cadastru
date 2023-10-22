@@ -30,6 +30,18 @@ namespace SIGL_Cadastru.Views
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Nr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.client = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.executant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.responsabil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nrCadastral = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valabilDeLa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valabilPanaLa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prelungit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stareaCererii = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.laReceptie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.respins = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eliberat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cerereDtoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.cerereDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -44,18 +56,6 @@ namespace SIGL_Cadastru.Views
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.Nr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.client = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.executant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.responsabil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrCadastral = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valabilDeLa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valabilPanaLa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prelungit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stareaCererii = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.laReceptie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.respins = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eliberat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerereDtoBindingSource)).BeginInit();
@@ -67,7 +67,6 @@ namespace SIGL_Cadastru.Views
             // 
             // dataGridView1
             // 
-            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
@@ -89,6 +88,7 @@ namespace SIGL_Cadastru.Views
             this.dataGridView1.DataSource = this.cerereDtoBindingSource1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
@@ -98,166 +98,7 @@ namespace SIGL_Cadastru.Views
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            // 
-            // cerereDtoBindingSource1
-            // 
-            this.cerereDtoBindingSource1.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
-            // 
-            // cerereDtoBindingSource
-            // 
-            this.cerereDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.maskedTextBox_panaLa);
-            this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.maskedTextBox_inceput);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Eliberat);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Respins);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_laReceptie);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox_inLucru);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(1678, 530);
-            this.splitContainer1.SplitterDistance = 165;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // maskedTextBox_panaLa
-            // 
-            this.maskedTextBox_panaLa.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox_panaLa.Location = new System.Drawing.Point(13, 332);
-            this.maskedTextBox_panaLa.Mask = "00-00-0000";
-            this.maskedTextBox_panaLa.Name = "maskedTextBox_panaLa";
-            this.maskedTextBox_panaLa.Size = new System.Drawing.Size(96, 30);
-            this.maskedTextBox_panaLa.TabIndex = 10;
-            this.maskedTextBox_panaLa.TextChanged += new System.EventHandler(this.maskedTextBox_panaLa_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 309);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Pana la:";
-            // 
-            // maskedTextBox_inceput
-            // 
-            this.maskedTextBox_inceput.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox_inceput.Location = new System.Drawing.Point(13, 270);
-            this.maskedTextBox_inceput.Mask = "00-00-0000";
-            this.maskedTextBox_inceput.Name = "maskedTextBox_inceput";
-            this.maskedTextBox_inceput.Size = new System.Drawing.Size(96, 30);
-            this.maskedTextBox_inceput.TabIndex = 8;
-            this.maskedTextBox_inceput.TextChanged += new System.EventHandler(this.maskedTextBox_inceput_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 247);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 20);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Valabil incepand cu:";
-            // 
-            // checkBox_Eliberat
-            // 
-            this.checkBox_Eliberat.AutoSize = true;
-            this.checkBox_Eliberat.Checked = true;
-            this.checkBox_Eliberat.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Eliberat.Location = new System.Drawing.Point(13, 204);
-            this.checkBox_Eliberat.Name = "checkBox_Eliberat";
-            this.checkBox_Eliberat.Size = new System.Drawing.Size(82, 24);
-            this.checkBox_Eliberat.TabIndex = 6;
-            this.checkBox_Eliberat.Text = "Eliberat";
-            this.checkBox_Eliberat.UseVisualStyleBackColor = true;
-            this.checkBox_Eliberat.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // checkBox_Respins
-            // 
-            this.checkBox_Respins.AutoSize = true;
-            this.checkBox_Respins.Checked = true;
-            this.checkBox_Respins.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Respins.Location = new System.Drawing.Point(13, 174);
-            this.checkBox_Respins.Name = "checkBox_Respins";
-            this.checkBox_Respins.Size = new System.Drawing.Size(81, 24);
-            this.checkBox_Respins.TabIndex = 5;
-            this.checkBox_Respins.Text = "Respins";
-            this.checkBox_Respins.UseVisualStyleBackColor = true;
-            this.checkBox_Respins.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // checkBox_laReceptie
-            // 
-            this.checkBox_laReceptie.AutoSize = true;
-            this.checkBox_laReceptie.Checked = true;
-            this.checkBox_laReceptie.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_laReceptie.Location = new System.Drawing.Point(13, 145);
-            this.checkBox_laReceptie.Name = "checkBox_laReceptie";
-            this.checkBox_laReceptie.Size = new System.Drawing.Size(108, 24);
-            this.checkBox_laReceptie.TabIndex = 4;
-            this.checkBox_laReceptie.Text = "La Receptie";
-            this.checkBox_laReceptie.UseVisualStyleBackColor = true;
-            this.checkBox_laReceptie.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // checkBox_inLucru
-            // 
-            this.checkBox_inLucru.AutoSize = true;
-            this.checkBox_inLucru.Checked = true;
-            this.checkBox_inLucru.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_inLucru.Location = new System.Drawing.Point(13, 115);
-            this.checkBox_inLucru.Name = "checkBox_inLucru";
-            this.checkBox_inLucru.Size = new System.Drawing.Size(82, 24);
-            this.checkBox_inLucru.TabIndex = 3;
-            this.checkBox_inLucru.Text = "In Lucru";
-            this.checkBox_inLucru.UseVisualStyleBackColor = true;
-            this.checkBox_inLucru.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(3, 77);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 27);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Nr",
-            "Client",
-            "Responsabil",
-            "Executant",
-            "Nr Cadastral",
-            "Comentariu"});
-            this.comboBox1.Location = new System.Drawing.Point(3, 43);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 28);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Cautare:";
+            this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
             // Nr
             // 
@@ -367,6 +208,174 @@ namespace SIGL_Cadastru.Views
             this.eliberat.Name = "eliberat";
             this.eliberat.ReadOnly = true;
             this.eliberat.Width = 125;
+            // 
+            // cerereDtoBindingSource1
+            // 
+            this.cerereDtoBindingSource1.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
+            // 
+            // cerereDtoBindingSource
+            // 
+            this.cerereDtoBindingSource.DataSource = typeof(SIGL_Cadastru.App.Entities.CerereDto);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.maskedTextBox_panaLa);
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.maskedTextBox_inceput);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Eliberat);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Respins);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_laReceptie);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_inLucru);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Size = new System.Drawing.Size(1678, 530);
+            this.splitContainer1.SplitterDistance = 165;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // maskedTextBox_panaLa
+            // 
+            this.maskedTextBox_panaLa.Enabled = false;
+            this.maskedTextBox_panaLa.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.maskedTextBox_panaLa.Location = new System.Drawing.Point(13, 332);
+            this.maskedTextBox_panaLa.Mask = "00-00-0000";
+            this.maskedTextBox_panaLa.Name = "maskedTextBox_panaLa";
+            this.maskedTextBox_panaLa.Size = new System.Drawing.Size(96, 30);
+            this.maskedTextBox_panaLa.TabIndex = 10;
+            this.maskedTextBox_panaLa.Visible = false;
+            this.maskedTextBox_panaLa.TextChanged += new System.EventHandler(this.maskedTextBox_panaLa_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Enabled = false;
+            this.label3.Location = new System.Drawing.Point(13, 309);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Pana la:";
+            this.label3.Visible = false;
+            // 
+            // maskedTextBox_inceput
+            // 
+            this.maskedTextBox_inceput.Enabled = false;
+            this.maskedTextBox_inceput.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.maskedTextBox_inceput.Location = new System.Drawing.Point(13, 270);
+            this.maskedTextBox_inceput.Mask = "00-00-0000";
+            this.maskedTextBox_inceput.Name = "maskedTextBox_inceput";
+            this.maskedTextBox_inceput.Size = new System.Drawing.Size(96, 30);
+            this.maskedTextBox_inceput.TabIndex = 8;
+            this.maskedTextBox_inceput.Visible = false;
+            this.maskedTextBox_inceput.TextChanged += new System.EventHandler(this.maskedTextBox_inceput_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Enabled = false;
+            this.label2.Location = new System.Drawing.Point(13, 247);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(141, 20);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Valabil incepand cu:";
+            this.label2.Visible = false;
+            // 
+            // checkBox_Eliberat
+            // 
+            this.checkBox_Eliberat.AutoSize = true;
+            this.checkBox_Eliberat.Checked = true;
+            this.checkBox_Eliberat.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Eliberat.Location = new System.Drawing.Point(13, 204);
+            this.checkBox_Eliberat.Name = "checkBox_Eliberat";
+            this.checkBox_Eliberat.Size = new System.Drawing.Size(82, 24);
+            this.checkBox_Eliberat.TabIndex = 6;
+            this.checkBox_Eliberat.Text = "Eliberat";
+            this.checkBox_Eliberat.UseVisualStyleBackColor = true;
+            this.checkBox_Eliberat.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // checkBox_Respins
+            // 
+            this.checkBox_Respins.AutoSize = true;
+            this.checkBox_Respins.Checked = true;
+            this.checkBox_Respins.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Respins.Location = new System.Drawing.Point(13, 174);
+            this.checkBox_Respins.Name = "checkBox_Respins";
+            this.checkBox_Respins.Size = new System.Drawing.Size(81, 24);
+            this.checkBox_Respins.TabIndex = 5;
+            this.checkBox_Respins.Text = "Respins";
+            this.checkBox_Respins.UseVisualStyleBackColor = true;
+            this.checkBox_Respins.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // checkBox_laReceptie
+            // 
+            this.checkBox_laReceptie.AutoSize = true;
+            this.checkBox_laReceptie.Checked = true;
+            this.checkBox_laReceptie.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_laReceptie.Location = new System.Drawing.Point(13, 145);
+            this.checkBox_laReceptie.Name = "checkBox_laReceptie";
+            this.checkBox_laReceptie.Size = new System.Drawing.Size(108, 24);
+            this.checkBox_laReceptie.TabIndex = 4;
+            this.checkBox_laReceptie.Text = "La Receptie";
+            this.checkBox_laReceptie.UseVisualStyleBackColor = true;
+            this.checkBox_laReceptie.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // checkBox_inLucru
+            // 
+            this.checkBox_inLucru.AutoSize = true;
+            this.checkBox_inLucru.Checked = true;
+            this.checkBox_inLucru.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_inLucru.Location = new System.Drawing.Point(13, 115);
+            this.checkBox_inLucru.Name = "checkBox_inLucru";
+            this.checkBox_inLucru.Size = new System.Drawing.Size(82, 24);
+            this.checkBox_inLucru.TabIndex = 3;
+            this.checkBox_inLucru.Text = "In Lucru";
+            this.checkBox_inLucru.UseVisualStyleBackColor = true;
+            this.checkBox_inLucru.CheckedChanged += new System.EventHandler(this.checkBox_Eliberat_CheckedChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 77);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(160, 27);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Nr",
+            "Client",
+            "Responsabil",
+            "Executant",
+            "Nr Cadastral",
+            "Comentariu"});
+            this.comboBox1.Location = new System.Drawing.Point(3, 43);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(160, 28);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Cautare:";
             // 
             // UC_Main
             // 

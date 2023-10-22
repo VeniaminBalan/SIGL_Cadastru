@@ -59,12 +59,12 @@ namespace SIGL_Cadastru.Views.Setari.Persoane
                 
             }
             
-            DialogResult dialogResult = MessageBox.Show($"Doriți sa salvați aceasta persoana? \n{p}", "Salvare", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show($"Doriți sa salvați persoana? \n{p}", "Salvare", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 _serviceManager.PersoanaService.CreatePersoana(p);
                 await _serviceManager.SaveAsync();
-                _eventService.OnCereriUpdateRequire(EventArgs.Empty);
+                _eventService.OnPersoaneUpdateRequire(EventArgs.Empty);
                 uc_persoanaNoua.ClearData();
 
             }

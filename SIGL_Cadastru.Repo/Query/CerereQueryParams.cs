@@ -1,4 +1,6 @@
 ﻿using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Repo.Query;
+using SIGL_Cadastru.Repo.Query.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,7 @@ public class CerereQueryParams
     public SearchQuery? Search { get; set; } = null;
     public TimeSpanFilter? TimeFilter { get; set; } = null;
     public StateFilter? StateFilter { get; set; } = null;
+    public SortQueryParams SortParams { get; set; } = new();
 
     public CerereQueryParams()
     {
