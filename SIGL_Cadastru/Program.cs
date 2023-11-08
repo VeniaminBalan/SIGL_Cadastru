@@ -54,10 +54,7 @@ namespace SIGL_Cadastru
                     services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
                     services.AddSingleton<EventService>();
 
-                    //services.AddScoped(typeof(IPdfGeneratorService), typeof(PdfGeneratorService));
-                    //services.Configure<PdfGeneratorService>(p => p.Path = sPdfFilePath);
-
-                    services.AddAutoMapper(typeof(Program));
+                   // services.AddScoped(typeof(IPdfGeneratorService), typeof(QuestPdfGeneratorService));
 
 
                     services.AddScoped<Func<Guid, FormViewCerere>>(container =>
@@ -65,7 +62,7 @@ namespace SIGL_Cadastru
                             {
                                 var service = container.GetRequiredService<IServiceManager>();
                                 var eventService = container.GetRequiredService<EventService>();
-                                var pdfService = new PdfGeneratorService(sPdfFilePath);
+                                var pdfService = new QuestPdfGeneratorService(sPdfFilePath);
                                 return new FormViewCerere(service, pdfService, eventService, Id);
                             });
 
@@ -74,7 +71,7 @@ namespace SIGL_Cadastru
                     services.AddTransient<FormCerere>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
-                        var pdfService = new PdfGeneratorService(sPdfFilePath);
+                        var pdfService = new QuestPdfGeneratorService(sPdfFilePath);
                         var eventService = container.GetRequiredService<EventService>();
 
                         var formCerere = new FormCerere(repository, pdfService, eventService);
@@ -89,7 +86,6 @@ namespace SIGL_Cadastru
                     });
                     services.AddScoped<UC_Main>(container => 
                     {
-                        var mapper = container.GetRequiredService<IMapper>();
                         var service = container.GetRequiredService<IServiceManager>();
                         var eventService = container.GetRequiredService<EventService>();
 
@@ -99,7 +95,6 @@ namespace SIGL_Cadastru
                     services.AddTransient<UC_PersoanaExistenta>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
-                        var mapper = container.GetRequiredService<IMapper>();
                         var eventService = container.GetRequiredService<EventService>();
                         var uc_PE = new UC_PersoanaExistenta(repository, eventService);
                         return uc_PE;

@@ -36,7 +36,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.listBoxLucrari = new System.Windows.Forms.ListBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label_suma = new System.Windows.Forms.Label();
             this.label_modificator = new System.Windows.Forms.Label();
@@ -56,7 +55,6 @@
             this.buttonPExistenta = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_comment = new System.Windows.Forms.TextBox();
-            this.comboBox_transport = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.documentBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -140,17 +138,6 @@
             this.listBoxLucrari.Size = new System.Drawing.Size(339, 104);
             this.listBoxLucrari.TabIndex = 24;
             this.listBoxLucrari.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBoxLucrari_KeyUp);
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label16.Location = new System.Drawing.Point(61, 587);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(78, 19);
-            this.label16.TabIndex = 27;
-            this.label16.Text = "Transport:";
             // 
             // label15
             // 
@@ -329,14 +316,6 @@
             this.textBox_comment.Size = new System.Drawing.Size(339, 104);
             this.textBox_comment.TabIndex = 39;
             // 
-            // comboBox_transport
-            // 
-            this.comboBox_transport.FormattingEnabled = true;
-            this.comboBox_transport.Location = new System.Drawing.Point(145, 582);
-            this.comboBox_transport.Name = "comboBox_transport";
-            this.comboBox_transport.Size = new System.Drawing.Size(151, 28);
-            this.comboBox_transport.TabIndex = 40;
-            // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -378,7 +357,6 @@
             this.Controls.Add(this.panel_UC_Documente);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox_transport);
             this.Controls.Add(this.textBox_comment);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.buttonPExistenta);
@@ -389,7 +367,6 @@
             this.Controls.Add(this.label_modificator);
             this.Controls.Add(this.label_suma);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.label16);
             this.Controls.Add(this.listBoxLucrari);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label14);
@@ -422,7 +399,6 @@
         private Label label14;
         private Button button1;
         private ListBox listBoxLucrari;
-        private Label label16;
         private Label label15;
         private Label label_suma;
         private Label label_modificator;
@@ -442,7 +418,6 @@
         private DateTimePicker dateTimePicker_dataSolicitarii;
         private Label label8;
         private TextBox textBox_comment;
-        private ComboBox comboBox_transport;
         private Button button2;
         private Label label9;
         private BindingSource documentBindingSource;

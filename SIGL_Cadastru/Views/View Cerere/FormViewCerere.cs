@@ -279,9 +279,7 @@ namespace SIGL_Cadastru.Views
             {
                 var path = _pdfService.GeneratePdf(cerere!);
 
-                //System.Diagnostics.Process.Start(path);
-
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {path}"));
+                StartProcess.Run(path);
             }
             catch (Exception ex)
             {

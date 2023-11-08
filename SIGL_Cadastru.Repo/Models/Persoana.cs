@@ -108,25 +108,25 @@ namespace SIGL_Cadastru.Repo.Models
             IPersoanaRepository repo)
         {
             if (string.IsNullOrWhiteSpace(nume))
-                throw new Exception("nume is null");
+                throw new Exception("Indicati numele persoanei");
 
             if (string.IsNullOrWhiteSpace(prenume))
-                throw new Exception("prenume is null");
+                throw new Exception("Indicati prenumele persoanei");
 
             if (string.IsNullOrWhiteSpace(domiciliu))
-                throw new Exception("domiciliu is null");
+                throw new Exception("Indicati prenumele persoanei");
                    
 
             if (string.IsNullOrWhiteSpace(iDNP))
-                throw new Exception("IDNP is null");
+                throw new Exception("Indicati IDNP-ul persoanei");
 
             if (!await repo.isIdnpUniqe(iDNP))
-                throw new IDNPUsedException("this IDNP is already used");
+                throw new IDNPUsedException("O persoana cu acest IDNP este deja inregistrata");
 
             if (!string.IsNullOrWhiteSpace(email))
             {
                 if (!IsEmailValid(email))
-                    throw new InvalidEmailException($"this Email: {email} is invalid");
+                    throw new InvalidEmailException($"Email-ul: {email} nu este intr-un format corect");
             }
 
             return new Persoana 

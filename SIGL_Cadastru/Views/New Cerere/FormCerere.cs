@@ -170,6 +170,11 @@ namespace SIGL_Cadastru.Views
                 throw new Exception("Introduceti Numarul cadastral");
             }
 
+            if (string.IsNullOrWhiteSpace(textBox_termen.Text)) 
+            {
+                throw new Exception("Introduceti Termenul");
+            }
+
 
             var nrCadastral = maskedTextBox_NrCadasrtral.Text;
             var id = Guid.NewGuid();
@@ -232,7 +237,7 @@ namespace SIGL_Cadastru.Views
 
                 string path = _pdfService.GeneratePdf(newCerere);
 
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {path}"));
+                StartProcess.Run(path);
             }
             catch (Exception ex)
             {
