@@ -3,6 +3,7 @@ name: "SIGL Cadastru"
 on:
   push:
     branches: [ main ]
+       
 
 env:
   PROJECT_PATH: SIGL_Cadastru/SIGL_Cadastru.csproj
@@ -31,17 +32,14 @@ jobs:
       - name: Remove the .pdb files
         run: Remove-Item -path ${{ env.PUBLISH_PATH }}/*.pdb
 
-      - name: Set Tag Name
-        id: set_tag
-        run: echo "TAG_NAME=release-${{ github.sha::8 }}" >> $GITHUB_ENV
-
-      - uses: actions/create-release@v1
+      - name: Create Release
         id: create_release
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.TAG_NAME }}
-          release_name: Release ${{ env.TAG_NAME }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
 
       - name: Copy archives to Release
         uses: csexton/release-asset-action@v2
