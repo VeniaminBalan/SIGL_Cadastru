@@ -38,8 +38,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ v1.1.20 }}
-          release_name: Release ${{ v1.1.20 }}
+          tag_name: v1.1.21
+          release_name: Release v1.1.21
 
       - name: Copy archives to Release
         uses: csexton/release-asset-action@v2
