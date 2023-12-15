@@ -14,15 +14,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-dotnet@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 7.x
+          dotnet-version: 7.0.x
+          include-prerelease: true
 
-      - run: dotnet restore ${{ env.PROJECT_PATH }}
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_PATH }} -r win-x64
 
-      - run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
+      - name: Build
+        run: dotnet build ${{ env.PROJECT_PATH }} -c Release -p:PublishSingleFile=true --no-restore
 
-      - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+      - name: Publish
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --output ./${{ env.PUBLISH_PATH }} --no-build
+
+      - name: Remove the .pdb files
+        run: Remove-Item -path ${{ env.PUBLISH_PATH }}/*.pdb
+
+      - name: Create archive with all remaining files
+        run: Compress-Archive -path ${{ env.PUBLISH_PATH }}/* -destinationPath "$($env:GITHUB_REF -replace "refs/tags/").zip" #tag name is file name at the same time
 
       - uses: actions/create-release@v1
         id: create_release
@@ -32,8 +43,9 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
 
-      - uses: csexton/release-asset-action@v2
+      - name: Copy archives to Release
+        uses: csexton/release-asset-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: SIGL_Cadastru/bin/Release/net7.0-windows/win-x64/publish/*.exe
+          pattern: "*.zip"
           release-url: ${{ steps.create_release.outputs.upload_url }}
