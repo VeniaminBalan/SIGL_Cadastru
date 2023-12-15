@@ -37,8 +37,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: release-${{ github.sha:0:8 }} # Use the first 8 characters of the commit SHA
+          release_name: Release ${{ github.sha:0:8 }}
 
       - name: Copy archives to Release
         uses: csexton/release-asset-action@v2
