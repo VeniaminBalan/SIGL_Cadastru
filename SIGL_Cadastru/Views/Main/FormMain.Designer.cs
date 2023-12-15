@@ -84,7 +84,7 @@
             this.Controls.Add(this.panel_content);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormMain";
+            this.Text = "SIGL Cadastru";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel_content.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

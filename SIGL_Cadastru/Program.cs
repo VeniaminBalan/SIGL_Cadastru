@@ -1,4 +1,3 @@
-using AutoMapper;
 using Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,21 +26,25 @@ namespace SIGL_Cadastru
         static void Main()
         {
             var formFactory = CompositionRoot();
-
             ApplicationConfiguration.Initialize();
+
             Application.Run(formFactory.CreateMain());
         }
 
+
         static IHostBuilder CreateHostBuilder()
         {
+
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources\Nomenclatura.xml");
-            string sPdf = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources");
-            string sPdfFilePath = Path.GetFullPath(sPdf);
+            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"\Resources\Nomenclatura.xml");
+            var varstring = $"Data Source={sCurrentDirectory}\\DB\\SIGLDB.db";
 
-
-            var connectionString = ConfigurationManager.ConnectionStrings["SQlite"].ConnectionString;
-            var varstring = @"Data Source=E:\PC\Projects\consult-trading\SIGL_Cadastru\DB\SIGLDB.db";
+            //Depricated
+            //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            //string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources\Nomenclatura.xml");
+            //string sPdf = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources");
+            //string sPdfFilePath = Path.GetFullPath(sPdf);
+            //var varstring = @"Data Source=E:\PC\Projects\consult-trading\SIGL_Cadastru\DB\SIGLDB.db";
 
 
             return Host.CreateDefaultBuilder()
@@ -53,8 +56,7 @@ namespace SIGL_Cadastru
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
                     services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
                     services.AddSingleton<EventService>();
-
-                   // services.AddScoped(typeof(IPdfGeneratorService), typeof(QuestPdfGeneratorService));
+                    services.AddScoped(typeof(IPdfGeneratorService), typeof(QuestPdfGeneratorService));
 
 
                     services.AddScoped<Func<Guid, FormViewCerere>>(container =>
@@ -62,7 +64,7 @@ namespace SIGL_Cadastru
                             {
                                 var service = container.GetRequiredService<IServiceManager>();
                                 var eventService = container.GetRequiredService<EventService>();
-                                var pdfService = new QuestPdfGeneratorService(sPdfFilePath);
+                                var pdfService = container.GetRequiredService<IPdfGeneratorService>();
                                 return new FormViewCerere(service, pdfService, eventService, Id);
                             });
 
@@ -71,7 +73,7 @@ namespace SIGL_Cadastru
                     services.AddTransient<FormCerere>(container =>
                     {
                         var repository = container.GetRequiredService<IRepositoryManager>();
-                        var pdfService = new QuestPdfGeneratorService(sPdfFilePath);
+                        var pdfService = container.GetRequiredService<IPdfGeneratorService>();
                         var eventService = container.GetRequiredService<EventService>();
 
                         var formCerere = new FormCerere(repository, pdfService, eventService);

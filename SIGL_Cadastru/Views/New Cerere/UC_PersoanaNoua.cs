@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Contracts;
+﻿using Contracts;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;

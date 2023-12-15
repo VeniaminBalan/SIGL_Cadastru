@@ -71,7 +71,7 @@
             this.Controls.Add(this.button1);
             this.Name = "FormAdaugareLucrare";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormAdaugareLucrare";
+            this.Text = "Adaugare Lucrare";
             this.ResumeLayout(false);
             this.PerformLayout();
 

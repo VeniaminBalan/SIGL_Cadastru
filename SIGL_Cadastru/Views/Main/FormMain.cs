@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Contracts;
-using SIGL_Cadastru.AppConfigurations;
+﻿using SIGL_Cadastru.AppConfigurations;
 
 
 namespace SIGL_Cadastru.Views

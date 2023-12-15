@@ -1,18 +1,6 @@
-﻿using AutoMapper.Execution;
-using SIGL_Cadastru.Repo.Models;
-using SIGL_Cadastru.Utils;
+﻿using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Views.Adaugare_Lucrare;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
+
 
 namespace SIGL_Cadastru.Views
 {

@@ -47,7 +47,7 @@ namespace SIGL_Cadastru.Views.Setari
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (uc_persoanaNoua is null) 
+            if (uc_persoanaNoua is null)
             {
                 uc_persoanaNoua = _service.FormFactory.CreatePersoanaNouaPage();
                 splitContainer1.Panel2.Controls.Add(uc_persoanaNoua);

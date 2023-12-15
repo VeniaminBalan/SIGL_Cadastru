@@ -36,7 +36,7 @@ namespace SIGL_Cadastru.Repo.Models
         public string NrCadastral { get; private set; }
         public int Adaos { get; private set; }
         public string Comment { get; private set; }
-        public Status Starea { get; private set; }
+        public Status Starea { get; set; }
         public Portofoliu Portofoliu { get; private set; }
 
 

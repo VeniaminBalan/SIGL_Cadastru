@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Contracts;
+﻿using Contracts;
 using Exceptions;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Repo.Query;

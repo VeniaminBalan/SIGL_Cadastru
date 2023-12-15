@@ -10,15 +10,8 @@ namespace SIGL_Cadastru.App.Services
 {
     public class QuestPdfGeneratorService : IPdfGeneratorService
     {
-
-        private readonly string _path;
         private Cerere cerere;
         private CerereDto cerereDto => Mappers.CerereMapper.Map(cerere);
-
-        public QuestPdfGeneratorService(string path)
-        {
-            _path = path;
-        }
 
         public string GeneratePdf(Cerere cerere)
         {
@@ -93,7 +86,7 @@ namespace SIGL_Cadastru.App.Services
 
             container.Column(column =>
             {
-                column.Item().Text($"Nr Cadastral {cerereDto.NrCadastral}")
+                column.Item().Text($"Nr Cadastral: {cerereDto.NrCadastral}")
                     .Style(titleStyle);
 
                 column.Item()
@@ -187,7 +180,7 @@ namespace SIGL_Cadastru.App.Services
         {
             container.Column(column =>
             {
-                column.Item().Text("Rog să efectuaț:");
+                column.Item().Text("Rog să efectuați:").SemiBold();
 
                 foreach (var lucreare in cerere.Portofoliu.Lucrari)
                 {
@@ -295,19 +288,19 @@ namespace SIGL_Cadastru.App.Services
                     column.Item().Row(row =>
                     {
                         row.Spacing(-70);
-                        row.RelativeItem().Text("Responsabil").SemiBold();
+                        row.RelativeItem().Text("Responsabil:").SemiBold();
                         row.RelativeItem().Text(cerereDto.Responsabil);
                     });
                     column.Item().Row(row =>
                     {
                         row.Spacing(-70);
-                        row.RelativeItem().Text("Telefon").SemiBold();
+                        row.RelativeItem().Text("Telefon:").SemiBold();
                         row.RelativeItem().Text(cerere.Responsabil.Telefon);
                     });
                     column.Item().Row(row =>
                     {
                         row.Spacing(-70);
-                        row.RelativeItem().Text("Email").SemiBold();
+                        row.RelativeItem().Text("Email:").SemiBold();
                         row.RelativeItem().Text(cerere.Responsabil.Email);
                     });
 
@@ -357,7 +350,7 @@ namespace SIGL_Cadastru.App.Services
                     .Row(row =>
                     {
                         row.Spacing(-180);
-                        row.RelativeItem().Text("Adresa");
+                        row.RelativeItem().Text("Adresa:");
                         row.RelativeItem().Text(cerere.Client.Domiciliu).SemiBold();
                     });
 

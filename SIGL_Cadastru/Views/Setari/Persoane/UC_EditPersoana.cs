@@ -71,7 +71,7 @@ namespace SIGL_Cadastru.Views.Setari
                 }
                 if (_persoana.IDNP != idnp)
                 {
-                    _persoana.SetIDNP(_service.RepositoryManager.Persoana, idnp);
+                    await _persoana.SetIDNP(_service.RepositoryManager.Persoana, idnp);
                 }
                 if (_persoana.Telefon != telefon)
                 {
@@ -101,7 +101,6 @@ namespace SIGL_Cadastru.Views.Setari
                 _eventService.OnPersoaneUpdateRequire(EventArgs.Empty);
                 _formSetari.UpdateRequire = true;
             }
-
         }
     }
 }

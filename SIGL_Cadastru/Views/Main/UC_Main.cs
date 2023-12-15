@@ -1,4 +1,3 @@
-using AutoMapper;
 using Query;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;

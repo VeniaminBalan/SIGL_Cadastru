@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Mappers;
+﻿using Mappers;
 using Models;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities.DataTransferObjects;

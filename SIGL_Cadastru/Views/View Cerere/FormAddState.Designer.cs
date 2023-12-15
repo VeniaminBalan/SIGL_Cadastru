@@ -102,7 +102,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "FormAddState";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormAddState";
+            this.Text = "Stare";
             this.ResumeLayout(false);
             this.PerformLayout();
 

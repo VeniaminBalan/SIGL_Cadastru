@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Contracts;
+﻿using Contracts;
 using FluentDateTime;
 using Models;
 using SIGL_Cadastru.App.Contracts;
@@ -12,6 +11,7 @@ using SIGL_Cadastru.Utils;
 using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SIGL_Cadastru.Views
 {
@@ -44,6 +44,23 @@ namespace SIGL_Cadastru.Views
         private async void FormCerere_Load(object sender, EventArgs e)
         {
             var responsabili = await GetPersoane(Role.Responsabil);
+          
+            if (!responsabili.Any()) 
+            {
+
+                this.Dispose();
+                DialogResult dialogResult = MessageBox.Show($"Nu exista niciun Responsabil \n Doriți să adăugați unul?", "Eroare", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    FormFactory _factory = new();
+                    var form = _factory.CreateFormSetari();
+                    form.ShowDialog();
+
+                }
+            }
+
+
+
             comboBox_Responsabil.DataSource = responsabili;
 
             var executanti = await GetPersoane(Role.Executant);
