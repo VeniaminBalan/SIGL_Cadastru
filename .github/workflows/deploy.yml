@@ -6,7 +6,7 @@ on:
        
 
 env:
-  PROJECT_PATH: SIGL_Cadstru/SIGL_Cadstru/SIGL_Cadstru.csproj
+  PROJECT_PATH: SIGL_Cadstru.csproj
 
 jobs:
   deploy:
