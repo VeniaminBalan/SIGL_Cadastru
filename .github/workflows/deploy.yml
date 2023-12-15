@@ -32,9 +32,6 @@ jobs:
       - name: Remove the .pdb files
         run: Remove-Item -path ${{ env.PUBLISH_PATH }}/*.pdb
 
-      - name: Create archive with all remaining files
-        run: Compress-Archive -path ${{ env.PUBLISH_PATH }}/* -destinationPath "$($env:GITHUB_REF -replace "refs/tags/").zip" #tag name is file name at the same time
-
       - uses: actions/create-release@v1
         id: create_release
         env:
