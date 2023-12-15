@@ -27,7 +27,7 @@ jobs:
         run: dotnet build ${{ env.PROJECT_PATH }} -c Release -p:PublishSingleFile=true --no-restore
 
       - name: Publish
-        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --output ./${{ env.PUBLISH_PATH }} --no-build
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
 
       - name: Remove the .pdb files
         run: Remove-Item -path ${{ env.PUBLISH_PATH }}/*.pdb
@@ -38,8 +38,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.1.21
-          release_name: Release v1.1.21
+          tag_name: v1.1.22
+          release_name: Release v1.1.22
 
       - name: Copy archives to Release
         uses: csexton/release-asset-action@v2
