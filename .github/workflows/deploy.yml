@@ -34,7 +34,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/upload-release-asset@v1
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -45,5 +45,5 @@ jobs:
         uses: csexton/release-asset-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: "*.zip"
+          pattern: SIGL_Cadastru/bin/Release/net7.0-windows/win-x64/publish/*.exe
           release-url: ${{ steps.create_release.outputs.upload_url }}
