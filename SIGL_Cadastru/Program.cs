@@ -6,6 +6,7 @@ using Repository;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
+using SIGL_Cadastru.Middlewares.Database;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Service;
@@ -19,15 +20,27 @@ namespace SIGL_Cadastru
 {
     public static class Program
     {
+        private static IHost host;
+
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
-            var formFactory = CompositionRoot();
-            ApplicationConfiguration.Initialize();
 
+            var hostBuilder = CreateHostBuilder();
+            host = hostBuilder.Build();
+            var formFactory = new FormFactoryImpl(host.Services);
+            FormFactory.SetProvider(formFactory);
+
+
+            //middlewares
+            host.MigrateIfNeeded();
+
+
+            ApplicationConfiguration.Initialize();
             Application.Run(formFactory.CreateMain());
         }
 
@@ -37,7 +50,6 @@ namespace SIGL_Cadastru
 
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string sFile = System.IO.Path.Combine(sCurrentDirectory, @"\Resources\Nomenclatura.xml");
-            var varstring = $"Data Source={sCurrentDirectory}\\DB\\SIGLDB.db";
 
             //Depricated
             //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -50,7 +62,7 @@ namespace SIGL_Cadastru
             return Host.CreateDefaultBuilder()
 
                 .ConfigureServices((context, services) => {
-                    services.AddDbContext<AppDbContext>(options => options.UseSqlite(varstring, b => 
+                    services.AddDbContext<AppDbContext>(options => options.UseSqlite(DatabaseOptions.ConnectionString, b => 
                     b.MigrationsAssembly( typeof(AppDbContext).Assembly.ToString() )));
 
                     services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
@@ -128,11 +140,12 @@ namespace SIGL_Cadastru
                 });
         }
 
+        //moved to main
         static IFormFactory CompositionRoot()
         {
             // host
             var hostBuilder = CreateHostBuilder();
-            var host = hostBuilder.Build();
+            host = hostBuilder.Build();
 
             // container
             var serviceProvider = host.Services;
