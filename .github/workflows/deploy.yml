@@ -1,40 +1,77 @@
-name: "Deploy Class Commands"
+name: Build and Deploy
 
 on:
   push:
-    branch:
+    branches:
       - main
-       
-
-env:
-  PROJECT_PATH: SIGL_Cadstru/SIGL_Cadstru.csproj
 
 jobs:
-  deploy:
+  build:
     runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 7
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v7
+      with:
+        dotnet-version: 7.0.100
 
-      - run: dotnet restore ${{ env.PROJECT_PATH }}
+    - name: Build and Publish
+      run: |
+        dotnet publish -c Release -r win-x64
+        echo "::set-output name=publish-dir::$(pwd)/bin/Release/net7.0-windows/win-x64"
 
-      - run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: WinFormsApp
+        path: ${{ needs.build.outputs.publish-dir }}
 
-      - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+  deploy:
+    needs: build
+    runs-on: windows-latest
 
-      - uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: WinFormsApp
 
-      - uses: csexton/release-asset-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: ClassCommands/bin/Release/netcoreapp3.1/win-x64/publish/*.exe
-          release-url: ${{ steps.create_release.outputs.upload_url }}
+    - name: Set up Git
+      run: |
+        git config user.name "${{ secrets.GITHUB_ACTOR }}"
+        git config user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Artifact to Release
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./WinFormsApp.zip
+        asset_name: WinFormsApp.zip
+        asset_content_type: application/zip
+
+    - name: Update Auto-Update Endpoint
+      run: |
+        echo "::set-output name=auto-update-url::https://github.com/${{ github.repository }}/releases/download/v${{ github.run_number }}/WinFormsApp.zip"
+
+    - name: Update Auto-Update Configuration
+      run: |
+        echo "auto-update-url=${{ steps.update_auto_update.outputs.auto-update-url }}" > auto-update.config
+
+    - name: Commit and Push Auto-Update Configuration
+      run: |
+        git add auto-update.config
+        git commit -m "Update auto-update configuration"
+        git push

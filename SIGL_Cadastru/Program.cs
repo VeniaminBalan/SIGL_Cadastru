@@ -6,6 +6,7 @@ using Repository;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
+using SIGL_Cadastru.Middlewares.AutoUpdate;
 using SIGL_Cadastru.Middlewares.Database;
 using SIGL_Cadastru.Repo.DataBase;
 using SIGL_Cadastru.Repo.Models;
@@ -14,7 +15,7 @@ using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Views;
 using SIGL_Cadastru.Views.Setari;
 using SIGL_Cadastru.Views.Setari.Persoane;
-using System.Configuration;
+using Squirrel;
 
 namespace SIGL_Cadastru
 {
@@ -39,9 +40,20 @@ namespace SIGL_Cadastru
             //middlewares
             host.MigrateIfNeeded();
 
+            
+            using (var mgr = new UpdateManager("YOUR_GITHUB_RELEASES_URL"))
+            {
+                // Check for updates
+                await host.CheckForUpdatesAsync(mgr);
 
-            ApplicationConfiguration.Initialize();
-            Application.Run(formFactory.CreateMain());
+                // Start the application
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                ApplicationConfiguration.Initialize();
+                Application.Run(formFactory.CreateMain());
+            }
+            
+
         }
 
 
