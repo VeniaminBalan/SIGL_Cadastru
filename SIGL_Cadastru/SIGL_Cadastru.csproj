@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	<OutputType>WinExe</OutputType>
-	<TargetFramework>net7.0-windows</TargetFramework>
+	<TargetFramework>net7.0-windows7.0</TargetFramework>
 	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	<Nullable>enable</Nullable>
 	<UseWindowsForms>true</UseWindowsForms>
