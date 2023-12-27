@@ -114,7 +114,7 @@ namespace SIGL_Cadastru.Repo.Models
                 throw new Exception("Indicati prenumele persoanei");
 
             if (string.IsNullOrWhiteSpace(domiciliu))
-                throw new Exception("Indicati prenumele persoanei");
+                throw new Exception("Indicati domiciliu persoanei");
                    
             if (string.IsNullOrWhiteSpace(iDNP))
                 throw new Exception("Indicati IDNP-ul persoanei");

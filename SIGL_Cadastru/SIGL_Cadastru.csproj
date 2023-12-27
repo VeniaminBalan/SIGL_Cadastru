@@ -1,11 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
+	<OutputType>WinExe</OutputType>
+	<TargetFramework>net7.0-windows7.0</TargetFramework>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	<Nullable>enable</Nullable>
+	<UseWindowsForms>true</UseWindowsForms>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SIGL_Cadastru.App\SIGL_Cadastru.App.csproj" />
-    <ProjectReference Include="..\SIGL_Cadastru.Repo\SIGL_Cadastru.Repo.csproj" />
+	<ProjectReference Include="..\SIGL_Cadastru.App\SIGL_Cadastru.App.csproj" />
+	<ProjectReference Include="..\SIGL_Cadastru.Repo\SIGL_Cadastru.Repo.csproj" />
   </ItemGroup>
 
 </Project>
