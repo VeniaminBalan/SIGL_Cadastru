@@ -14,6 +14,7 @@ namespace SIGL_Cadastru.Views
         {
             InitializeComponent();
             uc_Main = Add_UC_Main();
+            label_version.Text = $"Version:{Application.ProductVersion}";
         }
 
         public static FormMain Create() 
