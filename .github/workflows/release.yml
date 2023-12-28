@@ -33,11 +33,14 @@ jobs:
 
     - name: dotnet publish
       if: github.event_name != 'pull_request'
-      run: dotnet publish --configuration Release -o ./publish
+      run: | 
+        cd SIGL_Cadastru 
+        dotnet publish --configuration Release -o ./publish
 
     - name: Clowd.Squirrel
       if: github.event_name != 'pull_request'
       run: |
+        cd SIGL_Cadastru 
         Set-Alias Squirrel ($env:USERPROFILE + "\.nuget\packages\clowd.squirrel\2.11.1\tools\Squirrel.exe");
         Squirrel pack --framework net6,vcredist143-x86 --packId "SIGL.Cadastru" --packVersion "${{  github.ref_name }}" --packAuthors "Balan Veniamin" --packDir .\publish\ --releaseDir .\Release
 
@@ -46,4 +49,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Installer
-        path: ./Release
+        path: ./SIGL_Cadastru/Release
