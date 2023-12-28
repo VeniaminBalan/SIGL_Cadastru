@@ -26,7 +26,7 @@ jobs:
       run: |
         cd SIGL_Cadastru 
         dotnet build --configuration Release
-        xcopy /E /I Resources Release
+        xcopy Resources publish\Resources /E /I
 
     - name: dotnet publish
       if: github.event_name != 'pull_request'
