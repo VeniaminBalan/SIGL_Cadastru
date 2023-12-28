@@ -1,5 +1,5 @@
 ﻿using SIGL_Cadastru.AppConfigurations;
-
+using System.Reflection;
 
 namespace SIGL_Cadastru.Views
 {
@@ -14,7 +14,9 @@ namespace SIGL_Cadastru.Views
         {
             InitializeComponent();
             uc_Main = Add_UC_Main();
-            label_version.Text = $"Version:{Application.ProductVersion}";
+
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            label_version.Text = $"Version:{version!.ToString(3)}";
         }
 
         public static FormMain Create() 
