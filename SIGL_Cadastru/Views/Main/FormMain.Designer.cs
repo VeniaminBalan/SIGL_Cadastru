@@ -34,6 +34,7 @@
             this.label_version = new System.Windows.Forms.Label();
             this.button_setari = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel_content.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label_version);
             this.panel1.Controls.Add(this.button_setari);
             this.panel1.Controls.Add(this.button_cerere_noua);
@@ -89,6 +91,16 @@
             this.button_setari.UseVisualStyleBackColor = true;
             this.button_setari.Click += new System.EventHandler(this.button_setari_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.IndianRed;
+            this.label1.Location = new System.Drawing.Point(358, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "TEST";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -113,5 +125,6 @@
         private Button button_setari;
         private Panel panel1;
         private Label label_version;
+        private Label label1;
     }
 }
