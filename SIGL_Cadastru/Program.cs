@@ -31,20 +31,26 @@ namespace SIGL_Cadastru
         static async Task Main()
         {
 
+            SquirrelAwareApp.HandleEvents(
+                onInitialInstall: OnAppInstall,
+                onAppUninstall: OnAppUninstall,
+                onEveryRun: OnAppRun);
+
             var hostBuilder = CreateHostBuilder();
             host = hostBuilder.Build();
             var formFactory = new FormFactoryImpl(host.Services);
             FormFactory.SetProvider(formFactory);
 
 
-            //middlewares
-            host.MigrateIfNeeded();
 
             
             using (var mgr = new UpdateManager("YOUR_GITHUB_RELEASES_URL"))
             {
                 // Check for updates
                 await host.CheckForUpdatesAsync(mgr);
+
+                //middlewares
+                host.MigrateIfNeeded();
 
                 // Start the application
                 Application.EnableVisualStyles();
@@ -168,7 +174,6 @@ namespace SIGL_Cadastru
 
             return formFactory;
         }
-
         public class FormFactoryImpl : IFormFactory
         {
             private IServiceProvider _serviceProvider;
@@ -227,5 +232,21 @@ namespace SIGL_Cadastru
             }
         }
 
+        private static void OnAppInstall(SemanticVersion version, IAppTools tools)
+        {
+            tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+        }
+
+        private static void OnAppUninstall(SemanticVersion version, IAppTools tools)
+        {
+            tools.RemoveShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+        }
+
+        private static void OnAppRun(SemanticVersion version, IAppTools tools, bool firstRun)
+        {
+            tools.SetProcessAppUserModelId();
+            // show a welcome message when the app is first installed
+            if (firstRun) MessageBox.Show("Thanks for installing my application!");
+        }
     }
 }
