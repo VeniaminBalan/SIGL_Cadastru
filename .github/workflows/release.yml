@@ -3,11 +3,11 @@ name: .NET
 on:
   push:
     tags:
-      - 'v*.*.*'
-  pull_request:
-    tags:
-      - 'v*.*.*'
-  workflow_dispatch:
+      - 'v*'
+  #pull_request:
+  #  tags:
+  #    - 'v*.*.*'
+  #workflow_dispatch:
 
 jobs:
   build:
