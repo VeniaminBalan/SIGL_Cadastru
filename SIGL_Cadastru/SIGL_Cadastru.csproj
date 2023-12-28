@@ -6,7 +6,9 @@
 	<Nullable>enable</Nullable>
 	<UseWindowsForms>true</UseWindowsForms>
 	<ImplicitUsings>enable</ImplicitUsings>
-	 <ApplicationManifest>app.manifest</ApplicationManifest>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	<AssemblyVersion>1.0.0</AssemblyVersion>
+	<AssemblyFileVersion>1.0.0</AssemblyFileVersion>
   </PropertyGroup>
 
   <ItemGroup>

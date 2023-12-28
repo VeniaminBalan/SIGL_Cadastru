@@ -41,10 +41,8 @@ namespace SIGL_Cadastru
             var formFactory = new FormFactoryImpl(host.Services);
             FormFactory.SetProvider(formFactory);
 
-
-
             
-            using (var mgr = new UpdateManager("YOUR_GITHUB_RELEASES_URL"))
+            using (var mgr = new UpdateManager("https://github.com/Keboo/SimplyBudget/releases/latest"))
             {
                 // Check for updates
                 await host.CheckForUpdatesAsync(mgr);
