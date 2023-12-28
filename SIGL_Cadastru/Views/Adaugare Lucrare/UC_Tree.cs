@@ -41,7 +41,7 @@ namespace SIGL_Cadastru.Views.Adaugare_Lucrare
             XmlNode xmlNode;
 
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources\Nomenclatura.xml");
+            string sFile = $"{sCurrentDirectory}Resources\\Nomenclatura.xml";
             string sFilePath = Path.GetFullPath(sFile);
 
             FileStream fs = new FileStream(sFile, FileMode.Open, FileAccess.Read);

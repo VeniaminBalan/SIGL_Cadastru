@@ -67,7 +67,7 @@ namespace SIGL_Cadastru
         {
 
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"\Resources\Nomenclatura.xml");
+            string sFile = $"{sCurrentDirectory}Resources\\Nomenclatura.xml";
 
             //Depricated
             //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;

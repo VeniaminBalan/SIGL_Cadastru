@@ -27,9 +27,6 @@ jobs:
         cd SIGL_Cadastru 
         dotnet build --configuration Release
         xcopy /E /I Resources Release
-      
-    #- name: Test
-    #  run: dotnet test --no-build --configuration Release --verbosity normal
 
     - name: dotnet publish
       if: github.event_name != 'pull_request'
@@ -49,7 +46,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Installer
-        path: ./SIGL_Cadastru/Release
+        path: .\Release
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -57,6 +54,6 @@ jobs:
         fail_on_unmatched_files: true
         generate_release_notes: true
         files: |
-          ./Release/RELEASES
-          ./Release/SIGL_Cadastru-${{github.ref_name}}-full.nupkg
-          ./Release/SIGL_Cadastru.exe
+          .\Release\RELEASES
+          .\Release\SIGL_Cadastru-${{github.ref_name}}-full.nupkg
+          .\Release\SIGL_Cadastru.exe
