@@ -42,7 +42,7 @@ jobs:
       run: |
         cd SIGL_Cadastru 
         Set-Alias Squirrel ($env:USERPROFILE + "\.nuget\packages\clowd.squirrel\2.11.1\tools\Squirrel.exe");
-        Squirrel pack --framework net6,vcredist143-x86 --packId ${{ github.ref_name }} --packVersion "1.2.4" --packAuthors "Balan Veniamin" --packDir .\publish\ --releaseDir .\Release
+        Squirrel pack --framework net6,vcredist143-x86 --packId --packVersion "1.2.8" --packAuthors "Balan Veniamin" --packDir .\publish\ --releaseDir .\Release
 
     - name: Upload artifact for deployment job
       if: github.event_name != 'pull_request'
@@ -58,5 +58,6 @@ jobs:
         generate_release_notes: true
         files: |
           ./SIGL_Cadastru/Release/RELEASES
-          ./SIGL_Cadastru/Release/SIGL_Cadastru-${{ github.ref_name }}-full.nupkg
+          ./SIGL_Cadastru/Release/SIGL_Cadastru-1.2.8-full.nupkg
           ./SIGL_Cadastru/Release/SIGL_Cadastru.exe 
+          #${{ github.ref_name }}
