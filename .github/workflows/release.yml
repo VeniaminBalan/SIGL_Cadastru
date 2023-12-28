@@ -26,7 +26,6 @@ jobs:
       run: |
         cd SIGL_Cadastru 
         dotnet build --configuration Release
-        cd ..
         xcopy /E /I Resources Release
       
     #- name: Test
