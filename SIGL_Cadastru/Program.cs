@@ -22,6 +22,7 @@ namespace SIGL_Cadastru
     public static class Program
     {
         private static IHost host;
+        public static string Version = "0.0.0";
 
 
         /// <summary>
@@ -41,21 +42,26 @@ namespace SIGL_Cadastru
             var formFactory = new FormFactoryImpl(host.Services);
             FormFactory.SetProvider(formFactory);
 
-            
-            using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/VeniaminBalan/SIGL_Cadastru/releases/latest"))
+
+            using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/VeniaminBalan/SIGL_Cadastru"))
             {
-                // Check for updates
-                await host.CheckForUpdatesAsync(mgr.Result);
-
-                //middlewares
-                host.MigrateIfNeeded();
-
-                // Start the application
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                ApplicationConfiguration.Initialize();
-                Application.Run(formFactory.CreateMain());
+                await mgr.Result.UpdateApp();
             }
+            
+            // Check for updates
+            //await host.CheckForUpdatesAsync(mgr);
+
+                
+
+            //middlewares
+            host.MigrateIfNeeded();
+
+            // Start the application
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            ApplicationConfiguration.Initialize();
+            Application.Run(formFactory.CreateMain());
+            
             
 
         }
