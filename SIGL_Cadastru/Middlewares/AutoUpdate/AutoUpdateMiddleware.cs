@@ -30,7 +30,8 @@ public static class AutoUpdateMiddleware
                 if (updateInfo.ReleasesToApply.Any())
                 {
                     // Update available, apply it
-                    await mgr.UpdateApp();
+                    await mgr.UpdateApp();     
+                    UpdateManager.RestartApp();
                 }
             }
             catch (Exception ex)
