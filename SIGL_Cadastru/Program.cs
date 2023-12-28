@@ -43,17 +43,8 @@ namespace SIGL_Cadastru
             FormFactory.SetProvider(formFactory);
 
 
-            using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/VeniaminBalan/SIGL_Cadastru"))
-            {
-                await mgr.Result.UpdateApp();
-            }
-            
-            // Check for updates
-            //await host.CheckForUpdatesAsync(mgr);
-
-                
-
             //middlewares
+            await host.CheckForUpdatesAsync();
             host.MigrateIfNeeded();
 
             // Start the application
