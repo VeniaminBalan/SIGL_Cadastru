@@ -1,4 +1,7 @@
 using Contracts;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -58,8 +61,7 @@ namespace SIGL_Cadastru
 
             //stop loading screen
 
-            Application.Run(formFactory.CreateMain());        
-
+            Application.Run(formFactory.CreateMain());
         }
 
 

@@ -1,4 +1,7 @@
-﻿using SIGL_Cadastru.AppConfigurations;
+﻿using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter;
+using SIGL_Cadastru.AppConfigurations;
 using System.Reflection;
 
 namespace SIGL_Cadastru.Views
@@ -13,6 +16,7 @@ namespace SIGL_Cadastru.Views
         private FormMain()
         {
             InitializeComponent();
+            AppCenter.Start("53a47c06-b695-4143-96f2-88d4bfa05d15", typeof(Analytics), typeof(Crashes));
             uc_Main = Add_UC_Main();
 
             label_version.Text = $"Version: {Program.Version}";
