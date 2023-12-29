@@ -24,36 +24,41 @@ namespace SIGL_Cadastru
         private static IHost host;
         public static string Version = "0.0.0";
 
-
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static async Task Main()
         {
+            //loading screen
 
             SquirrelAwareApp.HandleEvents(
                 onInitialInstall: OnAppInstall,
                 onAppUninstall: OnAppUninstall,
                 onEveryRun: OnAppRun);
 
+
             var hostBuilder = CreateHostBuilder();
             host = hostBuilder.Build();
-            var formFactory = new FormFactoryImpl(host.Services);
-            FormFactory.SetProvider(formFactory);
 
 
             //middlewares
             await host.CheckForUpdatesAsync();
             host.MigrateIfNeeded();
 
+
+            var formFactory = new FormFactoryImpl(host.Services);
+            FormFactory.SetProvider(formFactory);
+
             // Start the application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             ApplicationConfiguration.Initialize();
-            Application.Run(formFactory.CreateMain());
-            
-            
+
+            //stop loading screen
+
+            Application.Run(formFactory.CreateMain());        
 
         }
 

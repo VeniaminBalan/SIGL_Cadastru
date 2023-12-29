@@ -16,6 +16,7 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
 
             builder.Property(p => p.Email).HasMaxLength(255);
 
+#if DEBUG
             builder.HasData(
 
                     new Persoana(
@@ -41,6 +42,7 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
                             Role.Client)                       
 
                 );
+#endif
         }
     }
 }
