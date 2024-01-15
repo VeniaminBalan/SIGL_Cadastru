@@ -20,7 +20,7 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
             builder.HasData(
 
                     new Persoana(
-                            Guid.NewGuid(),
+                            Guid.Parse("3453D494-75E5-46B1-96FF-2A3790F2D7A5"),
                             "Balan",
                             "Octavian",
                             "124353452341",
@@ -31,7 +31,7 @@ namespace SIGL_Cadastru.Repo.DataBase.Configurations
                             Role.Responsabil ),
 
                     new Persoana(
-                            Guid.NewGuid(),
+                            Guid.Parse("20BA7528-9E72-46FE-946A-99EFBA3D4A49"),
                             "Balan",
                             "Veniamin",
                             "2002500081628",

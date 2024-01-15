@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Models;
 using SIGL_Cadastru.Repo.Contracts;
+using SIGL_Cadastru.Repo.ValueObjects;
 using SQLitePCL;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,6 +31,7 @@ namespace SIGL_Cadastru.Repo.Models
         public Persoana Responsabil { get; private set; }
 
         public string Nr { get; private set; }
+        public NrCerere? CerereNr { get; private set; }
         public DateOnly ValabilDeLa { get; private set; }
         public DateOnly ValabilPanaLa { get; private set; }
 
