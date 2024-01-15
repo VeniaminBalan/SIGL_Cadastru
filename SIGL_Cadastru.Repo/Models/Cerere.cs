@@ -46,7 +46,7 @@ namespace SIGL_Cadastru.Repo.Models
         public IReadOnlyList<CerereStatus> StatusList => _stateList;
 
 
-        private Cerere(Guid id, Persoana client, Persoana executant, Persoana responsabil,string nr ,DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<CerereStatus> stateList, Portofoliu portofoliu)
+        private Cerere(Guid id, Persoana client, Persoana executant, Persoana responsabil,string nr ,DateOnly valabilDeLa, DateOnly valabilPanaLa, string nrCadastral, int adaos, string comment, List<CerereStatus> stateList, Portofoliu portofoliu, NrCerere nrCerere)
         {
             Id = id;
             ClientId = client.Id;
@@ -63,6 +63,7 @@ namespace SIGL_Cadastru.Repo.Models
             Portofoliu = portofoliu;
             _stateList = stateList;
             Nr = nr;
+            CerereNr = nrCerere;
             Starea = Status.Inlucru;
         }
 
@@ -105,18 +106,17 @@ namespace SIGL_Cadastru.Repo.Models
             if (costTotal < 0)
                 throw new Exception("Costul total nu poate fi mai mic de 0");
 
-            string count = await _repo.GetLastNr();
+            NrCerere? last = await _repo.GetLastNr();
 
-            if (string.IsNullOrWhiteSpace(count))
-                count = "00/0000";
+            if (last is null)
+                last = new NrCerere(DateTime.Now.Year, 1);
 
-            int resultNr = int.Parse(count.Split("/")[1]) + 1; // +performace with spans 
+            last.Index++;
 
-            string nr = $"{DateTime.Now.Year%100}/{string.Format("{0:0000}", resultNr)}";
-
-            return new Cerere(id, client,executant,responsabil,nr, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, stateList, portofoliu);
+            string nr = $"{last.Year}/{last.Index.ToString("0000")}";
 
 
+            return new Cerere(id, client,executant,responsabil,nr, valabilDeLa, valabilPanaLa, nrCadastral, adaos, comment, stateList, portofoliu, last);
         }
 
         public void AddStatus(CerereStatus cerereStatus)
