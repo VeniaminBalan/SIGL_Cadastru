@@ -26,6 +26,7 @@ namespace SIGL_Cadastru.Repo.Migrations
                 oldClrType: typeof(int),
                 oldType: "INTEGER");
 
+            // magic
             migrationBuilder.Sql(
                 """
                 UPDATE Cereri
