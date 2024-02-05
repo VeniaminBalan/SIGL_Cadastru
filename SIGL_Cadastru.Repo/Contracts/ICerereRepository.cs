@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Query;
 using SIGL_Cadastru.Repo.Models;
+using SIGL_Cadastru.Repo.ValueObjects;
 
 namespace Contracts;
 
@@ -12,5 +13,5 @@ public interface ICerereRepository
     void CreateCerere(Cerere cerere);
     void DeleteCerere(Cerere cerere);
     void UpdateCerere(Cerere cerere);
-    public Task<string> GetLastNr();
+    public Task<NrCerere?> GetLastNr();
 }

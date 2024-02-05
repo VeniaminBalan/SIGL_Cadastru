@@ -2,16 +2,20 @@
 
   <PropertyGroup>
 	<OutputType>WinExe</OutputType>
-	<TargetFramework>net7.0-windows7.0</TargetFramework>
+	<TargetFramework>net7.0-windows</TargetFramework>
 	<Nullable>enable</Nullable>
 	<UseWindowsForms>true</UseWindowsForms>
 	<ImplicitUsings>enable</ImplicitUsings>
-	 <ApplicationManifest>app.manifest</ApplicationManifest>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	<AssemblyVersion>1.0.0</AssemblyVersion>
+	<AssemblyFileVersion>1.0.0</AssemblyFileVersion>
   </PropertyGroup>
 
   <ItemGroup>
 	<PackageReference Include="Clowd.Squirrel" Version="2.11.1" />
 	<PackageReference Include="FluentDateTime" Version="2.1.0" />
+	<PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.3" />
+	<PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.3" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

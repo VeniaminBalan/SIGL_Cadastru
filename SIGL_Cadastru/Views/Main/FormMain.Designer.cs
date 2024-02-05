@@ -31,6 +31,7 @@
             this.button_cerere_noua = new System.Windows.Forms.Button();
             this.panel_content = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_version = new System.Windows.Forms.Label();
             this.button_setari = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel_content.SuspendLayout();
@@ -58,6 +59,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label_version);
             this.panel1.Controls.Add(this.button_setari);
             this.panel1.Controls.Add(this.button_cerere_noua);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -65,6 +67,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1190, 73);
             this.panel1.TabIndex = 5;
+            // 
+            // label_version
+            // 
+            this.label_version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_version.AutoSize = true;
+            this.label_version.Location = new System.Drawing.Point(1088, 9);
+            this.label_version.Name = "label_version";
+            this.label_version.Size = new System.Drawing.Size(90, 20);
+            this.label_version.TabIndex = 5;
+            this.label_version.Text = "Version:0.0.0";
+            this.label_version.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // button_setari
             // 
@@ -88,6 +101,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel_content.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -98,5 +112,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button button_setari;
         private Panel panel1;
+        private Label label_version;
     }
 }

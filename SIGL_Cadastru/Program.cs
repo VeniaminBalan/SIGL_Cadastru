@@ -1,4 +1,7 @@
 using Contracts;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +25,7 @@ namespace SIGL_Cadastru
     public static class Program
     {
         private static IHost host;
-
+        public static string Version = "0.0.0";
 
         /// <summary>
         ///  The main entry point for the application.
@@ -30,36 +33,35 @@ namespace SIGL_Cadastru
         [STAThread]
         static async Task Main()
         {
+            //loading screen
 
             SquirrelAwareApp.HandleEvents(
                 onInitialInstall: OnAppInstall,
                 onAppUninstall: OnAppUninstall,
                 onEveryRun: OnAppRun);
 
+
             var hostBuilder = CreateHostBuilder();
             host = hostBuilder.Build();
+
+
+            //middlewares
+            await host.CheckForUpdatesAsync();
+            host.MigrateIfNeeded();
+
+
             var formFactory = new FormFactoryImpl(host.Services);
             FormFactory.SetProvider(formFactory);
 
+            // Start the application
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            ApplicationConfiguration.Initialize();
 
+            //stop loading screen
 
-            
-            using (var mgr = new UpdateManager("YOUR_GITHUB_RELEASES_URL"))
-            {
-                // Check for updates
-                await host.CheckForUpdatesAsync(mgr);
-
-                //middlewares
-                host.MigrateIfNeeded();
-
-                // Start the application
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                ApplicationConfiguration.Initialize();
-                Application.Run(formFactory.CreateMain());
-            }
-            
-
+            Application.Run(formFactory.CreateMain());
         }
 
 
@@ -67,7 +69,7 @@ namespace SIGL_Cadastru
         {
 
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"\Resources\Nomenclatura.xml");
+            string sFile = $"{sCurrentDirectory}Resources\\Nomenclatura.xml";
 
             //Depricated
             //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;

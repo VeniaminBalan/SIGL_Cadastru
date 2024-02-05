@@ -7,6 +7,7 @@ using SIGL_Cadastru.Repo.Query.Extensions;
 using Query;
 using Exceptions;
 using System.Collections.Generic;
+using SIGL_Cadastru.Repo.ValueObjects;
 
 namespace SIGL_Cadastru.Repo.Repository
 {
@@ -56,10 +57,11 @@ namespace SIGL_Cadastru.Repo.Repository
             .Include(c => c.StatusList)
             .SingleOrDefaultAsync();
 
-        public async Task<string?> GetLastNr() =>
+        public async Task<NrCerere?> GetLastNr() =>
             await FindAll(false)
-            .OrderByDescending(c => c.Nr)
-            .Select(c => c.Nr)
+            .OrderByDescending(c => c.CerereNr!.Year)
+            .ThenByDescending(c => c.CerereNr!.Index)
+            .Select(c => c.CerereNr)
             .FirstOrDefaultAsync();
 
         public void UpdateCerere(Cerere cerere) => Update(cerere);

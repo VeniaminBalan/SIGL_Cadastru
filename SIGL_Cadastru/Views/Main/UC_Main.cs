@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Query;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;
@@ -29,6 +30,12 @@ namespace SIGL_Cadastru.Views
             _eventService.CereriUpdateRequire += _eventService_CereriUpdateRequire;
 
             InitializeComponent();
+            SetQuery();
+        }
+
+        private async void UC_Main_Load(object sender, EventArgs e)
+        {
+            await UpdateTable();
         }
 
         private async void _eventService_CereriUpdateRequire(object? sender, EventArgs e)
@@ -54,10 +61,6 @@ namespace SIGL_Cadastru.Views
 
         }
 
-        private async void UC_Main_Load(object sender, EventArgs e)
-        {
-            await UpdateTable();
-        }
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -93,6 +96,13 @@ namespace SIGL_Cadastru.Views
         }
         private async void checkBox_Eliberat_CheckedChanged(object sender, EventArgs e)
         {
+
+            SetQuery();
+            await UpdateTable();
+        }
+
+        private void SetQuery() 
+        {
             var statefilter = new StateFilter();
 
             if (checkBox_inLucru.Checked)
@@ -109,8 +119,6 @@ namespace SIGL_Cadastru.Views
 
 
             this.cerereQuery.StateFilter = statefilter;
-
-            await UpdateTable();
         }
         private async void maskedTextBox_inceput_TextChanged(object sender, EventArgs e)
         {

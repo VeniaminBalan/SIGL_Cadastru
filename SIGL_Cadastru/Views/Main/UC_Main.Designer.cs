@@ -296,8 +296,6 @@ namespace SIGL_Cadastru.Views
             // checkBox_Eliberat
             // 
             this.checkBox_Eliberat.AutoSize = true;
-            this.checkBox_Eliberat.Checked = true;
-            this.checkBox_Eliberat.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_Eliberat.Location = new System.Drawing.Point(13, 204);
             this.checkBox_Eliberat.Name = "checkBox_Eliberat";
             this.checkBox_Eliberat.Size = new System.Drawing.Size(82, 24);
