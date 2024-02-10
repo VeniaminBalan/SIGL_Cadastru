@@ -1,7 +1,4 @@
 using Contracts;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using Microsoft.AppCenter;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,7 +30,7 @@ namespace SIGL_Cadastru
         [STAThread]
         static async Task Main()
         {
-            //loading screen
+            //TODO: loading screen
 
             SquirrelAwareApp.HandleEvents(
                 onInitialInstall: OnAppInstall,

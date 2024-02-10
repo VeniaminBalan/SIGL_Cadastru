@@ -39,7 +39,7 @@ namespace SIGL_Cadastru.Views.Setari.Persoane
         private async void button_save_Click(object sender, EventArgs e)
         {
             Role rol;
-            if (!Enum.TryParse<Role>(comboBox_rols.Text, true, out rol)) 
+            if (!Enum.TryParse(comboBox_rols.Text, true, out rol)) 
             {
                 MessageBox.Show("indicati ce rol are Persoana");
                 return;

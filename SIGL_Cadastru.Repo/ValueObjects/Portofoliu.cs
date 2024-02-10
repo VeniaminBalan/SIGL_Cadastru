@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using SIGL_Cadastru.Repo.Models;
 
-namespace SIGL_Cadastru.Repo.Models;
+namespace SIGL_Cadastru.Repo.ValueObjects;
 
 
 public class Portofoliu
@@ -29,7 +24,7 @@ public class Portofoliu
         _lucrari.Add(lucrare);
     }
 
-    public void AddDocument(Document doc) 
+    public void AddDocument(Document doc)
     {
         _documente.Add(doc);
     }

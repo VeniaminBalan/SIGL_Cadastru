@@ -1,9 +1,9 @@
-﻿using SIGL_Cadastru.Repo.Models;
-using System;
+﻿using System;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using SIGL_Cadastru.Repo.ValueObjects;
 
 namespace SIGL_Cadastru.Repo.DataBase.CustomConverters;
 

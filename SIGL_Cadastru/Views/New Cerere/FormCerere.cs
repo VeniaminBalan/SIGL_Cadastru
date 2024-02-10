@@ -1,17 +1,12 @@
 ﻿using Contracts;
-using FluentDateTime;
-using Models;
 using SIGL_Cadastru.App.Contracts;
-using SIGL_Cadastru.App.Entities;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Repo.Query;
+using SIGL_Cadastru.Repo.ValueObjects;
 using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
 using System.Data;
-using System.Diagnostics;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SIGL_Cadastru.Views
 {
@@ -59,15 +54,10 @@ namespace SIGL_Cadastru.Views
                 }
             }
 
-
-
             comboBox_Responsabil.DataSource = responsabili;
 
             var executanti = await GetPersoane(Role.Executant);
-            foreach (var ex in responsabili) 
-            {
-                executanti.Add(ex);
-            }
+            executanti.AddRange(responsabili);
 
             comboBox_Executant.DataSource = executanti;
         }
@@ -112,7 +102,6 @@ namespace SIGL_Cadastru.Views
             formAdaugareLucrare.Show();
             formAdaugareLucrare.SubmitButtonPressed += OnFormAdaugareSubmit;
         }
-
         private void OnFormAdaugareSubmit(object sender, AdaugareLucrareEventArgs e) 
         {
             AddLucrare(e.Lucrare);
@@ -193,34 +182,38 @@ namespace SIGL_Cadastru.Views
             }
 
 
-            var nrCadastral = maskedTextBox_NrCadasrtral.Text;
-            var id = Guid.NewGuid();
-            var adaos = int.Parse(textBox_adaos.Text);
+            string nrCadastral = maskedTextBox_NrCadasrtral.Text;
+
+            bool parsedAdaos = int.TryParse(textBox_adaos.Text, out int adaos);
+
             var comment = textBox_comment.Text;
+
+            var termen = int.Parse(textBox_termen.Text);
 
             var executantItem = (ComboItem)comboBox_Executant.SelectedItem;
             var responsabilItem = (ComboItem)comboBox_Responsabil.SelectedItem;
 
-            var valabilDeLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value);
-            var valabilPanaLa = DateOnly.FromDateTime(dateTimePicker_dataSolicitarii.Value.AddBusinessDays(int.Parse(textBox_termen.Text)));
+            var valabilDeLa = dateTimePicker_dataSolicitarii.Value;
 
-            var responsabil = await _repo.Persoana.GetByIdAsync(responsabilItem.ID, true);
-            var executant = await _repo.Persoana.GetByIdAsync(executantItem.ID, true);
+            var responsabil = _repo.Persoana.GetByIdAsync(responsabilItem.ID, true);
+            var executant = _repo.Persoana.GetByIdAsync(executantItem.ID, true);
 
-            var result = await GetSelectedUC().GetPersoana();
+            await Task.WhenAll(responsabil, executant);
+
+            Result<Persoana> result = await GetSelectedUC().GetPersoana();
             Persoana client = result.Value;
 
             return await Cerere.Create(
-                id,
+                Guid.NewGuid(),
                 client,
-                executant,
-                responsabil,
+                executant.Result,
+                responsabil.Result,
                 valabilDeLa,
-                valabilPanaLa,
+                termen,
                 nrCadastral,
-                adaos,
+                parsedAdaos == false ? 0 : adaos,
                 comment,
-                new Portofoliu(UC_documente.GetDocumente() , this.Lucrari.ToList()),
+                new Portofoliu(UC_documente.GetDocumente() , Lucrari.ToList()),
                 new(),
                 _repo.Cerere);
 
@@ -289,7 +282,6 @@ namespace SIGL_Cadastru.Views
             }
 
         }
-
         private void FormCerere_FormClosed(object sender, FormClosedEventArgs e)
         {
             foreach (Control control in panelUC.Controls)

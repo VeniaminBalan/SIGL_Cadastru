@@ -1,26 +1,25 @@
 ﻿using SIGL_Cadastru.Repo.Contracts;
 
 
-namespace SIGL_Cadastru.Repo.Models
+namespace SIGL_Cadastru.Repo.Models;
+
+public class Lucrare
 {
-    public class Lucrare
+    public string TipLucrare { get; set; } = ""; 
+    public int Pret { get; set; }
+
+    public static Lucrare Create(string tipLucrare, int pret) 
     {
-        public string TipLucrare { get; set; } = ""; 
-        public int Pret { get; set; }
+        if (string.IsNullOrWhiteSpace(tipLucrare))
+            throw new Exception("Selectati lucrarea");
 
-        public static Lucrare Create(string tipLucrare, int pret) 
+        if(pret < 0)
+            throw new Exception("Pretul nu poate fi negativ");
+
+        return new Lucrare 
         {
-            if (string.IsNullOrWhiteSpace(tipLucrare))
-                throw new Exception("Selectati lucrarea");
-
-            if(pret < 0)
-                throw new Exception("Pretul nu poate fi negativ");
-
-            return new Lucrare 
-            {
-                TipLucrare= tipLucrare,
-                Pret= pret
-            };
-        }
+            TipLucrare= tipLucrare,
+            Pret= pret
+        };
     }
 }

@@ -5,6 +5,7 @@ using SIGL_Cadastru.Repo.DataBase.CustomConverters;
 using SIGL_Cadastru.Repo.Models;
 
 using Newtonsoft.Json;
+using SIGL_Cadastru.Repo.ValueObjects;
 
 
 namespace SIGL_Cadastru.Repo.DataBase.Configurations
