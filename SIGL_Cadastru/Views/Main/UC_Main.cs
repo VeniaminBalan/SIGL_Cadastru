@@ -1,14 +1,9 @@
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Query;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Entities;
-using SIGL_Cadastru.App.Entities.DataTransferObjects;
-using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.AppConfigurations;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Services;
-using SIGL_Cadastru.Utils;
-using System.Data;
 
 
 
@@ -43,14 +38,14 @@ namespace SIGL_Cadastru.Views
             await UpdateTable();
         }
 
-        public async Task UpdateTable() 
+        public async Task UpdateTable()
         {
-            
+
             try
             {
-                var cereri = await _service.CerereService.GetAllAsync(cerereQuery, false);           
+                var cereri = await _service.CerereService.GetAllAsync(cerereQuery, false);
                 dataGridView1.DataSource = cereri.ToList();
-                
+
 
             }
             catch (Exception ex)
@@ -101,7 +96,7 @@ namespace SIGL_Cadastru.Views
             await UpdateTable();
         }
 
-        private void SetQuery() 
+        private void SetQuery()
         {
             var statefilter = new StateFilter();
 
@@ -124,7 +119,7 @@ namespace SIGL_Cadastru.Views
         {
             maskedTextBox_inceput.ForeColor = Color.Black;
 
-            if (!maskedTextBox_inceput.MaskCompleted) 
+            if (!maskedTextBox_inceput.MaskCompleted)
             {
                 if (this.cerereQuery.TimeFilter is null)
                     return;
@@ -143,9 +138,9 @@ namespace SIGL_Cadastru.Views
             }
             catch (Exception)
             {
-                maskedTextBox_inceput.ForeColor= Color.Red;
+                maskedTextBox_inceput.ForeColor = Color.Red;
                 return;
-                
+
             }
 
             cerereQuery.TimeFilter = TimeSpanFilter.Create(TimeFilterMode.StartDate, date);
@@ -177,7 +172,7 @@ namespace SIGL_Cadastru.Views
             {
                 maskedTextBox_panaLa.ForeColor = Color.Red;
                 return;
-                
+
             }
 
             cerereQuery.TimeFilter = TimeSpanFilter.Create(TimeFilterMode.EndDate, date);
@@ -189,9 +184,9 @@ namespace SIGL_Cadastru.Views
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
 
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "stareaCererii") 
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "stareaCererii")
             {
-                if (e.Value is not null) 
+                if (e.Value is not null)
                 {
                     string stringValue = e.Value.ToString().ToLower();
                     if ((stringValue.IndexOf(Status.Respins.ToString().ToLower()) > -1))
@@ -202,19 +197,19 @@ namespace SIGL_Cadastru.Views
                     {
                         e.CellStyle.ForeColor = Color.Green;
                     }
-                    else if ((stringValue.IndexOf(Status.LaReceptie.ToString().ToLower()) > -1)) 
+                    else if ((stringValue.IndexOf(Status.LaReceptie.ToString().ToLower()) > -1))
                     {
                         e.CellStyle.ForeColor = Color.DarkBlue;
                         e.Value = "La Receptie";
                     }
-                    else if ((stringValue.IndexOf(Status.Inlucru.ToString().ToLower()) > -1)) 
+                    else if ((stringValue.IndexOf(Status.Inlucru.ToString().ToLower()) > -1))
                     {
                         e.Value = "In Lucru";
                     }
                 }
             }
 
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "valabilPanaLa") 
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "valabilPanaLa")
             {
 
                 var cerereDto = dataGridView1.Rows[e.RowIndex].DataBoundItem as CerereDto;

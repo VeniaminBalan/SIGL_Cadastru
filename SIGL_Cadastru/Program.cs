@@ -17,235 +17,244 @@ using SIGL_Cadastru.Views.Setari;
 using SIGL_Cadastru.Views.Setari.Persoane;
 using Squirrel;
 
-namespace SIGL_Cadastru
+namespace SIGL_Cadastru;
+
+public static class Program
 {
-    public static class Program
+    private static IHost host;
+    public static string Version = "0.0.0";
+    private static readonly string MutexId = "SIGL_App";
+
+    /// <summary>
+    ///  The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    static async Task Main()
     {
-        private static IHost host;
-        public static string Version = "0.0.0";
-
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static async Task Main()
+        using (Mutex mutex = new Mutex(true, MutexId, out bool createdNew))
         {
-            //TODO: loading screen
+            if (createdNew)
+            {
+                //TODO: loading screen
 
-            SquirrelAwareApp.HandleEvents(
-                onInitialInstall: OnAppInstall,
-                onAppUninstall: OnAppUninstall,
-                onEveryRun: OnAppRun);
-
-
-            var hostBuilder = CreateHostBuilder();
-            host = hostBuilder.Build();
+                SquirrelAwareApp.HandleEvents(
+                    onInitialInstall: OnAppInstall,
+                    onAppUninstall: OnAppUninstall,
+                    onEveryRun: OnAppRun);
 
 
-            //middlewares
-            await host.CheckForUpdatesAsync();
-            host.MigrateIfNeeded();
+                var hostBuilder = CreateHostBuilder();
+                host = hostBuilder.Build();
 
 
-            var formFactory = new FormFactoryImpl(host.Services);
-            FormFactory.SetProvider(formFactory);
-
-            // Start the application
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            ApplicationConfiguration.Initialize();
-
-            //stop loading screen
-
-            Application.Run(formFactory.CreateMain());
-        }
+                //middlewares
+                await host.CheckForUpdatesAsync();
+                host.MigrateIfNeeded();
 
 
-        static IHostBuilder CreateHostBuilder()
-        {
+                var formFactory = new FormFactoryImpl(host.Services);
+                FormFactory.SetProvider(formFactory);
 
-            string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string sFile = $"{sCurrentDirectory}Resources\\Nomenclatura.xml";
+                // Start the application
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.SetHighDpiMode(HighDpiMode.SystemAware);
+                ApplicationConfiguration.Initialize();
 
-            //Depricated
-            //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            //string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources\Nomenclatura.xml");
-            //string sPdf = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources");
-            //string sPdfFilePath = Path.GetFullPath(sPdf);
-            //var varstring = @"Data Source=E:\PC\Projects\consult-trading\SIGL_Cadastru\DB\SIGLDB.db";
+                //stop loading screen
 
-
-            return Host.CreateDefaultBuilder()
-
-                .ConfigureServices((context, services) => {
-                    services.AddDbContext<AppDbContext>(options => options.UseSqlite(DatabaseOptions.ConnectionString, b => 
-                    b.MigrationsAssembly( typeof(AppDbContext).Assembly.ToString() )));
-
-                    services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
-                    services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
-                    services.AddSingleton<EventService>();
-                    services.AddScoped(typeof(IPdfGeneratorService), typeof(QuestPdfGeneratorService));
+                Application.Run(formFactory.CreateMain());
+            }
+            else
+            {
+                // If another instance is running, you may want to bring it to the foreground
+                MessageBox.Show("Another instance of the application is already running.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        } 
+    }
 
 
-                    services.AddScoped<Func<Guid, FormViewCerere>>(container =>
-                            Id =>
-                            {
-                                var service = container.GetRequiredService<IServiceManager>();
-                                var eventService = container.GetRequiredService<EventService>();
-                                var pdfService = container.GetRequiredService<IPdfGeneratorService>();
-                                return new FormViewCerere(service, pdfService, eventService, Id);
-                            });
+    static IHostBuilder CreateHostBuilder()
+    {
 
-                    services.AddTransient<FormMain>(container => FormMain.Create());
+        string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string sFile = $"{sCurrentDirectory}Resources\\Nomenclatura.xml";
 
-                    services.AddTransient<FormCerere>(container =>
-                    {
-                        var repository = container.GetRequiredService<IRepositoryManager>();
-                        var pdfService = container.GetRequiredService<IPdfGeneratorService>();
-                        var eventService = container.GetRequiredService<EventService>();
+        //Depricated
+        //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        //string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources\Nomenclatura.xml");
+        //string sPdf = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources");
+        //string sPdfFilePath = Path.GetFullPath(sPdf);
+        //var varstring = @"Data Source=E:\PC\Projects\consult-trading\SIGL_Cadastru\DB\SIGLDB.db";
 
-                        var formCerere = new FormCerere(repository, pdfService, eventService);
-                        return formCerere;
-                    });
-                    services.AddTransient<FormSetari>(container =>
-                    {
-                        var service = container.GetRequiredService<IServiceManager>();
-                        var eventService = container.GetRequiredService<EventService>();
 
-                        return FormSetari.Create(service, eventService); ;
-                    });
-                    services.AddScoped<UC_Main>(container => 
-                    {
-                        var service = container.GetRequiredService<IServiceManager>();
-                        var eventService = container.GetRequiredService<EventService>();
+        return Host.CreateDefaultBuilder()
 
-                        var uc_main = new UC_Main(service, eventService);
-                        return uc_main;
-                    });
-                    services.AddTransient<UC_PersoanaExistenta>(container =>
-                    {
-                        var repository = container.GetRequiredService<IRepositoryManager>();
-                        var eventService = container.GetRequiredService<EventService>();
-                        var uc_PE = new UC_PersoanaExistenta(repository, eventService);
-                        return uc_PE;
-                    });
-                    services.AddTransient<UC_PersoanaNoua>(container =>
-                    {
-                        var repository = container.GetRequiredService<IRepositoryManager>();
-                        var eventService = container.GetRequiredService<EventService>();
-                        var uc_PNoua = new UC_PersoanaNoua(repository, eventService);
-                        return uc_PNoua;
-                    });
-                    services.AddTransient<Func<Persoana, UC_EditPersoana>>(container => 
-                        persoana => 
+            .ConfigureServices((context, services) => {
+                services.AddDbContext<AppDbContext>(options => options.UseSqlite(DatabaseOptions.ConnectionString, b => 
+                b.MigrationsAssembly( typeof(AppDbContext).Assembly.ToString() )));
+
+                services.AddScoped(typeof(IRepositoryManager), typeof(RepositoryManager));
+                services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
+                services.AddSingleton<EventService>();
+                services.AddScoped(typeof(IPdfGeneratorService), typeof(QuestPdfGeneratorService));
+
+
+                services.AddScoped<Func<Guid, FormViewCerere>>(container =>
+                        Id =>
                         {
                             var service = container.GetRequiredService<IServiceManager>();
                             var eventService = container.GetRequiredService<EventService>();
-                            var formSetari = container.GetRequiredService<FormSetari>();
-                            var uc_pEdit = new UC_EditPersoana(service, eventService, formSetari, persoana);
-
-                            return uc_pEdit;
+                            var pdfService = container.GetRequiredService<IPdfGeneratorService>();
+                            return new FormViewCerere(service, pdfService, eventService, Id);
                         });
-                    services.AddTransient<UC_PagePersoanaNoua>(container => 
-                    {
-                        var eventService = container.GetRequiredService<EventService>();
-                        var service = container.GetRequiredService<IServiceManager>();
-                        return new UC_PagePersoanaNoua(service, eventService);
 
-                    });
+                services.AddTransient<FormMain>(container => FormMain.Create());
+
+                services.AddTransient<FormCerere>(container =>
+                {
+                    var repository = container.GetRequiredService<IRepositoryManager>();
+                    var pdfService = container.GetRequiredService<IPdfGeneratorService>();
+                    var eventService = container.GetRequiredService<EventService>();
+
+                    var formCerere = new FormCerere(repository, pdfService, eventService);
+                    return formCerere;
                 });
-        }
+                services.AddTransient<FormSetari>(container =>
+                {
+                    var service = container.GetRequiredService<IServiceManager>();
+                    var eventService = container.GetRequiredService<EventService>();
 
-        //moved to main
-        static IFormFactory CompositionRoot()
+                    return FormSetari.Create(service, eventService); ;
+                });
+                services.AddScoped<UC_Main>(container => 
+                {
+                    var service = container.GetRequiredService<IServiceManager>();
+                    var eventService = container.GetRequiredService<EventService>();
+
+                    var uc_main = new UC_Main(service, eventService);
+                    return uc_main;
+                });
+                services.AddTransient<UC_PersoanaExistenta>(container =>
+                {
+                    var repository = container.GetRequiredService<IRepositoryManager>();
+                    var eventService = container.GetRequiredService<EventService>();
+                    var uc_PE = new UC_PersoanaExistenta(repository, eventService);
+                    return uc_PE;
+                });
+                services.AddTransient<UC_PersoanaNoua>(container =>
+                {
+                    var repository = container.GetRequiredService<IRepositoryManager>();
+                    var eventService = container.GetRequiredService<EventService>();
+                    var uc_PNoua = new UC_PersoanaNoua(repository, eventService);
+                    return uc_PNoua;
+                });
+                services.AddTransient<Func<Persoana, UC_EditPersoana>>(container => 
+                    persoana => 
+                    {
+                        var service = container.GetRequiredService<IServiceManager>();
+                        var eventService = container.GetRequiredService<EventService>();
+                        var formSetari = container.GetRequiredService<FormSetari>();
+                        var uc_pEdit = new UC_EditPersoana(service, eventService, formSetari, persoana);
+
+                        return uc_pEdit;
+                    });
+                services.AddTransient<UC_PagePersoanaNoua>(container => 
+                {
+                    var eventService = container.GetRequiredService<EventService>();
+                    var service = container.GetRequiredService<IServiceManager>();
+                    return new UC_PagePersoanaNoua(service, eventService);
+
+                });
+            });
+    }
+
+    //moved to main
+    static IFormFactory CompositionRoot()
+    {
+        // host
+        var hostBuilder = CreateHostBuilder();
+        host = hostBuilder.Build();
+
+        // container
+        var serviceProvider = host.Services;
+
+        // form factory
+        var formFactory = new FormFactoryImpl(serviceProvider);
+        FormFactory.SetProvider(formFactory);
+
+        return formFactory;
+    }
+    public class FormFactoryImpl : IFormFactory
+    {
+        private IServiceProvider _serviceProvider;
+
+        public FormFactoryImpl(IServiceProvider serviceProvider)
         {
-            // host
-            var hostBuilder = CreateHostBuilder();
-            host = hostBuilder.Build();
-
-            // container
-            var serviceProvider = host.Services;
-
-            // form factory
-            var formFactory = new FormFactoryImpl(serviceProvider);
-            FormFactory.SetProvider(formFactory);
-
-            return formFactory;
+            this._serviceProvider = serviceProvider;
         }
-        public class FormFactoryImpl : IFormFactory
+
+        public FormCerere CreateCerere()
         {
-            private IServiceProvider _serviceProvider;
-
-            public FormFactoryImpl(IServiceProvider serviceProvider)
-            {
-                this._serviceProvider = serviceProvider;
-            }
-
-            public FormCerere CreateCerere()
-            {
-                return _serviceProvider.GetRequiredService<FormCerere>();
-            }
-
-            public FormMain CreateMain()
-            {
-                return _serviceProvider.GetRequiredService<FormMain>();
-            }
-
-            public UC_Main CreateUC_Main()
-            {
-                return _serviceProvider.GetRequiredService<UC_Main>();
-            }
-
-            public UC_PersoanaExistenta CreateUC_PersoanaExistenta()
-            {
-                return _serviceProvider.GetRequiredService<UC_PersoanaExistenta>();
-            }
-
-            public UC_EditPersoana CreateUC_PersoanaEdit(Persoana persoana)
-            {
-                var _form2Factory = _serviceProvider.GetRequiredService<Func<Persoana, UC_EditPersoana>>();
-                return _form2Factory(persoana);
-            }
-
-            public UC_PersoanaNoua CreateUC_PersoanaNoua()
-            {
-                var _form2Factory = _serviceProvider.GetRequiredService<UC_PersoanaNoua>();
-                return _form2Factory;
-            }
-
-            public FormViewCerere CreateFromViewCerere(Guid Id)
-            {
-                var _form2Factory = _serviceProvider.GetRequiredService<Func<Guid, FormViewCerere>>();
-                return _form2Factory(Id);
-            }
-
-            public FormSetari CreateFormSetari()
-            {
-                return _serviceProvider.GetRequiredService<FormSetari>();
-            }
-
-            public UC_PagePersoanaNoua CreatePersoanaNouaPage()
-            {
-                return _serviceProvider.GetRequiredService<UC_PagePersoanaNoua>();
-            }
+            return _serviceProvider.GetRequiredService<FormCerere>();
         }
 
-        private static void OnAppInstall(SemanticVersion version, IAppTools tools)
+        public FormMain CreateMain()
         {
-            tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+            return _serviceProvider.GetRequiredService<FormMain>();
         }
 
-        private static void OnAppUninstall(SemanticVersion version, IAppTools tools)
+        public UC_Main CreateUC_Main()
         {
-            tools.RemoveShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+            return _serviceProvider.GetRequiredService<UC_Main>();
         }
 
-        private static void OnAppRun(SemanticVersion version, IAppTools tools, bool firstRun)
+        public UC_PersoanaExistenta CreateUC_PersoanaExistenta()
         {
-            tools.SetProcessAppUserModelId();
-            // show a welcome message when the app is first installed
-            if (firstRun) MessageBox.Show("Thanks for installing my application!");
+            return _serviceProvider.GetRequiredService<UC_PersoanaExistenta>();
         }
+
+        public UC_EditPersoana CreateUC_PersoanaEdit(Persoana persoana)
+        {
+            var _form2Factory = _serviceProvider.GetRequiredService<Func<Persoana, UC_EditPersoana>>();
+            return _form2Factory(persoana);
+        }
+
+        public UC_PersoanaNoua CreateUC_PersoanaNoua()
+        {
+            var _form2Factory = _serviceProvider.GetRequiredService<UC_PersoanaNoua>();
+            return _form2Factory;
+        }
+
+        public FormViewCerere CreateFromViewCerere(Guid Id)
+        {
+            var _form2Factory = _serviceProvider.GetRequiredService<Func<Guid, FormViewCerere>>();
+            return _form2Factory(Id);
+        }
+
+        public FormSetari CreateFormSetari()
+        {
+            return _serviceProvider.GetRequiredService<FormSetari>();
+        }
+
+        public UC_PagePersoanaNoua CreatePersoanaNouaPage()
+        {
+            return _serviceProvider.GetRequiredService<UC_PagePersoanaNoua>();
+        }
+    }
+
+    private static void OnAppInstall(SemanticVersion version, IAppTools tools)
+    {
+        tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+    }
+    private static void OnAppUninstall(SemanticVersion version, IAppTools tools)
+    {
+        tools.RemoveShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+    }
+    private static void OnAppRun(SemanticVersion version, IAppTools tools, bool firstRun)
+    {
+        tools.SetProcessAppUserModelId();
+        // show a welcome message when the app is first installed
+        if (firstRun) MessageBox.Show("Thanks for installing my application!");
     }
 }

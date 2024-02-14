@@ -2,7 +2,6 @@
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.App.Services;
 using SIGL_Cadastru.AppConfigurations;
-using SIGL_Cadastru.Services;
 
 namespace SIGL_Cadastru.Service;
 
