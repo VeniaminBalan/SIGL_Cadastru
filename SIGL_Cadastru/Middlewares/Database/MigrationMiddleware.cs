@@ -29,7 +29,6 @@ public static class MigrationMiddleware
     {
         string folderPath = DatabaseOptions.Path;
         string fileName = DatabaseOptions.DataBaseFile;
-        string connectionString  = DatabaseOptions.ConnectionString;
 
         string filePath = Path.Combine(folderPath, fileName);
 

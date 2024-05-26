@@ -1,5 +1,5 @@
 ﻿using Contracts;
-using Exceptions;
+using SIGL_Cadastru.Repo.Exceptions.PersonException;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Repo.Query;
 using SIGL_Cadastru.Services;

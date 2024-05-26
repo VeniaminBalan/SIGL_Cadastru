@@ -214,7 +214,6 @@ namespace SIGL_Cadastru.Views
                 parsedAdaos == false ? 0 : adaos,
                 comment,
                 new Portofoliu(UC_documente.GetDocumente() , Lucrari.ToList()),
-                new(),
                 _repo.Cerere);
 
         }

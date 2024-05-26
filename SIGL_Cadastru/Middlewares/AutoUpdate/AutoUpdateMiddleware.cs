@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using SIGL_Cadastru.Middlewares.Database;
 using Squirrel;
 using System.Diagnostics;
 
@@ -30,6 +31,8 @@ public static class AutoUpdateMiddleware
                 if (updateInfo.ReleasesToApply.Any())
                 {
                     // Update available, apply it
+                    CreateDatabaseBackup();
+
                     await mgr.UpdateApp();     
                     UpdateManager.RestartApp();
                 }
@@ -41,5 +44,35 @@ public static class AutoUpdateMiddleware
             }
         }
     }
-    
+
+    static void CreateDatabaseBackup()
+    {
+        string filePath = Path.Combine(DatabaseOptions.Path, DatabaseOptions.DataBaseFile);
+
+
+        string backupFolderPath = DatabaseOptions.BackupPath;
+        string backupFilePath = Path.Combine(backupFolderPath, $"DB_{Program.Version}_{DateTime.Now.ToString("dd-MM-yyyy")}");
+
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                if (!Directory.Exists(backupFolderPath))
+                {
+                    Directory.CreateDirectory(backupFolderPath);
+                    Console.WriteLine($"Backup folder '{backupFolderPath}' created.");
+                }
+
+                // Copy the file to the backup folder
+                File.Copy(filePath, backupFilePath);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+
 }

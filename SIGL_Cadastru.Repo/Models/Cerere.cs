@@ -3,6 +3,7 @@ using Models;
 using SIGL_Cadastru.Repo.Contracts;
 using SIGL_Cadastru.Repo.ValueObjects;
 using FluentDateTime;
+using SIGL_Cadastru.Repo.Exceptions.CerereException;
 
 namespace SIGL_Cadastru.Repo.Models;
 
@@ -75,82 +76,58 @@ public class Cerere : IModel
         DateTime valabilDeLa, 
         int termen, 
         string nrCadastral, 
-        int adaos, 
-        string comment, 
-        Portofoliu portofoliu, 
-        List<CerereStatus> stateList,
+        int adaos,          string comment, 
+        Portofoliu portofoliu,
         ICerereRepository _repo) 
     {
-        if (stateList.Count() == 0)
-            stateList.Add(new CerereStatus
-            {
-                Id = Guid.NewGuid(),
-                Created = DateOnly.FromDateTime(DateTime.Now),
-                CerereId = id,
-                Starea = Status.Inlucru
-            }) ;
-
-        if (string.IsNullOrEmpty(nrCadastral))
-            throw new Exception("Nr cadastral gresit");
-
-        if (termen <= 0)
-            throw new Exception("Termen invalid");
 
 
-        DateOnly valabilPanaLa = DateOnly.FromDateTime(valabilDeLa.AddBusinessDays(termen));
+        VerifyRoles(responsabil, executant);
+        VerifynrCadastral(nrCadastral);
+        VerifyTotalPrice(adaos, portofoliu.Lucrari);
 
-        int costTotal = adaos;
+        NrCerere nextNumber = await _repo.GetNextNumber();
 
-        foreach (var item in portofoliu.Lucrari)
+        var cerere = new Cerere 
         {
-            costTotal += item.Pret;
-        }
+            Id = id,
+            Client = client,
+            Executant = executant,
+            Responsabil = responsabil,
+            Nr = nextNumber.ToString('/'),
+            ValabilDeLa = DateOnly.FromDateTime(valabilDeLa),
+            ValabilPanaLa = GetValabilPanaLa(valabilDeLa, termen),
+            NrCadastral = nrCadastral,
+            Adaos = adaos,
+            Comment = comment,
+            Portofoliu = portofoliu,
+            CerereNr = nextNumber,
+        };
 
-        if (costTotal < 0)
-            throw new Exception("Costul total nu poate fi mai mic de 0");
-
-        NrCerere? last = await _repo.GetLastNr();
-
-        if (last is null)
+        cerere.AddStatus(new CerereStatus
         {
-            last = new NrCerere(DateTime.Now.Year, 1);
-        }
-        else 
-        {
-            last.Index++;
-        }
+            Id = Guid.NewGuid(),
+            Created = DateOnly.FromDateTime(DateTime.Now),
+            CerereId = cerere.Id,
+            Starea = Status.Inlucru
+        });
 
-        string nr = $"{last.Year}/{last.Index.ToString("0000")}";
-
-        return new Cerere(id, 
-            client,
-            executant,
-            responsabil,
-            nr, 
-            DateOnly.FromDateTime(valabilDeLa),
-            valabilPanaLa, 
-            nrCadastral, 
-            adaos, 
-            comment, 
-            stateList, 
-            portofoliu, 
-            last);
+        return cerere;   
     }
 
     public void AddStatus(CerereStatus cerereStatus)
     {
-        if (cerereStatus.Created < this.ValabilDeLa)
-            throw new Exception($"data starii ({cerereStatus.Created}) nu poate fi mai devreme de data de cand e valabila cererea");
+        if (this.Starea == Status.Eliberat)
+            throw new InvalidOperationException("Cererea deja a fost eliberata !");
 
-        if (cerereStatus.Starea == Status.Eliberat && this.StatusList.Any(c => c.Starea == Status.Eliberat))
-            throw new Exception($"Cererea poate fi eliberata doar o singura data");
+        if (cerereStatus.Created < this.ValabilDeLa)
+            throw new InvalidOperationException($"data starii ({cerereStatus.Created}) nu poate fi mai devreme de data de cand e valabila cererea");
 
         if (cerereStatus.Starea == Status.Prelungit && cerereStatus.Created < ValabilPanaLa)
-            throw new Exception($"Starea \"Prelungit\" poate fi setata dupa data {ValabilPanaLa}");
+            throw new InvalidOperationException($"Starea \"Prelungit\" poate fi setata dupa data {ValabilPanaLa}");
 
         _stateList.Add(cerereStatus);
         Starea = SetStatus(_stateList);
-
     }
 
     public void SetComment(string _comment) 
@@ -158,18 +135,52 @@ public class Cerere : IModel
         this.Comment = _comment;
     }
 
-    private static Status SetStatus(List<CerereStatus> stari)
+    private Status SetStatus(List<CerereStatus> stari)
     {
+
         if (stari.Any(c => c.Starea == Status.Eliberat))
             return Status.Eliberat;
 
         var state = stari
             .Where(s => s.Starea != Status.Prelungit)
-            .OrderByDescending(x => x.Created).FirstOrDefault();
+            .OrderByDescending(x => x.Created)
+            .FirstOrDefault();
 
         if (state is null)
             return Status.Inlucru;
 
         return state.Starea;
+    }
+
+    private static void VerifyTotalPrice(int adaos, IEnumerable<Lucrare> lurari) 
+    {
+        int costTotal = adaos + lurari.Sum(l => l.Pret);
+
+
+        if (costTotal <= 0)
+            throw new InvalidPriceException("Costul total nu poate fi mai mic sau egal cu 0");
+    }
+
+    private static void VerifyRoles(Persoana responsabil, Persoana executant) 
+    {
+        if (responsabil.Rol != Role.Responsabil)
+            throw new InvalidRoleException(Role.Responsabil, responsabil);
+
+        if (executant.Rol != Role.Executant && executant.Rol != Role.Responsabil)
+            throw new InvalidRoleException(Role.Executant ,executant);
+    }
+
+    private static DateOnly GetValabilPanaLa(DateTime valabilDeLa, int termen) 
+    {
+        if (termen <= 0)
+            throw new InvalidDateException("Termen invalid");
+
+        return DateOnly.FromDateTime(valabilDeLa.AddBusinessDays(termen));
+    }
+
+    private static void VerifynrCadastral(string nrCadastral) 
+    {
+        if (string.IsNullOrEmpty(nrCadastral))
+            throw new EmptyFieldException(nameof(NrCadastral), "Nr cadastral nu poate fi gol");
     }
 }

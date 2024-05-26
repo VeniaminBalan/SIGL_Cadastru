@@ -7,9 +7,6 @@ using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Services;
 using SIGL_Cadastru.Utils;
 using System.Data;
-using System.Diagnostics;
-using System.Security.Policy;
-using System.Windows.Forms;
 
 
 namespace SIGL_Cadastru.Views

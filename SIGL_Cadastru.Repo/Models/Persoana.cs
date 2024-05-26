@@ -1,6 +1,6 @@
 ﻿using Contracts;
-using Exceptions;
 using SIGL_Cadastru.Repo.Contracts;
+using SIGL_Cadastru.Repo.Exceptions.PersonException;
 using System.Text.RegularExpressions;
 
 namespace SIGL_Cadastru.Repo.Models;

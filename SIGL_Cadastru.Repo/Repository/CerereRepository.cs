@@ -5,8 +5,6 @@ using SIGL_Cadastru.Repo.Models;
 using Microsoft.EntityFrameworkCore;
 using SIGL_Cadastru.Repo.Query.Extensions;
 using Query;
-using Exceptions;
-using System.Collections.Generic;
 using SIGL_Cadastru.Repo.ValueObjects;
 
 namespace SIGL_Cadastru.Repo.Repository
@@ -57,12 +55,26 @@ namespace SIGL_Cadastru.Repo.Repository
             .Include(c => c.StatusList)
             .SingleOrDefaultAsync();
 
-        public async Task<NrCerere?> GetLastNr() =>
-            await FindAll(false)
-            .OrderByDescending(c => c.CerereNr!.Year)
-            .ThenByDescending(c => c.CerereNr!.Index)
-            .Select(c => c.CerereNr)
-            .FirstOrDefaultAsync();
+        public async Task<NrCerere> GetNextNumber() 
+        {
+            var nr = await FindAll(false)
+                .OrderByDescending(c => c.CerereNr!.Year)
+                .ThenByDescending(c => c.CerereNr!.Index)
+                .Select(c => c.CerereNr)
+                .FirstOrDefaultAsync();
+
+            if (nr is null)
+            {
+                nr = new NrCerere(DateTime.Now.Year, 1);
+            }
+            else
+            {
+                nr.Index++;
+            }
+
+            return nr;
+
+        }
 
         public void UpdateCerere(Cerere cerere) => Update(cerere);
         public Task<Cerere?> UpdateCerereAsync(Guid Id, Cerere cerere) => UpdateAsync(Id, cerere);

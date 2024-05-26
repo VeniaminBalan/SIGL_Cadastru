@@ -17,4 +17,7 @@ public class NrCerere
         Year= year;
         Index= index;
     }
+
+    public string ToString(char separator)
+        => $"{Year % 100}{separator}{Index.ToString("0000")}";
 }

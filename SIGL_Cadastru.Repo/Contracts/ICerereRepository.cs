@@ -13,5 +13,5 @@ public interface ICerereRepository
     void CreateCerere(Cerere cerere);
     void DeleteCerere(Cerere cerere);
     void UpdateCerere(Cerere cerere);
-    public Task<NrCerere?> GetLastNr();
+    public Task<NrCerere> GetNextNumber();
 }

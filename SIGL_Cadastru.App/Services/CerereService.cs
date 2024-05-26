@@ -1,10 +1,10 @@
 ﻿using Contracts;
-using Exceptions;
 using Query;
 using SIGL_Cadastru.App.Contracts;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.App.Mappers;
 using SIGL_Cadastru.App.Entities;
+using SIGL_Cadastru.Repo.Exceptions.CerereException;
 
 
 namespace SIGL_Cadastru.App.Services;
@@ -28,7 +28,7 @@ public sealed class CerereService : ICerereService
         var cerere = await _repo.Cerere.GetByIdAsync(id, true);
 
         if(cerere is null)
-            throw new CerereNotFoundException("Cererea nu a fost gasita");
+            throw new CerereNotFoundException();
 
         _repo.Cerere.DeleteCerere(cerere);
         await _repo.SaveAsync();
@@ -47,7 +47,7 @@ public sealed class CerereService : ICerereService
         var data = await _repo.Cerere.GetByIdAsync(Id, trackChanges);
 
         if (data is null) 
-            throw new CerereNotFoundException("Cererea nu a fost gasita");
+            throw new CerereNotFoundException();
 
         return data;
     }

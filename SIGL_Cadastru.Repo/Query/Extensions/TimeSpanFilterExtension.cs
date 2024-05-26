@@ -1,5 +1,5 @@
-﻿using Exceptions;
-using Query;
+﻿using Query;
+using SIGL_Cadastru.Repo.Exceptions.QueryException;
 using SIGL_Cadastru.Repo.Models;
 
 namespace SIGL_Cadastru.Repo.Query.Extensions;

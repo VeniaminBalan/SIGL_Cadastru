@@ -1,5 +1,4 @@
-﻿
-namespace Exceptions;
+﻿namespace SIGL_Cadastru.Repo.Exceptions.PersonException;
 
 public class PersonNotFoundException : Exception
 {
