@@ -1,5 +1,5 @@
 ﻿
-using Models;
+using SIGL_Cadastru.Repo.Exceptions.CerereException;
 using SIGL_Cadastru.Repo.Models;
 using SIGL_Cadastru.Tests.Mock;
 
@@ -45,7 +45,7 @@ public class CreateCerereTests
 
 
 
-        await Assert.ThrowsAsync<Exception>( async () => await Cerere.Create(
+        await Assert.ThrowsAsync<InvalidRoleException>( async () => await Cerere.Create(
             Guid.NewGuid(),
             client: client,
             executant: executant,
@@ -70,7 +70,7 @@ public class CreateCerereTests
 
 
 
-        await Assert.ThrowsAsync<Exception>( async () => await Cerere.Create(
+        await Assert.ThrowsAsync<InvalidRoleException>( async () => await Cerere.Create(
             Guid.NewGuid(),
             client: client,
             executant: executant,
@@ -92,16 +92,17 @@ public class CreateCerereTests
         var repository = new MockCerereRepository();
         var client = Helper.GetClient();
         var executant = Helper.GetExecutant();
+        var responsabil = Helper.GetResponsabil();
         var portofoliu = Helper.GetPortofoliu();
         var nrCadastral = ""; // invalid field
 
 
 
-        await Assert.ThrowsAsync<Exception>(async () => await Cerere.Create(
+        await Assert.ThrowsAsync<EmptyFieldException>(async () => await Cerere.Create(
             Guid.NewGuid(),
             client: client,
             executant: executant,
-            responsabil: executant,
+            responsabil: responsabil,
             referenceDateTime,
             20,
             nrCadastral,
@@ -119,17 +120,18 @@ public class CreateCerereTests
         var repository = new MockCerereRepository();
         var client = Helper.GetClient();
         var executant = Helper.GetExecutant();
+        var responsabil = Helper.GetResponsabil();
         var portofoliu = Helper.GetPortofoliu();
         var nrCadastral = "13-531-412";
         var adaos = -10_000;
 
 
 
-        await Assert.ThrowsAsync<Exception>(async () => await Cerere.Create(
+        await Assert.ThrowsAsync<InvalidPriceException>(async () => await Cerere.Create(
             Guid.NewGuid(),
             client: client,
             executant: executant,
-            responsabil: executant,
+            responsabil: responsabil,
             referenceDateTime,
             20,
             nrCadastral,

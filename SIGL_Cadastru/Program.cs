@@ -35,7 +35,6 @@ public static class Program
         {
             if (createdNew)
             {
-                //TODO: loading screen
 
                 SquirrelAwareApp.HandleEvents(
                     onInitialInstall: OnAppInstall,
@@ -47,27 +46,22 @@ public static class Program
                 host = hostBuilder.Build();
 
 
-                //middlewares
                 await host.CheckForUpdatesAsync();
                 host.MigrateIfNeeded();
 
 
                 var formFactory = new FormFactoryImpl(host.Services);
                 FormFactory.SetProvider(formFactory);
-
-                // Start the application
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.SetHighDpiMode(HighDpiMode.SystemAware);
                 ApplicationConfiguration.Initialize();
 
-                //stop loading screen
 
                 Application.Run(formFactory.CreateMain());
             }
             else
             {
-                // If another instance is running, you may want to bring it to the foreground
                 MessageBox.Show("Another instance of the application is already running.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         } 
@@ -79,13 +73,6 @@ public static class Program
 
         string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
         string sFile = $"{sCurrentDirectory}Resources\\Nomenclatura.xml";
-
-        //Depricated
-        //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        //string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources\Nomenclatura.xml");
-        //string sPdf = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Resources");
-        //string sPdfFilePath = Path.GetFullPath(sPdf);
-        //var varstring = @"Data Source=E:\PC\Projects\consult-trading\SIGL_Cadastru\DB\SIGLDB.db";
 
 
         return Host.CreateDefaultBuilder()
