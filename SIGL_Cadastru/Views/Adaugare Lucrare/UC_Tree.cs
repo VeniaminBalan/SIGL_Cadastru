@@ -35,8 +35,18 @@ namespace SIGL_Cadastru.Views.Adaugare_Lucrare
             string sFile = $"{sCurrentDirectory}Resources\\Nomenclatura.xml";
             string sFilePath = Path.GetFullPath(sFile);
 
-            FileStream fs = new FileStream(sFile, FileMode.Open, FileAccess.Read);
-            xmldoc.Load(fs);
+
+            try 
+            {
+                FileStream fs = new FileStream(sFile, FileMode.Open, FileAccess.Read);
+                xmldoc.Load(fs);
+            }catch (Exception ex) 
+            {
+                var devPath = $"{sCurrentDirectory}..\\..\\..\\Resources\\Nomenclatura.xml";
+                FileStream fs = new FileStream(devPath, FileMode.Open, FileAccess.Read);
+                xmldoc.Load(fs);
+            }
+            
 
             xmlNode = xmldoc.ChildNodes[1];
             treeView1.Nodes.Clear();
